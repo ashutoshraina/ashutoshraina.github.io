@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MongoDB-Understaading queries through explain plan
+title: MongoDB-Understanding queries through explain plan
 category: .net, CSharp, mongodb, opensource
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
