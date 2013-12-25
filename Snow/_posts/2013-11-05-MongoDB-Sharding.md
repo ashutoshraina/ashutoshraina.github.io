@@ -4,6 +4,14 @@ title: MongoDB-Sharding
 category: .net, CSharp, mongodb, opensource
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
+series:
+	name: MongoDB-Ops
+	current: 5
+	part: Part 1 - Ops Stuff
+	part: Part 2 - Indexing
+	part: Part 3 - Explain Plan
+	part: Part 4 - Replication
+	part: Part 5 - Sharding
 ---
 **Sharding**
 

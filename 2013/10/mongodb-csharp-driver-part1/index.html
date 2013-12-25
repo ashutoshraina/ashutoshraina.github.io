@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/10/review-csharp-indepth/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part1/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -37,13 +37,14 @@
                   
 
 <div id="post">
-    <h1>Review-CSharp in Depth.</h1>
+    <h1>MongoDB-CSharp-Driver Getting started</h1>
 
     <div class="post-note">
-      posted on 23 Oct 2013
+      posted on 03 Oct 2013
        | <a href="/category/.net">.net</a>
        | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/book-review">book review</a>
+       | <a href="/category/mongodb">mongodb</a>
+       | <a href="/category/opensource">opensource</a>
       
       <div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -54,22 +55,71 @@
       </div>
     </div>
     
-    
+    <ul class="snow-series"><li>Part 1 - Using Linq</li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
         
-    <p>I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy <a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet">Jon Skeet</a>) has managed to come out with a great book once again.</p>
+    <p>There are several drivers available for C#. I do not plan to go thorugh all of them here. Since, the official driver now has LINQ(although not complete yet) support, we will go with it.
+Basic Setup..get the stuff of NuGet. It should put in two dll's in there 
+1. MongoDB.Bson
+2. MongoDB.Driver</p>
+
+<p>We will get to what does what later. For now assume that we only want to get some data in and out of MongoDB.
+Let's connect to MongoDB now(the code below is just quick and dirty, we will see a better version later).</p>
+
+<pre><code>//MongoDB should be running by now, and assuming you have inserted some documents in there
+var client = new MongoClient(@"mongodb://localhost");
+var server = client.GetServer();
+var database = server.GetDatabase("YourDataBaseName");
+var mongoCollection = database.GetCollection("SomeCollectionName");
+//Getting all the documents
+var cursor = mongoCollection.AsQueryable();
+cursor.ForEach(Console.WriteLine);  
+</code></pre>
 
 <!--excerpt-->
 
-<p>Jon starts easy on this, but doesn't hold back. The prose is lucid yet well paced. It is one of the few books that make the effort to take the reader on journey. The journey begins with C#1 and then continues to C#5. Hardly any chapters drag on anymore than they should. Linq is covered in great depth and is a nicely written with enough diagrams to visualize what is happening under the hood. Generics is one my personal favourites. The text is nice, so are the code samples. I have never really understood generics completely, but the books does make things a lot clearer. The treatment of dynamic is really nice. It goes into the heart of the DLR and shows everything that you need to know to really understand dynamic. </p>
+<p>It is time for some explanataion.</p>
 
-<p>The book really shines when you move to <em>async/await</em>. Jon makes a rather tough concept easier. I had to read it several times but each time the concept became easier. I only wish we moved away from the download the web page example for async. The book does spend time on compiler transformations that are behind <em>async/await</em>. Be patient when you read it, it will take time to sink in.</p>
+<p>What is MongoClient ?
+MongoClient is the standard way of accessing the driver. I have dabbled with the python driver(pymongo) and it is the same there. I believe it was changed to keep the drivers for different languages in sync.
+Reading up on this told me that SafeMode settings were dropped in favour of WriteConcern and instead of SlaveOK , ReadPreference should be used. The settings were present previously in MongoServerSettings, the new ones are on MongoClientSettings. IpV6 setting is also in MongoClientSettings. </p>
 
-<p>The only part that has been left out from the third edition is the chapter on Code Contracts. Jon clearly mentions that the topic hasn't gained as much traction as he hoped. It may come back in the future though. As many have mentioned this before this is not a book for beginners. Use this to become a better C# programmer, after you have written C# for some time. This is a must have in your collection, especially if you work with C# day in and day out. It will give you a greater understanding of how the language designers wanted you think, and what makes C# a real joy.
-A 4.5/5 for this one, keeping the 0.5 for the next edition :).</p>
+<p>What is MongoServer ?
+The server manages the life cycle of ServerProxies. Gives access to databases and some sort of connection management. More needs to be said about the server, I will stop short for now.</p>
 
-<p>P.S. Even the appendix is handy.</p>
+<p>Notice that I did not use a genric GetCollection here (yet, will do so soon). The generic method is also available, which we will put to use soon.</p>
 
-<p>Disclosure : I got a free copy of the book to review.  The review is my own opinion and not influenced by anyone else.</p>
+<p>All documents in MongoDB have an Id which has the type ObjectId (ObjectId resides in MongoDB.Bson).
+So, we can have an interface which takes care of this and subsequently all our types can implement this.</p>
+
+<pre><code>public interface IMongoEntity
+{
+    ObjectId Id { get; set; }
+}
+public class MongoEntity : IMongoEntity
+{
+   public ObjectId Id { get; set; }
+}
+</code></pre>
+
+<p>Refinement and obtaining a better MongoDBHandler(you can do much better than what I will show you here, but   that depends to large extent on your taste).</p>
+
+<pre><code>public class MongoConnectionHandler&lt;T&gt; where T : IMongoEntity
+{
+    public MongoCollection&lt;T&gt; MongoCollection { get; private set; }
+    private const string ConnectionString = @"mongodb://localhost";
+
+    public MongoConnectionHandler(string databaseName)
+    {
+        var client = new MongoClient(ConnectionString);
+        var server = client.GetServer();
+        var database = server.GetDatabase(databaseName);
+        MongoCollection = database.GetCollection&lt;T&gt;(typeof (T).Name.ToLower() + "s");
+    }
+}
+</code></pre>
+
+<p>Having a the <em>databaseName</em> as a parameter is very subjective, if you only have a single database then you might want to just stick it directly in the method call, otherwise it just increases the burden of the caller and spreads the database name all over the code base. Another option that comes to my mind striaghtaway is having an Enum of DatabaseName or in some sort of configuration files. The same goes for ConnectionString, put it in some place configurable. The collection names are plural so you need to just stick an extra "s" in there(this took me quite a while to figure out).
+So, we are setup nicely to go forward and do some more interesting work with MongoDB.</p>
 
 
     <div id="disqus_thread"></div>
@@ -79,14 +129,14 @@ A 4.5/5 for this one, keeping the 0.5 for the next edition :).</p>
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/10/review-csharp-indepth/';
+                this.page.url = 'http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part1/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/10/review-csharp-indepth/';
+    var disqus_url = 'http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part1/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

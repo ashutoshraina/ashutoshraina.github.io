@@ -492,4 +492,322 @@ numShards is a number that reports the total number of shards queried.&lt;/p&gt;
 I prefer to increase the time for reporting from the default 1 sec to somewhere close to 5 sec or more (this is just a random number that I feel comfortable with..otherwise the data is to verbose to make any sense).&lt;/p&gt;
 
 &lt;p&gt;This should be a good start. We will go into some more concepts about monitoring mongodb before going into sharding etc..&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-indexing/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-indexing/</link><title>MongoDB-Indexing</title><description>&lt;p&gt;Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Field Indexes&lt;/strong&gt; : Think about having an index on a column in RDBMS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compound Indexes&lt;/strong&gt;: Think about an having an index on multiple columns in RDBMS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multikey Indexes&lt;/strong&gt;: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geospatial Indexes and Queries&lt;/strong&gt; : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Text Indexes&lt;/strong&gt; : For full text search inside a document. Should we use lucene ? Not sure ?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hashed Index&lt;/strong&gt;: Index on hashed contents of the fields.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description><pubDate>Sat, 05 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-05T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Field Indexes&lt;/strong&gt; : Think about having an index on a column in RDBMS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compound Indexes&lt;/strong&gt;: Think about an having an index on multiple columns in RDBMS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multikey Indexes&lt;/strong&gt;: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geospatial Indexes and Queries&lt;/strong&gt; : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Text Indexes&lt;/strong&gt; : For full text search inside a document. Should we use lucene ? Not sure ?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hashed Index&lt;/strong&gt;: Index on hashed contents of the fields.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Indexes have properties associated with them :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;TTL: This is a rather surprising feature. I never expected such a feature to be available on indexes, but after giving it some thought, it makes sense to expire the indexes.&lt;/li&gt;
+&lt;li&gt;Unique: Only documents with unique values on the field are permitted.&lt;/li&gt;
+&lt;li&gt;Sparse: Really useful if you are going to have sparse fields. It leaves out the documents that do not have the field.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Some more tid-bits&lt;/strong&gt;
+- The order of indexes matters.
+e.g. if an index is created on (a,b,c) then index will be used only if the query is on
+- A or a,b or a,b,c . 
+- Index will not be called if we query on b,c or c.
+- It needs to be a left subset of the index.&lt;/p&gt;
+
+&lt;p&gt;The command is below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Db.collection.ensureIndex('property');
+e.g. `db.students.ensureIndex({'class':1,'student_name':1});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;- Note: 1 or -1 is for ascending v/s descending which becomes useful when we have a lot of sort queries.
+- By default all the indexes are built in the foreground i.e. all the writers will be blocked while the index is being created. It is fast but the database is blocked.
+- Background ones are slow, fit for production use.
+- Creating the database index in the background also blocks the current shell while it is being created.
+- All indexes are Btree indexes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Index Creation option , Unique , Removing Duplicates&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unique indexes ensure that the key is unique in the collection.&lt;/li&gt;
+&lt;li&gt;e.g. db.students.ensureIndex({'student&lt;em&gt;id':1,'class&lt;/em&gt;id':1},{'unique':true})&lt;/li&gt;
+&lt;li&gt;To remove the duplicates while creating the index we can do the following :&lt;/li&gt;
+&lt;li&gt;Provide the dropDups :true along with the unique attribute. This is dangerous, so handle with care. There is no way to control which documents it will remove. It will let live a single document and we can't predict or configure as to which one it will be.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;MultiKey Index&lt;/em&gt;
+- It will create an index for all the items in the array if the key.
+- You can't have two multi keys in a single index. This cause a polynomial explosion of the indexes.
+- We will only when we first insert something in the collection.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Index Efficiency&lt;/em&gt;
+- $gt, $lt will use the index but the efficiency may not be there since the selectivity could be very low.
+Similar for $ne etc.. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Index Size&lt;/em&gt;
+- Indexes must be kept in memory.
+- Db.collection.stats() to get the stats on the collection.
+Db.collection.getIndexSize() to get the total size of the index of the database.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Final thoughts&lt;/strong&gt;
+- Create any and all indexes that are required for your queries.
+- Ensure that the indexes fit in memory, reading from the disk is bad.
+- Sorting should also use Indexes.
+- High selectivity should be the prime consideration when deciding about indexes.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-ops-stuff/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-ops-stuff/</link><title>MongoDB-Ops-Stuff</title><description>&lt;p&gt;In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Creating Indexes&lt;/strong&gt;
+The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public void CreateIndex()
+{
+var QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
+QuestionConnectionHandler.MongoCollection.EnsureIndex( 
+                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+</description><pubDate>Fri, 04 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-04T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Creating Indexes&lt;/strong&gt;
+The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public void CreateIndex()
+{
+var QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
+QuestionConnectionHandler.MongoCollection.EnsureIndex( 
+                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Dropping indexes is also easy with &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;QuestionConnectionHandler.MongoCollection.DropAllIndexes();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What happens when you want to see what is going on under the hood ? You let the database &lt;strong&gt;Explain&lt;/strong&gt; it's&lt;strong&gt; Plan&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;QuestionConnectionHandler.MongoCollection.AsQueryable()
+                  .Where(q =&amp;gt; q.Difficulty &amp;gt;= 3).Explain();
+//or if you went the other way 
+var query = Query&amp;lt;Question&amp;gt;.GTE(q =&amp;gt; q.Difficulty, 3);
+var explainPlan = QuestionConnectionHandler.MongoCollection
+                          .FindAs&amp;lt;Question&amp;gt;(query).Explain();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, if only we could have some stats about our database and the indexes. All wrapped in a nice syntax.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var stats = QuestionConnectionHandler.MongoCollection.GetStats();
+Console.WriteLine("Namespace : {0}", stats.Namespace);
+Console.WriteLine("DataSize : {0}", stats.DataSize);
+Console.WriteLine("Index Count : {0}", stats.IndexCount);
+stats.IndexSizes.Keys.ForEach(Console.WriteLine);
+var size = QuestionConnectionHandler.MongoCollection.GetTotalDataSize();
+Console.WriteLine("The total datasize for this collection is {0}", size);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A routine task is to get all the collections in a database and all the databases on the server itself. Easy peasy!!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var collections = QuestionConnectionHandler.MongoCollection.Database.GetCollectionNames();
+Console.WriteLine("\nThe following collections are present in the database");
+collections.ForEach(Console.WriteLine);
+var client = new MongoClient(@"mongodb://localhost");
+var server = client.GetServer();
+var databases = server.GetDatabaseNames().ToList();
+Console.WriteLine("\nAll the databases in the server");
+databases.ForEach(Console.WriteLine);
+&lt;/code&gt;&lt;/pre&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part2/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part2/</link><title>MongoDB-CSharp-Driver Getting organised</title><description>&lt;p&gt;Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Question : MongoEntity
+{
+    public string Text { get; set; }
+    public string Answer { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int Difficulty { get; set; }
+}
+public class User : MongoEntity
+{
+    public string Name { get; set; }
+    public int Reputation { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+</description><pubDate>Thu, 03 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-03T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Question : MongoEntity
+{
+    public string Text { get; set; }
+    public string Answer { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int Difficulty { get; set; }
+}
+public class User : MongoEntity
+{
+    public string Name { get; set; }
+    public int Reputation { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Finally, we get down to some real stuff. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class SimpleQueries
+{
+    protected readonly MongoConnectionHandler&amp;lt;User&amp;gt; UserConnectionHandler;
+    protected readonly MongoConnectionHandler&amp;lt;Question&amp;gt; QuestionConnectionHandler;
+
+    public SimpleQueries()
+    {
+        UserConnectionHandler = new MongoConnectionHandler&amp;lt;User&amp;gt;("MongoDBDemo");
+        QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
+    }
+
+    public void CreateQuestion(Question question)
+    {
+        //// Save the entity with safe mode (WriteConcern.Acknowledged)
+        var result = QuestionConnectionHandler.MongoCollection.Save&amp;lt;Question&amp;gt;(question, 
+                             new MongoInsertOptions { WriteConcern = WriteConcern.Acknowledged});
+
+        if (!result.Ok)
+        {
+            Console.WriteLine(result.LastErrorMessage);
+        }
+        else if (result.Response["err"] != null)
+        {
+            Console.WriteLine("Insertion was successfull");
+        }
+    }
+
+    public void CreateUser(User user)
+    {
+        //// Save the entity with safe mode (WriteConcern.Acknowledged)
+        var result = UserConnectionHandler.MongoCollection.Save&amp;lt;User&amp;gt;(user, 
+                          new MongoInsertOptions { WriteConcern = WriteConcern.Acknowledged });
+
+        if (!result.Ok)
+        {
+            Console.WriteLine(result.LastErrorMessage);
+        }
+        else if (result.Response["err"] != null)
+        {
+            Console.WriteLine("Insertion was successfull");
+        }
+    }
+
+    public void GetAllQuestions()
+    {
+        var cursor = QuestionConnectionHandler.MongoCollection.AsQueryable();
+        var resultSet = cursor.ToList();
+
+        Console.WriteLine("Writing out all the questions");
+        foreach (var result in resultSet)
+        {
+            Console.WriteLine("Text : {0},  Answer : {1}", result.Text, result.Answer);
+        }
+    }
+
+    public ObjectId GetOneQuestion()
+    {
+        var cursor = QuestionConnectionHandler.MongoCollection.AsQueryable().FirstOrDefault();
+
+        Console.WriteLine(cursor.Id);
+        return cursor.Id;
+    }
+
+    public void DeleteQuestion(ObjectId id)
+    {
+        var result = QuestionConnectionHandler.MongoCollection.Remove(
+            Query&amp;lt;Question&amp;gt;.EQ(e =&amp;gt; e.Id, id), RemoveFlags.None, WriteConcern.Acknowledged);
+
+        if (!result.Ok)
+        {
+            Console.WriteLine(result.ErrorMessage);
+        }
+        else
+        {
+            Console.WriteLine("Delete Operation OK : {0}", result.Ok);
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, that we have some capabilities in our application, we can query away.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//Seed Data
+var question = new Question { Text = "Who are you ?", Answer = "I am MongoDB.",
+                          CreatedOn = DateTime.Now, Difficulty = 3 };
+var user = new User {Name = "Ashutosh", Reputation = 100};
+var queries = new SimpleQueries();
+queries.CreateQuestion(question);
+queries.CreateUser(user);
+
+
+
+var queries = new SimpleQueries();
+queries.GetAllQuestions();
+var id = queries.GetOneQuestion();
+queries.DeleteQuestion(id);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If all is well then you will see some output and the world will be a better place.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part3/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part3/</link><title>MongoDB-CSharp-Driver-Using Linq</title><description>&lt;p&gt;In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
+Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var result = UserConnectionHandler.MongoCollection.AsQueryable()
+                                  .Where(u =&amp;gt; u.Reputation &amp;gt; reputation);
+&lt;/code&gt;&lt;/pre&gt;
+
+</description><pubDate>Thu, 03 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-03T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
+Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var result = UserConnectionHandler.MongoCollection.AsQueryable()
+                                  .Where(u =&amp;gt; u.Reputation &amp;gt; reputation);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;The alternative to this form of querying is using a BsonDocument and a MongoQuery. The way to build up such a query is below. Note, that the first lambda is the property and the second parameter is the key for the filtering. The query builder is in the MongoDB.Drivers.Builders namespace.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var query = Query&amp;lt;User&amp;gt;.GT(u =&amp;gt; u.Reputation, reputation);
+var result = UserConnectionHandler.MongoCollection.FindAs&amp;lt;User&amp;gt;(query);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is a bit more work to specify queries by hand so I would prefer LINQ, but both options are available.
+Another, interesting querying mechanism is Regex. It was kind of hard to locate in the API ( or may be I just didn't know where to look). It is present in Bson namesapce.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public void UserNameStartsWith(string searchKey)
+{
+var query = Query.Matches("Name", new BsonRegularExpression(string.Format("^{0}", searchKey)));
+var result = UserConnectionHandler.MongoCollection.Find(query);
+Console.WriteLine("We found {0} Users whose name starts with {1}", result.Count(), searchKey);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Select does not result in fewer fields being returned from the server. The entire document is pulled back and passed to the native Select method. Therefore, the projection is performed client side. We should use the IQueryable implementation from the MongoDB.Driver.Linq namespace. Alternatively, there is SetFields() that is available to selectively bring fields back from the database. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var query = Query.Matches("Name", new BsonRegularExpression(string.Format("^{0}", searchKey)));
+var result = UserConnectionHandler.MongoCollection.Find(query)
+                .SetFields(Fields&amp;lt;User&amp;gt;.Include(u =&amp;gt; u.Name, u =&amp;gt; u.Reputation));
+&lt;/code&gt;&lt;/pre&gt;
 </a10:content></item></channel></rss>

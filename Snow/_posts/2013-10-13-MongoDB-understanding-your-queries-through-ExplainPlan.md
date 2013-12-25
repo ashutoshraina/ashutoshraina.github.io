@@ -4,6 +4,14 @@ title: MongoDB-Understanding queries through explain plan
 category: .net, CSharp, mongodb, opensource
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
+series:
+	name: MongoDB-Ops
+	current: 3
+	part: Part 1 - Ops Stuff
+	part: Part 2 - Indexing
+	part: Part 3 - Explain Plan
+	part: Part 4 - Replication
+	part: Part 5 - Sharding
 ---
 
 Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
