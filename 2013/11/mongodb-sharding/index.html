@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/category/asynchrony/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2013/11/mongodb-sharding/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -36,24 +36,112 @@
                 <div id="content" role="main">
                   
 
-  <header>
-  <div class="head-inner">
-    <h1><a href="/categories/">Categories</a> - Asynchrony</h1>
-  </div>
-  </header>
+<div id="post">
+    <h1>MongoDB-Sharding</h1>
 
-  <ul class="category-list fancy-container orange">
-      <li>
-        <a href="/2013/12/tasks-with-timeout-contd/" title="Tasks With Timeout Contd.">Tasks With Timeout Contd.</a> 
-        <small>(24 Dec 2013)</small>
-      </li>
-      <li>
-        <a href="/2013/12/tasks-with-timeouts/" title="Tasks With Timeout">Tasks With Timeout</a> 
-        <small>(23 Dec 2013)</small>
-      </li>
-  </ul>
-  
+    <div class="post-note">
+      posted on 05 Nov 2013
+       | <a href="/category/.net">.net</a>
+       | <a href="/category/csharp">CSharp</a>
+       | <a href="/category/mongodb">mongodb</a>
+       | <a href="/category/opensource">opensource</a>
+      
+      <div class="addthis_toolbox addthis_default_style" style="float:right;">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        <a class="addthis_button_linkedin_counter"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+      </div>
+    </div>
+    
+    
+        
+    <p><strong>Sharding</strong></p>
 
+<p>Mongodb sharding is based on shard key.</p>
+
+<p>K1 -&gt; k2 on shard1
+K2 -&gt; k3 on shard2 etc..</p>
+
+<p>Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.</p>
+
+<!--excerpt-->
+
+<p>All of the documents on a particular shard are known as chunks ~~ 100mb.</p>
+
+<p>There are two operations that happen in the background in sharding and these are done automatically for us.</p>
+
+<ol>
+<li>Split - splits a range if the range is producing bigger chunks, this is fairly expensive</li>
+<li>Migrate - moves chunks to somewhere else in the cluster, this is somewhat expensive.
+<ul>
+<li>Between a pair of shards there will not be more than one migration activity.</li>
+<li>We can still read and write from the data when we are migrating. So, it is live.</li>
+<li>"Balancer" decides when to do the balancing. It balances on the number of chunks today.</li>
+</ul></li>
+</ol>
+
+<p>Both of these are done to maintain a balance in the shards w.r.t. the documents.
+The metadata about these shards and our system is stored in config servers. These are light weight.
+Conceptually these shards are processes and not separate physical machines or virtual machines although they can and most likely will be.</p>
+
+<p>Mongos gives the client the big picture of the whole setup. Client is therefore insulated from the underlying architecture that is used to implement sharding, replication etc..</p>
+
+<p><img src="/stylesheets/images/posts/sharding.png" alt="Sharding" /></p>
+
+<p>End client applications should go through mongos.</p>
+
+<p>To create a shard connect to mongos</p>
+
+<p>Then</p>
+
+<pre><code>sh.addShard("hostname:port")
+sh.enableSharding("dbname")
+db.ensureIndex(Key pattern for your shard key)
+sh.shardCollection("namespaceforyourCollection",shardkey);
+</code></pre>
+
+<p>Choosing a shard key</p>
+
+<ul>
+<li>Filed should be involved in most of the queries</li>
+<li>Good cardinality/granularity</li>
+<li>Shard key should not increase monotonically</li>
+</ul>
+
+
+    <div id="disqus_thread"></div>
+<script>
+    var reset_disqus = function(){
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                //this.page.identifier = '';
+                this.page.url = 'http://ashutoshraina.github.io/2013/11/mongodb-sharding/';
+                //this.page.title = '';
+            }
+        });
+    };
+
+    var disqus_shortname = 'ashutoshraina';
+    var disqus_url = 'http://ashutoshraina.github.io/2013/11/mongodb-sharding/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    window.addEventListener('orientationchange', reset_disqus);
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
+   </script>
+
+</div>
                 </div>
                 <!-- #content -->
             </div>

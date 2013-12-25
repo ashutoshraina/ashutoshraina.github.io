@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/category/asynchrony/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2013/11/mongodb-replication/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -36,24 +36,94 @@
                 <div id="content" role="main">
                   
 
-  <header>
-  <div class="head-inner">
-    <h1><a href="/categories/">Categories</a> - Asynchrony</h1>
-  </div>
-  </header>
+<div id="post">
+    <h1>MongoDB-Replication</h1>
 
-  <ul class="category-list fancy-container orange">
-      <li>
-        <a href="/2013/12/tasks-with-timeout-contd/" title="Tasks With Timeout Contd.">Tasks With Timeout Contd.</a> 
-        <small>(24 Dec 2013)</small>
-      </li>
-      <li>
-        <a href="/2013/12/tasks-with-timeouts/" title="Tasks With Timeout">Tasks With Timeout</a> 
-        <small>(23 Dec 2013)</small>
-      </li>
-  </ul>
-  
+    <div class="post-note">
+      posted on 04 Nov 2013
+       | <a href="/category/.net">.net</a>
+       | <a href="/category/csharp">CSharp</a>
+       | <a href="/category/mongodb">mongodb</a>
+       | <a href="/category/opensource">opensource</a>
+      
+      <div class="addthis_toolbox addthis_default_style" style="float:right;">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        <a class="addthis_button_linkedin_counter"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+      </div>
+    </div>
+    
+    
+        
+    <p><strong>REPLICATION</strong></p>
 
+<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
+Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
+Minimum number of nodes will be 3, since the election requires a majority of the original set.
+If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
+
+<p><!--excerpt-->
+Replica Set Elections</p>
+
+<pre><code>Regular Node : It has the data and can become primary or secondary.
+Arbiter : It is just there for voting purposes. We need it if we want an even number of nodes. It has no data on it.
+Delayed/Regular : It can be set to a few hours after the nodes. It cannot become primary. It's priority is set to 0.
+Hidden Node : It cannot become a primary node. It's priority is set to 0.
+</code></pre>
+
+<p>By default the reads and writes go to the primary. You can go to secondary for reading. This means that you might read stale data. The lag between nodes is not guaranteed since the process is async. If you read from secondary then what we have is <em>"eventual consistency"</em>.</p>
+
+<pre><code>rs.slaveOk() -- ok to read from the secondary
+rs.isMaster() -- checks whether the node is master
+rs.status() -- gives the current status of the replica set.
+</code></pre>
+
+<p>In the database locals , the collection oplogs.rs has all the operational logs. Replication happens when secondary nodes query the primary for the changes from a given timestamp. OpLog is the statement based replication log.
+Replication happens in a statement driven manner?
+e.g If a statement deletes 100 documents on the primary then there will 100 statements that are sent to the secondary to execute. There is no binary replication. This allows us to run different version of mongodb on different machines.</p>
+
+<ul>
+<li>Try to keep the OpLog small on 64 bit machine since it defaults to a large value on 64 bit systems.</li>
+<li>For replica sets don't use localhost or the ip address of the machine.</li>
+<li>Use a logical name, that is the best practice.</li>
+<li>Use DNS.</li></li>
+<li>Pick appropriate TTL as well.</li>
+</ul>
+
+
+    <div id="disqus_thread"></div>
+<script>
+    var reset_disqus = function(){
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                //this.page.identifier = '';
+                this.page.url = 'http://ashutoshraina.github.io/2013/11/mongodb-replication/';
+                //this.page.title = '';
+            }
+        });
+    };
+
+    var disqus_shortname = 'ashutoshraina';
+    var disqus_url = 'http://ashutoshraina.github.io/2013/11/mongodb-replication/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    window.addEventListener('orientationchange', reset_disqus);
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
+   </script>
+
+</div>
                 </div>
                 <!-- #content -->
             </div>

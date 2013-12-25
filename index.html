@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2013-12-25T21:53:07.8356137+05:30" />
+    <meta http-equiv="last-modified" content="2013-12-25T23:53:09.9076524+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
+    <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
     <link rel="canonical" href="http://ashutoshraina.github.io/" />
 </head>
 <body class="home blog">
@@ -86,6 +88,63 @@
 
       <p><a href="/2013/12/tasks-with-timeouts/">Read more...</a></p>
     </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/11/mongodb-sharding/">MongoDB-Sharding</a> 
+        <span>posted on 05 Nov 2013</span>
+      </h1> 
+      
+      <p><strong>Sharding</strong></p>
+
+<p>Mongodb sharding is based on shard key.</p>
+
+<p>K1 -&gt; k2 on shard1
+K2 -&gt; k3 on shard2 etc..</p>
+
+<p>Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.</p>
+
+
+      <p><a href="/2013/11/mongodb-sharding/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/11/mongodb-replication/">MongoDB-Replication</a> 
+        <span>posted on 04 Nov 2013</span>
+      </h1> 
+      
+      <p><strong>REPLICATION</strong></p>
+
+<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
+Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
+Minimum number of nodes will be 3, since the election requires a majority of the original set.
+If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
+
+<p>
+      <p><a href="/2013/11/mongodb-replication/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/review-csharp-indepth/">Review-CSharp in Depth.</a> 
+        <span>posted on 23 Oct 2013</span>
+      </h1> 
+      
+      <p>I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy <a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet">Jon Skeet</a>) has managed to come out with a great book once again.</p>
+
+
+      <p><a href="/2013/10/review-csharp-indepth/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">MongoDB-Understaading queries through explain plan</a> 
+        <span>posted on 13 Oct 2013</span>
+      </h1> 
+      
+      <p>Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
+The details have been taken from the mongodb website and presented here for continuity of series.</p>
+
+
+      <p><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Read more...</a></p>
+    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -131,6 +190,8 @@
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
                           <li><a href="/archive#2013December">December, 2013</a></li>
+                          <li><a href="/archive#2013November">November, 2013</a></li>
+                          <li><a href="/archive#2013October">October, 2013</a></li>
                     </ul>
                 </aside>
             </div>
