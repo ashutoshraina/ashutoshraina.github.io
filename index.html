@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2013-12-25T20:54:22.9238267+05:30" />
+    <meta http-equiv="last-modified" content="2013-12-25T21:53:07.8356137+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="canonical" href="http://ashutoshraina.github.io/" />
@@ -37,133 +37,54 @@
   <ul class="posts">
     <li class="fancy-container lightblue">
       <h1>
-        <a href="/2013/08/test-post-twelve/">Love the new ReSharper 8, best update to date!</a> 
-        <span>posted on 03 Aug 2013</span>
+        <a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a> 
+        <span>posted on 24 Dec 2013</span>
       </h1> 
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
+      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li>Part 2 - Tasks With Timeouts contd.</li></ul>
+      <p>As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!</p>
 
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
+<pre><code>    var tasks = new List&lt;Task&gt;();
+    try
+    {
+    //instead of checking for fault within the continutaion, 
+    //we can just use a TaskContinuationOption to tell communicate the right semantics
 
+    var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent).TimeoutAfter(1000)
+      .ContinueWith(t =&gt; SomethingUsefulWithTheResult(), 
+     TaskContinuationOptions.NotOnFaulted);
 
-      <p><a href="/2013/08/test-post-twelve/">Read more...</a></p>
+    var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
+      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
+
+    var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
+
+    tasks.Add(t1);
+    tasks.Add(t2);
+    tasks.Add(t3);
+
+    Task.WaitAll(tasks.ToArray());
+    }
+    catch (Exception ex)
+    {
+    Console.WriteLine("There was an exception");
+    Console.WriteLine(ex.InnerException.Message);   
+    }
+</code></pre>
+
+      <p><a href="/2013/12/tasks-with-timeout-contd/">Read more...</a></p>
     </li>
     <li class="fancy-container lightblue">
       <h1>
-        <a href="/2013/07/test-post-eleven/">Setting up a ServiceStack Service</a> 
-        <span>posted on 15 Jul 2013</span>
+        <a href="/2013/12/tasks-with-timeouts/">Tasks With Timeout</a> 
+        <span>posted on 23 Dec 2013</span>
       </h1> 
-      <ul class="snow-series"><li><a href="/2013/06/test-post-seven/">Part 1 - Setting up the Virtual Machine and nginx</a></li><li><a href="/2013/06/test-post-eight/">Part 2 - Setting up new Website and Domain on nginx</a></li><li><a href="/2013/06/test-post-nine/">Part 3 - Setting up Mono on nginx</a></li><li><a href="/2013/07/test-post-ten/">Part 4 - Setting up a NancyFX website</a></li><li>Part 5 - Setting up a ServiceStack web service</li></ul>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/07/test-post-eleven/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/07/test-post-ten/">Setting up a NancyFX website</a> 
-        <span>posted on 04 Jul 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/06/test-post-seven/">Part 1 - Setting up the Virtual Machine and nginx</a></li><li><a href="/2013/06/test-post-eight/">Part 2 - Setting up new Website and Domain on nginx</a></li><li><a href="/2013/06/test-post-nine/">Part 3 - Setting up Mono on nginx</a></li><li>Part 4 - Setting up a NancyFX website</li><li><a href="/2013/07/test-post-eleven/">Part 5 - Setting up a ServiceStack web service</a></li></ul>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
+      <ul class="snow-series"><li>Part 1 - Tasks With Timeouts</li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li></ul>
+      <p>So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
+<a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout">Tasks With Timeouts</a></p>
 
 
-      <p><a href="/2013/07/test-post-ten/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/06/test-post-nine/">Setting up Mono on nginx</a> 
-        <span>posted on 28 Jun 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/06/test-post-seven/">Part 1 - Setting up the Virtual Machine and nginx</a></li><li><a href="/2013/06/test-post-eight/">Part 2 - Setting up new Website and Domain on nginx</a></li><li>Part 3 - Setting up Mono on nginx</li><li><a href="/2013/07/test-post-ten/">Part 4 - Setting up a NancyFX website</a></li><li><a href="/2013/07/test-post-eleven/">Part 5 - Setting up a ServiceStack web service</a></li></ul>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/06/test-post-nine/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/06/test-post-eight/">Setting up new Website and Domain on nginx</a> 
-        <span>posted on 27 Jun 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/06/test-post-seven/">Part 1 - Setting up the Virtual Machine and nginx</a></li><li>Part 2 - Setting up new Website and Domain on nginx</li><li><a href="/2013/06/test-post-nine/">Part 3 - Setting up Mono on nginx</a></li><li><a href="/2013/07/test-post-ten/">Part 4 - Setting up a NancyFX website</a></li><li><a href="/2013/07/test-post-eleven/">Part 5 - Setting up a ServiceStack web service</a></li></ul>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/06/test-post-eight/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/06/test-post-seven/">Setting up Ubuntu and nginx on Azure</a> 
-        <span>posted on 26 Jun 2013</span>
-      </h1> 
-      <ul class="snow-series"><li>Part 1 - Setting up the Virtual Machine and nginx</li><li><a href="/2013/06/test-post-eight/">Part 2 - Setting up new Website and Domain on nginx</a></li><li><a href="/2013/06/test-post-nine/">Part 3 - Setting up Mono on nginx</a></li><li><a href="/2013/07/test-post-ten/">Part 4 - Setting up a NancyFX website</a></li><li><a href="/2013/07/test-post-eleven/">Part 5 - Setting up a ServiceStack web service</a></li></ul>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/06/test-post-seven/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/06/test-post-six/">Making NuGet a little easier to use with an Alias</a> 
-        <span>posted on 21 Jun 2013</span>
-      </h1> 
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/06/test-post-six/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/05/test-post-five/">NancyFX - Hosting with OWIN</a> 
-        <span>posted on 29 May 2013</span>
-      </h1> 
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/05/test-post-five/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/05/test-post-four/">NancyFX - Revisiting Content Negotiation &amp; APIs (Part 3)</a> 
-        <span>posted on 18 May 2013</span>
-      </h1> 
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/05/test-post-four/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/03/test-post-three/">Setup my first Azure Virtual Machine!</a> 
-        <span>posted on 01 Mar 2013</span>
-      </h1> 
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ligula tortor, interdum sit amet mattis vel, aliquet vitae sapien. Sed fermentum, massa ac aliquet ornare, arcu sem imperdiet libero, eget mattis urna sem in risus. Phasellus vehicula interdum ornare. Duis pellentesque, ante fringilla mattis fringilla, leo ligula imperdiet nisi, vitae tincidunt nisl urna vitae metus. Fusce quis malesuada urna, vitae ultricies nunc. Nullam lectus elit, sollicitudin ac imperdiet sit amet, dignissim at lorem. Mauris luctus erat dui, non suscipit est convallis quis. Praesent dictum velit sit amet feugiat elementum.</p>
-
-<p>Quisque semper vitae nisl ac viverra. Etiam fermentum turpis sit amet ornare malesuada. Aliquam lectus velit, aliquam quis adipiscing eu, tristique vel dolor. Nam dui lorem, tempor eget nisi ut, rhoncus dignissim felis. Aliquam sodales enim et dictum placerat. Sed nisl nisi, tempus quis erat gravida, euismod scelerisque massa. Ut adipiscing arcu felis, in ornare quam tincidunt vitae. Suspendisse id augue sed purus hendrerit mattis id faucibus felis. Curabitur ornare sem sed nibh varius porta. Etiam imperdiet augue et nulla consectetur, ut placerat sapien mattis. Mauris consectetur, lectus a tempor tincidunt, eros mauris sagittis lorem, at vulputate libero nibh id risus. Cras vitae consequat leo. Cras ut lacus eget dui posuere vestibulum. Vivamus vel cursus ipsum, id accumsan erat. Integer posuere mauris mauris, ut iaculis ante luctus in. Mauris eget leo sit amet metus iaculis elementum ut id tortor.</p>
-
-
-      <p><a href="/2013/03/test-post-three/">Read more...</a></p>
+      <p><a href="/2013/12/tasks-with-timeouts/">Read more...</a></p>
     </li>
   </ul> 
 
@@ -174,9 +95,6 @@
 
       <!--<a href="/">Previous Page</a>-->
 
-    <p class="previous">
-      <a href="/page2">Next Page</a>
-    </p>
 
   </div>
 
@@ -199,38 +117,20 @@
                     </div>
                    <a href="http://stackexchange.com/users/422979">
 <img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
-</a>
-                    
-                    
-                </aside>
-                <!--aside id="text-8" class="widget widget_text">
-                    <h1 class="widget-title">Other sites</h1>
-                    <div class="textwidget">
-                        <a href="http://csharptube.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://csharptube.com']);">csharptube.com</a><br />
-                        <a href="http://thisisparrot.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://thisisparrot.com']);">Parrot</a><br />
-                        <a href="http://shitprogrammerswrite.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://shitprogrammerswrite.com']);">Shit programmers write</a><br />
-                    </div>
-                </aside-->
+</a>  
+                
                 <aside id="linkcat-6" class="widget widget_links">
                     <h1 class="widget-title">Other Blogs</h1>
                     <ul class='xoxo blogroll'>
-                        <li><a href="http://www.nickharris.net/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://nickharris.net/']);">Nick Harris</a></li>
-                        <li><a href="http://www.mindscapehq.com/blog/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.mindscapehq.com/blog/']);">Mindscape</a></li>
-                        <li><a href="http://blog.orangelightning.co.uk/" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://blog.orangelightning.co.uk/']);">Phil Jones</a></li>
-                        <li><a href="http://buildstarted.com/" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://buildstarted.com']);">Ben Dornis</a></li>
-                        <li><a href="http://jflood.net/" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://jflood.net/']);">Jospeh Flood</a></li>
+                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
+                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
                     </ul>
                     
                 </aside>
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
-                          <li><a href="/archive#2013August">August, 2013</a></li>
-                          <li><a href="/archive#2013July">July, 2013</a></li>
-                          <li><a href="/archive#2013June">June, 2013</a></li>
-                          <li><a href="/archive#2013May">May, 2013</a></li>
-                          <li><a href="/archive#2013March">March, 2013</a></li>
-                          <li><a href="/archive#2013February">February, 2013</a></li>
+                          <li><a href="/archive#2013December">December, 2013</a></li>
                     </ul>
                 </aside>
             </div>
