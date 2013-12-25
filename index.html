@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2013-12-26T02:23:08.1764104+05:30" />
+    <meta http-equiv="last-modified" content="2013-12-26T02:41:12.5065558+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -56,14 +56,16 @@
     //instead of checking for fault within the continutaion, 
     //we can just use a TaskContinuationOption to tell communicate the right semantics
 
-    var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent).TimeoutAfter(1000)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult(), 
+    var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
+    .TimeoutAfter(1000)
+    .ContinueWith(t =&gt; SomethingUsefulWithTheResult(), 
      TaskContinuationOptions.NotOnFaulted);
 
     var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
       .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
 
-    var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+    var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"),
+    TaskCreationOptions.AttachedToParent)
       .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
 
     tasks.Add(t1);

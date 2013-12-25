@@ -6,14 +6,16 @@
     //instead of checking for fault within the continutaion, 
     //we can just use a TaskContinuationOption to tell communicate the right semantics
 
-    var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(), TaskCreationOptions.AttachedToParent).TimeoutAfter(1000)
-      .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult(), 
+    var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
+    .TimeoutAfter(1000)
+    .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult(), 
      TaskContinuationOptions.NotOnFaulted);
 
     var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
       .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult());
 
-    var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+    var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"),
+    TaskCreationOptions.AttachedToParent)
       .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult());
 
     tasks.Add(t1);
@@ -36,14 +38,16 @@
     //instead of checking for fault within the continutaion, 
     //we can just use a TaskContinuationOption to tell communicate the right semantics
 
-    var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(), TaskCreationOptions.AttachedToParent).TimeoutAfter(1000)
-      .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult(), 
+    var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
+    .TimeoutAfter(1000)
+    .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult(), 
      TaskContinuationOptions.NotOnFaulted);
 
     var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
       .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult());
 
-    var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+    var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"),
+    TaskCreationOptions.AttachedToParent)
       .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult());
 
     tasks.Add(t1);
