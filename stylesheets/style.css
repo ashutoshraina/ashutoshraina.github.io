@@ -723,6 +723,7 @@ body {
 
 #secondary .widget-title {
     font-size: 15px;
+    color: black;
 }
 
 .main-navigation li.current-menu-item a, .main-navigation li.current_page_item a {
