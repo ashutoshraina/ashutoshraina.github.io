@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2013-12-26T02:41:12.5065558+05:30" />
+    <meta http-equiv="last-modified" content="2013-12-31T14:51:37.8207344+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,22 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a> 
+        <span>posted on 04 Oct 2013</span>
+      </h1> 
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li>Part 3 - Getting Started</li></ul>
+      <p>In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
+Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.</p>
+
+<pre><code>var result = UserConnectionHandler.MongoCollection.AsQueryable()
+                                  .Where(u =&gt; u.Reputation &gt; reputation);
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part3/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/10/mongodb-csharp-driver-part1/">MongoDB-CSharp-Driver Getting started</a> 

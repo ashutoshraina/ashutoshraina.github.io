@@ -1,4 +1,127 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</link><title>Tasks With Timeout Contd.</title><description>&lt;p&gt;As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!&lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</link><title>Tasks With Timeout On .net 4.5 Contd.</title><description>&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
+    {
+        var delay = task.ContinueWith(t =&amp;gt; { }, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+    public static Task&amp;lt;T&amp;gt; WithTimeout&amp;lt;T&amp;gt;(this Task&amp;lt;T&amp;gt; task, TimeSpan timeout)
+    {            
+        var delay = task.ContinueWith(t =&amp;gt; t.Result, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;</description><pubDate>Sun, 29 Dec 2013 18:30:00 Z</pubDate><a10:updated>2013-12-29T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
+    {
+        var delay = task.ContinueWith(t =&amp;gt; { }, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+    public static Task&amp;lt;T&amp;gt; WithTimeout&amp;lt;T&amp;gt;(this Task&amp;lt;T&amp;gt; task, TimeSpan timeout)
+    {            
+        var delay = task.ContinueWith(t =&amp;gt; t.Result, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Program
+{
+    private static List&amp;lt;int&amp;gt; Output = new List&amp;lt;int&amp;gt;();
+    private static Random _random = new Random();
+
+    public static int LongRunningTask(string message)
+    {
+        Console.WriteLine(message);
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        //Simulate a long running task
+        Thread.Sleep(TimeSpan.FromSeconds(2));
+        var number = _random.Next();
+        Console.WriteLine("Adding " + number + " From thread  - " + Thread.CurrentThread.ManagedThreadId);
+        return number;
+    }
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("In Main");
+        TimeoutonNet45();
+        Console.ReadLine();
+    }
+
+    public static void TimeoutonNet45()
+    {
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        var tasks = new List&amp;lt;Task&amp;gt;();
+        try
+        {
+            var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"),TaskCreationOptions.AttachedToParent)
+                                 .WithTimeout(TimeSpan.FromMilliseconds(1000))                
+                                 .ContinueWith(t =&amp;gt; Output.Add(t.Result), TaskContinuationOptions.NotOnCanceled);
+            var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+            tasks.Add(t1);
+            tasks.Add(t2);
+            Task.WaitAll(tasks.ToArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("There was an exception");
+            Console.WriteLine(ex.InnerException.Message);
+        }
+        Console.WriteLine("Output :");
+        Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
+    }
+
+    public static void TimeoutOnNet4()
+    {
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        var tasks = new List&amp;lt;Task&amp;gt;();
+        try
+        {
+            var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"), TaskCreationOptions.AttachedToParent)
+                                 .TimeoutAfter(1000)
+                                 .ContinueWith(t =&amp;gt; Output.Add(t.Result), TaskContinuationOptions.NotOnFaulted);
+            var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+            var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+            tasks.Add(t1);
+            tasks.Add(t2);
+            tasks.Add(t3);
+            Task.WaitAll(tasks.ToArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("There was an exception");
+            Console.WriteLine(ex.InnerException.Message);
+        }
+        Console.WriteLine("Output :");
+        Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output will look something like this :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In Main
+Managed thread Id 10
+Entering task1
+Managed thread Id 11
+Entering task2
+Managed thread Id 12
+Adding 856463453 From thread  - 12
+Adding 1826416296 From thread  - 11
+There was an exception
+A task was canceled.
+Output :
+856463453
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</link><title>Tasks With Timeout Contd.</title><description>&lt;p&gt;As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    var tasks = new List&amp;lt;Task&amp;gt;();
     try
@@ -30,6 +153,8 @@
     Console.WriteLine(ex.InnerException.Message);   
     }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I will show in the next post how this wasn't all that better since this leaves a few gaps.&lt;/p&gt;
 </description><pubDate>Mon, 23 Dec 2013 18:30:00 Z</pubDate><a10:updated>2013-12-23T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    var tasks = new List&amp;lt;Task&amp;gt;();
@@ -62,6 +187,8 @@
     Console.WriteLine(ex.InnerException.Message);   
     }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I will show in the next post how this wasn't all that better since this leaves a few gaps.&lt;/p&gt;
 </a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeouts/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeouts/</link><title>Tasks With Timeout</title><description>&lt;p&gt;So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
 &lt;a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout"&gt;Tasks With Timeouts&lt;/a&gt;&lt;/p&gt;
 
@@ -775,43 +902,4 @@ queries.DeleteQuestion(id);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If all is well then you will see some output and the world will be a better place.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part3/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part3/</link><title>MongoDB-CSharp-Driver-Using Linq</title><description>&lt;p&gt;In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
-Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var result = UserConnectionHandler.MongoCollection.AsQueryable()
-                                  .Where(u =&amp;gt; u.Reputation &amp;gt; reputation);
-&lt;/code&gt;&lt;/pre&gt;
-
-</description><pubDate>Thu, 03 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-03T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
-Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var result = UserConnectionHandler.MongoCollection.AsQueryable()
-                                  .Where(u =&amp;gt; u.Reputation &amp;gt; reputation);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;The alternative to this form of querying is using a BsonDocument and a MongoQuery. The way to build up such a query is below. Note, that the first lambda is the property and the second parameter is the key for the filtering. The query builder is in the MongoDB.Drivers.Builders namespace.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var query = Query&amp;lt;User&amp;gt;.GT(u =&amp;gt; u.Reputation, reputation);
-var result = UserConnectionHandler.MongoCollection.FindAs&amp;lt;User&amp;gt;(query);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It is a bit more work to specify queries by hand so I would prefer LINQ, but both options are available.
-Another, interesting querying mechanism is Regex. It was kind of hard to locate in the API ( or may be I just didn't know where to look). It is present in Bson namesapce.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public void UserNameStartsWith(string searchKey)
-{
-var query = Query.Matches("Name", new BsonRegularExpression(string.Format("^{0}", searchKey)));
-var result = UserConnectionHandler.MongoCollection.Find(query);
-Console.WriteLine("We found {0} Users whose name starts with {1}", result.Count(), searchKey);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Select does not result in fewer fields being returned from the server. The entire document is pulled back and passed to the native Select method. Therefore, the projection is performed client side. We should use the IQueryable implementation from the MongoDB.Driver.Linq namespace. Alternatively, there is SetFields() that is available to selectively bring fields back from the database. &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var query = Query.Matches("Name", new BsonRegularExpression(string.Format("^{0}", searchKey)));
-var result = UserConnectionHandler.MongoCollection.Find(query)
-                .SetFields(Fields&amp;lt;User&amp;gt;.Include(u =&amp;gt; u.Name, u =&amp;gt; u.Reputation));
-&lt;/code&gt;&lt;/pre&gt;
 </a10:content></item></channel></rss>

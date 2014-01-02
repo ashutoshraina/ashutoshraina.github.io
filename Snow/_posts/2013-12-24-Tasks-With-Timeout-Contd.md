@@ -8,7 +8,8 @@ series:
 	name: Tasks
 	current: 2
 	part: Part 1 - Tasks With Timeouts
-	part: Part 2 - Tasks With Timeouts contd.
+    part: Part 2 - Tasks With Timeouts contd.
+    part: Part 3 - Tasks With Timeout on .net4.5
 ---
 
 As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!
@@ -44,3 +45,4 @@ As mentioned in the last post we can now have tasks with individual timeouts. Th
 		Console.WriteLine(ex.InnerException.Message);   
 		}
 
+I will show in the next post how this wasn't all that better since this leaves a few gaps.

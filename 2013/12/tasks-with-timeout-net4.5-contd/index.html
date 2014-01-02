@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,14 +42,13 @@
                   
 
 <div id="post">
-    <h1>MongoDB-Understanding queries through explain plan</h1>
+    <h1>Tasks With Timeout On .net 4.5 Contd.</h1>
 
     <div class="post-note">
-      posted on 13 Oct 2013
+      posted on 30 Dec 2013
        | <a href="/category/.net">.net</a>
        | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/mongodb">mongodb</a>
-       | <a href="/category/opensource">opensource</a>
+       | <a href="/category/asynchrony">Asynchrony</a>
       
       <div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -60,120 +59,117 @@
       </div>
     </div>
     
-    <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li>Part 3 - Explain Plan</li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+    <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li>Part 3 - Tasks With Timeout on .net4.5</li></ul>
         
-    <p>Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
-The details have been taken from the mongodb website and presented here for continuity of series.</p>
+    <p>The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!</p>
 
-<!--excerpt-->
+<pre><code>    public static Task WithTimeout(this Task task, TimeSpan timeout)
+    {
+        var delay = task.ContinueWith(t =&gt; { }, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+    public static Task&lt;T&gt; WithTimeout&lt;T&gt;(this Task&lt;T&gt; task, TimeSpan timeout)
+    {            
+        var delay = task.ContinueWith(t =&gt; t.Result, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+</code></pre>
 
-<p><strong>Explain Output Fields</strong></p>
+<p><!--excerpt-->
+OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.</p>
 
-<p><em>explain.cursor</em>
-cursor is a string that reports the type of cursor used by the query operation:</p>
+<pre><code>public class Program
+{
+    private static List&lt;int&gt; Output = new List&lt;int&gt;();
+    private static Random _random = new Random();
 
-<p>BasicCursor indicates a full collection scan.
-BtreeCursor indicates that the query used an index. The cursor includes name of the index. When a query uses an index, the output of explain() includes indexBounds details.
-GeoSearchCursor indicates that the query used a geospatial index.
-explain.isMultiKey
-isMultiKey is a boolean. When true, the query uses a multikey index, where one of the fields in the index holds an array.</p>
+    public static int LongRunningTask(string message)
+    {
+        Console.WriteLine(message);
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        //Simulate a long running task
+        Thread.Sleep(TimeSpan.FromSeconds(2));
+        var number = _random.Next();
+        Console.WriteLine("Adding " + number + " From thread  - " + Thread.CurrentThread.ManagedThreadId);
+        return number;
+    }
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("In Main");
+        TimeoutonNet45();
+        Console.ReadLine();
+    }
 
-<p><em>explain.n</em>
-n is a number that reflects the number of documents that match the query selection criteria.</p>
+    public static void TimeoutonNet45()
+    {
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        var tasks = new List&lt;Task&gt;();
+        try
+        {
+            var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task1"),TaskCreationOptions.AttachedToParent)
+                                 .WithTimeout(TimeSpan.FromMilliseconds(1000))                
+                                 .ContinueWith(t =&gt; Output.Add(t.Result), TaskContinuationOptions.NotOnCanceled);
+            var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&gt; Output.Add(_.Result));
+            tasks.Add(t1);
+            tasks.Add(t2);
+            Task.WaitAll(tasks.ToArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("There was an exception");
+            Console.WriteLine(ex.InnerException.Message);
+        }
+        Console.WriteLine("Output :");
+        Output.ForEach(_ =&gt; Console.WriteLine(_));
+    }
 
-<p><em>explain.nscannedObjects</em>
-Specifies the total number of documents scanned during the query. The nscannedObjects may be lower than nscanned, such as if the index covers a query. See indexOnly. Additionally, the nscannedObjects may be lower than nscanned in the case of multikey index on an array field with duplicate documents.</p>
-
-<p><em>explain.nscanned</em>
-Specifies the total number of documents or index entries scanned during the database operation. You want n and nscanned to be close in value as possible. The nscanned value may be higher than the nscannedObjects value, such as if the index covers a query. See indexOnly.</p>
-
-<p><em>explain.nscannedObjectsAllPlans</em>
-nscannedObjectsAllPlans is a number that reflects the total number of documents scanned for all query plans during the database operation.</p>
-
-<p><em>explain.nscannedAllPlans</em>
-nscannedAllPlans is a number that reflects the total number of documents or index entries scanned for all query plans during the database operation.</p>
-
-<p><em>explain.scanAndOrder</em>
-scanAndOrder is a boolean that is true when the query cannot use the index for returning sorted results.</p>
-
-<p>When true, MongoDB must sort the documents after it retrieves them from either an index cursor or a cursor that scans the entire collection.</p>
-
-<p><em>explain.indexOnly</em>
-indexOnly is a boolean value that returns true when the query is covered by the index indicated in the cursor field. When an index covers a query, MongoDB can both match the query conditions and return the results using only the index because:</p>
-
-<p>all the fields in the query are part of that index, and
-all the fields returned in the results set are in the same index.
-explain.nYields
-nYields is a number that reflects the number of times this query yielded the read lock to allow waiting writes execute.</p>
-
-<p><em>explain.nChunkSkips</em>
-nChunkSkips is a number that reflects the number of documents skipped because of active chunk migrations in a sharded system. Typically this will be zero. A number greater than zero is ok, but indicates a little bit of inefficiency.</p>
-
-<p><em>explain.millis</em>
-millis is a number that reflects the time in milliseconds to complete the query.</p>
-
-<p><em>explain.indexBounds</em>
-indexBounds is a document that contains the lower and upper index key bounds. This field resembles one of the following:</p>
-
-<pre><code>"indexBounds" : {
-"start" : {  : , ...  },
-"end" : {  : , ... }
-},
-"indexBounds" : { "" : [ [ ,  ] ],
-  ...
+    public static void TimeoutOnNet4()
+    {
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        var tasks = new List&lt;Task&gt;();
+        try
+        {
+            var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task1"), TaskCreationOptions.AttachedToParent)
+                                 .TimeoutAfter(1000)
+                                 .ContinueWith(t =&gt; Output.Add(t.Result), TaskContinuationOptions.NotOnFaulted);
+            var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&gt; Output.Add(_.Result));
+            var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&gt; Output.Add(_.Result));
+            tasks.Add(t1);
+            tasks.Add(t2);
+            tasks.Add(t3);
+            Task.WaitAll(tasks.ToArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("There was an exception");
+            Console.WriteLine(ex.InnerException.Message);
+        }
+        Console.WriteLine("Output :");
+        Output.ForEach(_ =&gt; Console.WriteLine(_));
+    }
 }
 </code></pre>
 
-<p><em>explain.allPlans</em>
-allPlans is an array that holds the list of plans the query optimizer runs in order to select the index for the query. Displays only when the  parameter to explain() is true or 1.</p>
+<p>The output will look something like this :</p>
 
-<p><em>explain.oldPlan</em>
-oldPlan is a document value that contains the previous plan selected by the query optimizer for the query. Displays only when the  parameter to explain() is true or 1.</p>
+<pre><code>In Main
+Managed thread Id 10
+Entering task1
+Managed thread Id 11
+Entering task2
+Managed thread Id 12
+Adding 856463453 From thread  - 12
+Adding 1826416296 From thread  - 11
+There was an exception
+A task was canceled.
+Output :
+856463453
+</code></pre>
 
-<p><em>explain.server</em>
-server is a string that reports the MongoDB server.</p>
-
-<p>$or Query Output Fields
-explain.clauses
-clauses is an array that holds the Core Explain Output Fields information for each clause of the $or expression. clauses is only included when the clauses in the $or expression use indexes.</p>
-
-<p>Sharded Collections Output Fields
-<em>explain.clusteredType</em>
-clusteredType is a string that reports the access pattern for shards. The value is:</p>
-
-<p>ParallelSort, if the mongos queries shards in parallel.
-SerialServer, if the mongos queries shards sequentially.
-<em>explain.shards</em>
-shards contains fields for each shard in the cluster accessed during the query. Each field holds the Core Explain Output Fields for that shard.</p>
-
-<p><em>explain.millisShardTotal</em>
-millisShardTotal is a number that reports the total time in milliseconds for the query to run on the shards.</p>
-
-<p><em>explain.millisShardAvg</em>
-millisShardAvg is a number that reports the average time in millisecond for the query to run on each shard.</p>
-
-<p><em>explain.numQueries</em>
-numQueries is a number that reports the total number of queries executed.</p>
-
-<p><em>explain.numShards</em>
-numShards is a number that reports the total number of shards queried.</p>
-
-<p>Lastly, some more profiling tips that can be pretty useful.</p>
-
-<p><strong>Logging Slow Queries</strong></p>
-
-<ul>
-<li>There are 3 levels for the profiler 0 OFF , 1Slow, 2 ALL</li>
-<li>Enable this using mongod -profile 1 --slowms 2</li>
-<li><code>Db.getProfilingLevel()</code> to get the current profiling level.</li>
-<li>If you want to get all queries that took longer than 3 second, ordered by timestamp descending</li>
-<li><code>db.system.profile.find({millis:{$gt:3000}}).sort({ts:-1})</code></li>
-</ul>
-
-<p>Mongotop can be run set to a specific time interval to determine where is the majority of the time spent. This utility tracks the time that mongod spends on reads and writes. The information is on a per collection basis.
-I prefer to increase the time for reporting from the default 1 sec to somewhere close to 5 sec or more (this is just a random number that I feel comfortable with..otherwise the data is to verbose to make any sense).</p>
-
-<p>This should be a good start. We will go into some more concepts about monitoring mongodb before going into sharding etc..</p>
+<p>A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.</p>
 
 
     <div id="disqus_thread"></div>
@@ -183,14 +179,14 @@ I prefer to increase the time for reporting from the default 1 sec to somewhere 
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/';
+                this.page.url = 'http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/';
+    var disqus_url = 'http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

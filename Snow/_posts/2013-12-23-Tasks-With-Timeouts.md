@@ -8,7 +8,8 @@ series:
 	name: Tasks
 	current: 1
 	part: Part 1 - Tasks With Timeouts
-	part: Part 2 - Tasks With Timeouts contd.
+    part: Part 2 - Tasks With Timeouts contd.
+    part: Part 3 - Tasks With Timeout on .net4.5
 ---
 
 So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
