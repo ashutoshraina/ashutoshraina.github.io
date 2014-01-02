@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="last-modified" content="2014-01-03T00:48:38.9715527+05:30" />
+    <title>Ashutosh Raina</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
+    <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/page3/" />
+</head>
+<body class="home blog">
+    <div id="page" class="hfeed site">
+        <header id="masthead" class="site-header fancy-container lightgreen" role="banner">
+            <hgroup>
+                <h1 class="site-title"><a href="/" title="ashutoshraina.github.io" rel="home">ashutoshraina</a></h1>
+                <h2 class="site-title"><small>For those who are still chasing</small></h2>
+                <p class="site-description">I love french fries!!</p>
+            </hgroup>
+            <nav role="navigation" class="site-navigation main-navigation">
+                <h1 class="assistive-text">Menu</h1>
+                <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/category">Categories</a></li>
+                        <li><a href="/archive">Archive</a></li>
+                        <li><a href="/feed.xml">RSS/Atom</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
+
+        <div id="main">
+
+            <div id="primary" class="site-content">
+                <div id="content" role="main">
+                  
+
+  <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/useful-extension-methods/">Useful Extension Methods</a> 
+        <span>posted on 03 Feb 2013</span>
+      </h1> 
+      
+      <p>Extension methods provide a very useful way of extending the functionality of a Type (value, reference or interface). The earlier way of extending or rather adding a functionality through inheritance or making an entirely new type from scratch were tedious to say the least. 
+Extension methods are basically static methods with the calling syntax same as that of static methods. Over the course of the last few weeks i have come to realise they reduce a lot of repetitiveness from the code when used appropriately.<strong>MSDN</strong> specification also clearly states they must be used sparingly.
+So,here are a few useful extension methods.
+The syntax has only one new thing, the use of <em>this </em>keyword on the type that the extension method is meant for. </p>
+
+<pre><code>public static XElement ToXElement(this XmlNode node)
+{
+   var xDoc = new XDocument();
+   using (var xmlWriter = xDoc.CreateWriter())
+          node.WriteTo(xmlWriter);
+   return xDoc.Root;
+}
+</code></pre>
+
+<p>So, calling the code would be something like ,</p>
+
+<pre><code>var xelement = node.ToXElement();
+</code></pre>
+
+<p>xelement is now an XElement. This might look very plain and simple at the outset but when you really start to have a lot of repetitive functionality over a type this could really bail you out and make the code more readable to say the least. For e.g inside a for loop if you have a lot of code that operates over a type then it could be useful to take it to an extension method and then call the extension method statically.Further, extension methods can also have overloads so that is another nifty feature.
+The following extension method returns the XmlAttributeCollection for a XmlNode</p>
+
+<pre><code>public static XmlAttributeCollection GetXmlAtrributeCollection(this XmlNode node)
+{
+    var xmlDoc = new XmlDocument();
+    var element = node.ToXElement();
+    using (var reader = element.CreateReader())
+    {
+      xmlDoc.Load(reader);
+      return xmlDoc.DocumentElement != null ? xmlDoc.DocumentElement.Attributes : null;
+    }
+} 
+</code></pre>
+
+<p>Too much of XML ?? Lets get one really useful extension method. <a href="http://msdn.microsoft.com/en-us/library/bb460184.aspx" title="Lookup">Lookup</a> is an immutable class in System.Linq. It works similar to a dictionary but does not enforce unique keys , so returns an IEnumerable.
+Unfortunately, the creation of a Lookup is internal to .net. So we can only call ToLookup() from a Dictionary etc. So ,i needed some way of adding data to the Lookup.Here is what i came up with. </p>
+
+<pre><code>public class Pairs 
+    {
+        public String Key { get; set; }
+        public Object Value { get; set; }
+    }
+public static class LookupExtensionMethods
+    {
+        public static Lookup&lt;String,Object&gt; AddToLookup(this Lookup&lt;String,Object&gt; lookup,
+                                                       List&lt;Pairs&gt; pairlist)
+        {
+            var temp = (Lookup&lt;String, Object&gt;)pairlist.ToLookup(p =&gt; p.Key, p =&gt; p.Value);
+            lookup.Concat(temp);
+            return lookup;
+        }
+
+    public static Lookup&lt;String, Object&gt; AddToLookup(this Lookup&lt;String, Object&gt; lookup, Pairs pair)
+    {
+        var pairlist = new List&lt;Pairs&gt; {pair};
+        var temp = (Lookup&lt;String, Object&gt;)pairlist.ToLookup(p =&gt; p.Key, p =&gt; p.Value);
+        lookup.Concat(temp);
+        return lookup;
+    }
+}
+</code></pre>
+
+<p>Lastly, there is no way to replace the first occurrence of a string in C# straight out of the box(I bet you did not notice that). </p>
+
+<pre><code> public static string ReplaceFirstOccurrance(this string original, string oldValue, string newValue)
+ {
+     if (String.IsNullOrEmpty(original))
+                return String.Empty;
+     if (String.IsNullOrEmpty(oldValue))
+                return original;
+     if (String.IsNullOrEmpty(newValue))
+                newValue = String.Empty;
+     var loc = original.IndexOf(oldValue);
+     return loc == -1 ? original : original.Remove(loc, oldValue.Length).Insert(loc, newValue);
+ }
+</code></pre>
+
+<p>Suddenly, the world seems a lot better.</p>
+
+      <p><a href="/2013/02/useful-extension-methods/">Read more...</a></p>
+    </li>
+  </ul> 
+
+  <!-- Pagination links -->
+  <div id="post-pagination" class="pagination">
+
+   
+      <p class="previous">
+        <a href="/page2">Previous Page</a>
+        </p>
+
+
+
+  </div>
+
+
+                </div>
+                <!-- #content -->
+            </div>
+            <!-- #primary .site-content -->      
+
+ <div id="secondary" class="widget-area fancy-container lightred" role="complementary">
+                <aside id="text-5" class="widget widget_text">
+                    <h1 class="widget-title">Follow</h1>
+                    <div class="textwidget logos">
+                     <a href="https://twitter.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="/stylesheets/images/twitter.png"></a>
+                     <a href="http://stackoverflow.com/users/802070/ashutosh-raina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://stackoverflow.com']);"><img src="/stylesheets/images/stackoverflow.png"></a>
+                    <a href="http://www.linkedin.com/pub/ashutosh-raina/11/165/328" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.linkedin.com']);"><img src="/stylesheets/images/linkedin.png"></a>                      
+                    <a href="https://github.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://github.com']);"><img src="/stylesheets/images/github.png"></a>
+                       
+                  
+                    </div>
+                   <a href="http://stackexchange.com/users/422979">
+<img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
+</a>  
+                
+                <aside id="linkcat-6" class="widget widget_links">
+                    <h1 class="widget-title">Other Blogs</h1>
+                    <ul class='xoxo blogroll'>
+                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
+                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
+                    </ul>
+                    
+                </aside>
+                <aside id="archives-4" class="widget widget_archive">
+                    <h1 class="widget-title">Archive</h1>
+                    <ul class="posts">
+                          <li><a href="/archive#2013December">December, 2013</a></li>
+                          <li><a href="/archive#2013November">November, 2013</a></li>
+                          <li><a href="/archive#2013October">October, 2013</a></li>
+                          <li><a href="/archive#2013September">September, 2013</a></li>
+                          <li><a href="/archive#2013July">July, 2013</a></li>
+                          <li><a href="/archive#2013April">April, 2013</a></li>
+                          <li><a href="/archive#2013February">February, 2013</a></li>
+                    </ul>
+                </aside>
+            </div>
+            <!-- #secondary .widget-area -->
+
+        </div>
+        <!-- #main -->
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="site-info">
+                Powered by <a href="https://github.com/Sandra/Sandra.Snow" rel="generator">Sandra.Snow</a>.	
+            </div>
+            <!-- .site-info -->
+        </footer>
+        <!-- #colophon .site-footer -->
+    </div>
+    <!-- #page .hfeed .site -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src='/javascripts/prettify.js' type='text/javascript'></script>
+    
+    <script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-46699881-1']);
+_gaq.push(['_trackPageview']);
+        
+(function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+})();
+</script>
+    
+    <script type='text/javascript'>
+      $(function () {
+        $("pre code").parent().each(function () {
+          if (!$(this).hasClass("prettyprint")) {
+            $(this).addClass("prettyprint");
+            a = true
+          }
+        });
+
+        prettyPrint();
+      });
+    </script>
+</body>
+</html>

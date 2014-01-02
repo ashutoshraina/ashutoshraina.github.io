@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2013-12-31T14:51:37.8207344+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-03T00:48:38.9715527+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -15,7 +15,7 @@
         <header id="masthead" class="site-header fancy-container lightgreen" role="banner">
             <hgroup>
                 <h1 class="site-title"><a href="/" title="ashutoshraina.github.io" rel="home">ashutoshraina</a></h1>
-                <h2><small>For those who are still chasing</small></h2>
+                <h2 class="site-title"><small>For those who are still chasing</small></h2>
                 <p class="site-description">I love french fries!!</p>
             </hgroup>
             <nav role="navigation" class="site-navigation main-navigation">
@@ -175,6 +175,108 @@ Next, time we will do some stuff by creating some collections and then querying.
 
       <p><a href="/2013/09/mongodb-getting-started/">Read more...</a></p>
     </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/07/python-development-in-visual-studio/">Python Development in Visual Studio</a> 
+        <span>posted on 20 Jul 2013</span>
+      </h1> 
+      
+      <p><strong>What ..you must be mad !!</strong></p>
+
+<p>IronPython has been around for some time now. Python tools for Visual Studio have recently been given a facelift. It has been lifted to become a more complete tool which we can use for Python development with Visual Studio.
+I have recently been flirting with Python since it is easier and quicker to just get some stuff done in Python. It can easily be a second language for a C# developer and I do intend to keep it in my toolbox. There are alternatives available including but not limited to PyDev plugin for eclipse and Aptana Studio which comes with all the bells bundled together.</p>
+
+<p>
+      <p><a href="/2013/07/python-development-in-visual-studio/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/04/console2-commandline-awesomeness/">Console2- Command Line Awesomeness</a> 
+        <span>posted on 14 Apr 2013</span>
+      </h1> 
+      
+      <ol>
+<li><p>What is this ?
+Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. </p></li>
+<li><p>Where do I get it ?
+You can download it from here <a href="http://sourceforge.net/projects/console/" title="Console2">Console2</a></p></li>
+<li><p>Help me set it up .<a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post">Scott's Originial Blog Post</a>
+Refer to Scott Hansleman's blog post </p></li>
+</ol>
+
+<p>Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
+Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.</p>
+
+<ol>
+<li>Let's make the world a better place by adding Git Bash to the the tabs.</li>
+</ol>
+
+<blockquote>
+  <p>Title : GitBash</p>
+  
+  <p>Icon : C:\Program Files (x86)\Git\etc\git.ico</p>
+  
+  <p>Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i</p>
+  
+  <p>Startup dir : c:\Users\Ashutosh ( or whatever your path is )</p>
+</blockquote>
+
+<p><img src="/stylesheets/images/posts/console2.png" alt="Console2" /></p>
+
+<p>All looks nice, the world is a better place.</p>
+
+      <p><a href="/2013/04/console2-commandline-awesomeness/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/teamcity-recover-admin-password/">TeamCity- Recover Admin Password</a> 
+        <span>posted on 04 Feb 2013</span>
+      </h1> 
+      
+      <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
+I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
+Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+
+<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
+So,</p>
+
+<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+
+Step 2  Open CMD as ADMINISTRATOR
+(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
+
+Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
+</code></pre>
+
+<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
+
+      <p><a href="/2013/02/teamcity-recover-admin-password/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/nunit-codesnippet/">NUnit-Code Snippet</a> 
+        <span>posted on 03 Feb 2013</span>
+      </h1> 
+      
+      <p>What are we doing ?
+We are trying to create a snippet for creating an NUnit test.</p>
+
+<p>How do we do this ?
+We go write a snippet.</p>
+
+<p>The snippet is here <a href="https://gist.github.com/4696972" title="NUnit Snippet">Snippet</a></p>
+
+<p>Save it under </p>
+
+<pre><code>..\Documents\Visual Studio 2012\Code Snippets\Visual C#\My Code Snippets
+</code></pre>
+
+<p>Now go add the snippet.
+Go to Tools in VS -&gt; Code Snippets Manager -&gt; and Import after clicking on the Snippet.
+That's it, we are done.</p>
+
+      <p><a href="/2013/02/nunit-codesnippet/">Read more...</a></p>
+    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -186,6 +288,9 @@ Next, time we will do some stuff by creating some collections and then querying.
       </p>
 
 
+    <p class="previous">
+      <a href="/page3">Next Page</a>
+    </p>
 
   </div>
 
@@ -225,6 +330,9 @@ Next, time we will do some stuff by creating some collections and then querying.
                           <li><a href="/archive#2013November">November, 2013</a></li>
                           <li><a href="/archive#2013October">October, 2013</a></li>
                           <li><a href="/archive#2013September">September, 2013</a></li>
+                          <li><a href="/archive#2013July">July, 2013</a></li>
+                          <li><a href="/archive#2013April">April, 2013</a></li>
+                          <li><a href="/archive#2013February">February, 2013</a></li>
                     </ul>
                 </aside>
             </div>
