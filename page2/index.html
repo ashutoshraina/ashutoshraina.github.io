@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-03T10:50:28.3370185+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-03T23:21:21.2075880+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,31 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a> 
+        <span>posted on 04 Oct 2013</span>
+      </h1> 
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li>Part 2 - Getting organised</li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
+      <p>Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.</p>
+
+<pre><code>public class Question : MongoEntity
+{
+    public string Text { get; set; }
+    public string Answer { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int Difficulty { get; set; }
+}
+public class User : MongoEntity
+{
+    public string Name { get; set; }
+    public int Reputation { get; set; }
+}
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part2/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a> 
@@ -252,31 +277,6 @@ Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\Progr
 
       <p><a href="/2013/02/teamcity-recover-admin-password/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/02/nunit-codesnippet/">NUnit-Code Snippet</a> 
-        <span>posted on 03 Feb 2013</span>
-      </h1> 
-      
-      <p>What are we doing ?
-We are trying to create a snippet for creating an NUnit test.</p>
-
-<p>How do we do this ?
-We go write a snippet.</p>
-
-<p>The snippet is here <a href="https://gist.github.com/4696972" title="NUnit Snippet">Snippet</a></p>
-
-<p>Save it under </p>
-
-<pre><code>..\Documents\Visual Studio 2012\Code Snippets\Visual C#\My Code Snippets
-</code></pre>
-
-<p>Now go add the snippet.
-Go to Tools in VS -&gt; Code Snippets Manager -&gt; and Import after clicking on the Snippet.
-That's it, we are done.</p>
-
-      <p><a href="/2013/02/nunit-codesnippet/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -326,6 +326,7 @@ That's it, we are done.</p>
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
+                          <li><a href="/archive#2014January">January, 2014</a></li>
                           <li><a href="/archive#2013December">December, 2013</a></li>
                           <li><a href="/archive#2013November">November, 2013</a></li>
                           <li><a href="/archive#2013October">October, 2013</a></li>

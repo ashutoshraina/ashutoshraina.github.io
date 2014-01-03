@@ -1,4 +1,66 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</link><title>Tasks With Timeout On .net 4.5 Contd.</title><description>&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</guid><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><title>Up and Running with Asp.net MVC Mono and Monodevelop</title><description>&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
+
+</description><pubDate>Thu, 02 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-02T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/mono-mvc-error.png" alt="Mono MVC Error" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, here is the long recipe of fixing it one step at a time. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Go to Project Options -&amp;gt; General -&amp;gt; Change the Target Framework to Mono/.net4.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install the Asp.net MVC Nuget package.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/nuget-install.png" alt="Nuget Install" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, compile and go yayy!!
+Press F5 and wait for your happiness to go away.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;"Could not launch web server. Make sure that XSP4 web server is installed".
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Don't worry it is installed the mono guys just wanted to have fun by poiking us with a stick. Copy the &lt;strong&gt;winhack&lt;/strong&gt; folder from &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I was only able to arrive at this hack by looking at the monosoftdebugger source code and a bit of hit and miss. In between I asked around if there was a way to attache IIS Express to monodevelop, I couldn't find anything that was simple and obvious (ended up with a useful IISExpress manager utility, more on that later).&lt;/p&gt;
+
+&lt;p&gt;Now, press F5 again and the misery continues, but thankfully this is something we understand.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;System.InvalidOperationException
+Conflicting versions of ASP.NET Web Pages detected: specified version is "1.0.0.0", but the version in bin is "3.0.0.0". To continue, remove files from the application's bin directory or remove the version specification in web.config.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In project's web.config change the version.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;add key="webpages:Version" value="3.0.0.0" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let's press F5 again.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;System.InvalidOperationException
+Could not locate Razor Host Factory type: System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the web.config located in the views folder change the version to the appropriate mvc version.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;host factoryType="System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Side Note : Better, change the version wherever it needs to be updated.&lt;/p&gt;
+
+&lt;p&gt;Now, Press F5.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/mvc-mono-success.png" alt="Success" /&gt;&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</link><title>Tasks With Timeout On .net 4.5 Contd.</title><description>&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
     {
@@ -767,139 +829,4 @@ var databases = server.GetDatabaseNames().ToList();
 Console.WriteLine("\nAll the databases in the server");
 databases.ForEach(Console.WriteLine);
 &lt;/code&gt;&lt;/pre&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part2/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part2/</link><title>MongoDB-CSharp-Driver Getting organised</title><description>&lt;p&gt;Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Question : MongoEntity
-{
-    public string Text { get; set; }
-    public string Answer { get; set; }
-    public DateTime CreatedOn { get; set; }
-    public int Difficulty { get; set; }
-}
-public class User : MongoEntity
-{
-    public string Name { get; set; }
-    public int Reputation { get; set; }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-</description><pubDate>Thu, 03 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-03T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Question : MongoEntity
-{
-    public string Text { get; set; }
-    public string Answer { get; set; }
-    public DateTime CreatedOn { get; set; }
-    public int Difficulty { get; set; }
-}
-public class User : MongoEntity
-{
-    public string Name { get; set; }
-    public int Reputation { get; set; }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;Finally, we get down to some real stuff. &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class SimpleQueries
-{
-    protected readonly MongoConnectionHandler&amp;lt;User&amp;gt; UserConnectionHandler;
-    protected readonly MongoConnectionHandler&amp;lt;Question&amp;gt; QuestionConnectionHandler;
-
-    public SimpleQueries()
-    {
-        UserConnectionHandler = new MongoConnectionHandler&amp;lt;User&amp;gt;("MongoDBDemo");
-        QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
-    }
-
-    public void CreateQuestion(Question question)
-    {
-        //// Save the entity with safe mode (WriteConcern.Acknowledged)
-        var result = QuestionConnectionHandler.MongoCollection.Save&amp;lt;Question&amp;gt;(question, 
-                             new MongoInsertOptions { WriteConcern = WriteConcern.Acknowledged});
-
-        if (!result.Ok)
-        {
-            Console.WriteLine(result.LastErrorMessage);
-        }
-        else if (result.Response["err"] != null)
-        {
-            Console.WriteLine("Insertion was successfull");
-        }
-    }
-
-    public void CreateUser(User user)
-    {
-        //// Save the entity with safe mode (WriteConcern.Acknowledged)
-        var result = UserConnectionHandler.MongoCollection.Save&amp;lt;User&amp;gt;(user, 
-                          new MongoInsertOptions { WriteConcern = WriteConcern.Acknowledged });
-
-        if (!result.Ok)
-        {
-            Console.WriteLine(result.LastErrorMessage);
-        }
-        else if (result.Response["err"] != null)
-        {
-            Console.WriteLine("Insertion was successfull");
-        }
-    }
-
-    public void GetAllQuestions()
-    {
-        var cursor = QuestionConnectionHandler.MongoCollection.AsQueryable();
-        var resultSet = cursor.ToList();
-
-        Console.WriteLine("Writing out all the questions");
-        foreach (var result in resultSet)
-        {
-            Console.WriteLine("Text : {0},  Answer : {1}", result.Text, result.Answer);
-        }
-    }
-
-    public ObjectId GetOneQuestion()
-    {
-        var cursor = QuestionConnectionHandler.MongoCollection.AsQueryable().FirstOrDefault();
-
-        Console.WriteLine(cursor.Id);
-        return cursor.Id;
-    }
-
-    public void DeleteQuestion(ObjectId id)
-    {
-        var result = QuestionConnectionHandler.MongoCollection.Remove(
-            Query&amp;lt;Question&amp;gt;.EQ(e =&amp;gt; e.Id, id), RemoveFlags.None, WriteConcern.Acknowledged);
-
-        if (!result.Ok)
-        {
-            Console.WriteLine(result.ErrorMessage);
-        }
-        else
-        {
-            Console.WriteLine("Delete Operation OK : {0}", result.Ok);
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, that we have some capabilities in our application, we can query away.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//Seed Data
-var question = new Question { Text = "Who are you ?", Answer = "I am MongoDB.",
-                          CreatedOn = DateTime.Now, Difficulty = 3 };
-var user = new User {Name = "Ashutosh", Reputation = 100};
-var queries = new SimpleQueries();
-queries.CreateQuestion(question);
-queries.CreateUser(user);
-
-
-
-var queries = new SimpleQueries();
-queries.GetAllQuestions();
-var id = queries.GetOneQuestion();
-queries.DeleteQuestion(id);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If all is well then you will see some output and the world will be a better place.&lt;/p&gt;
 </a10:content></item></channel></rss>

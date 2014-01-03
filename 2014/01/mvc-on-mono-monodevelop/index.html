@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/04/console2-commandline-awesomeness/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,13 +42,15 @@
                   
 
 <div id="post">
-    <h1>Console2- Command Line Awesomeness</h1>
+    <h1>Up and Running with Asp.net MVC Mono and Monodevelop</h1>
 
     <div class="post-note">
-      posted on 14 Apr 2013
-       | <a href="/category/tools">Tools</a>
-       | <a href="/category/productivity">Productivity</a>
-       | <a href="/category/tips">Tips</a>
+      posted on 03 Jan 2014
+       | <a href="/category/monodevelop">monodevelop</a>
+       | <a href="/category/mono">mono</a>
+       | <a href="/category/opensource">opensource</a>
+       | <a href="/category/asp.net-mvc">asp.net mvc</a>
+       | <a href="/category/tips">tips</a>
       
       <div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -61,35 +63,66 @@
     
     
         
-    <ol>
-<li><p>What is this ?
-Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. </p></li>
-<li><p>Where do I get it ?
-You can download it from here <a href="http://sourceforge.net/projects/console/" title="Console2">Console2</a></p></li>
-<li><p>Help me set it up .<a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post">Scott's Originial Blog Post</a>
-Refer to Scott Hansleman's blog post </p></li>
-</ol>
+    <p>After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.</p>
 
-<p>Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
-Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.</p>
+<!--excerpt-->
 
-<ol>
-<li>Let's make the world a better place by adding Git Bash to the the tabs.</li>
-</ol>
+<p><img src="/stylesheets/images/posts/mono-mvc-error.png" alt="Mono MVC Error" /></p>
 
-<blockquote>
-  <p>Title : GitBash</p>
-  
-  <p>Icon : C:\Program Files (x86)\Git\etc\git.ico</p>
-  
-  <p>Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i</p>
-  
-  <p>Startup dir : c:\Users\Ashutosh ( or whatever your path is )</p>
-</blockquote>
+<p>Now, here is the long recipe of fixing it one step at a time. </p>
 
-<p><img src="/stylesheets/images/posts/console2.png" alt="Console2" /></p>
+<pre><code>Go to Project Options -&gt; General -&gt; Change the Target Framework to Mono/.net4.5
+</code></pre>
 
-<p>All looks nice, the world is a better place.</p>
+<p>Install the Asp.net MVC Nuget package.</p>
+
+<p><img src="/stylesheets/images/posts/nuget-install.png" alt="Nuget Install" /></p>
+
+<p>Now, compile and go yayy!!
+Press F5 and wait for your happiness to go away.</p>
+
+<pre><code>"Could not launch web server. Make sure that XSP4 web server is installed".
+</code></pre>
+
+<p>Don't worry it is installed the mono guys just wanted to have fun by poiking us with a stick. Copy the <strong>winhack</strong> folder from </p>
+
+<pre><code>C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.0
+</code></pre>
+
+<p>to </p>
+
+<pre><code>C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.5
+</code></pre>
+
+<p>I was only able to arrive at this hack by looking at the monosoftdebugger source code and a bit of hit and miss. In between I asked around if there was a way to attache IIS Express to monodevelop, I couldn't find anything that was simple and obvious (ended up with a useful IISExpress manager utility, more on that later).</p>
+
+<p>Now, press F5 again and the misery continues, but thankfully this is something we understand.</p>
+
+<pre><code>System.InvalidOperationException
+Conflicting versions of ASP.NET Web Pages detected: specified version is "1.0.0.0", but the version in bin is "3.0.0.0". To continue, remove files from the application's bin directory or remove the version specification in web.config.
+</code></pre>
+
+<p>In project's web.config change the version.</p>
+
+<pre><code>&lt;add key="webpages:Version" value="3.0.0.0" /&gt;
+</code></pre>
+
+<p>Let's press F5 again.</p>
+
+<pre><code>System.InvalidOperationException
+Could not locate Razor Host Factory type: System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35
+</code></pre>
+
+<p>In the web.config located in the views folder change the version to the appropriate mvc version.</p>
+
+<pre><code>&lt;host factoryType="System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" /&gt;
+</code></pre>
+
+<p>Side Note : Better, change the version wherever it needs to be updated.</p>
+
+<p>Now, Press F5.</p>
+
+<p><img src="/stylesheets/images/posts/mvc-mono-success.png" alt="Success" /></p>
 
 
     <div id="disqus_thread"></div>
@@ -99,14 +132,14 @@ Console2 is a great little front-end for your existing shell, no matter what it 
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/04/console2-commandline-awesomeness/';
+                this.page.url = 'http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/04/console2-commandline-awesomeness/';
+    var disqus_url = 'http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
