@@ -23,14 +23,16 @@ Press F5 and wait for your happiness to go away.
 
     "Could not launch web server. Make sure that XSP4 web server is installed".
 
-Don't worry it is installed the mono guys just wanted to have fun by poiking us with a stick. Copy the **winhack** folder from 
+Don't worry it is installed the mono guys just wanted to have fun by poking us with a stick. Copy the **winhack** folder from 
     
     C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.0
 to 
     
     C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.5
 
-I was only able to arrive at this hack by looking at the monosoftdebugger source code and a bit of hit and miss. In between I asked around if there was a way to attache IIS Express to monodevelop, I couldn't find anything that was simple and obvious (ended up with a useful IISExpress manager utility, more on that later).
+I was only able to arrive at this hack by looking at the monosoftdebugger source code and a bit of hit and miss. In between I asked around if there was a way to attache IIS Express to monodevelop, I couldn't find anything that was simple and obvious (ended up with a useful IISExpress manager utility, more on that later). If you change the target framework to .net 4 and monitor the application output tab then you will the following and it will make sense as to how I reached winhack folder.
+
+    Loaded assembly: C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.5\winhack\xsp4.exe
 
 Now, press F5 again and the misery continues, but thankfully this is something we understand.
 

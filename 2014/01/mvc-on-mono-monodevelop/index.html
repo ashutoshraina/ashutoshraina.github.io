@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-03T23:30:57.8947816+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-03T23:42:37.9841232+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -84,7 +84,7 @@ Press F5 and wait for your happiness to go away.</p>
 <pre><code>"Could not launch web server. Make sure that XSP4 web server is installed".
 </code></pre>
 
-<p>Don't worry it is installed the mono guys just wanted to have fun by poiking us with a stick. Copy the <strong>winhack</strong> folder from </p>
+<p>Don't worry it is installed the mono guys just wanted to have fun by poking us with a stick. Copy the <strong>winhack</strong> folder from </p>
 
 <pre><code>C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.0
 </code></pre>
@@ -94,7 +94,10 @@ Press F5 and wait for your happiness to go away.</p>
 <pre><code>C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.5
 </code></pre>
 
-<p>I was only able to arrive at this hack by looking at the monosoftdebugger source code and a bit of hit and miss. In between I asked around if there was a way to attache IIS Express to monodevelop, I couldn't find anything that was simple and obvious (ended up with a useful IISExpress manager utility, more on that later).</p>
+<p>I was only able to arrive at this hack by looking at the monosoftdebugger source code and a bit of hit and miss. In between I asked around if there was a way to attache IIS Express to monodevelop, I couldn't find anything that was simple and obvious (ended up with a useful IISExpress manager utility, more on that later). If you change the target framework to .net 4 and monitor the application output tab then you will the following and it will make sense as to how I reached winhack folder.</p>
+
+<pre><code>Loaded assembly: C:\Program Files (x86)\Mono-3.2.3\lib\mono\4.5\winhack\xsp4.exe
+</code></pre>
 
 <p>Now, press F5 again and the misery continues, but thankfully this is something we understand.</p>
 
