@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/10/mongodb-schemadesign/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2011/10/entity-framework-inhertiance/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,14 +42,13 @@
                   
 
 <div id="post">
-    <h1>MongoDB-Schema Design</h1>
+    <h1>Entity Framework Inhertiance</h1>
 
     <div class="post-note">
-      posted on 02 Oct 2013
+      posted on 24 Oct 2011
+       | <a href="/category/entity-framework">entity-framework</a>
        | <a href="/category/.net">.net</a>
-       | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/mongodb">mongodb</a>
-       | <a href="/category/opensource">opensource</a>
+       | <a href="/category/csharp">csharp</a>
       
       <div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -62,65 +61,74 @@
     
     
         
-    <p>This is a short post on Schema Design.</p>
+    <p>Inheritance is the basic requirement when we go about making a model for our business. Inheritance in SQL based systems is restricted to “has a “relationships. In real world applications which are modeled in object oriented mechanisms this is the real paint point for the developers. The essence of ORM systems is to bridge the gap between these two worlds and allow a seamless layer of abstraction to exist for the database access.</p>
 
-<p>Schema Design in MongoDB</p>
+<!--excerpt-->
 
-<ul>
-<li>Application Driven Schema is the best way to store data in MongoDB</li>
-<li>MongoDB stores rich documents i.e. store embedded documents , arrays etc..</li>
-<li>Joins happen at the application level not at the database level.</li>
-<li>There are no constraints in the database.</li>
-<li>No support for transactions.</li>
-<li>Support for Atomic present operations is present.</li>
-<li>Tip : Embed as much as you can.</li>
-</ul>
+<p>Inheritance in general can be classified into 3 chief categories: - 
+Table Per Type (TPT)
+Table Per Hierarchy (TPH)
+Table Per Concrete Type (TPC)</p>
 
-<p><!--excerpt-->
-Relational Normalisation</p>
+<p>Consider that following structure of inheritance.</p>
 
-<ul>
-<li>Frees the database of modification anomalies</li>
-<li>Achieve extensibility.</li>
-<li>Removes bias towards a particular access pattern.</li>
-<li>Constraints are supposed to be handled at the application level</li>
-<li>Transactions are also not present in the database.</li>
-</ul>
-
-<p>Mapping Strategies</p>
-
-<p>Considerations 
-    Query access pattern.
-    Which collections will grow.
-<strong>1:1</strong></p>
-
-<p>Two documents related to each other can be kept in separate collections :
-    To reduce the working set size of your application.
-    Because the combined size of the documents would be larger than 16MB</p>
-
-<p><strong>1: M</strong></p>
-
-<p>We should have true linking in this case.
-i.e. have collection for each type.</p>
-
-<p>If it is 1 to few then we can embed it in the 1 collection.</p>
-
-<p><strong>M: M</strong></p>
-
-<p>e.g. Student and Teacher</p>
-
-<pre><code>Generally make both of them separate collections. 
-Link in one direction.
-At the risk of duplication we can link both ways but that should be done only when 
-    we have performance considerations.
+<pre><code>public class QuestionDescriptor
+    {
+        public int QuestionDescriptorId { get; set; }
+        public int Rating { get; set; }
+        public int Difficulty { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public String QuestionText { get; set; }
+        public String Answer { get; set; }        
+    }
+public class QuestionBrief : QuestionDescriptor
+    {
+        public bool Short { get; set; }
+    }
+public class QuestionImage : QuestionDescriptor
+    {
+       public String ImagePath { get; set; }
+    }
 </code></pre>
 
-<p>When to De-Normalise ?</p>
+<p>Table Per Type represents the “IS A” relationship through Foreign Keys. This means that we need to map QuestionBrief and QuestionImage to separate tables in the database and have Foreign Key relations with the QuestionDescriptor table.
+The mapping required is as follows: -</p>
 
-<pre><code>1: 1 Embed
-1 : M Embed from the many to one
-M : M Link
+<pre><code>modelBuilder.Entity&lt;QuestionBrief&gt;().ToTable("Brief");
+modelBuilder.Entity&lt;QuestionImage&gt;().ToTable("Image");
 </code></pre>
+
+<p>TPT strategy gives rise to a normalised database and the schema lends itself nicely to evolution. The primary drawback is that the queries formed are using Joins between table.</p>
+
+<p><img src="/stylesheets/images/posts/r1.jpg" alt="Table Per Type" title="Table Per Type" /></p>
+
+<p>Figure 1 Table Per Type</p>
+
+<p>This strategy involves creating a single table and having a discriminator column. Since discriminator is not the key and yet determines the values of the columns that belong to the subclasses, this strategy violates the third normal form. It also requires the properties of the subclasses to be nullable. However, it is the best performing strategy for both polymorphic (queries instance of a class and all instances of the sub-class) and non-polymorphic queries (queries returning only instances of a particular subclass).
+This can be achieved with the following mapping: -</p>
+
+<pre><code>modelBuilder.Entity&lt;QuestionDescriptor&gt;()
+                .Map&lt;QuestionBrief&gt;(m =&gt; m.Requires("QuestionType").HasValue("Brief"))
+                .Map&lt;QuestionImage&gt;(m =&gt; m.Requires("QuestionType").HasValue("Image"));
+</code></pre>
+
+<p>The HasValue() method takes as a parameter an Object type so we can pass Boolean, integers etc. The type of parameter we pass to the HasValue() method will determine the datatype of the column in the database.  </p>
+
+<pre><code>modelBuilder.Entity&lt;QuestionDescriptor&gt;()
+            .Map&lt;QuestionBrief&gt;(m =&gt; m.Requires("QuestionType").HasValue(1))
+            .Map&lt;QuestionImage&gt;(m =&gt; m.Requires("QuestionType").HasValue(2));
+</code></pre>
+
+<p><img src="/stylesheets/images/posts/r21.jpg" alt="R2" title="R2" /></p>
+
+<p>Figure 2 Table Per Hierarchy</p>
+
+<p><strong>Table Per Concrete Type*</strong></p>
+
+<p>Table per concrete type strategy pushes down the attributes of the base class to the sub-class. So, if we do not have many attributes in the base class and don’t care much for the polymorphism in our model we can also go for this strategy. 
+•   TPC becomes tough when we have changes in the schema and the base class evolves to have more attributes and relationships. 
+•   This approach also suffers with major ideological challenge in the sense that it discards polymorphism altogether and hence doesn’t support a dynamic environment with changing business requirements. 
+•   This approach is recommended only when we are confident that the base class won’t change and we are not referring to the base class for multiple queries.</p>
 
 
     <div id="disqus_thread"></div>
@@ -130,14 +138,14 @@ M : M Link
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/10/mongodb-schemadesign/';
+                this.page.url = 'http://ashutoshraina.github.io/2011/10/entity-framework-inhertiance/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/10/mongodb-schemadesign/';
+    var disqus_url = 'http://ashutoshraina.github.io/2011/10/entity-framework-inhertiance/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
