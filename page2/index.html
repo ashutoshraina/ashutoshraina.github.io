@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-03T23:42:37.9841232+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-08T18:58:31.2512873+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -216,66 +216,50 @@ I have recently been flirting with Python since it is easier and quicker to just
     </li>
     <li class="fancy-container lightblue">
       <h1>
-        <a href="/2013/04/console2-commandline-awesomeness/">Console2- Command Line Awesomeness</a> 
-        <span>posted on 14 Apr 2013</span>
+        <a href="/2013/06/entity-framework-table-per-type-gotcha/">Entity Framework - Table Per Type Gotcha</a> 
+        <span>posted on 02 Jun 2013</span>
       </h1> 
       
-      <ol>
-<li><p>What is this ?
-Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. </p></li>
-<li><p>Where do I get it ?
-You can download it from here <a href="http://sourceforge.net/projects/console/" title="Console2">Console2</a></p></li>
-<li><p>Help me set it up .<a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post">Scott's Originial Blog Post</a>
-Refer to Scott Hansleman's blog post </p></li>
-</ol>
+      <p>Entity Framework Table Per Type (TPT) implementation has a little gotcha ( little is really relative ). When we create table per type we will have orphan rows if the parent gets deleted and there will be orphan rows in the parent if the child gets deleted. This causes a funny picture to emerge with very bad consequences.</p>
 
-<p>Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
-Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.</p>
+<p><img src="/stylesheets/images/posts/fix-tpt.png" alt="Gotcha" /></p>
 
-<ol>
-<li>Let's make the world a better place by adding Git Bash to the the tabs.</li>
-</ol>
+<p>Now, to get around this my simple workaround was to alter the relationships in my seed method.</p>
 
-<blockquote>
-  <p>Title : GitBash</p>
-  
-  <p>Icon : C:\Program Files (x86)\Git\etc\git.ico</p>
-  
-  <p>Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i</p>
-  
-  <p>Startup dir : c:\Users\Ashutosh ( or whatever your path is )</p>
-</blockquote>
+<pre><code>context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] DROP CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] ADD CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
 
-<p><img src="/stylesheets/images/posts/console2.png" alt="Console2" /></p>
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] DROP CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] ADD CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
 
-<p>All looks nice, the world is a better place.</p>
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] DROP CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] ADD CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
 
-      <p><a href="/2013/04/console2-commandline-awesomeness/">Read more...</a></p>
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] DROP CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+</code></pre>
+
+<p><img src="/stylesheets/images/posts/foreign-key.png" alt="ForeignKey" /></p>
+
+<p>There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.</p>
+
+      <p><a href="/2013/06/entity-framework-table-per-type-gotcha/">Read more...</a></p>
     </li>
     <li class="fancy-container lightblue">
       <h1>
-        <a href="/2013/02/teamcity-recover-admin-password/">TeamCity- Recover Admin Password</a> 
-        <span>posted on 04 Feb 2013</span>
+        <a href="/2013/05/entity-framework-migrations/">Entity Framework - Migrations</a> 
+        <span>posted on 13 May 2013</span>
       </h1> 
       
-      <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
-I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
-Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+      <p>Migrations are needed in our day to day work and EF migrations story has become a lot better over the last year. When your database changes rapidly then migrations are needed to keep pace. Ofcourse this is nothing new, but it wasn't available in EF before.</p>
 
-<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
-So,</p>
+<p><strong>Enable Migrations*</strong></p>
 
-<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+<p>To enable the migrations go to Tools -&gt; Library Package Manager -&gt; Package Manager Console.
+Type Enable-Migrations in the console.
+-Force parameter is optionally available if you want to overwrite an existing migrations.
 
-Step 2  Open CMD as ADMINISTRATOR
-(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
-
-Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
-</code></pre>
-
-<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
-
-      <p><a href="/2013/02/teamcity-recover-admin-password/">Read more...</a></p>
+      <p><a href="/2013/05/entity-framework-migrations/">Read more...</a></p>
     </li>
   </ul> 
 
@@ -332,6 +316,8 @@ Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\Progr
                           <li><a href="/archive#2013October">October, 2013</a></li>
                           <li><a href="/archive#2013September">September, 2013</a></li>
                           <li><a href="/archive#2013July">July, 2013</a></li>
+                          <li><a href="/archive#2013June">June, 2013</a></li>
+                          <li><a href="/archive#2013May">May, 2013</a></li>
                           <li><a href="/archive#2013April">April, 2013</a></li>
                           <li><a href="/archive#2013February">February, 2013</a></li>
                     </ul>

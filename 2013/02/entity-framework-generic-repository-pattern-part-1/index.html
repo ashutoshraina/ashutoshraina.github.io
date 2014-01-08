@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="last-modified" content="2014-01-08T18:58:31.2512873+05:30" />
+    <title>Ashutosh Raina</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
+    <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2013/02/entity-framework-generic-repository-pattern-part-1/" />
+</head>
+<body class="home blog">
+    <div id="page" class="hfeed site">
+        <header id="masthead" class="site-header fancy-container lightgreen" role="banner">
+            <hgroup>
+                <h1 class="site-title"><a href="/" title="ashutoshraina.github.io" rel="home">Ashutosh Raina</a></h1>
+                <h2 class="site-title"><small>For those who are still chasing</small></h2>
+                <p class="site-description">I love french fries!!</p>
+            </hgroup>
+            <nav role="navigation" class="site-navigation main-navigation">
+                <h1 class="assistive-text">Menu</h1>
+                <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/category">Categories</a></li>
+                        <li><a href="/archive">Archive</a></li>
+                        <li><a href="/feed.xml">RSS/Atom</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
+
+        <div id="main">
+
+            <div id="primary" class="site-content">
+                <div id="content" role="main">
+                  
+
+<div id="post">
+    <h1>Entity Framework - Generic repository Pattern - Part 1</h1>
+
+    <div class="post-note">
+      posted on 02 Feb 2013
+       | <a href="/category/entity-framework">entity-framework</a>
+       | <a href="/category/pattern">pattern</a>
+       | <a href="/category/.net">.net</a>
+       | <a href="/category/csharp">csharp</a>
+      
+      <div class="addthis_toolbox addthis_default_style" style="float:right;">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        <a class="addthis_button_linkedin_counter"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+      </div>
+    </div>
+    
+    <ul class="snow-series"><li>Part 1 - Generic Repositry Pattern</li><li>Part 2 - Generic Repositry Pattern Contd.</li></ul>
+        
+    <p>The generic repository pattern has been a matter of discussion on the forums and SO. Developers are not convinced that it solves a problem, yet everyday SO has more questions about the pattern. Clearly, something is not right. I tried to implement the pattern in a way I thought fit. I changed my mind a million times during the process, that tells you that the process was not smooth. You can find several implementations of the pattern scattered all over the internet. I will not pass a opinion on the pattern. I would rather tell you what issues I faced and I how solved (or not) them.
+<!--excerpt-->
+First I created an IRepository and IUnitOfwork</p>
+
+<pre><code>public interface IRepository
+{
+    T Add(T entity);
+    T Remove(T entity);
+    T Update(T entity);
+    IQueryable Query();        
+}
+public interface IUnitOfWork : IDisposable
+{
+    void Commit();
+}
+</code></pre>
+
+<p>Next, let's get the EF specific implementation up and running.</p>
+
+<pre><code>/// &lt;summary&gt;
+/// A EFRepository represents the repository for performing operations on the
+/// Entity using the EntityFramework.
+/// &lt;/summary&gt;
+/// &lt;typeparam name="T"&gt;T is the Entity&lt;/typeparam&gt;
+public class EFRepository&lt;T&gt; : IRepository&lt;T&gt; where T : class
+{
+    /// &lt;summary&gt;
+    /// This is set in the constructor and provides access to the underlying EntityFramework methods
+    /// &lt;/summary&gt;
+    private DbSet&lt;T&gt; _dbSet;
+    /// &lt;summary&gt;
+    /// The context for working with the EntityFramework. This is set in the constructor.
+    /// &lt;/summary&gt;
+    private DbContext _dataContext;
+    /// &lt;summary&gt;
+    /// Initialises a new instance of Repository for &lt;see cref="T"/&gt;
+    /// &lt;/summary&gt;
+    /// &lt;param name="unitOfWork"&gt;IUnitOfWork&lt;/param&gt;
+    /// &lt;param name="dataContext"&gt;DbContext&lt;/param&gt;
+    /// &lt;exception cref="ArgumentNullException"&gt;Throws ArgumentNullException if any of the arguments is null&lt;/exception&gt;
+    public EFRepository(IUnitOfWork unitOfWork, DbContext dataContext)
+    {
+        if (unitOfWork == null)
+        {
+            throw new ArgumentNullException("unitOfWork", "unitOfWork cannot be null");
+        }
+        if (dataContext == null)
+        {
+            throw new ArgumentNullException("dataContext", "dataContext cannot be null");
+        }
+        var EfUnitOfWork = unitOfWork as EFUnitOfWork;            
+        _dataContext = dataContext;
+        _dbSet = _dataContext.Set&lt;T&gt;();
+    }
+    /// &lt;summary&gt;
+    /// Adds the specified Entity to the DbSet of the context.
+    /// The Entity is inserted only when UnitOfWork is commited.
+    /// &lt;/summary&gt;
+    /// &lt;param name="item"&gt;The Entity to be added&lt;/param&gt;
+    /// &lt;returns&gt;The added Entity&lt;/returns&gt;
+    public T Add(T item)
+    {
+        return _dbSet.Add(item);
+    }
+    /// &lt;summary&gt;
+    /// Removes the specified Entity from the DbSet of the context.
+    /// The Entity is removed only when UnitOfWork is commited.
+    /// &lt;/summary&gt;
+    /// &lt;param name="item"&gt;The Entity to be removed&lt;/param&gt;
+    /// &lt;returns&gt;The Entity removed from the underlying DbSet&lt;/returns&gt;
+    public T Remove(T item)
+    {
+        return _dbSet.Remove(item);
+    }
+    /// &lt;summary&gt;
+    /// Removes the specified Entity from the DbSet of the context.
+    /// The Entity is removed only when UnitOfWork is commited.
+    /// &lt;/summary&gt;
+    /// &lt;param name="item"&gt;The Entity to be updated&lt;/param&gt;
+    /// &lt;returns&gt;the Entity removed from the underlying DbSet&lt;/returns&gt;
+    public T Update(T item)
+    {
+        var updated = _dbSet.Attach(item);
+        _dataContext.Entry(item).State = EntityState.Modified;
+        return updated;
+    }
+    /// &lt;summary&gt;
+    /// Provides the caller with the underlying DbSet.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;An IQueryable to run queries against the underlying DbSet&lt;/returns&gt;
+    public IQueryable&lt;T&gt; Query()
+    {
+        return _dbSet;
+    }
+</code></pre>
+
+<p>Follow this up with an implementation of EFUnitOfWork</p>
+
+<pre><code>/// &lt;summary&gt;
+/// Represents an IUnitOfWork for Entity Framework
+/// &lt;/summary&gt;
+public class EFUnitOfWork : IUnitOfWork
+{
+    private DbContext _context;        
+    private bool _disposed;
+    public EFUnitOfWork(DbContext context)
+    {
+        if (context == null)
+        {
+            throw new UnitOfWorkException();
+        }
+        _context = context;
+    }
+    /// &lt;summary&gt;
+    /// Method to be called when a UnitOfWork is to be committed.
+    /// &lt;/summary&gt;
+    public void Commit()
+    {
+        _context.SaveChanges();
+    }
+    // Implement IDisposable.       
+    public void Dispose()
+    {
+        Dispose(true);
+        // Take yourself off the Finalization queue to prevent finalization code for object from executing a second time.
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        // Check to see if Dispose has already been called.
+        if (!_disposed)
+        {
+            // If disposing equals true, dispose all managed and unmanaged resources.
+            if (disposing)
+            {
+                // Dispose managed resources.
+                if (_context != null)
+                {
+                    _context.Dispose();
+                }
+            }             
+        }
+        _disposed = true;
+    }
+}
+[Serializable]
+public class UnitOfWorkException : Exception
+{
+    public override string Message
+    {
+        get
+        {
+            return "The parameter must be EFUnitOfWork";
+        }
+    }
+}
+</code></pre>
+
+<p>The above code is at 
+<a href="https://github.com/ashutoshraina/Pariksha/tree/master/Repository/Infrastructure" title="Github">Github</a></p>
+
+<p>Are there alternatives ?
+Oh yes plenty. Some just differ in implementation details , but others differ in philosophy altogether. Next time I will blog about a different one that I thought of initially. Then later I will write about the problems we face. Pick and choose what fits.</p>
+
+
+    <div id="disqus_thread"></div>
+<script>
+    var reset_disqus = function(){
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                //this.page.identifier = '';
+                this.page.url = 'http://ashutoshraina.github.io/2013/02/entity-framework-generic-repository-pattern-part-1/';
+                //this.page.title = '';
+            }
+        });
+    };
+
+    var disqus_shortname = 'ashutoshraina';
+    var disqus_url = 'http://ashutoshraina.github.io/2013/02/entity-framework-generic-repository-pattern-part-1/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    window.addEventListener('orientationchange', reset_disqus);
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
+   </script>
+
+</div>
+                </div>
+                <!-- #content -->
+            </div>
+            <!-- #primary .site-content -->      
+
+ <div id="secondary" class="widget-area fancy-container lightred" role="complementary">
+                <aside id="text-5" class="widget widget_text">
+                    <h1 class="widget-title">Follow</h1>
+                    <div class="textwidget logos">
+                     <a href="https://twitter.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="/stylesheets/images/twitter.png"></a>
+                     <a href="http://stackoverflow.com/users/802070/ashutosh-raina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://stackoverflow.com']);"><img src="/stylesheets/images/stackoverflow.png"></a>
+                    <a href="http://www.linkedin.com/pub/ashutosh-raina/11/165/328" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.linkedin.com']);"><img src="/stylesheets/images/linkedin.png"></a>                      
+                    <a href="https://github.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://github.com']);"><img src="/stylesheets/images/github.png"></a>
+                       
+                  
+                    </div>
+                   <a href="http://stackexchange.com/users/422979">
+<img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
+</a>  
+                
+                <aside id="linkcat-6" class="widget widget_links">
+                    <h1 class="widget-title">Other Blogs</h1>
+                    <ul class='xoxo blogroll'>
+                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
+                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
+                    </ul>
+                    
+                </aside>
+                <aside id="archives-4" class="widget widget_archive">
+                    <h1 class="widget-title">Archive</h1>
+                    <ul class="posts">
+                          <li><a href="/archive#2014January">January, 2014</a></li>
+                          <li><a href="/archive#2013December">December, 2013</a></li>
+                          <li><a href="/archive#2013November">November, 2013</a></li>
+                          <li><a href="/archive#2013October">October, 2013</a></li>
+                          <li><a href="/archive#2013September">September, 2013</a></li>
+                          <li><a href="/archive#2013July">July, 2013</a></li>
+                          <li><a href="/archive#2013June">June, 2013</a></li>
+                          <li><a href="/archive#2013May">May, 2013</a></li>
+                          <li><a href="/archive#2013April">April, 2013</a></li>
+                          <li><a href="/archive#2013February">February, 2013</a></li>
+                    </ul>
+                </aside>
+            </div>
+            <!-- #secondary .widget-area -->
+
+        </div>
+        <!-- #main -->
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="site-info">
+                Powered by <a href="https://github.com/Sandra/Sandra.Snow" rel="generator">Sandra.Snow</a>.	
+            </div>
+            <!-- .site-info -->
+        </footer>
+        <!-- #colophon .site-footer -->
+    </div>
+    <!-- #page .hfeed .site -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src='/javascripts/prettify.js' type='text/javascript'></script>
+    
+    <script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-46699881-1']);
+_gaq.push(['_trackPageview']);
+        
+(function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+})();
+</script>
+    
+    <script type='text/javascript'>
+      $(function () {
+        $("pre code").parent().each(function () {
+          if (!$(this).hasClass("prettyprint")) {
+            $(this).addClass("prettyprint");
+            a = true
+          }
+        });
+
+        prettyPrint();
+      });
+    </script>
+</body>
+</html>
