@@ -1,4 +1,133 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</guid><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><title>Up and Running with Asp.net MVC Mono and Monodevelop</title><description>&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</link><title>MongoDb: Querying the OpLog</title><description>&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the OpLog?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The mongodb website gives a rather long definition. I will quote that &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, allowing them to maintain the current state of the database.&lt;/p&gt;
+  
+  &lt;p&gt;To facilitate replication, all replica set members send heartbeats (pings) to all other members. Any member can import oplog entries from any other member.
+  Whether applied once or multiple times to the target dataset, each operation in the oplog produces the same results, i.e. each operation in the oplog is idempotent. For proper replication operations, entries in the oplog must be idempotent:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;initial sync&lt;/li&gt;
+&lt;li&gt;post-rollback catch-up&lt;/li&gt;
+&lt;li&gt;sharding chunk migrations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;</description><pubDate>Thu, 09 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-09T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the OpLog?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The mongodb website gives a rather long definition. I will quote that &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, allowing them to maintain the current state of the database.&lt;/p&gt;
+  
+  &lt;p&gt;To facilitate replication, all replica set members send heartbeats (pings) to all other members. Any member can import oplog entries from any other member.
+  Whether applied once or multiple times to the target dataset, each operation in the oplog produces the same results, i.e. each operation in the oplog is idempotent. For proper replication operations, entries in the oplog must be idempotent:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;initial sync&lt;/li&gt;
+&lt;li&gt;post-rollback catch-up&lt;/li&gt;
+&lt;li&gt;sharding chunk migrations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+So, the oplog is applicable for a replica set but then do I really need a non-trivial process to start playing with it ? And to your heart's delight the answer is no.
+Oplog is not turned on by default when you have a single node in your cluster (of course, who would want that to be way (read me)). OK, let's create a one node replica set then.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    mongod.exe --replSet myreplSet --oplogSize 50
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We now have a one node repl set with the oplog of 50mb. One liners are always cool !!&lt;/p&gt;
+
+&lt;p&gt;Let's go on our querying streak. Start the monog.exe and let's go to the local database and find our oplog.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rs0:PRIMARY&amp;gt; use local
+switched to db local
+rs0:PRIMARY&amp;gt; show collections
+oplog.rs
+startup_log
+system.replset
+rs0:PRIMARY&amp;gt; db.oplog.rs.findOne();
+{
+        "ts" : {
+                "t" : 1387363823,
+                "i" : 1
+        },
+        "h" : NumberLong(0),
+        "v" : 2,
+        "op" : "n",
+        "ns" : "",
+        "o" : {
+                "msg" : "initiating set"
+        }
+}
+rs0:PRIMARY&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We just don't want to query it simply we really do want to get it into our application in real-time. Let's move to the application code now.&lt;/p&gt;
+
+&lt;p&gt;Now, If you look at my previous posts you will recollect that we had a generic version of MongoConnectionHandler. For querying the oplog, I created a non-generic one for this since it makes our lives just a touch easier by not asking us to derive from an IMongoEntity.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MongoConnectionHandler
+    {
+        public MongoCollection MongoCollection { get; private set; }
+        private const string ConnectionString = @"mongodb://localhost";
+        public MongoConnectionHandler(string databaseName, string collection)
+        {
+            var client = new MongoClient(ConnectionString);
+            var server = client.GetServer();
+            var database = server.GetDatabase(databaseName);
+            MongoCollection = database.GetCollection(collection);
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, we can query the oplog quite simply by switching to the local daatbase and reading the &lt;strong&gt;&lt;em&gt;BsonDocument&lt;/em&gt;&lt;/strong&gt; that is returned.&lt;/p&gt;
+
+&lt;p&gt;Note: The orignial version was written in the examples in java and is available on Github as part of examples of the java driver.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class QueryOpLog {
+        protected readonly MongoConnectionHandler OpLogHandler;
+        public QueryOpLog () {
+            OpLogHandler = new MongoConnectionHandler("local", "oplog.rs");
+        }
+        public IEnumerable&amp;lt;BsonDocument&amp;gt; GetLastEntryInOpLog () {           
+            BsonValue lastId = BsonMinKey.Value;
+            while (true) {
+                var query = Query.GT("ts", lastId);
+                var cursor = OpLogHandler.MongoCollection.FindAs&amp;lt;BsonDocument&amp;gt;(query)
+                            .SetFlags(QueryFlags.TailableCursor | QueryFlags.AwaitData)
+                            .SetSortOrder(SortBy.Ascending("$natural"));
+                var count = 0;
+                foreach (var document in cursor) {
+                    lastId = document["ts"];
+                    Console.WriteLine("LastId is {0}", lastId);
+                    yield return document;
+                    count++;
+                }
+                if ( count == 0 ) {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(100));
+                }
+            }           
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are a few things going on here. One, some flags are being set in the query to get a tailable cursor and we are basically querying the oplog only if we have a new document by using a count. &lt;strong&gt;&lt;em&gt;yield&lt;/em&gt;&lt;/strong&gt; makes for a nicer syntax for the consumer of this method.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var oplog = new QueryOpLog();
+var resut = oplog.GetLastEntryInOpLog();
+resut.ForEach(r =&amp;gt; Console.WriteLine(r));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, go on and make some operations through the shell and watch the oplog show up in a console window.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</guid><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><title>Up and Running with Asp.net MVC Mono and Monodevelop</title><description>&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
 
 </description><pubDate>Thu, 02 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-02T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
 
@@ -767,69 +896,4 @@ Db.collection.getIndexSize() to get the total size of the index of the database.
 - Ensure that the indexes fit in memory, reading from the disk is bad.
 - Sorting should also use Indexes.
 - High selectivity should be the prime consideration when deciding about indexes.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-ops-stuff/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-ops-stuff/</link><title>MongoDB-Ops-Stuff</title><description>&lt;p&gt;In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Creating Indexes&lt;/strong&gt;
-The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public void CreateIndex()
-{
-var QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
-QuestionConnectionHandler.MongoCollection.EnsureIndex( 
-                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-</description><pubDate>Fri, 04 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-04T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Creating Indexes&lt;/strong&gt;
-The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public void CreateIndex()
-{
-var QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
-QuestionConnectionHandler.MongoCollection.EnsureIndex( 
-                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;Dropping indexes is also easy with &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;QuestionConnectionHandler.MongoCollection.DropAllIndexes();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What happens when you want to see what is going on under the hood ? You let the database &lt;strong&gt;Explain&lt;/strong&gt; it's&lt;strong&gt; Plan&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;QuestionConnectionHandler.MongoCollection.AsQueryable()
-                  .Where(q =&amp;gt; q.Difficulty &amp;gt;= 3).Explain();
-//or if you went the other way 
-var query = Query&amp;lt;Question&amp;gt;.GTE(q =&amp;gt; q.Difficulty, 3);
-var explainPlan = QuestionConnectionHandler.MongoCollection
-                          .FindAs&amp;lt;Question&amp;gt;(query).Explain();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, if only we could have some stats about our database and the indexes. All wrapped in a nice syntax.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var stats = QuestionConnectionHandler.MongoCollection.GetStats();
-Console.WriteLine("Namespace : {0}", stats.Namespace);
-Console.WriteLine("DataSize : {0}", stats.DataSize);
-Console.WriteLine("Index Count : {0}", stats.IndexCount);
-stats.IndexSizes.Keys.ForEach(Console.WriteLine);
-var size = QuestionConnectionHandler.MongoCollection.GetTotalDataSize();
-Console.WriteLine("The total datasize for this collection is {0}", size);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A routine task is to get all the collections in a database and all the databases on the server itself. Easy peasy!!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var collections = QuestionConnectionHandler.MongoCollection.Database.GetCollectionNames();
-Console.WriteLine("\nThe following collections are present in the database");
-collections.ForEach(Console.WriteLine);
-var client = new MongoClient(@"mongodb://localhost");
-var server = client.GetServer();
-var databases = server.GetDatabaseNames().ToList();
-Console.WriteLine("\nAll the databases in the server");
-databases.ForEach(Console.WriteLine);
-&lt;/code&gt;&lt;/pre&gt;
 </a10:content></item></channel></rss>

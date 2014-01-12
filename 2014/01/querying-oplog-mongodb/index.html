@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,13 +42,14 @@
                   
 
 <div id="post">
-    <h1>TeamCity- Recover Admin Password</h1>
+    <h1>MongoDb: Querying the OpLog</h1>
 
     <div class="post-note">
-      posted on 04 Feb 2013
-       | <a href="/category/tools">Tools</a>
-       | <a href="/category/productivity">Productivity</a>
-       | <a href="/category/tips">Tips</a>
+      posted on 10 Jan 2014
+       | <a href="/category/.net">.net</a>
+       | <a href="/category/csharp">CSharp</a>
+       | <a href="/category/mongodb">mongodb</a>
+       | <a href="/category/opensource">opensource</a>
       
       <div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -61,22 +62,116 @@
     
     
         
-    <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
-I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
-Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+    <p>Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.</p>
 
-<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
-So,</p>
+<p><strong>What is the OpLog?</strong></p>
 
-<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+<p>The mongodb website gives a rather long definition. I will quote that </p>
 
-Step 2  Open CMD as ADMINISTRATOR
-(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
+<blockquote>
+  <p>The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, allowing them to maintain the current state of the database.</p>
+  
+  <p>To facilitate replication, all replica set members send heartbeats (pings) to all other members. Any member can import oplog entries from any other member.
+  Whether applied once or multiple times to the target dataset, each operation in the oplog produces the same results, i.e. each operation in the oplog is idempotent. For proper replication operations, entries in the oplog must be idempotent:</p>
+</blockquote>
 
-Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
+<ul>
+<li>initial sync</li>
+<li>post-rollback catch-up</li>
+<li>sharding chunk migrations</li>
+</ul>
+
+<p><!--excerpt-->
+So, the oplog is applicable for a replica set but then do I really need a non-trivial process to start playing with it ? And to your heart's delight the answer is no.
+Oplog is not turned on by default when you have a single node in your cluster (of course, who would want that to be way (read me)). OK, let's create a one node replica set then.</p>
+
+<pre><code>    mongod.exe --replSet myreplSet --oplogSize 50
 </code></pre>
 
-<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
+<p>We now have a one node repl set with the oplog of 50mb. One liners are always cool !!</p>
+
+<p>Let's go on our querying streak. Start the monog.exe and let's go to the local database and find our oplog.</p>
+
+<pre><code>rs0:PRIMARY&gt; use local
+switched to db local
+rs0:PRIMARY&gt; show collections
+oplog.rs
+startup_log
+system.replset
+rs0:PRIMARY&gt; db.oplog.rs.findOne();
+{
+        "ts" : {
+                "t" : 1387363823,
+                "i" : 1
+        },
+        "h" : NumberLong(0),
+        "v" : 2,
+        "op" : "n",
+        "ns" : "",
+        "o" : {
+                "msg" : "initiating set"
+        }
+}
+rs0:PRIMARY&gt;
+</code></pre>
+
+<p>We just don't want to query it simply we really do want to get it into our application in real-time. Let's move to the application code now.</p>
+
+<p>Now, If you look at my previous posts you will recollect that we had a generic version of MongoConnectionHandler. For querying the oplog, I created a non-generic one for this since it makes our lives just a touch easier by not asking us to derive from an IMongoEntity.</p>
+
+<pre><code>public class MongoConnectionHandler
+    {
+        public MongoCollection MongoCollection { get; private set; }
+        private const string ConnectionString = @"mongodb://localhost";
+        public MongoConnectionHandler(string databaseName, string collection)
+        {
+            var client = new MongoClient(ConnectionString);
+            var server = client.GetServer();
+            var database = server.GetDatabase(databaseName);
+            MongoCollection = database.GetCollection(collection);
+        }
+    }
+</code></pre>
+
+<p>Now, we can query the oplog quite simply by switching to the local daatbase and reading the <strong><em>BsonDocument</em></strong> that is returned.</p>
+
+<p>Note: The orignial version was written in the examples in java and is available on Github as part of examples of the java driver.</p>
+
+<pre><code>public class QueryOpLog {
+        protected readonly MongoConnectionHandler OpLogHandler;
+        public QueryOpLog () {
+            OpLogHandler = new MongoConnectionHandler("local", "oplog.rs");
+        }
+        public IEnumerable&lt;BsonDocument&gt; GetLastEntryInOpLog () {           
+            BsonValue lastId = BsonMinKey.Value;
+            while (true) {
+                var query = Query.GT("ts", lastId);
+                var cursor = OpLogHandler.MongoCollection.FindAs&lt;BsonDocument&gt;(query)
+                            .SetFlags(QueryFlags.TailableCursor | QueryFlags.AwaitData)
+                            .SetSortOrder(SortBy.Ascending("$natural"));
+                var count = 0;
+                foreach (var document in cursor) {
+                    lastId = document["ts"];
+                    Console.WriteLine("LastId is {0}", lastId);
+                    yield return document;
+                    count++;
+                }
+                if ( count == 0 ) {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(100));
+                }
+            }           
+        }
+    }
+</code></pre>
+
+<p>There are a few things going on here. One, some flags are being set in the query to get a tailable cursor and we are basically querying the oplog only if we have a new document by using a count. <strong><em>yield</em></strong> makes for a nicer syntax for the consumer of this method.</p>
+
+<pre><code>var oplog = new QueryOpLog();
+var resut = oplog.GetLastEntryInOpLog();
+resut.ForEach(r =&gt; Console.WriteLine(r));
+</code></pre>
+
+<p>Now, go on and make some operations through the shell and watch the oplog show up in a console window.</p>
 
 
     <div id="disqus_thread"></div>
@@ -86,14 +181,14 @@ Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\Progr
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/';
+                this.page.url = 'http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/';
+    var disqus_url = 'http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

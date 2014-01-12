@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-11T22:15:59.7120410+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-12T17:49:05.7382586+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,34 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2014/01/querying-oplog-mongodb/">MongoDb: Querying the OpLog</a> 
+        <span>posted on 10 Jan 2014</span>
+      </h1> 
+      
+      <p>Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.</p>
+
+<p><strong>What is the OpLog?</strong></p>
+
+<p>The mongodb website gives a rather long definition. I will quote that </p>
+
+<blockquote>
+  <p>The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, allowing them to maintain the current state of the database.</p>
+  
+  <p>To facilitate replication, all replica set members send heartbeats (pings) to all other members. Any member can import oplog entries from any other member.
+  Whether applied once or multiple times to the target dataset, each operation in the oplog produces the same results, i.e. each operation in the oplog is idempotent. For proper replication operations, entries in the oplog must be idempotent:</p>
+</blockquote>
+
+<ul>
+<li>initial sync</li>
+<li>post-rollback catch-up</li>
+<li>sharding chunk migrations</li>
+</ul>
+
+<p>
+      <p><a href="/2014/01/querying-oplog-mongodb/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2014/01/mvc-on-mono-monodevelop/">Up and Running with Asp.net MVC Mono and Monodevelop</a> 
@@ -207,28 +235,6 @@ The details have been taken from the mongodb website and presented here for cont
 
 
       <p><a href="/2013/10/mongodb-indexing/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-ops-stuff/">MongoDB-Ops-Stuff</a> 
-        <span>posted on 05 Oct 2013</span>
-      </h1> 
-      <ul class="snow-series"><li>Part 1 - Ops Stuff</li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
-      <p>In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.</p>
-
-<p><strong>Creating Indexes</strong>
-The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.</p>
-
-<pre><code>public void CreateIndex()
-{
-var QuestionConnectionHandler = new MongoConnectionHandler&lt;Question&gt;("MongoDBDemo");
-QuestionConnectionHandler.MongoCollection.EnsureIndex( 
-                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
-}
-</code></pre>
-
-
-      <p><a href="/2013/10/mongodb-ops-stuff/">Read more...</a></p>
     </li>
   </ul> 
 

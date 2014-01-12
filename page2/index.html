@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-11T22:15:59.7120410+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-12T17:49:05.7382586+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,28 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-ops-stuff/">MongoDB-Ops-Stuff</a> 
+        <span>posted on 05 Oct 2013</span>
+      </h1> 
+      <ul class="snow-series"><li>Part 1 - Ops Stuff</li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p>In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.</p>
+
+<p><strong>Creating Indexes</strong>
+The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.</p>
+
+<pre><code>public void CreateIndex()
+{
+var QuestionConnectionHandler = new MongoConnectionHandler&lt;Question&gt;("MongoDBDemo");
+QuestionConnectionHandler.MongoCollection.EnsureIndex( 
+                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
+}
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-ops-stuff/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a> 
@@ -244,22 +266,6 @@ context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CON
 <p>There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.</p>
 
       <p><a href="/2013/06/entity-framework-table-per-type-gotcha/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/05/entity-framework-migrations/">Entity Framework - Migrations</a> 
-        <span>posted on 13 May 2013</span>
-      </h1> 
-      
-      <p>Migrations are needed in our day to day work and EF migrations story has become a lot better over the last year. When your database changes rapidly then migrations are needed to keep pace. Ofcourse this is nothing new, but it wasn't available in EF before.</p>
-
-<p><strong>Enable Migrations*</strong></p>
-
-<p>To enable the migrations go to Tools -&gt; Library Package Manager -&gt; Package Manager Console.
-Type Enable-Migrations in the console.
--Force parameter is optionally available if you want to overwrite an existing migrations.
-
-      <p><a href="/2013/05/entity-framework-migrations/">Read more...</a></p>
     </li>
   </ul> 
 
