@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/09/mongodb-getting-started/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,10 +42,10 @@
                   
 
 <div id="post">
-    <h1>MongoDB-Getting Started</h1>
+    <h1>MongoDb: Optimistic Concurrency</h1>
 
     <div class="post-note">
-      posted on 30 Sep 2013
+      posted on 18 Jan 2014
        | <a href="/category/.net">.net</a>
        | <a href="/category/csharp">CSharp</a>
        | <a href="/category/mongodb">mongodb</a>
@@ -62,31 +62,43 @@
     
     
         
-    <p>MongoDB is a document database and I won't bore you with details about what it can do. MongoDB makes many claims, they are <a href="http://www.mongodb.org/" title="Here">here</a>. In short, MongoDB is a document database that stores data in a JSON format and then promises to make out lives easier. 
-Installation instruction are varied depending on your OS etc..and the both varieties of bitness are also available. <a href="http://www.mongodb.org/downloads,"Download"">Download</a></p>
+    <p>Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
+First, a really simple document.</p>
 
-<p>The shell for MongoDB is a Javascript based one, so if you know a bit of JS then you will fly in there. Start mongod from the command line, this can be done by navigating to the bin directory of installation. Provide the dbpath(the place where it stores the data) as well.</p>
+<p>Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.</p>
 
-<p><img src="/stylesheets/images/posts/mongod.png" alt="Mongod" /></p>
+<!--excerpt-->
 
-<p>If you look at the output when we start the daemon (mongod = mongo-daemon) then the last line talks about a rest interface. This can be enable by passing the --rest flag when starting the instance. The port for viewing the webpage is also there.</p>
-
-<p>Let's get into the mix of things by connecting to this mongod using the shell(mongo.exe). Navigate to the mongo directory and go mongo.exe.
-By default this connects  to the test database. The prompt will say something like </p>
-
-<pre><code>C:\Users\Ashutosh\mongodb\bin&gt;mongo.exe
-MongoDB shell version: 2.4.1
-connecting to: test
-&gt; 
+<pre><code>public class Person : MongoEntity {
+        public string Name { get; set; }
+        public long Version { get ; set ; }
+    }
 </code></pre>
 
-<p>At any moment you can go back to mongod and check how many connections are open. Run a couple of commands like 
-<em>show dbs
-show collections</em> 
-to see if everything is in order. </p>
+<p>Next, when you want to edit a person it becomes a simple FindAndModify.</p>
 
-<p>Create a new database by use yourdatabasename. The shell will switch it's context to that database(after creating it if it does not exist already.) 
-Next, time we will do some stuff by creating some collections and then querying. This will be a longish series, hold on and let me smear you twitter timelines.</p>
+<pre><code>public bool EditPerson (Person person) {
+            //find the document with thr same id and version
+            var query = Query.And(
+                Query&lt;Person&gt;.EQ(_ =&gt; _.Version, person.Version), 
+                Query&lt;Person&gt;.EQ(_ =&gt; _.Id, person.Id));
+
+            //bump the version
+
+            var updatedPerson = person;
+            updatedPerson.Version = person.Version + 1;
+            var result = PersonConnectionHandler.MongoCollection.FindAndModify(query, null, 
+                Update.Replace&lt;Person&gt;(updatedPerson), true);
+
+            if ( result.ModifiedDocument != null ) {
+                Console.WriteLine("Document Modified successfully");
+                Console.WriteLine(result.ModifiedDocument);
+                return true;
+            } else {
+                return false;
+            }
+        }
+</code></pre>
 
 
     <div id="disqus_thread"></div>
@@ -96,14 +108,14 @@ Next, time we will do some stuff by creating some collections and then querying.
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/09/mongodb-getting-started/';
+                this.page.url = 'http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/09/mongodb-getting-started/';
+    var disqus_url = 'http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

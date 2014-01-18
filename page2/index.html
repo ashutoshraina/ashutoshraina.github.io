@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-12T17:49:05.7382586+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-18T19:19:59.5425555+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,26 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-indexing/">MongoDB-Indexing</a> 
+        <span>posted on 06 Oct 2013</span>
+      </h1> 
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li>Part 2 - Indexing</li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p>Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : </p>
+
+<ul>
+<li><strong>Single Field Indexes</strong> : Think about having an index on a column in RDBMS.</li>
+<li><strong>Compound Indexes</strong>: Think about an having an index on multiple columns in RDBMS.</li>
+<li><strong>Multikey Indexes</strong>: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.</li>
+<li><strong>Geospatial Indexes and Queries</strong> : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.</li>
+<li><strong>Text Indexes</strong> : For full text search inside a document. Should we use lucene ? Not sure ?</li>
+<li><strong>Hashed Index</strong>: Index on hashed contents of the fields.</li>
+</ul>
+
+
+      <p><a href="/2013/10/mongodb-indexing/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/10/mongodb-ops-stuff/">MongoDB-Ops-Stuff</a> 
@@ -235,37 +255,6 @@ I have recently been flirting with Python since it is easier and quicker to just
 
 <p>
       <p><a href="/2013/07/python-development-in-visual-studio/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/06/entity-framework-table-per-type-gotcha/">Entity Framework - Table Per Type Gotcha</a> 
-        <span>posted on 02 Jun 2013</span>
-      </h1> 
-      
-      <p>Entity Framework Table Per Type (TPT) implementation has a little gotcha ( little is really relative ). When we create table per type we will have orphan rows if the parent gets deleted and there will be orphan rows in the parent if the child gets deleted. This causes a funny picture to emerge with very bad consequences.</p>
-
-<p><img src="/stylesheets/images/posts/fix-tpt.png" alt="Gotcha" /></p>
-
-<p>Now, to get around this my simple workaround was to alter the relationships in my seed method.</p>
-
-<pre><code>context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] DROP CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] ADD CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
-
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] DROP CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] ADD CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
-
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] DROP CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] ADD CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
-
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] DROP CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
-</code></pre>
-
-<p><img src="/stylesheets/images/posts/foreign-key.png" alt="ForeignKey" /></p>
-
-<p>There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.</p>
-
-      <p><a href="/2013/06/entity-framework-table-per-type-gotcha/">Read more...</a></p>
     </li>
   </ul> 
 

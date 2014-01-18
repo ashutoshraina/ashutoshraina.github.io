@@ -1,4 +1,46 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</link><title>MongoDb: Querying the OpLog</title><description>&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</link><title>MongoDb: Optimistic Concurrency</title><description>&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
+First, a really simple document.&lt;/p&gt;
+
+&lt;p&gt;Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.&lt;/p&gt;
+
+</description><pubDate>Fri, 17 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-17T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
+First, a really simple document.&lt;/p&gt;
+
+&lt;p&gt;Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Person : MongoEntity {
+        public string Name { get; set; }
+        public long Version { get ; set ; }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, when you want to edit a person it becomes a simple FindAndModify.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public bool EditPerson (Person person) {
+            //find the document with thr same id and version
+            var query = Query.And(
+                Query&amp;lt;Person&amp;gt;.EQ(_ =&amp;gt; _.Version, person.Version), 
+                Query&amp;lt;Person&amp;gt;.EQ(_ =&amp;gt; _.Id, person.Id));
+
+            //bump the version
+
+            var updatedPerson = person;
+            updatedPerson.Version = person.Version + 1;
+            var result = PersonConnectionHandler.MongoCollection.FindAndModify(query, null, 
+                Update.Replace&amp;lt;Person&amp;gt;(updatedPerson), true);
+
+            if ( result.ModifiedDocument != null ) {
+                Console.WriteLine("Document Modified successfully");
+                Console.WriteLine(result.ModifiedDocument);
+                return true;
+            } else {
+                return false;
+            }
+        }
+&lt;/code&gt;&lt;/pre&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</link><title>MongoDb: Querying the OpLog</title><description>&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;What is the OpLog?&lt;/strong&gt;&lt;/p&gt;
 
@@ -817,83 +859,4 @@ numShards is a number that reports the total number of shards queried.&lt;/p&gt;
 I prefer to increase the time for reporting from the default 1 sec to somewhere close to 5 sec or more (this is just a random number that I feel comfortable with..otherwise the data is to verbose to make any sense).&lt;/p&gt;
 
 &lt;p&gt;This should be a good start. We will go into some more concepts about monitoring mongodb before going into sharding etc..&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-indexing/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-indexing/</link><title>MongoDB-Indexing</title><description>&lt;p&gt;Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Single Field Indexes&lt;/strong&gt; : Think about having an index on a column in RDBMS.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Compound Indexes&lt;/strong&gt;: Think about an having an index on multiple columns in RDBMS.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multikey Indexes&lt;/strong&gt;: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Geospatial Indexes and Queries&lt;/strong&gt; : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Text Indexes&lt;/strong&gt; : For full text search inside a document. Should we use lucene ? Not sure ?&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hashed Index&lt;/strong&gt;: Index on hashed contents of the fields.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description><pubDate>Sat, 05 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-05T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Single Field Indexes&lt;/strong&gt; : Think about having an index on a column in RDBMS.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Compound Indexes&lt;/strong&gt;: Think about an having an index on multiple columns in RDBMS.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multikey Indexes&lt;/strong&gt;: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Geospatial Indexes and Queries&lt;/strong&gt; : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Text Indexes&lt;/strong&gt; : For full text search inside a document. Should we use lucene ? Not sure ?&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hashed Index&lt;/strong&gt;: Index on hashed contents of the fields.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;Indexes have properties associated with them :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;TTL: This is a rather surprising feature. I never expected such a feature to be available on indexes, but after giving it some thought, it makes sense to expire the indexes.&lt;/li&gt;
-&lt;li&gt;Unique: Only documents with unique values on the field are permitted.&lt;/li&gt;
-&lt;li&gt;Sparse: Really useful if you are going to have sparse fields. It leaves out the documents that do not have the field.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Some more tid-bits&lt;/strong&gt;
-- The order of indexes matters.
-e.g. if an index is created on (a,b,c) then index will be used only if the query is on
-- A or a,b or a,b,c . 
-- Index will not be called if we query on b,c or c.
-- It needs to be a left subset of the index.&lt;/p&gt;
-
-&lt;p&gt;The command is below.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Db.collection.ensureIndex('property');
-e.g. `db.students.ensureIndex({'class':1,'student_name':1});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;- Note: 1 or -1 is for ascending v/s descending which becomes useful when we have a lot of sort queries.
-- By default all the indexes are built in the foreground i.e. all the writers will be blocked while the index is being created. It is fast but the database is blocked.
-- Background ones are slow, fit for production use.
-- Creating the database index in the background also blocks the current shell while it is being created.
-- All indexes are Btree indexes.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Index Creation option , Unique , Removing Duplicates&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Unique indexes ensure that the key is unique in the collection.&lt;/li&gt;
-&lt;li&gt;e.g. db.students.ensureIndex({'student&lt;em&gt;id':1,'class&lt;/em&gt;id':1},{'unique':true})&lt;/li&gt;
-&lt;li&gt;To remove the duplicates while creating the index we can do the following :&lt;/li&gt;
-&lt;li&gt;Provide the dropDups :true along with the unique attribute. This is dangerous, so handle with care. There is no way to control which documents it will remove. It will let live a single document and we can't predict or configure as to which one it will be.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;MultiKey Index&lt;/em&gt;
-- It will create an index for all the items in the array if the key.
-- You can't have two multi keys in a single index. This cause a polynomial explosion of the indexes.
-- We will only when we first insert something in the collection.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Index Efficiency&lt;/em&gt;
-- $gt, $lt will use the index but the efficiency may not be there since the selectivity could be very low.
-Similar for $ne etc.. &lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Index Size&lt;/em&gt;
-- Indexes must be kept in memory.
-- Db.collection.stats() to get the stats on the collection.
-Db.collection.getIndexSize() to get the total size of the index of the database.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Final thoughts&lt;/strong&gt;
-- Create any and all indexes that are required for your queries.
-- Ensure that the indexes fit in memory, reading from the disk is bad.
-- Sorting should also use Indexes.
-- High selectivity should be the prime consideration when deciding about indexes.&lt;/p&gt;
 </a10:content></item></channel></rss>

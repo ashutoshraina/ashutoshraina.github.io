@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-12T17:49:05.7382586+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-18T19:19:59.5425555+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,20 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2014/01/optimistic-concurrency-mongodb/">MongoDb: Optimistic Concurrency</a> 
+        <span>posted on 18 Jan 2014</span>
+      </h1> 
+      
+      <p>Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
+First, a really simple document.</p>
+
+<p>Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.</p>
+
+
+      <p><a href="/2014/01/optimistic-concurrency-mongodb/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2014/01/querying-oplog-mongodb/">MongoDb: Querying the OpLog</a> 
@@ -215,26 +229,6 @@ The details have been taken from the mongodb website and presented here for cont
 
 
       <p><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-indexing/">MongoDB-Indexing</a> 
-        <span>posted on 06 Oct 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li>Part 2 - Indexing</li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
-      <p>Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : </p>
-
-<ul>
-<li><strong>Single Field Indexes</strong> : Think about having an index on a column in RDBMS.</li>
-<li><strong>Compound Indexes</strong>: Think about an having an index on multiple columns in RDBMS.</li>
-<li><strong>Multikey Indexes</strong>: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.</li>
-<li><strong>Geospatial Indexes and Queries</strong> : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.</li>
-<li><strong>Text Indexes</strong> : For full text search inside a document. Should we use lucene ? Not sure ?</li>
-<li><strong>Hashed Index</strong>: Index on hashed contents of the fields.</li>
-</ul>
-
-
-      <p><a href="/2013/10/mongodb-indexing/">Read more...</a></p>
     </li>
   </ul> 
 

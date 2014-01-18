@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-12T17:49:05.7382586+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-18T19:19:59.5425555+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,37 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/06/entity-framework-table-per-type-gotcha/">Entity Framework - Table Per Type Gotcha</a> 
+        <span>posted on 02 Jun 2013</span>
+      </h1> 
+      
+      <p>Entity Framework Table Per Type (TPT) implementation has a little gotcha ( little is really relative ). When we create table per type we will have orphan rows if the parent gets deleted and there will be orphan rows in the parent if the child gets deleted. This causes a funny picture to emerge with very bad consequences.</p>
+
+<p><img src="/stylesheets/images/posts/fix-tpt.png" alt="Gotcha" /></p>
+
+<p>Now, to get around this my simple workaround was to alter the relationships in my seed method.</p>
+
+<pre><code>context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] DROP CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] ADD CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] DROP CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] ADD CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] DROP CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] ADD CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] DROP CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+</code></pre>
+
+<p><img src="/stylesheets/images/posts/foreign-key.png" alt="ForeignKey" /></p>
+
+<p>There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.</p>
+
+      <p><a href="/2013/06/entity-framework-table-per-type-gotcha/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/05/entity-framework-migrations/">Entity Framework - Migrations</a> 
@@ -291,17 +322,6 @@ Now, the questions can be of varying difficulty levels so now we can do the foll
 
       <p><a href="/2011/10/entity-framework-complex-types/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2011/10/entity-framework-inhertiance/">Entity Framework Inhertiance</a> 
-        <span>posted on 24 Oct 2011</span>
-      </h1> 
-      
-      <p>Inheritance is the basic requirement when we go about making a model for our business. Inheritance in SQL based systems is restricted to “has a “relationships. In real world applications which are modeled in object oriented mechanisms this is the real paint point for the developers. The essence of ORM systems is to bridge the gap between these two worlds and allow a seamless layer of abstraction to exist for the database access.</p>
-
-
-      <p><a href="/2011/10/entity-framework-inhertiance/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -313,6 +333,9 @@ Now, the questions can be of varying difficulty levels so now we can do the foll
         </p>
 
 
+    <p class="previous">
+      <a href="/page4">Next Page</a>
+    </p>
 
   </div>
 

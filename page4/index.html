@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/09/mongodb-getting-started/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/page4/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -41,85 +41,33 @@
                 <div id="content" role="main">
                   
 
-<div id="post">
-    <h1>MongoDB-Getting Started</h1>
-
-    <div class="post-note">
-      posted on 30 Sep 2013
-       | <a href="/category/.net">.net</a>
-       | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/mongodb">mongodb</a>
-       | <a href="/category/opensource">opensource</a>
+  <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2011/10/entity-framework-inhertiance/">Entity Framework Inhertiance</a> 
+        <span>posted on 24 Oct 2011</span>
+      </h1> 
       
-      <div class="addthis_toolbox addthis_default_style" style="float:right;">
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        <a class="addthis_button_tweet"></a>
-        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        <a class="addthis_button_linkedin_counter"></a>
-        <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-    </div>
-    
-    
-        
-    <p>MongoDB is a document database and I won't bore you with details about what it can do. MongoDB makes many claims, they are <a href="http://www.mongodb.org/" title="Here">here</a>. In short, MongoDB is a document database that stores data in a JSON format and then promises to make out lives easier. 
-Installation instruction are varied depending on your OS etc..and the both varieties of bitness are also available. <a href="http://www.mongodb.org/downloads,"Download"">Download</a></p>
-
-<p>The shell for MongoDB is a Javascript based one, so if you know a bit of JS then you will fly in there. Start mongod from the command line, this can be done by navigating to the bin directory of installation. Provide the dbpath(the place where it stores the data) as well.</p>
-
-<p><img src="/stylesheets/images/posts/mongod.png" alt="Mongod" /></p>
-
-<p>If you look at the output when we start the daemon (mongod = mongo-daemon) then the last line talks about a rest interface. This can be enable by passing the --rest flag when starting the instance. The port for viewing the webpage is also there.</p>
-
-<p>Let's get into the mix of things by connecting to this mongod using the shell(mongo.exe). Navigate to the mongo directory and go mongo.exe.
-By default this connects  to the test database. The prompt will say something like </p>
-
-<pre><code>C:\Users\Ashutosh\mongodb\bin&gt;mongo.exe
-MongoDB shell version: 2.4.1
-connecting to: test
-&gt; 
-</code></pre>
-
-<p>At any moment you can go back to mongod and check how many connections are open. Run a couple of commands like 
-<em>show dbs
-show collections</em> 
-to see if everything is in order. </p>
-
-<p>Create a new database by use yourdatabasename. The shell will switch it's context to that database(after creating it if it does not exist already.) 
-Next, time we will do some stuff by creating some collections and then querying. This will be a longish series, hold on and let me smear you twitter timelines.</p>
+      <p>Inheritance is the basic requirement when we go about making a model for our business. Inheritance in SQL based systems is restricted to “has a “relationships. In real world applications which are modeled in object oriented mechanisms this is the real paint point for the developers. The essence of ORM systems is to bridge the gap between these two worlds and allow a seamless layer of abstraction to exist for the database access.</p>
 
 
-    <div id="disqus_thread"></div>
-<script>
-    var reset_disqus = function(){
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/09/mongodb-getting-started/';
-                //this.page.title = '';
-            }
-        });
-    };
+      <p><a href="/2011/10/entity-framework-inhertiance/">Read more...</a></p>
+    </li>
+  </ul> 
 
-    var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/09/mongodb-getting-started/';
+  <!-- Pagination links -->
+  <div id="post-pagination" class="pagination">
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+   
+      <p class="previous">
+        <a href="/page3">Previous Page</a>
+        </p>
 
-    window.addEventListener('orientationchange', reset_disqus);
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
-   </script>
 
-</div>
+
+  </div>
+
+
                 </div>
                 <!-- #content -->
             </div>
