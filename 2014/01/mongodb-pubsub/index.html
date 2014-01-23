@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-23T23:23:12.8827907+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-23T23:55:34.5688965+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -66,9 +66,11 @@
 <!--excerpt-->
 First, Capped Collection. Again from the MongodB webstie </p>
 
-<p>Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.</p>
+<blockquote>
+  <p>Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.</p>
+</blockquote>
 
-<p>So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog (refer to ("/2014/01/querying-oplog-mongodb/", "previous post")) using tailable cursors. Let's get down to it now.</p>
+<p>So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog <a href="/2014/01/querying-oplog-mongodb" title="previous post">previous post</a> using tailable cursors. Let's get down to it now.</p>
 
 <p>Modifying my MongoConnectionHandler that we had before to pass in the CollectionOptions for setting up the capped collections.</p>
 
@@ -108,7 +110,6 @@ var connectionHandler = new MongoConnectionHandler&lt;Message&gt;("MongoDBDemo",
                 yield return new Message{ Topic = topic, Data = "Message " + i, Version = 0 };
             }
         }
-
 
     public static void Publish (string topic) {
         var options = CollectionOptions.SetCapped(true).SetMaxSize(5000).SetMaxDocuments(100);
@@ -150,6 +151,8 @@ var connectionHandler = new MongoConnectionHandler&lt;Message&gt;("MongoDBDemo",
 Task.Factory.StartNew(t =&gt; Publish(topic), TaskCreationOptions.None);
 Task.Factory.StartNew(t =&gt; Subscribe(topic), TaskCreationOptions.None); 
 </code></pre>
+
+<p>It wasn't so hard after all!!</p>
 
 
     <div id="disqus_thread"></div>

@@ -9,9 +9,9 @@ In the spirit of trying out new thigns I wanted to create a pub0sub system with 
 <!--excerpt-->
 First, Capped Collection. Again from the MongodB webstie 
 
-Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.
+> Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.
 
-So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog (refer to ("/2014/01/querying-oplog-mongodb/", "previous post")) using tailable cursors. Let's get down to it now.
+So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog [previous post](/2014/01/querying-oplog-mongodb  "previous post") using tailable cursors. Let's get down to it now.
 
 Modifying my MongoConnectionHandler that we had before to pass in the CollectionOptions for setting up the capped collections.
 
@@ -48,7 +48,6 @@ A small helper for generating the messages
                     yield return new Message{ Topic = topic, Data = "Message " + i, Version = 0 };
                 }
             }
-
 
         public static void Publish (string topic) {
             var options = CollectionOptions.SetCapped(true).SetMaxSize(5000).SetMaxDocuments(100);
@@ -87,3 +86,5 @@ Setting all of this in motion.
     var topic = "mytopic";
     Task.Factory.StartNew(t => Publish(topic), TaskCreationOptions.None);
     Task.Factory.StartNew(t => Subscribe(topic), TaskCreationOptions.None); 
+
+It wasn't so hard after all!!

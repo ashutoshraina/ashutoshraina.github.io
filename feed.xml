@@ -3,9 +3,11 @@
 &lt;!--excerpt--&gt;
 First, Capped Collection. Again from the MongodB webstie &lt;/p&gt;
 
-&lt;p&gt;Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog (refer to ("/2014/01/querying-oplog-mongodb/", "previous post")) using tailable cursors. Let's get down to it now.&lt;/p&gt;
+&lt;p&gt;So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog &lt;a href="http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb" title="previous post"&gt;previous post&lt;/a&gt; using tailable cursors. Let's get down to it now.&lt;/p&gt;
 
 &lt;p&gt;Modifying my MongoConnectionHandler that we had before to pass in the CollectionOptions for setting up the capped collections.&lt;/p&gt;
 
@@ -45,7 +47,6 @@ var connectionHandler = new MongoConnectionHandler&amp;lt;Message&amp;gt;("Mongo
                 yield return new Message{ Topic = topic, Data = "Message " + i, Version = 0 };
             }
         }
-
 
     public static void Publish (string topic) {
         var options = CollectionOptions.SetCapped(true).SetMaxSize(5000).SetMaxDocuments(100);
@@ -87,6 +88,8 @@ var connectionHandler = new MongoConnectionHandler&amp;lt;Message&amp;gt;("Mongo
 Task.Factory.StartNew(t =&amp;gt; Publish(topic), TaskCreationOptions.None);
 Task.Factory.StartNew(t =&amp;gt; Subscribe(topic), TaskCreationOptions.None); 
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It wasn't so hard after all!!&lt;/p&gt;
 </a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</link><title>MongoDb: Optimistic Concurrency</title><description>&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
 First, a really simple document.&lt;/p&gt;
 
