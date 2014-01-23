@@ -1,4 +1,93 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</link><title>MongoDb: Optimistic Concurrency</title><description>&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</guid><link>http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</link><title>Pub Sub with MongoDB</title><description>&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
+</description><pubDate>Wed, 22 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-22T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
+&lt;!--excerpt--&gt;
+First, Capped Collection. Again from the MongodB webstie &lt;/p&gt;
+
+&lt;p&gt;Capped Collections are circular, fixed-size collections that keep documents well-ordered, even without the use of an index. This means that capped collections can receive very high-speed writes and sequential reads.&lt;/p&gt;
+
+&lt;p&gt;So, isn't that what we want ? Fast sequential reads and fast writes within a fixed size. Now, an example of capped collection is the oplog. We already know how to query the oplog (refer to ("/2014/01/querying-oplog-mongodb/", "previous post")) using tailable cursors. Let's get down to it now.&lt;/p&gt;
+
+&lt;p&gt;Modifying my MongoConnectionHandler that we had before to pass in the CollectionOptions for setting up the capped collections.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public MongoConnectionHandler (string connectionString, string databaseName, CollectionOptionsBuilder options) {
+            var client = new MongoClient(connectionString);
+            _server = client.GetServer();
+            _database = _server.GetDatabase(databaseName);
+            var collectionName = typeof(T).Name.ToLower() + "s";
+            if ( !_database.CollectionExists(collectionName) &amp;amp;&amp;amp; options != null ) {
+                _database.CreateCollection(collectionName, options);
+            }
+            _collection = _database.GetCollection&amp;lt;T&amp;gt;(typeof(T).Name.ToLower() + "s");
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, setting up the collection with the options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var options = CollectionOptions.SetCapped(true).SetMaxSize(5000).SetMaxDocuments(100);
+var connectionHandler = new MongoConnectionHandler&amp;lt;Message&amp;gt;("MongoDBDemo", options);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our Message is really simple.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Message : MongoEntity
+{
+    public string Topic { get; set; }
+    public String Data { get; set; }
+    public int Version { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A small helper for generating the messages&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;internal static IEnumerable&amp;lt;Message&amp;gt; Generator (string topic) {
+            for (int i = 0; i &amp;lt; 100; i++) {
+                Thread.Sleep(100);
+                yield return new Message{ Topic = topic, Data = "Message " + i, Version = 0 };
+            }
+        }
+
+
+    public static void Publish (string topic) {
+        var options = CollectionOptions.SetCapped(true).SetMaxSize(5000).SetMaxDocuments(100);
+        var connectionHandler = new MongoConnectionHandler&amp;lt;Message&amp;gt;("MongoDBDemo", options);
+        var messages = Generator(topic);
+        foreach (var message in messages) {
+            Console.WriteLine("Publishing message");
+            connectionHandler.MongoCollection.Insert(message);
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, subscribing isn't that hard with tailable cursors.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    public static void Subscribe (string topic) {
+        var connectionHandler = new MongoConnectionHandler&amp;lt;Message&amp;gt;("MongoDBDemo");
+        BsonValue lastId = BsonMinKey.Value;
+        while (true) {
+            var query = Query.EQ("Topic", topic);
+            var cursor = connectionHandler.MongoCollection.FindAs&amp;lt;BsonDocument&amp;gt;(query)
+                .SetFlags(QueryFlags.TailableCursor | QueryFlags.AwaitData)
+                .SetSortOrder(SortBy.Ascending("$natural"));
+            var count = 0;
+            foreach (var document in cursor) {
+                Console.WriteLine("Message Recieved from topic {0} with data {1}",document["Topic"],document["Data"]);
+                //Console.WriteLine(document);
+                count++;
+            }
+            if ( count == 0 ) {
+                Thread.Sleep(TimeSpan.FromMilliseconds(1000));
+            }
+        }  
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Setting all of this in motion.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var topic = "mytopic";
+Task.Factory.StartNew(t =&amp;gt; Publish(topic), TaskCreationOptions.None);
+Task.Factory.StartNew(t =&amp;gt; Subscribe(topic), TaskCreationOptions.None); 
+&lt;/code&gt;&lt;/pre&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</link><title>MongoDb: Optimistic Concurrency</title><description>&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
 First, a really simple document.&lt;/p&gt;
 
 &lt;p&gt;Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.&lt;/p&gt;
@@ -744,119 +833,4 @@ A 4.5/5 for this one, keeping the 0.5 for the next edition :).&lt;/p&gt;
 &lt;p&gt;P.S. Even the appendix is handy.&lt;/p&gt;
 
 &lt;p&gt;Disclosure : I got a free copy of the book to review.  The review is my own opinion and not influenced by anyone else.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/</guid><link>http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/</link><title>MongoDB-Understanding queries through explain plan</title><description>&lt;p&gt;Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
-The details have been taken from the mongodb website and presented here for continuity of series.&lt;/p&gt;
-
-</description><pubDate>Sat, 12 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-12T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
-The details have been taken from the mongodb website and presented here for continuity of series.&lt;/p&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;&lt;strong&gt;Explain Output Fields&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.cursor&lt;/em&gt;
-cursor is a string that reports the type of cursor used by the query operation:&lt;/p&gt;
-
-&lt;p&gt;BasicCursor indicates a full collection scan.
-BtreeCursor indicates that the query used an index. The cursor includes name of the index. When a query uses an index, the output of explain() includes indexBounds details.
-GeoSearchCursor indicates that the query used a geospatial index.
-explain.isMultiKey
-isMultiKey is a boolean. When true, the query uses a multikey index, where one of the fields in the index holds an array.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.n&lt;/em&gt;
-n is a number that reflects the number of documents that match the query selection criteria.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.nscannedObjects&lt;/em&gt;
-Specifies the total number of documents scanned during the query. The nscannedObjects may be lower than nscanned, such as if the index covers a query. See indexOnly. Additionally, the nscannedObjects may be lower than nscanned in the case of multikey index on an array field with duplicate documents.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.nscanned&lt;/em&gt;
-Specifies the total number of documents or index entries scanned during the database operation. You want n and nscanned to be close in value as possible. The nscanned value may be higher than the nscannedObjects value, such as if the index covers a query. See indexOnly.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.nscannedObjectsAllPlans&lt;/em&gt;
-nscannedObjectsAllPlans is a number that reflects the total number of documents scanned for all query plans during the database operation.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.nscannedAllPlans&lt;/em&gt;
-nscannedAllPlans is a number that reflects the total number of documents or index entries scanned for all query plans during the database operation.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.scanAndOrder&lt;/em&gt;
-scanAndOrder is a boolean that is true when the query cannot use the index for returning sorted results.&lt;/p&gt;
-
-&lt;p&gt;When true, MongoDB must sort the documents after it retrieves them from either an index cursor or a cursor that scans the entire collection.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.indexOnly&lt;/em&gt;
-indexOnly is a boolean value that returns true when the query is covered by the index indicated in the cursor field. When an index covers a query, MongoDB can both match the query conditions and return the results using only the index because:&lt;/p&gt;
-
-&lt;p&gt;all the fields in the query are part of that index, and
-all the fields returned in the results set are in the same index.
-explain.nYields
-nYields is a number that reflects the number of times this query yielded the read lock to allow waiting writes execute.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.nChunkSkips&lt;/em&gt;
-nChunkSkips is a number that reflects the number of documents skipped because of active chunk migrations in a sharded system. Typically this will be zero. A number greater than zero is ok, but indicates a little bit of inefficiency.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.millis&lt;/em&gt;
-millis is a number that reflects the time in milliseconds to complete the query.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.indexBounds&lt;/em&gt;
-indexBounds is a document that contains the lower and upper index key bounds. This field resembles one of the following:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;"indexBounds" : {
-"start" : {  : , ...  },
-"end" : {  : , ... }
-},
-"indexBounds" : { "" : [ [ ,  ] ],
-  ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;explain.allPlans&lt;/em&gt;
-allPlans is an array that holds the list of plans the query optimizer runs in order to select the index for the query. Displays only when the  parameter to explain() is true or 1.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.oldPlan&lt;/em&gt;
-oldPlan is a document value that contains the previous plan selected by the query optimizer for the query. Displays only when the  parameter to explain() is true or 1.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.server&lt;/em&gt;
-server is a string that reports the MongoDB server.&lt;/p&gt;
-
-&lt;p&gt;$or Query Output Fields
-explain.clauses
-clauses is an array that holds the Core Explain Output Fields information for each clause of the $or expression. clauses is only included when the clauses in the $or expression use indexes.&lt;/p&gt;
-
-&lt;p&gt;Sharded Collections Output Fields
-&lt;em&gt;explain.clusteredType&lt;/em&gt;
-clusteredType is a string that reports the access pattern for shards. The value is:&lt;/p&gt;
-
-&lt;p&gt;ParallelSort, if the mongos queries shards in parallel.
-SerialServer, if the mongos queries shards sequentially.
-&lt;em&gt;explain.shards&lt;/em&gt;
-shards contains fields for each shard in the cluster accessed during the query. Each field holds the Core Explain Output Fields for that shard.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.millisShardTotal&lt;/em&gt;
-millisShardTotal is a number that reports the total time in milliseconds for the query to run on the shards.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.millisShardAvg&lt;/em&gt;
-millisShardAvg is a number that reports the average time in millisecond for the query to run on each shard.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.numQueries&lt;/em&gt;
-numQueries is a number that reports the total number of queries executed.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;explain.numShards&lt;/em&gt;
-numShards is a number that reports the total number of shards queried.&lt;/p&gt;
-
-&lt;p&gt;Lastly, some more profiling tips that can be pretty useful.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Logging Slow Queries&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;There are 3 levels for the profiler 0 OFF , 1Slow, 2 ALL&lt;/li&gt;
-&lt;li&gt;Enable this using mongod -profile 1 --slowms 2&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Db.getProfilingLevel()&lt;/code&gt; to get the current profiling level.&lt;/li&gt;
-&lt;li&gt;If you want to get all queries that took longer than 3 second, ordered by timestamp descending&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;db.system.profile.find({millis:{$gt:3000}}).sort({ts:-1})&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Mongotop can be run set to a specific time interval to determine where is the majority of the time spent. This utility tracks the time that mongod spends on reads and writes. The information is on a per collection basis.
-I prefer to increase the time for reporting from the default 1 sec to somewhere close to 5 sec or more (this is just a random number that I feel comfortable with..otherwise the data is to verbose to make any sense).&lt;/p&gt;
-
-&lt;p&gt;This should be a good start. We will go into some more concepts about monitoring mongodb before going into sharding etc..&lt;/p&gt;
 </a10:content></item></channel></rss>
