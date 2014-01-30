@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/11/mongodb-replication/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/page7/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -41,94 +41,54 @@
                 <div id="content" role="main">
                   
 
-<div id="post">
-    <h1>MongoDB-Replication</h1>
+  <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/entity-framework-generic-repository-pattern-part-1/">Entity Framework - Generic repository Pattern - Part 1</a> 
+        <span>posted on 02 Feb 2013</span>
+      </h1> 
+      <ul class="snow-series"><li>Part 1 - Generic Repositry Pattern</li><li>Part 2 - Generic Repositry Pattern Contd.</li></ul>
+      <p>The generic repository pattern has been a matter of discussion on the forums and SO. Developers are not convinced that it solves a problem, yet everyday SO has more questions about the pattern. Clearly, something is not right. I tried to implement the pattern in a way I thought fit. I changed my mind a million times during the process, that tells you that the process was not smooth. You can find several implementations of the pattern scattered all over the internet. I will not pass a opinion on the pattern. I would rather tell you what issues I faced and I how solved (or not) them.
 
-    <div class="post-note">
-      posted on 04 Nov 2013
-       | <a href="/category/.net">.net</a>
-       | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/mongodb">mongodb</a>
-       | <a href="/category/opensource">opensource</a>
+      <p><a href="/2013/02/entity-framework-generic-repository-pattern-part-1/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2011/10/entity-framework-complex-types/">Entity Framework Complex Types</a> 
+        <span>posted on 24 Oct 2011</span>
+      </h1> 
       
-      <div class="addthis_toolbox addthis_default_style" style="float:right;">
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        <a class="addthis_button_tweet"></a>
-        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        <a class="addthis_button_linkedin_counter"></a>
-        <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-    </div>
-    
-    <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li>Part 4 - Replication</li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
-        
-    <p><strong>REPLICATION</strong></p>
-
-<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
-Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
-Minimum number of nodes will be 3, since the election requires a majority of the original set.
-If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
-
-<p><!--excerpt-->
-Replica Set Elections</p>
-
-<pre><code>Regular Node : It has the data and can become primary or secondary.
-Arbiter : It is just there for voting purposes. We need it if we want an even number of nodes. It has no data on it.
-Delayed/Regular : It can be set to a few hours after the nodes. It cannot become primary. It's priority is set to 0.
-Hidden Node : It cannot become a primary node. It's priority is set to 0.
-</code></pre>
-
-<p>By default the reads and writes go to the primary. You can go to secondary for reading. This means that you might read stale data. The lag between nodes is not guaranteed since the process is async. If you read from secondary then what we have is <em>"eventual consistency"</em>.</p>
-
-<pre><code>rs.slaveOk() -- ok to read from the secondary
-rs.isMaster() -- checks whether the node is master
-rs.status() -- gives the current status of the replica set.
-</code></pre>
-
-<p>In the database locals , the collection oplogs.rs has all the operational logs. Replication happens when secondary nodes query the primary for the changes from a given timestamp. OpLog is the statement based replication log.
-Replication happens in a statement driven manner?
-e.g If a statement deletes 100 documents on the primary then there will 100 statements that are sent to the secondary to execute. There is no binary replication. This allows us to run different version of mongodb on different machines.</p>
-
-<ul>
-<li>Try to keep the OpLog small on 64 bit machine since it defaults to a large value on 64 bit systems.</li>
-<li>For replica sets don't use localhost or the ip address of the machine.</li>
-<li>Use a logical name, that is the best practice.</li>
-<li>Use DNS.</li></li>
-<li>Pick appropriate TTL as well.</li>
-</ul>
+      <p>In complicated models we need complex types to satisfy complex business logic .The most simple example would be having address as a complex type. Complex types are objects with no identity of their own. They are dependent on the parent for their existence. Consider the case where address has no real significance if it is not associated with a customer. This also implies that lazy loading of the complex type is not possible.</p>
 
 
-    <div id="disqus_thread"></div>
-<script>
-    var reset_disqus = function(){
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/11/mongodb-replication/';
-                //this.page.title = '';
-            }
-        });
-    };
+      <p><a href="/2011/10/entity-framework-complex-types/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2011/10/entity-framework-inhertiance/">Entity Framework Inhertiance</a> 
+        <span>posted on 24 Oct 2011</span>
+      </h1> 
+      
+      <p>Inheritance is the basic requirement when we go about making a model for our business. Inheritance in SQL based systems is restricted to “has a “relationships. In real world applications which are modeled in object oriented mechanisms this is the real paint point for the developers. The essence of ORM systems is to bridge the gap between these two worlds and allow a seamless layer of abstraction to exist for the database access.</p>
 
-    var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/11/mongodb-replication/';
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+      <p><a href="/2011/10/entity-framework-inhertiance/">Read more...</a></p>
+    </li>
+  </ul> 
 
-    window.addEventListener('orientationchange', reset_disqus);
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
-   </script>
+  <!-- Pagination links -->
+  <div id="post-pagination" class="pagination">
 
-</div>
+   
+      <p class="previous">
+        <a href="/page6">Previous Page</a>
+        </p>
+
+
+
+  </div>
+
+
                 </div>
                 <!-- #content -->
             </div>

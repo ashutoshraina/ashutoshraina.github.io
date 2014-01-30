@@ -9,7 +9,7 @@ email: ashutoshraina1989@gmail.com
 While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
 Microsoft provides the executable for 2.6 and we can download it from there.
 
-<!--excerpt->
+<!--excerpt-->
 
 Now, how do we talk to redis ? First, as expected there is a CLI which is quite simple and easy. Second, get some packages from nuget and start writing C#. I tried the CLI for an hour or so and then moved on to C#. (CLI is no slouch, you can do a pub-sub there). The things you can do with redis are simple and few. That is not a such a bad thing because it keeps the clutter out. It does a few things and does them really well and really fast.
 Now, for talking to redis there are two primary options BookSleeve (by Marc Garvel) and ServiceStack.Redis. I chose the former just for the name(no kidding naming is still a hard problem).

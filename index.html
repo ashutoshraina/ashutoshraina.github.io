@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-28T21:11:16.7524971+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-30T23:01:03.0141772+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -51,65 +51,6 @@
       <p>While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
 Microsoft provides the executable for 2.6 and we can download it from there.</p>
 
-<p><!--excerpt-></p>
-
-<p>Now, how do we talk to redis ? First, as expected there is a CLI which is quite simple and easy. Second, get some packages from nuget and start writing C#. I tried the CLI for an hour or so and then moved on to C#. (CLI is no slouch, you can do a pub-sub there). The things you can do with redis are simple and few. That is not a such a bad thing because it keeps the clutter out. It does a few things and does them really well and really fast.
-Now, for talking to redis there are two primary options BookSleeve (by Marc Garvel) and ServiceStack.Redis. I chose the former just for the name(no kidding naming is still a hard problem).</p>
-
-<p>Let's get to the coding bit.
-Open up a connection, insert something and get something back.</p>
-
-<pre><code>RedisConnection connection = new RedisConnection("localhost");
-connection.Open();
-//0 is the database number, you can set it whatever you want
-connection.Strings.Set(0, "foo", "bar");
-var bar = connection.Strings.GetString(0, "foo");
-</code></pre>
-
-<p>Now, before we move further just for clarity Redis supports the following data structures.</p>
-
-<pre><code>Strings
-Hashes
-Lists
-Sets
-Sorted-Sets
-</code></pre>
-
-<p>The api surface in booksleeve brings the simplicity of redis to the surface.</p>
-
-<pre><code>connection.Hashes.Set(0, "duck", new Dictionary&lt;string,byte[]&gt;{ { "quack", Encoding.UTF8.GetBytes("I am a quack") } });
-var quack = connection.Hashes.GetString(0, "duck", "quack");
-Console.WriteLine(quack.Result);
-
-connection.Lists.AddFirst(0, "baz", "bazz");
-var bazz = connection.Lists.GetString(0, "baz", 0);
-Console.WriteLine(bazz.Result);
-</code></pre>
-
-<p>Another, interesting feature of redis is the ability to expire data. This can be quite handy especially when cache needs to be invalidated.</p>
-
-<pre><code>connection.Strings.Set(0, "temp", "aboutToExpire", 4);
-var temp = connection.Strings.GetString(0, "temp");
-Console.WriteLine(temp.Result);
-Thread.Sleep(4000);
-temp = connection.Strings.GetString(0, "temp");
-Console.WriteLine(string.IsNullOrEmpty(temp.Result));
-</code></pre>
-
-<p>Publish and subscribe was surprisingly terse.</p>
-
-<pre><code>connection.Publish("topic", "Hello From Pub");
-
-var channel = connection.GetOpenSubscriberChannel();
-channel.Subscribe("topic", SubscritionCallback);
-
-private static void SubscritionCallback (string key,byte[] message) {
-Console.WriteLine(key);
-Console.WriteLine(Encoding.UTF8.GetString((message)));
-}
-</code></pre>
-
-<p>This wasn't so hard and can be quite useful in situation where you simply need to hold data and not pay the penalty of going back to a full database again and again. I enjoyed writing about redis, hope you like reading it.</p>
 
       <p><a href="/2014/01/learning-redis-by-accident/">Read more...</a></p>
     </li>
@@ -175,118 +116,6 @@ First, a really simple document.</p>
 
 
       <p><a href="/2014/01/mvc-on-mono-monodevelop/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a> 
-        <span>posted on 30 Dec 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li>Part 3 - Tasks With Timeout on .net4.5</li></ul>
-      <p>The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!</p>
-
-<pre><code>    public static Task WithTimeout(this Task task, TimeSpan timeout)
-    {
-        var delay = task.ContinueWith(t =&gt; { }, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-    public static Task&lt;T&gt; WithTimeout&lt;T&gt;(this Task&lt;T&gt; task, TimeSpan timeout)
-    {            
-        var delay = task.ContinueWith(t =&gt; t.Result, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-</code></pre>
-
-<p>
-      <p><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a> 
-        <span>posted on 24 Dec 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li>Part 2 - Tasks With Timeouts contd.</li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
-      <p>As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!</p>
-
-<pre><code>    var tasks = new List&lt;Task&gt;();
-    try
-    {
-    //instead of checking for fault within the continutaion, 
-    //we can just use a TaskContinuationOption to tell communicate the right semantics
-
-    var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
-    .TimeoutAfter(1000)
-    .ContinueWith(t =&gt; SomethingUsefulWithTheResult(), 
-     TaskContinuationOptions.NotOnFaulted);
-
-    var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
-
-    var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"),
-    TaskCreationOptions.AttachedToParent)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
-
-    tasks.Add(t1);
-    tasks.Add(t2);
-    tasks.Add(t3);
-
-    Task.WaitAll(tasks.ToArray());
-    }
-    catch (Exception ex)
-    {
-    Console.WriteLine("There was an exception");
-    Console.WriteLine(ex.InnerException.Message);   
-    }
-</code></pre>
-
-<p>I will show in the next post how this wasn't all that better since this leaves a few gaps.</p>
-
-      <p><a href="/2013/12/tasks-with-timeout-contd/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/12/tasks-with-timeouts/">Tasks With Timeout</a> 
-        <span>posted on 23 Dec 2013</span>
-      </h1> 
-      <ul class="snow-series"><li>Part 1 - Tasks With Timeouts</li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
-      <p>So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
-<a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout">Tasks With Timeouts</a></p>
-
-
-      <p><a href="/2013/12/tasks-with-timeouts/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/11/mongodb-sharding/">MongoDB-Sharding</a> 
-        <span>posted on 05 Nov 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li>Part 5 - Sharding</li></ul>
-      <p><strong>Sharding</strong></p>
-
-<p>Mongodb sharding is based on shard key.</p>
-
-<p>K1 -&gt; k2 on shard1
-K2 -&gt; k3 on shard2 etc..</p>
-
-<p>Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.</p>
-
-
-      <p><a href="/2013/11/mongodb-sharding/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/11/mongodb-replication/">MongoDB-Replication</a> 
-        <span>posted on 04 Nov 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li>Part 4 - Replication</li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
-      <p><strong>REPLICATION</strong></p>
-
-<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
-Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
-Minimum number of nodes will be 3, since the election requires a majority of the original set.
-If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
-
-<p>
-      <p><a href="/2013/11/mongodb-replication/">Read more...</a></p>
     </li>
   </ul> 
 

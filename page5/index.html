@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/09/mongodb-getting-started/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/page5/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -41,28 +41,14 @@
                 <div id="content" role="main">
                   
 
-<div id="post">
-    <h1>MongoDB-Getting Started</h1>
-
-    <div class="post-note">
-      posted on 30 Sep 2013
-       | <a href="/category/.net">.net</a>
-       | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/mongodb">mongodb</a>
-       | <a href="/category/opensource">opensource</a>
+  <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/09/mongodb-getting-started/">MongoDB-Getting Started</a> 
+        <span>posted on 30 Sep 2013</span>
+      </h1> 
       
-      <div class="addthis_toolbox addthis_default_style" style="float:right;">
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        <a class="addthis_button_tweet"></a>
-        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        <a class="addthis_button_linkedin_counter"></a>
-        <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-    </div>
-    
-    
-        
-    <p>MongoDB is a document database and I won't bore you with details about what it can do. MongoDB makes many claims, they are <a href="http://www.mongodb.org/" title="Here">here</a>. In short, MongoDB is a document database that stores data in a JSON format and then promises to make out lives easier. 
+      <p>MongoDB is a document database and I won't bore you with details about what it can do. MongoDB makes many claims, they are <a href="http://www.mongodb.org/" title="Here">here</a>. In short, MongoDB is a document database that stores data in a JSON format and then promises to make out lives easier. 
 Installation instruction are varied depending on your OS etc..and the both varieties of bitness are also available. <a href="http://www.mongodb.org/downloads,"Download"">Download</a></p>
 
 <p>The shell for MongoDB is a Javascript based one, so if you know a bit of JS then you will fly in there. Start mongod from the command line, this can be done by navigating to the bin directory of installation. Provide the dbpath(the place where it stores the data) as well.</p>
@@ -88,38 +74,125 @@ to see if everything is in order. </p>
 <p>Create a new database by use yourdatabasename. The shell will switch it's context to that database(after creating it if it does not exist already.) 
 Next, time we will do some stuff by creating some collections and then querying. This will be a longish series, hold on and let me smear you twitter timelines.</p>
 
+      <p><a href="/2013/09/mongodb-getting-started/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/07/python-development-in-visual-studio/">Python Development in Visual Studio</a> 
+        <span>posted on 20 Jul 2013</span>
+      </h1> 
+      
+      <p><strong>What ..you must be mad !!</strong></p>
 
-    <div id="disqus_thread"></div>
-<script>
-    var reset_disqus = function(){
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/09/mongodb-getting-started/';
-                //this.page.title = '';
-            }
-        });
-    };
+<p>IronPython has been around for some time now. Python tools for Visual Studio have recently been given a facelift. It has been lifted to become a more complete tool which we can use for Python development with Visual Studio.
+I have recently been flirting with Python since it is easier and quicker to just get some stuff done in Python. It can easily be a second language for a C# developer and I do intend to keep it in my toolbox. There are alternatives available including but not limited to PyDev plugin for eclipse and Aptana Studio which comes with all the bells bundled together.</p>
 
-    var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/09/mongodb-getting-started/';
+<p>
+      <p><a href="/2013/07/python-development-in-visual-studio/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/06/entity-framework-table-per-type-gotcha/">Entity Framework - Table Per Type Gotcha</a> 
+        <span>posted on 02 Jun 2013</span>
+      </h1> 
+      
+      <p>Entity Framework Table Per Type (TPT) implementation has a little gotcha ( little is really relative ). When we create table per type we will have orphan rows if the parent gets deleted and there will be orphan rows in the parent if the child gets deleted. This causes a funny picture to emerge with very bad consequences.</p>
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+<p><img src="/stylesheets/images/posts/fix-tpt.png" alt="Gotcha" /></p>
 
-    window.addEventListener('orientationchange', reset_disqus);
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
-   </script>
+<p>Now, to get around this my simple workaround was to alter the relationships in my seed method.</p>
 
-</div>
+<pre><code>context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] DROP CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] ADD CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] DROP CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] ADD CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] DROP CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] ADD CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] DROP CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+</code></pre>
+
+<p><img src="/stylesheets/images/posts/foreign-key.png" alt="ForeignKey" /></p>
+
+<p>There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.</p>
+
+      <p><a href="/2013/06/entity-framework-table-per-type-gotcha/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/05/entity-framework-migrations/">Entity Framework - Migrations</a> 
+        <span>posted on 13 May 2013</span>
+      </h1> 
+      
+      <p>Migrations are needed in our day to day work and EF migrations story has become a lot better over the last year. When your database changes rapidly then migrations are needed to keep pace. Ofcourse this is nothing new, but it wasn't available in EF before.</p>
+
+<p><strong>Enable Migrations*</strong></p>
+
+<p>To enable the migrations go to Tools -&gt; Library Package Manager -&gt; Package Manager Console.
+Type Enable-Migrations in the console.
+-Force parameter is optionally available if you want to overwrite an existing migrations.
+
+      <p><a href="/2013/05/entity-framework-migrations/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/04/console2-commandline-awesomeness/">Console2- Command Line Awesomeness</a> 
+        <span>posted on 14 Apr 2013</span>
+      </h1> 
+      
+      <ol>
+<li><p>What is this ?
+Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. </p></li>
+<li><p>Where do I get it ?
+You can download it from here <a href="http://sourceforge.net/projects/console/" title="Console2">Console2</a></p></li>
+<li><p>Help me set it up .<a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post">Scott's Originial Blog Post</a>
+Refer to Scott Hansleman's blog post </p></li>
+</ol>
+
+<p>Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
+Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.</p>
+
+<ol>
+<li>Let's make the world a better place by adding Git Bash to the the tabs.</li>
+</ol>
+
+<blockquote>
+  <p>Title : GitBash</p>
+  
+  <p>Icon : C:\Program Files (x86)\Git\etc\git.ico</p>
+  
+  <p>Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i</p>
+  
+  <p>Startup dir : c:\Users\Ashutosh ( or whatever your path is )</p>
+</blockquote>
+
+<p><img src="/stylesheets/images/posts/console2.png" alt="Console2" /></p>
+
+<p>All looks nice, the world is a better place.</p>
+
+      <p><a href="/2013/04/console2-commandline-awesomeness/">Read more...</a></p>
+    </li>
+  </ul> 
+
+  <!-- Pagination links -->
+  <div id="post-pagination" class="pagination">
+
+   
+      <p class="previous">
+        <a href="/page4">Previous Page</a>
+        </p>
+
+
+    <p class="previous">
+      <a href="/page6">Next Page</a>
+    </p>
+
+  </div>
+
+
                 </div>
                 <!-- #content -->
             </div>

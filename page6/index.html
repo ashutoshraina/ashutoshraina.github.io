@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/02/useful-extension-methods/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/page6/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -41,28 +41,79 @@
                 <div id="content" role="main">
                   
 
-<div id="post">
-    <h1>Useful Extension Methods</h1>
+  <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/04/entity-framework-generic-repository-pattern-part-2/">Entity Framework - Generic repository Pattern - Part 2</a> 
+        <span>posted on 13 Apr 2013</span>
+      </h1> 
+      <ul class="snow-series"><li>Part 1 - Generic Repositry Pattern</li><li>Part 2 - Generic Repositry Pattern Contd.</li></ul>
+      <p>In the previous post I wrote about an implementation of the Generic Repository pattern for EF. There is so much data on the web that it is difficult to understand what might actually work for you. All of this can drive you 
+<a href="http://codereview.stackexchange.com/questions/11785/ef-code-first-with-repository-unitofwork-and-dbcontextfactory?rq=1" title="Crazy">Crazy</a></p>
 
-    <div class="post-note">
-      posted on 03 Feb 2013
-       | <a href="/category/.net">.net</a>
-       | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/tips">Tips</a>
-       | <a href="/category/extension-methods">Extension Methods</a>
+<p>Throw in my version of crazy as well.
+<a href="http://codereview.stackexchange.com/questions/19037/entity-framework-generic-repository-pattern" title="Crazy2">Crazy2</a></p>
+
+
+      <p><a href="/2013/04/entity-framework-generic-repository-pattern-part-2/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/teamcity-recover-admin-password/">TeamCity- Recover Admin Password</a> 
+        <span>posted on 04 Feb 2013</span>
+      </h1> 
       
-      <div class="addthis_toolbox addthis_default_style" style="float:right;">
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        <a class="addthis_button_tweet"></a>
-        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        <a class="addthis_button_linkedin_counter"></a>
-        <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-    </div>
-    
-    
-        
-    <p>Extension methods provide a very useful way of extending the functionality of a Type (value, reference or interface). The earlier way of extending or rather adding a functionality through inheritance or making an entirely new type from scratch were tedious to say the least. 
+      <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
+I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
+Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+
+<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
+So,</p>
+
+<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+
+Step 2  Open CMD as ADMINISTRATOR
+(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
+
+Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
+</code></pre>
+
+<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
+
+      <p><a href="/2013/02/teamcity-recover-admin-password/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/nunit-codesnippet/">NUnit-Code Snippet</a> 
+        <span>posted on 03 Feb 2013</span>
+      </h1> 
+      
+      <p>What are we doing ?
+We are trying to create a snippet for creating an NUnit test.</p>
+
+<p>How do we do this ?
+We go write a snippet.</p>
+
+<p>The snippet is here <a href="https://gist.github.com/4696972" title="NUnit Snippet">Snippet</a></p>
+
+<p>Save it under </p>
+
+<pre><code>..\Documents\Visual Studio 2012\Code Snippets\Visual C#\My Code Snippets
+</code></pre>
+
+<p>Now go add the snippet.
+Go to Tools in VS -&gt; Code Snippets Manager -&gt; and Import after clicking on the Snippet.
+That's it, we are done.</p>
+
+      <p><a href="/2013/02/nunit-codesnippet/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/useful-extension-methods/">Useful Extension Methods</a> 
+        <span>posted on 03 Feb 2013</span>
+      </h1> 
+      
+      <p>Extension methods provide a very useful way of extending the functionality of a Type (value, reference or interface). The earlier way of extending or rather adding a functionality through inheritance or making an entirely new type from scratch were tedious to say the least. 
 Extension methods are basically static methods with the calling syntax same as that of static methods. Over the course of the last few weeks i have come to realise they reduce a lot of repetitiveness from the code when used appropriately.<strong>MSDN</strong> specification also clearly states they must be used sparingly.
 So,here are a few useful extension methods.
 The syntax has only one new thing, the use of <em>this </em>keyword on the type that the extension method is meant for. </p>
@@ -141,38 +192,48 @@ public static class LookupExtensionMethods
 
 <p>Suddenly, the world seems a lot better.</p>
 
+      <p><a href="/2013/02/useful-extension-methods/">Read more...</a></p>
+    </li>
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/02/entity-framework-6-whats-new/">Entity Framework 6 What's new ?</a> 
+        <span>posted on 02 Feb 2013</span>
+      </h1> 
+      
+      <p>EF6 is still in alpha stages but you can go grab it now via nuget.
+What is new ?
+A whole lot find about it here <a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6">EF6</a></p>
 
-    <div id="disqus_thread"></div>
-<script>
-    var reset_disqus = function(){
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/02/useful-extension-methods/';
-                //this.page.title = '';
-            }
-        });
-    };
+<p>Also, do read this post about migrating to EF6 if you are migrating an existing application.</p>
 
-    var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/02/useful-extension-methods/';
+<p><a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6 Migration">EF6 Migration</a></p>
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+<p>I am basically using the same model to see if life is any easier with V6. The model is fairly simple. There are users, users can questions and questions are of different types. A user creates Test which is composed of many questions.</p>
 
-    window.addEventListener('orientationchange', reset_disqus);
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
-   </script>
+<p>Earlier, there was no easy way of doing Enum in EF Code First. That limitation is no longer there.
+Now, the questions can be of varying difficulty levels so now we can do the following.</p>
 
-</div>
+
+      <p><a href="/2013/02/entity-framework-6-whats-new/">Read more...</a></p>
+    </li>
+  </ul> 
+
+  <!-- Pagination links -->
+  <div id="post-pagination" class="pagination">
+
+   
+      <p class="previous">
+        <a href="/page5">Previous Page</a>
+        </p>
+
+
+    <p class="previous">
+      <a href="/page7">Next Page</a>
+    </p>
+
+  </div>
+
+
                 </div>
                 <!-- #content -->
             </div>
