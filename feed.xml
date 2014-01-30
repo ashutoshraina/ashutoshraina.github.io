@@ -1,4 +1,128 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</guid><link>http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</link><title>Pub Sub with MongoDB</title><description>&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</guid><link>http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</link><title>Learning Redis by accident</title><description>&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
+Microsoft provides the executable for 2.6 and we can download it from there.&lt;/p&gt;
+
+&lt;p&gt;&lt;!--excerpt-&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, how do we talk to redis ? First, as expected there is a CLI which is quite simple and easy. Second, get some packages from nuget and start writing C#. I tried the CLI for an hour or so and then moved on to C#. (CLI is no slouch, you can do a pub-sub there). The things you can do with redis are simple and few. That is not a such a bad thing because it keeps the clutter out. It does a few things and does them really well and really fast.
+Now, for talking to redis there are two primary options BookSleeve (by Marc Garvel) and ServiceStack.Redis. I chose the former just for the name(no kidding naming is still a hard problem).&lt;/p&gt;
+
+&lt;p&gt;Let's get to the coding bit.
+Open up a connection, insert something and get something back.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RedisConnection connection = new RedisConnection("localhost");
+connection.Open();
+//0 is the database number, you can set it whatever you want
+connection.Strings.Set(0, "foo", "bar");
+var bar = connection.Strings.GetString(0, "foo");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, before we move further just for clarity Redis supports the following data structures.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Strings
+Hashes
+Lists
+Sets
+Sorted-Sets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The api surface in booksleeve brings the simplicity of redis to the surface.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connection.Hashes.Set(0, "duck", new Dictionary&amp;lt;string,byte[]&amp;gt;{ { "quack", Encoding.UTF8.GetBytes("I am a quack") } });
+var quack = connection.Hashes.GetString(0, "duck", "quack");
+Console.WriteLine(quack.Result);
+
+connection.Lists.AddFirst(0, "baz", "bazz");
+var bazz = connection.Lists.GetString(0, "baz", 0);
+Console.WriteLine(bazz.Result);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another, interesting feature of redis is the ability to expire data. This can be quite handy especially when cache needs to be invalidated.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connection.Strings.Set(0, "temp", "aboutToExpire", 4);
+var temp = connection.Strings.GetString(0, "temp");
+Console.WriteLine(temp.Result);
+Thread.Sleep(4000);
+temp = connection.Strings.GetString(0, "temp");
+Console.WriteLine(string.IsNullOrEmpty(temp.Result));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Publish and subscribe was surprisingly terse.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connection.Publish("topic", "Hello From Pub");
+
+var channel = connection.GetOpenSubscriberChannel();
+channel.Subscribe("topic", SubscritionCallback);
+
+private static void SubscritionCallback (string key,byte[] message) {
+Console.WriteLine(key);
+Console.WriteLine(Encoding.UTF8.GetString((message)));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This wasn't so hard and can be quite useful in situation where you simply need to hold data and not pay the penalty of going back to a full database again and again. I enjoyed writing about redis, hope you like reading it.&lt;/p&gt;
+</description><pubDate>Sun, 26 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-26T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
+Microsoft provides the executable for 2.6 and we can download it from there.&lt;/p&gt;
+
+&lt;p&gt;&lt;!--excerpt-&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, how do we talk to redis ? First, as expected there is a CLI which is quite simple and easy. Second, get some packages from nuget and start writing C#. I tried the CLI for an hour or so and then moved on to C#. (CLI is no slouch, you can do a pub-sub there). The things you can do with redis are simple and few. That is not a such a bad thing because it keeps the clutter out. It does a few things and does them really well and really fast.
+Now, for talking to redis there are two primary options BookSleeve (by Marc Garvel) and ServiceStack.Redis. I chose the former just for the name(no kidding naming is still a hard problem).&lt;/p&gt;
+
+&lt;p&gt;Let's get to the coding bit.
+Open up a connection, insert something and get something back.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RedisConnection connection = new RedisConnection("localhost");
+connection.Open();
+//0 is the database number, you can set it whatever you want
+connection.Strings.Set(0, "foo", "bar");
+var bar = connection.Strings.GetString(0, "foo");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, before we move further just for clarity Redis supports the following data structures.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Strings
+Hashes
+Lists
+Sets
+Sorted-Sets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The api surface in booksleeve brings the simplicity of redis to the surface.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connection.Hashes.Set(0, "duck", new Dictionary&amp;lt;string,byte[]&amp;gt;{ { "quack", Encoding.UTF8.GetBytes("I am a quack") } });
+var quack = connection.Hashes.GetString(0, "duck", "quack");
+Console.WriteLine(quack.Result);
+
+connection.Lists.AddFirst(0, "baz", "bazz");
+var bazz = connection.Lists.GetString(0, "baz", 0);
+Console.WriteLine(bazz.Result);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another, interesting feature of redis is the ability to expire data. This can be quite handy especially when cache needs to be invalidated.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connection.Strings.Set(0, "temp", "aboutToExpire", 4);
+var temp = connection.Strings.GetString(0, "temp");
+Console.WriteLine(temp.Result);
+Thread.Sleep(4000);
+temp = connection.Strings.GetString(0, "temp");
+Console.WriteLine(string.IsNullOrEmpty(temp.Result));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Publish and subscribe was surprisingly terse.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connection.Publish("topic", "Hello From Pub");
+
+var channel = connection.GetOpenSubscriberChannel();
+channel.Subscribe("topic", SubscritionCallback);
+
+private static void SubscritionCallback (string key,byte[] message) {
+Console.WriteLine(key);
+Console.WriteLine(Encoding.UTF8.GetString((message)));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This wasn't so hard and can be quite useful in situation where you simply need to hold data and not pay the penalty of going back to a full database again and again. I enjoyed writing about redis, hope you like reading it.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</guid><link>http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</link><title>Pub Sub with MongoDB</title><description>&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
 </description><pubDate>Wed, 22 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-22T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
 &lt;!--excerpt--&gt;
 First, Capped Collection. Again from the MongodB webstie &lt;/p&gt;
@@ -820,20 +944,4 @@ e.g If a statement deletes 100 documents on the primary then there will 100 stat
 &lt;li&gt;Use DNS.&lt;/li&gt;&lt;/li&gt;
 &lt;li&gt;Pick appropriate TTL as well.&lt;/li&gt;
 &lt;/ul&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/10/review-csharp-indepth/</guid><link>http://ashutoshraina.github.io/2013/10/review-csharp-indepth/</link><title>Review-CSharp in Depth.</title><description>&lt;p&gt;I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy &lt;a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet"&gt;Jon Skeet&lt;/a&gt;) has managed to come out with a great book once again.&lt;/p&gt;
-
-</description><pubDate>Tue, 22 Oct 2013 18:30:00 Z</pubDate><a10:updated>2013-10-22T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy &lt;a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet"&gt;Jon Skeet&lt;/a&gt;) has managed to come out with a great book once again.&lt;/p&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;Jon starts easy on this, but doesn't hold back. The prose is lucid yet well paced. It is one of the few books that make the effort to take the reader on journey. The journey begins with C#1 and then continues to C#5. Hardly any chapters drag on anymore than they should. Linq is covered in great depth and is a nicely written with enough diagrams to visualize what is happening under the hood. Generics is one my personal favourites. The text is nice, so are the code samples. I have never really understood generics completely, but the books does make things a lot clearer. The treatment of dynamic is really nice. It goes into the heart of the DLR and shows everything that you need to know to really understand dynamic. &lt;/p&gt;
-
-&lt;p&gt;The book really shines when you move to &lt;em&gt;async/await&lt;/em&gt;. Jon makes a rather tough concept easier. I had to read it several times but each time the concept became easier. I only wish we moved away from the download the web page example for async. The book does spend time on compiler transformations that are behind &lt;em&gt;async/await&lt;/em&gt;. Be patient when you read it, it will take time to sink in.&lt;/p&gt;
-
-&lt;p&gt;The only part that has been left out from the third edition is the chapter on Code Contracts. Jon clearly mentions that the topic hasn't gained as much traction as he hoped. It may come back in the future though. As many have mentioned this before this is not a book for beginners. Use this to become a better C# programmer, after you have written C# for some time. This is a must have in your collection, especially if you work with C# day in and day out. It will give you a greater understanding of how the language designers wanted you think, and what makes C# a real joy.
-A 4.5/5 for this one, keeping the 0.5 for the next edition :).&lt;/p&gt;
-
-&lt;p&gt;P.S. Even the appendix is handy.&lt;/p&gt;
-
-&lt;p&gt;Disclosure : I got a free copy of the book to review.  The review is my own opinion and not influenced by anyone else.&lt;/p&gt;
 </a10:content></item></channel></rss>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-23T23:55:34.5688965+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-28T21:11:16.7524971+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,77 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2014/01/learning-redis-by-accident/">Learning Redis by accident</a> 
+        <span>posted on 27 Jan 2014</span>
+      </h1> 
+      
+      <p>While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
+Microsoft provides the executable for 2.6 and we can download it from there.</p>
+
+<p><!--excerpt-></p>
+
+<p>Now, how do we talk to redis ? First, as expected there is a CLI which is quite simple and easy. Second, get some packages from nuget and start writing C#. I tried the CLI for an hour or so and then moved on to C#. (CLI is no slouch, you can do a pub-sub there). The things you can do with redis are simple and few. That is not a such a bad thing because it keeps the clutter out. It does a few things and does them really well and really fast.
+Now, for talking to redis there are two primary options BookSleeve (by Marc Garvel) and ServiceStack.Redis. I chose the former just for the name(no kidding naming is still a hard problem).</p>
+
+<p>Let's get to the coding bit.
+Open up a connection, insert something and get something back.</p>
+
+<pre><code>RedisConnection connection = new RedisConnection("localhost");
+connection.Open();
+//0 is the database number, you can set it whatever you want
+connection.Strings.Set(0, "foo", "bar");
+var bar = connection.Strings.GetString(0, "foo");
+</code></pre>
+
+<p>Now, before we move further just for clarity Redis supports the following data structures.</p>
+
+<pre><code>Strings
+Hashes
+Lists
+Sets
+Sorted-Sets
+</code></pre>
+
+<p>The api surface in booksleeve brings the simplicity of redis to the surface.</p>
+
+<pre><code>connection.Hashes.Set(0, "duck", new Dictionary&lt;string,byte[]&gt;{ { "quack", Encoding.UTF8.GetBytes("I am a quack") } });
+var quack = connection.Hashes.GetString(0, "duck", "quack");
+Console.WriteLine(quack.Result);
+
+connection.Lists.AddFirst(0, "baz", "bazz");
+var bazz = connection.Lists.GetString(0, "baz", 0);
+Console.WriteLine(bazz.Result);
+</code></pre>
+
+<p>Another, interesting feature of redis is the ability to expire data. This can be quite handy especially when cache needs to be invalidated.</p>
+
+<pre><code>connection.Strings.Set(0, "temp", "aboutToExpire", 4);
+var temp = connection.Strings.GetString(0, "temp");
+Console.WriteLine(temp.Result);
+Thread.Sleep(4000);
+temp = connection.Strings.GetString(0, "temp");
+Console.WriteLine(string.IsNullOrEmpty(temp.Result));
+</code></pre>
+
+<p>Publish and subscribe was surprisingly terse.</p>
+
+<pre><code>connection.Publish("topic", "Hello From Pub");
+
+var channel = connection.GetOpenSubscriberChannel();
+channel.Subscribe("topic", SubscritionCallback);
+
+private static void SubscritionCallback (string key,byte[] message) {
+Console.WriteLine(key);
+Console.WriteLine(Encoding.UTF8.GetString((message)));
+}
+</code></pre>
+
+<p>This wasn't so hard and can be quite useful in situation where you simply need to hold data and not pay the penalty of going back to a full database again and again. I enjoyed writing about redis, hope you like reading it.</p>
+
+      <p><a href="/2014/01/learning-redis-by-accident/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2014/01/mongodb-pubsub/">Pub Sub with MongoDB</a> 
@@ -216,17 +287,6 @@ If there were only 2 sets then the remaining one is not a majority and you would
 
 <p>
       <p><a href="/2013/11/mongodb-replication/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/review-csharp-indepth/">Review-CSharp in Depth.</a> 
-        <span>posted on 23 Oct 2013</span>
-      </h1> 
-      
-      <p>I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy <a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet">Jon Skeet</a>) has managed to come out with a great book once again.</p>
-
-
-      <p><a href="/2013/10/review-csharp-indepth/">Read more...</a></p>
     </li>
   </ul> 
 

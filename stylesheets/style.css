@@ -1263,7 +1263,7 @@ div.divider {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 8px;
-  background: #F8F8F8;
+  background: #FFF;
   box-shadow: 0 2px 6px rgba(100,100,100,.2);
 }
 

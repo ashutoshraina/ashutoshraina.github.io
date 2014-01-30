@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-23T23:55:34.5688965+05:30" />
+    <meta http-equiv="last-modified" content="2014-01-28T21:11:16.7524971+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,40 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/09/mongodb-getting-started/">MongoDB-Getting Started</a> 
+        <span>posted on 30 Sep 2013</span>
+      </h1> 
+      
+      <p>MongoDB is a document database and I won't bore you with details about what it can do. MongoDB makes many claims, they are <a href="http://www.mongodb.org/" title="Here">here</a>. In short, MongoDB is a document database that stores data in a JSON format and then promises to make out lives easier. 
+Installation instruction are varied depending on your OS etc..and the both varieties of bitness are also available. <a href="http://www.mongodb.org/downloads,"Download"">Download</a></p>
+
+<p>The shell for MongoDB is a Javascript based one, so if you know a bit of JS then you will fly in there. Start mongod from the command line, this can be done by navigating to the bin directory of installation. Provide the dbpath(the place where it stores the data) as well.</p>
+
+<p><img src="/stylesheets/images/posts/mongod.png" alt="Mongod" /></p>
+
+<p>If you look at the output when we start the daemon (mongod = mongo-daemon) then the last line talks about a rest interface. This can be enable by passing the --rest flag when starting the instance. The port for viewing the webpage is also there.</p>
+
+<p>Let's get into the mix of things by connecting to this mongod using the shell(mongo.exe). Navigate to the mongo directory and go mongo.exe.
+By default this connects  to the test database. The prompt will say something like </p>
+
+<pre><code>C:\Users\Ashutosh\mongodb\bin&gt;mongo.exe
+MongoDB shell version: 2.4.1
+connecting to: test
+&gt; 
+</code></pre>
+
+<p>At any moment you can go back to mongod and check how many connections are open. Run a couple of commands like 
+<em>show dbs
+show collections</em> 
+to see if everything is in order. </p>
+
+<p>Create a new database by use yourdatabasename. The shell will switch it's context to that database(after creating it if it does not exist already.) 
+Next, time we will do some stuff by creating some collections and then querying. This will be a longish series, hold on and let me smear you twitter timelines.</p>
+
+      <p><a href="/2013/09/mongodb-getting-started/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/07/python-development-in-visual-studio/">Python Development in Visual Studio</a> 
@@ -314,16 +348,6 @@ Now, the questions can be of varying difficulty levels so now we can do the foll
 
 
       <p><a href="/2013/02/entity-framework-6-whats-new/">Read more...</a></p>
-    </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/02/entity-framework-generic-repository-pattern-part-1/">Entity Framework - Generic repository Pattern - Part 1</a> 
-        <span>posted on 02 Feb 2013</span>
-      </h1> 
-      <ul class="snow-series"><li>Part 1 - Generic Repositry Pattern</li><li>Part 2 - Generic Repositry Pattern Contd.</li></ul>
-      <p>The generic repository pattern has been a matter of discussion on the forums and SO. Developers are not convinced that it solves a problem, yet everyday SO has more questions about the pattern. Clearly, something is not right. I tried to implement the pattern in a way I thought fit. I changed my mind a million times during the process, that tells you that the process was not smooth. You can find several implementations of the pattern scattered all over the internet. I will not pass a opinion on the pattern. I would rather tell you what issues I faced and I how solved (or not) them.
-
-      <p><a href="/2013/02/entity-framework-generic-repository-pattern-part-1/">Read more...</a></p>
     </li>
   </ul> 
 
