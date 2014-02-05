@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/category/accident/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -41,75 +41,24 @@
                 <div id="content" role="main">
                   
 
-<div id="post">
-    <h1>TeamCity- Recover Admin Password</h1>
+  <header>
+  <div class="head-inner">
+    <h1><a href="/categories/">Categories</a> - accident</h1>
+  </div>
+  </header>
 
-    <div class="post-note">
-      posted on 04 Feb 2013
-       | <a href="/category/tools">Tools</a>
-       | <a href="/category/productivity">Productivity</a>
-       | <a href="/category/tips">Tips</a>
-      
-      <div class="addthis_toolbox addthis_default_style" style="float:right;">
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        <a class="addthis_button_tweet"></a>
-        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        <a class="addthis_button_linkedin_counter"></a>
-        <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-    </div>
-    
-    
-        
-    <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
-I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
-Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+  <ul class="category-list fancy-container orange">
+      <li>
+        <a href="/2014/02/learning-chrome-extensions-by-accident/" title="Learning Chrome Extensions by accident">Learning Chrome Extensions by accident</a> 
+        <small>(05 Feb 2014)</small>
+      </li>
+      <li>
+        <a href="/2014/01/learning-redis-by-accident/" title="Learning Redis by accident">Learning Redis by accident</a> 
+        <small>(27 Jan 2014)</small>
+      </li>
+  </ul>
+  
 
-<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
-So,</p>
-
-<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
-
-Step 2  Open CMD as ADMINISTRATOR
-(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
-
-Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
-</code></pre>
-
-<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
-
-
-    <div id="disqus_thread"></div>
-<script>
-    var reset_disqus = function(){
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/';
-                //this.page.title = '';
-            }
-        });
-    };
-
-    var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/';
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-
-    window.addEventListener('orientationchange', reset_disqus);
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
-   </script>
-
-</div>
                 </div>
                 <!-- #content -->
             </div>

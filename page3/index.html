@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-30T23:01:03.0141772+05:30" />
+    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,22 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/11/mongodb-replication/">MongoDB-Replication</a> 
+        <span>posted on 04 Nov 2013</span>
+      </h1> 
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li>Part 4 - Replication</li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p><strong>REPLICATION</strong></p>
+
+<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
+Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
+Minimum number of nodes will be 3, since the election requires a majority of the original set.
+If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
+
+<p>
+      <p><a href="/2013/11/mongodb-replication/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/10/review-csharp-indepth/">Review-CSharp in Depth.</a> 
@@ -107,31 +123,6 @@ QuestionConnectionHandler.MongoCollection.EnsureIndex(
 
       <p><a href="/2013/10/mongodb-ops-stuff/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a> 
-        <span>posted on 04 Oct 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li>Part 2 - Getting organised</li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
-      <p>Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.</p>
-
-<pre><code>public class Question : MongoEntity
-{
-    public string Text { get; set; }
-    public string Answer { get; set; }
-    public DateTime CreatedOn { get; set; }
-    public int Difficulty { get; set; }
-}
-public class User : MongoEntity
-{
-    public string Name { get; set; }
-    public int Reputation { get; set; }
-}
-</code></pre>
-
-
-      <p><a href="/2013/10/mongodb-csharp-driver-part2/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -181,6 +172,7 @@ public class User : MongoEntity
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
+                          <li><a href="/archive#2014February">February, 2014</a></li>
                           <li><a href="/archive#2014January">January, 2014</a></li>
                           <li><a href="/archive#2013December">December, 2013</a></li>
                           <li><a href="/archive#2013November">November, 2013</a></li>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-30T23:01:03.0141772+05:30" />
+    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,23 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-shell/">MongoDB-Shell</a> 
+        <span>posted on 01 Oct 2013</span>
+      </h1> 
+      
+      <p>MongoDB stores the documents in BSON format. It is a binary serialisation format and a super set of JSON.
+It has more types than JSON which enables better integration with various languages that support these types. 
+Languages like perl and JS have a smaller type system which can cause problems.
+ObjectId which uniquely identifies a document in mongodb is also part of the bson specification.
+<em>id field is the primary key which is of type ObjectId. 
+It is immutable.
+    _Object Id = 4-byte timestamp + machine id + process id + counter</em></p>
+
+
+      <p><a href="/2013/10/mongodb-shell/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/09/mongodb-getting-started/">MongoDB-Getting Started</a> 
@@ -137,44 +154,6 @@ Type Enable-Migrations in the console.
 
       <p><a href="/2013/05/entity-framework-migrations/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/04/console2-commandline-awesomeness/">Console2- Command Line Awesomeness</a> 
-        <span>posted on 14 Apr 2013</span>
-      </h1> 
-      
-      <ol>
-<li><p>What is this ?
-Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. </p></li>
-<li><p>Where do I get it ?
-You can download it from here <a href="http://sourceforge.net/projects/console/" title="Console2">Console2</a></p></li>
-<li><p>Help me set it up .<a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post">Scott's Originial Blog Post</a>
-Refer to Scott Hansleman's blog post </p></li>
-</ol>
-
-<p>Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
-Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.</p>
-
-<ol>
-<li>Let's make the world a better place by adding Git Bash to the the tabs.</li>
-</ol>
-
-<blockquote>
-  <p>Title : GitBash</p>
-  
-  <p>Icon : C:\Program Files (x86)\Git\etc\git.ico</p>
-  
-  <p>Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i</p>
-  
-  <p>Startup dir : c:\Users\Ashutosh ( or whatever your path is )</p>
-</blockquote>
-
-<p><img src="/stylesheets/images/posts/console2.png" alt="Console2" /></p>
-
-<p>All looks nice, the world is a better place.</p>
-
-      <p><a href="/2013/04/console2-commandline-awesomeness/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -224,6 +203,7 @@ Console2 is a great little front-end for your existing shell, no matter what it 
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
+                          <li><a href="/archive#2014February">February, 2014</a></li>
                           <li><a href="/archive#2014January">January, 2014</a></li>
                           <li><a href="/archive#2013December">December, 2013</a></li>
                           <li><a href="/archive#2013November">November, 2013</a></li>

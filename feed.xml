@@ -1,4 +1,84 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</guid><link>http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</link><title>Learning Redis by accident</title><description>&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</guid><link>http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</link><title>Learning Chrome Extensions by accident</title><description>&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
+
+</description><pubDate>Tue, 04 Feb 2014 18:30:00 Z</pubDate><a10:updated>2014-02-04T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Get the sample for making a chrome extension from &lt;a href="http://developer.chrome.com/extensions/getstarted.html" title="chrome extension"&gt;here&lt;/a&gt;. There is more to it than what I am going to write about hopefully you will go on and explore it further. Open up the manifest.js and fix the permissions and the icon. I wanted to tweak twitter so asked for that you may want something else. There are other types of permission as well which may include working with an active tab etc..Pick and choose the relevant one. I did not need any styling in the body of the page hence I got rid of that. I ended up needing no body at all so my manifest looked like this eventually.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  "manifest_version": 2,
+  "name": "Twitter Fixer",
+  "description": "Fixes twitter styling",
+  "version": "1.0",
+    "icons": {
+    "16": "icon.png"
+    },
+"permissions": [
+  "https://twitter.com/*"
+],
+"content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/"
+      ],
+      "css": [
+        "fixtwitter.css"
+      ]
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The html page was bare bones.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;title&amp;gt;Twitter Fixer&amp;lt;/title&amp;gt;
+    &amp;lt;script src="fixtwitter.js"&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So what is fixtwitter.css. It is the css which I wanted to apply on top of twitter. I tweaked it in the developer tools and settled on what I thought worked for me. It ended up looking like this. I tried fiddling with the CSS through js but I now know better.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#timeline {
+    width:115%;
+}
+#discover-stories{
+    width:115%;
+}
+.content-main{
+    width:115%;
+}
+.avatar{
+    border-radius:'25px';
+    width:65px;
+    height:65px;
+}
+.dashboard{
+    display:none;
+}
+.stream-item .content{
+margin:inherit;
+}
+.module{
+    display:none;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, armed with all the tools(you might want to change your icon). I opened up the extensions in settings and loaded the unpacked extension. The result was this.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/twitter-fixed.png" alt="Fixed Twitter" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Being able to bend and break things is quite cool. Play as much as you can.
+I thought about putting it up on chrome extension gallery then saw the $5 charge and dropped the idea.&lt;/p&gt;
+
+&lt;p&gt;P.S. Don't judge me by my CSS skills.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</guid><link>http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</link><title>Learning Redis by accident</title><description>&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
 Microsoft provides the executable for 2.6 and we can download it from there.&lt;/p&gt;
 
 </description><pubDate>Sun, 26 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-26T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
@@ -843,46 +923,5 @@ sh.shardCollection("namespaceforyourCollection",shardkey);
 &lt;li&gt;Filed should be involved in most of the queries&lt;/li&gt;
 &lt;li&gt;Good cardinality/granularity&lt;/li&gt;
 &lt;li&gt;Shard key should not increase monotonically&lt;/li&gt;
-&lt;/ul&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/11/mongodb-replication/</guid><link>http://ashutoshraina.github.io/2013/11/mongodb-replication/</link><title>MongoDB-Replication</title><description>&lt;p&gt;&lt;strong&gt;REPLICATION&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
-Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
-Minimum number of nodes will be 3, since the election requires a majority of the original set.
-If there were only 2 sets then the remaining one is not a majority and you would not be able to write.&lt;/p&gt;
-
-&lt;p&gt;</description><pubDate>Sun, 03 Nov 2013 18:30:00 Z</pubDate><a10:updated>2013-11-03T18:30:00Z</a10:updated><a10:content type="text">&lt;p&gt;&lt;strong&gt;REPLICATION&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
-Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
-Minimum number of nodes will be 3, since the election requires a majority of the original set.
-If there were only 2 sets then the remaining one is not a majority and you would not be able to write.&lt;/p&gt;
-
-&lt;p&gt;&lt;!--excerpt--&gt;
-Replica Set Elections&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Regular Node : It has the data and can become primary or secondary.
-Arbiter : It is just there for voting purposes. We need it if we want an even number of nodes. It has no data on it.
-Delayed/Regular : It can be set to a few hours after the nodes. It cannot become primary. It's priority is set to 0.
-Hidden Node : It cannot become a primary node. It's priority is set to 0.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;By default the reads and writes go to the primary. You can go to secondary for reading. This means that you might read stale data. The lag between nodes is not guaranteed since the process is async. If you read from secondary then what we have is &lt;em&gt;"eventual consistency"&lt;/em&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;rs.slaveOk() -- ok to read from the secondary
-rs.isMaster() -- checks whether the node is master
-rs.status() -- gives the current status of the replica set.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the database locals , the collection oplogs.rs has all the operational logs. Replication happens when secondary nodes query the primary for the changes from a given timestamp. OpLog is the statement based replication log.
-Replication happens in a statement driven manner?
-e.g If a statement deletes 100 documents on the primary then there will 100 statements that are sent to the secondary to execute. There is no binary replication. This allows us to run different version of mongodb on different machines.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Try to keep the OpLog small on 64 bit machine since it defaults to a large value on 64 bit systems.&lt;/li&gt;
-&lt;li&gt;For replica sets don't use localhost or the ip address of the machine.&lt;/li&gt;
-&lt;li&gt;Use a logical name, that is the best practice.&lt;/li&gt;
-&lt;li&gt;Use DNS.&lt;/li&gt;&lt;/li&gt;
-&lt;li&gt;Pick appropriate TTL as well.&lt;/li&gt;
 &lt;/ul&gt;
 </a10:content></item></channel></rss>

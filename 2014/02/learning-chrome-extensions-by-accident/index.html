@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,13 +42,11 @@
                   
 
 <div id="post">
-    <h1>TeamCity- Recover Admin Password</h1>
+    <h1>Learning Chrome Extensions by accident</h1>
 
     <div class="post-note">
-      posted on 04 Feb 2013
-       | <a href="/category/tools">Tools</a>
-       | <a href="/category/productivity">Productivity</a>
-       | <a href="/category/tips">Tips</a>
+      posted on 05 Feb 2014
+       | <a href="/category/accident">accident</a>
       
       <div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -61,22 +59,84 @@
     
     
         
-    <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
-I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
-Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+    <p>So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!</p>
 
-<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
-So,</p>
+<!--excerpt-->
 
-<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+<p>Get the sample for making a chrome extension from <a href="http://developer.chrome.com/extensions/getstarted.html" title="chrome extension">here</a>. There is more to it than what I am going to write about hopefully you will go on and explore it further. Open up the manifest.js and fix the permissions and the icon. I wanted to tweak twitter so asked for that you may want something else. There are other types of permission as well which may include working with an active tab etc..Pick and choose the relevant one. I did not need any styling in the body of the page hence I got rid of that. I ended up needing no body at all so my manifest looked like this eventually.</p>
 
-Step 2  Open CMD as ADMINISTRATOR
-(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
-
-Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
+<pre><code>{
+  "manifest_version": 2,
+  "name": "Twitter Fixer",
+  "description": "Fixes twitter styling",
+  "version": "1.0",
+    "icons": {
+    "16": "icon.png"
+    },
+"permissions": [
+  "https://twitter.com/*"
+],
+"content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/"
+      ],
+      "css": [
+        "fixtwitter.css"
+      ]
+    }
+  ]
+}
 </code></pre>
 
-<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
+<p>The html page was bare bones.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Twitter Fixer&lt;/title&gt;
+    &lt;script src="fixtwitter.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>So what is fixtwitter.css. It is the css which I wanted to apply on top of twitter. I tweaked it in the developer tools and settled on what I thought worked for me. It ended up looking like this. I tried fiddling with the CSS through js but I now know better.</p>
+
+<pre><code>#timeline {
+    width:115%;
+}
+#discover-stories{
+    width:115%;
+}
+.content-main{
+    width:115%;
+}
+.avatar{
+    border-radius:'25px';
+    width:65px;
+    height:65px;
+}
+.dashboard{
+    display:none;
+}
+.stream-item .content{
+margin:inherit;
+}
+.module{
+    display:none;
+}
+</code></pre>
+
+<p>Now, armed with all the tools(you might want to change your icon). I opened up the extensions in settings and loaded the unpacked extension. The result was this.</p>
+
+<p><img src="/stylesheets/images/posts/twitter-fixed.png" alt="Fixed Twitter" /></p>
+
+<p>Being able to bend and break things is quite cool. Play as much as you can.
+I thought about putting it up on chrome extension gallery then saw the $5 charge and dropped the idea.</p>
+
+<p>P.S. Don't judge me by my CSS skills.</p>
 
 
     <div id="disqus_thread"></div>
@@ -86,14 +146,14 @@ Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\Progr
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/';
+                this.page.url = 'http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/';
+    var disqus_url = 'http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-30T23:01:03.0141772+05:30" />
+    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,44 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/04/console2-commandline-awesomeness/">Console2- Command Line Awesomeness</a> 
+        <span>posted on 14 Apr 2013</span>
+      </h1> 
+      
+      <ol>
+<li><p>What is this ?
+Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. </p></li>
+<li><p>Where do I get it ?
+You can download it from here <a href="http://sourceforge.net/projects/console/" title="Console2">Console2</a></p></li>
+<li><p>Help me set it up .<a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post">Scott's Originial Blog Post</a>
+Refer to Scott Hansleman's blog post </p></li>
+</ol>
+
+<p>Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
+Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.</p>
+
+<ol>
+<li>Let's make the world a better place by adding Git Bash to the the tabs.</li>
+</ol>
+
+<blockquote>
+  <p>Title : GitBash</p>
+  
+  <p>Icon : C:\Program Files (x86)\Git\etc\git.ico</p>
+  
+  <p>Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i</p>
+  
+  <p>Startup dir : c:\Users\Ashutosh ( or whatever your path is )</p>
+</blockquote>
+
+<p><img src="/stylesheets/images/posts/console2.png" alt="Console2" /></p>
+
+<p>All looks nice, the world is a better place.</p>
+
+      <p><a href="/2013/04/console2-commandline-awesomeness/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/04/entity-framework-generic-repository-pattern-part-2/">Entity Framework - Generic repository Pattern - Part 2</a> 
@@ -194,28 +232,6 @@ public static class LookupExtensionMethods
 
       <p><a href="/2013/02/useful-extension-methods/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/02/entity-framework-6-whats-new/">Entity Framework 6 What's new ?</a> 
-        <span>posted on 02 Feb 2013</span>
-      </h1> 
-      
-      <p>EF6 is still in alpha stages but you can go grab it now via nuget.
-What is new ?
-A whole lot find about it here <a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6">EF6</a></p>
-
-<p>Also, do read this post about migrating to EF6 if you are migrating an existing application.</p>
-
-<p><a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6 Migration">EF6 Migration</a></p>
-
-<p>I am basically using the same model to see if life is any easier with V6. The model is fairly simple. There are users, users can questions and questions are of different types. A user creates Test which is composed of many questions.</p>
-
-<p>Earlier, there was no easy way of doing Enum in EF Code First. That limitation is no longer there.
-Now, the questions can be of varying difficulty levels so now we can do the following.</p>
-
-
-      <p><a href="/2013/02/entity-framework-6-whats-new/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -265,6 +281,7 @@ Now, the questions can be of varying difficulty levels so now we can do the foll
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
+                          <li><a href="/archive#2014February">February, 2014</a></li>
                           <li><a href="/archive#2014January">January, 2014</a></li>
                           <li><a href="/archive#2013December">December, 2013</a></li>
                           <li><a href="/archive#2013November">November, 2013</a></li>

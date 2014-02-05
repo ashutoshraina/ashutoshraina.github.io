@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-30T23:01:03.0141772+05:30" />
+    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,31 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a> 
+        <span>posted on 04 Oct 2013</span>
+      </h1> 
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li>Part 2 - Getting organised</li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
+      <p>Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.</p>
+
+<pre><code>public class Question : MongoEntity
+{
+    public string Text { get; set; }
+    public string Answer { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int Difficulty { get; set; }
+}
+public class User : MongoEntity
+{
+    public string Name { get; set; }
+    public int Reputation { get; set; }
+}
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part2/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a> 
@@ -124,23 +149,6 @@ switched to db Awesome
 <p>
       <p><a href="/2013/10/mongodb-query/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-shell/">MongoDB-Shell</a> 
-        <span>posted on 01 Oct 2013</span>
-      </h1> 
-      
-      <p>MongoDB stores the documents in BSON format. It is a binary serialisation format and a super set of JSON.
-It has more types than JSON which enables better integration with various languages that support these types. 
-Languages like perl and JS have a smaller type system which can cause problems.
-ObjectId which uniquely identifies a document in mongodb is also part of the bson specification.
-<em>id field is the primary key which is of type ObjectId. 
-It is immutable.
-    _Object Id = 4-byte timestamp + machine id + process id + counter</em></p>
-
-
-      <p><a href="/2013/10/mongodb-shell/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -190,6 +198,7 @@ It is immutable.
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
+                          <li><a href="/archive#2014February">February, 2014</a></li>
                           <li><a href="/archive#2014January">January, 2014</a></li>
                           <li><a href="/archive#2013December">December, 2013</a></li>
                           <li><a href="/archive#2013November">November, 2013</a></li>

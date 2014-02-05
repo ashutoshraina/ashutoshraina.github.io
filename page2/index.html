@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-01-30T23:01:03.0141772+05:30" />
+    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,17 @@
                   
 
   <ul class="posts">
+    <li class="fancy-container lightblue">
+      <h1>
+        <a href="/2014/01/mvc-on-mono-monodevelop/">Up and Running with Asp.net MVC Mono and Monodevelop</a> 
+        <span>posted on 03 Jan 2014</span>
+      </h1> 
+      
+      <p>After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.</p>
+
+
+      <p><a href="/2014/01/mvc-on-mono-monodevelop/">Read more...</a></p>
+    </li>
     <li class="fancy-container lightblue">
       <h1>
         <a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a> 
@@ -138,22 +149,6 @@ K2 -&gt; k3 on shard2 etc..</p>
 
       <p><a href="/2013/11/mongodb-sharding/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/11/mongodb-replication/">MongoDB-Replication</a> 
-        <span>posted on 04 Nov 2013</span>
-      </h1> 
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li>Part 4 - Replication</li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
-      <p><strong>REPLICATION</strong></p>
-
-<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
-Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
-Minimum number of nodes will be 3, since the election requires a majority of the original set.
-If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
-
-<p>
-      <p><a href="/2013/11/mongodb-replication/">Read more...</a></p>
-    </li>
   </ul> 
 
   <!-- Pagination links -->
@@ -203,6 +198,7 @@ If there were only 2 sets then the remaining one is not a majority and you would
                 <aside id="archives-4" class="widget widget_archive">
                     <h1 class="widget-title">Archive</h1>
                     <ul class="posts">
+                          <li><a href="/archive#2014February">February, 2014</a></li>
                           <li><a href="/archive#2014January">January, 2014</a></li>
                           <li><a href="/archive#2013December">December, 2013</a></li>
                           <li><a href="/archive#2013November">November, 2013</a></li>
