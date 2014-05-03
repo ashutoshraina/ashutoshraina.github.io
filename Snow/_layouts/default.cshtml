@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
     @Html.CanonicalUrl()
 </head>
 <body class="home blog">
@@ -25,7 +26,8 @@
                 <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
                 </div>
                 <div class="menu">
-                    <ul class="display-flex">
+                    <ul>
+						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/category">Categories</a></li>
                         <li><a href="/archive">Archive</a></li>
@@ -34,8 +36,6 @@
                 </div>
             </nav>
         </header>
-
-
 
         <div id="main">
 
@@ -46,43 +46,6 @@
                 <!-- #content -->
             </div>
             <!-- #primary .site-content -->      
-
- <div id="secondary" class="widget-area fancy-container lightred" role="complementary">
-                <aside id="text-5" class="widget widget_text">
-                    <h1 class="widget-title">Follow</h1>
-                    <div class="textwidget logos">
-                     <a href="https://twitter.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="/stylesheets/images/twitter.png"></a>
-                     <a href="http://stackoverflow.com/users/802070/ashutosh-raina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://stackoverflow.com']);"><img src="/stylesheets/images/stackoverflow.png"></a>
-                    <a href="http://www.linkedin.com/pub/ashutosh-raina/11/165/328" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.linkedin.com']);"><img src="/stylesheets/images/linkedin.png"></a>                      
-                    <a href="https://github.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://github.com']);"><img src="/stylesheets/images/github.png"></a>
-                       
-                  
-                    </div>
-                   <a href="http://stackexchange.com/users/422979">
-<img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
-</a>  
-                
-                <aside id="linkcat-6" class="widget widget_links">
-                    <h1 class="widget-title">Other Blogs</h1>
-                    <ul class='xoxo blogroll'>
-                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
-                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
-                    </ul>
-                    
-                </aside>
-                <aside id="archives-4" class="widget widget_archive">
-                    <h1 class="widget-title">Archive</h1>
-                    <ul class="posts">
-                    @foreach(var item in Model.MonthYearList)
-                    {
-                          <li><a href="@item.Url">@item.Title</a></li>
-                    }
-                    </ul>
-                </aside>
-            </div>
-            <!-- #secondary .widget-area -->
-
-        </div>
         <!-- #main -->
 
         <footer id="colophon" class="site-footer" role="contentinfo">

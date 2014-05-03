@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
+    <meta http-equiv="last-modified" content="2014-05-03T14:06:52.5287702+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
     <link rel="canonical" href="http://ashutoshraina.github.io/2013/10/mongodb-indexing/" />
 </head>
 <body class="home blog">
@@ -23,7 +24,8 @@
                 <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
                 </div>
                 <div class="menu">
-                    <ul class="display-flex">
+                    <ul>
+						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/category">Categories</a></li>
                         <li><a href="/archive">Archive</a></li>
@@ -33,8 +35,6 @@
             </nav>
         </header>
 
-
-
         <div id="main">
 
             <div id="primary" class="site-content">
@@ -43,23 +43,25 @@
 
 <div id="post">
     <h1>MongoDB-Indexing</h1>
-
-    <div class="post-note">
-      posted on 06 Oct 2013
-       | <a href="/category/.net">.net</a>
-       | <a href="/category/csharp">CSharp</a>
-       | <a href="/category/mongodb">mongodb</a>
-       | <a href="/category/opensource">opensource</a>
-      
-      <div class="addthis_toolbox addthis_default_style" style="float:right;">
+    
+	<div class="meta">
+        <p class="posted">06 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title="Snow.Models.Category">.net</a></li>
+          <li><a href="/category/csharp" title="Snow.Models.Category">CSharp</a></li>
+          <li><a href="/category/mongodb" title="Snow.Models.Category">mongodb</a></li>
+          <li><a href="/category/opensource" title="Snow.Models.Category">opensource</a></li>
+        </ul>
+      </div>
+    
+	<div class="addthis_toolbox addthis_default_style" style="float:right;">
         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
         <a class="addthis_button_tweet"></a>
         <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
         <a class="addthis_button_linkedin_counter"></a>
         <a class="addthis_counter addthis_pill_style"></a>
       </div>
-    </div>
-    
+	  
     <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li>Part 2 - Indexing</li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
         
     <p>Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : </p>
@@ -167,51 +169,6 @@ Db.collection.getIndexSize() to get the total size of the index of the database.
                 <!-- #content -->
             </div>
             <!-- #primary .site-content -->      
-
- <div id="secondary" class="widget-area fancy-container lightred" role="complementary">
-                <aside id="text-5" class="widget widget_text">
-                    <h1 class="widget-title">Follow</h1>
-                    <div class="textwidget logos">
-                     <a href="https://twitter.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="/stylesheets/images/twitter.png"></a>
-                     <a href="http://stackoverflow.com/users/802070/ashutosh-raina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://stackoverflow.com']);"><img src="/stylesheets/images/stackoverflow.png"></a>
-                    <a href="http://www.linkedin.com/pub/ashutosh-raina/11/165/328" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.linkedin.com']);"><img src="/stylesheets/images/linkedin.png"></a>                      
-                    <a href="https://github.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://github.com']);"><img src="/stylesheets/images/github.png"></a>
-                       
-                  
-                    </div>
-                   <a href="http://stackexchange.com/users/422979">
-<img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
-</a>  
-                
-                <aside id="linkcat-6" class="widget widget_links">
-                    <h1 class="widget-title">Other Blogs</h1>
-                    <ul class='xoxo blogroll'>
-                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
-                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
-                    </ul>
-                    
-                </aside>
-                <aside id="archives-4" class="widget widget_archive">
-                    <h1 class="widget-title">Archive</h1>
-                    <ul class="posts">
-                          <li><a href="/archive#2014February">February, 2014</a></li>
-                          <li><a href="/archive#2014January">January, 2014</a></li>
-                          <li><a href="/archive#2013December">December, 2013</a></li>
-                          <li><a href="/archive#2013November">November, 2013</a></li>
-                          <li><a href="/archive#2013October">October, 2013</a></li>
-                          <li><a href="/archive#2013September">September, 2013</a></li>
-                          <li><a href="/archive#2013July">July, 2013</a></li>
-                          <li><a href="/archive#2013June">June, 2013</a></li>
-                          <li><a href="/archive#2013May">May, 2013</a></li>
-                          <li><a href="/archive#2013April">April, 2013</a></li>
-                          <li><a href="/archive#2013February">February, 2013</a></li>
-                          <li><a href="/archive#2011October">October, 2011</a></li>
-                    </ul>
-                </aside>
-            </div>
-            <!-- #secondary .widget-area -->
-
-        </div>
         <!-- #main -->
 
         <footer id="colophon" class="site-footer" role="contentinfo">

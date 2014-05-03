@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
+    <meta http-equiv="last-modified" content="2014-05-03T14:06:52.5287702+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
     <link rel="canonical" href="http://ashutoshraina.github.io/page4/" />
 </head>
 <body class="home blog">
@@ -23,7 +24,8 @@
                 <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
                 </div>
                 <div class="menu">
-                    <ul class="display-flex">
+                    <ul>
+						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/category">Categories</a></li>
                         <li><a href="/archive">Archive</a></li>
@@ -33,8 +35,6 @@
             </nav>
         </header>
 
-
-
         <div id="main">
 
             <div id="primary" class="site-content">
@@ -42,11 +42,17 @@
                   
 
   <ul class="posts">
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a> 
-        <span>posted on 04 Oct 2013</span>
-      </h1> 
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a></h1> 
+      <div class="meta">
+        <p class="posted">04 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li>Part 2 - Getting organised</li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
       <p>Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.</p>
 
@@ -67,11 +73,18 @@ public class User : MongoEntity
 
       <p><a href="/2013/10/mongodb-csharp-driver-part2/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a> 
-        <span>posted on 04 Oct 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a></h1> 
+      <div class="meta">
+        <p class="posted">04 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li>Part 3 - Getting Started</li></ul>
       <p>In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
 Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.</p>
@@ -83,11 +96,18 @@ Be careful about pulling all the documents locally and then performing operation
 
       <p><a href="/2013/10/mongodb-csharp-driver-part3/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-csharp-driver-part1/">MongoDB-CSharp-Driver Getting started</a> 
-        <span>posted on 03 Oct 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part1/">MongoDB-CSharp-Driver Getting started</a></h1> 
+      <div class="meta">
+        <p class="posted">03 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li>Part 1 - Using Linq</li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
       <p>There are several drivers available for C#. I do not plan to go thorugh all of them here. Since, the official driver now has LINQ(although not complete yet) support, we will go with it.
 Basic Setup..get the stuff of NuGet. It should put in two dll's in there 
@@ -110,11 +130,18 @@ cursor.ForEach(Console.WriteLine);
 
       <p><a href="/2013/10/mongodb-csharp-driver-part1/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-schemadesign/">MongoDB-Schema Design</a> 
-        <span>posted on 02 Oct 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-schemadesign/">MongoDB-Schema Design</a></h1> 
+      <div class="meta">
+        <p class="posted">02 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
       
       <p>This is a short post on Schema Design.</p>
 
@@ -133,11 +160,18 @@ cursor.ForEach(Console.WriteLine);
 <p>
       <p><a href="/2013/10/mongodb-schemadesign/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/10/mongodb-query/">MongoDB-Query</a> 
-        <span>posted on 01 Oct 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-query/">MongoDB-Query</a></h1> 
+      <div class="meta">
+        <p class="posted">01 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
       
       <p>Hopefully, the MongoDB set up in the last post is still working.
 Let's create a database and name it <em>Awesome</em>(just because we can).</p>
@@ -149,6 +183,7 @@ switched to db Awesome
 <p>
       <p><a href="/2013/10/mongodb-query/">Read more...</a></p>
     </li>
+    <hr/>
   </ul> 
 
   <!-- Pagination links -->
@@ -171,51 +206,6 @@ switched to db Awesome
                 <!-- #content -->
             </div>
             <!-- #primary .site-content -->      
-
- <div id="secondary" class="widget-area fancy-container lightred" role="complementary">
-                <aside id="text-5" class="widget widget_text">
-                    <h1 class="widget-title">Follow</h1>
-                    <div class="textwidget logos">
-                     <a href="https://twitter.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="/stylesheets/images/twitter.png"></a>
-                     <a href="http://stackoverflow.com/users/802070/ashutosh-raina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://stackoverflow.com']);"><img src="/stylesheets/images/stackoverflow.png"></a>
-                    <a href="http://www.linkedin.com/pub/ashutosh-raina/11/165/328" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.linkedin.com']);"><img src="/stylesheets/images/linkedin.png"></a>                      
-                    <a href="https://github.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://github.com']);"><img src="/stylesheets/images/github.png"></a>
-                       
-                  
-                    </div>
-                   <a href="http://stackexchange.com/users/422979">
-<img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
-</a>  
-                
-                <aside id="linkcat-6" class="widget widget_links">
-                    <h1 class="widget-title">Other Blogs</h1>
-                    <ul class='xoxo blogroll'>
-                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
-                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
-                    </ul>
-                    
-                </aside>
-                <aside id="archives-4" class="widget widget_archive">
-                    <h1 class="widget-title">Archive</h1>
-                    <ul class="posts">
-                          <li><a href="/archive#2014February">February, 2014</a></li>
-                          <li><a href="/archive#2014January">January, 2014</a></li>
-                          <li><a href="/archive#2013December">December, 2013</a></li>
-                          <li><a href="/archive#2013November">November, 2013</a></li>
-                          <li><a href="/archive#2013October">October, 2013</a></li>
-                          <li><a href="/archive#2013September">September, 2013</a></li>
-                          <li><a href="/archive#2013July">July, 2013</a></li>
-                          <li><a href="/archive#2013June">June, 2013</a></li>
-                          <li><a href="/archive#2013May">May, 2013</a></li>
-                          <li><a href="/archive#2013April">April, 2013</a></li>
-                          <li><a href="/archive#2013February">February, 2013</a></li>
-                          <li><a href="/archive#2011October">October, 2011</a></li>
-                    </ul>
-                </aside>
-            </div>
-            <!-- #secondary .widget-area -->
-
-        </div>
         <!-- #main -->
 
         <footer id="colophon" class="site-footer" role="contentinfo">

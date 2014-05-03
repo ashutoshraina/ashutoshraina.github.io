@@ -10,7 +10,7 @@
   </div>
   </header>
   
-  <ul class="category-list fancy-container darkishblue">
+  <ul class="category-list">
     @foreach(var category in Model.AllCategories){
       <li><a href="/category/@category.Url" title="@category.Name">@category.Name</a></li>
     }

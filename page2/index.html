@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-02-05T23:12:07.8682252+05:30" />
+    <meta http-equiv="last-modified" content="2014-05-03T14:06:52.5287702+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
     <link rel="canonical" href="http://ashutoshraina.github.io/page2/" />
 </head>
 <body class="home blog">
@@ -23,7 +24,8 @@
                 <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
                 </div>
                 <div class="menu">
-                    <ul class="display-flex">
+                    <ul>
+						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/category">Categories</a></li>
                         <li><a href="/archive">Archive</a></li>
@@ -33,8 +35,6 @@
             </nav>
         </header>
 
-
-
         <div id="main">
 
             <div id="primary" class="site-content">
@@ -42,22 +42,35 @@
                   
 
   <ul class="posts">
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2014/01/mvc-on-mono-monodevelop/">Up and Running with Asp.net MVC Mono and Monodevelop</a> 
-        <span>posted on 03 Jan 2014</span>
-      </h1> 
+    <li class="post">
+      <h1><a href="/2014/01/mvc-on-mono-monodevelop/">Up and Running with Asp.net MVC Mono and Monodevelop</a></h1> 
+      <div class="meta">
+        <p class="posted">03 Jan 2014</p>
+        <ul class="categories">
+          <li><a href="/category/monodevelop" title="monodevelop">monodevelop</a></li>
+          <li><a href="/category/mono" title="mono">mono</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+          <li><a href="/category/asp.net mvc" title="asp.net mvc">asp.net mvc</a></li>
+          <li><a href="/category/tips" title="tips">tips</a></li>
+        </ul>
+      </div>
       
       <p>After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.</p>
 
 
       <p><a href="/2014/01/mvc-on-mono-monodevelop/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a> 
-        <span>posted on 30 Dec 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a></h1> 
+      <div class="meta">
+        <p class="posted">30 Dec 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li>Part 3 - Tasks With Timeout on .net4.5</li></ul>
       <p>The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!</p>
 
@@ -76,11 +89,17 @@
 <p>
       <p><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a> 
-        <span>posted on 24 Dec 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a></h1> 
+      <div class="meta">
+        <p class="posted">24 Dec 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li>Part 2 - Tasks With Timeouts contd.</li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
       <p>As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!</p>
 
@@ -119,11 +138,17 @@
 
       <p><a href="/2013/12/tasks-with-timeout-contd/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/12/tasks-with-timeouts/">Tasks With Timeout</a> 
-        <span>posted on 23 Dec 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/12/tasks-with-timeouts/">Tasks With Timeout</a></h1> 
+      <div class="meta">
+        <p class="posted">23 Dec 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li>Part 1 - Tasks With Timeouts</li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
       <p>So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
 <a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout">Tasks With Timeouts</a></p>
@@ -131,11 +156,18 @@
 
       <p><a href="/2013/12/tasks-with-timeouts/">Read more...</a></p>
     </li>
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="/2013/11/mongodb-sharding/">MongoDB-Sharding</a> 
-        <span>posted on 05 Nov 2013</span>
-      </h1> 
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/11/mongodb-sharding/">MongoDB-Sharding</a></h1> 
+      <div class="meta">
+        <p class="posted">05 Nov 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/CSharp" title="CSharp">CSharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
       <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li>Part 5 - Sharding</li></ul>
       <p><strong>Sharding</strong></p>
 
@@ -149,6 +181,7 @@ K2 -&gt; k3 on shard2 etc..</p>
 
       <p><a href="/2013/11/mongodb-sharding/">Read more...</a></p>
     </li>
+    <hr/>
   </ul> 
 
   <!-- Pagination links -->
@@ -171,51 +204,6 @@ K2 -&gt; k3 on shard2 etc..</p>
                 <!-- #content -->
             </div>
             <!-- #primary .site-content -->      
-
- <div id="secondary" class="widget-area fancy-container lightred" role="complementary">
-                <aside id="text-5" class="widget widget_text">
-                    <h1 class="widget-title">Follow</h1>
-                    <div class="textwidget logos">
-                     <a href="https://twitter.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);"><img src="/stylesheets/images/twitter.png"></a>
-                     <a href="http://stackoverflow.com/users/802070/ashutosh-raina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://stackoverflow.com']);"><img src="/stylesheets/images/stackoverflow.png"></a>
-                    <a href="http://www.linkedin.com/pub/ashutosh-raina/11/165/328" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.linkedin.com']);"><img src="/stylesheets/images/linkedin.png"></a>                      
-                    <a href="https://github.com/ashutoshraina" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://github.com']);"><img src="/stylesheets/images/github.png"></a>
-                       
-                  
-                    </div>
-                   <a href="http://stackexchange.com/users/422979">
-<img src="http://stackexchange.com/users/flair/422979.png" width="208" height="58" alt="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites" title="profile for ashutosh raina on Stack Exchange, a network of free, community-driven Q&A sites">
-</a>  
-                
-                <aside id="linkcat-6" class="widget widget_links">
-                    <h1 class="widget-title">Other Blogs</h1>
-                    <ul class='xoxo blogroll'>
-                        <li><a href="http://www.hanselman.com/blog" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hanselman.com/']);">Scott Hanselman</a></li>
-                        <li><a href="http://www.2guysfrommumbai.wordpress.com/" target="_top" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.2guysfrommumbai.wordpress.com']);">My Old blog</a></li>                        
-                    </ul>
-                    
-                </aside>
-                <aside id="archives-4" class="widget widget_archive">
-                    <h1 class="widget-title">Archive</h1>
-                    <ul class="posts">
-                          <li><a href="/archive#2014February">February, 2014</a></li>
-                          <li><a href="/archive#2014January">January, 2014</a></li>
-                          <li><a href="/archive#2013December">December, 2013</a></li>
-                          <li><a href="/archive#2013November">November, 2013</a></li>
-                          <li><a href="/archive#2013October">October, 2013</a></li>
-                          <li><a href="/archive#2013September">September, 2013</a></li>
-                          <li><a href="/archive#2013July">July, 2013</a></li>
-                          <li><a href="/archive#2013June">June, 2013</a></li>
-                          <li><a href="/archive#2013May">May, 2013</a></li>
-                          <li><a href="/archive#2013April">April, 2013</a></li>
-                          <li><a href="/archive#2013February">February, 2013</a></li>
-                          <li><a href="/archive#2011October">October, 2011</a></li>
-                    </ul>
-                </aside>
-            </div>
-            <!-- #secondary .widget-area -->
-
-        </div>
         <!-- #main -->
 
         <footer id="colophon" class="site-footer" role="contentinfo">

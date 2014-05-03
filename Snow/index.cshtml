@@ -6,15 +6,21 @@
 
   <ul class="posts">
     @foreach(var postPaged in Model.PostsPaged) {
-    <li class="fancy-container lightblue">
-      <h1>
-        <a href="@postPaged.Url">@postPaged.Title</a> 
-        <span>posted on @postPaged.Date.ToString("dd MMM yyyy")</span>
-      </h1> 
+    <li class="post">
+      <h1><a href="@postPaged.Url">@postPaged.Title</a></h1> 
+      <div class="meta">
+        <p class="posted">@postPaged.Date.ToString("dd MMM yyyy")</p>
+        <ul class="categories">
+        @foreach(var category in @postPaged.Categories.ToList()) {
+          <li><a href="/category/@category" title="@category">@category</a></li>
+        }
+        </ul>
+      </div>
       @Html.RenderSeries(postPaged)
       @Html.Raw(postPaged.ContentExcerpt)
       <p><a href="@postPaged.Url">Read more...</a></p>
     </li>
+    <hr/>
     }
   </ul> 
 

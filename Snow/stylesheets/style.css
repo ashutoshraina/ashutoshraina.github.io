@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
     border: 0;
     font-family: inherit;
@@ -18,8 +20,7 @@ html {
 }
 
 body {
-    background: #fff;
-    background-image: url(images/pw_maze_white.png);
+    background: #fefefe;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
@@ -70,6 +71,7 @@ body, button, input, select, textarea {
 
 h1, h2, h3, h4, h5, h6 {
     clear: both;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 hr {
@@ -301,7 +303,7 @@ a {
 }
 
     a:visited {
-        color: rgba(12, 192, 192, 0.6);
+        color: #26ADE4;
     }
 
     a:hover, a:focus, a:active {
@@ -348,9 +350,6 @@ img.aligncenter {
 }
 
 .main-navigation {
-    clear: both;
-    display: block;
-    float: left;
     width: 100%;
 }
 
@@ -361,12 +360,11 @@ img.aligncenter {
     }
 
     .main-navigation li {
-        float: left;
         position: relative;
     }
 
     .main-navigation a {
-        display: inline;
+        display: block;
         text-decoration: none;
     }
 
@@ -374,7 +372,7 @@ img.aligncenter {
         -moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
         -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
         box-shadow: 0 3px 3px rgba(0,0,0,0.2);
-        display: inline;
+        display: none;
         float: left;
         position: absolute;
         top: 1.5em;
@@ -676,24 +674,31 @@ ul.children .comment-author {
 }
 
 body {
-    font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 18px 'Source Sans Pro', sans-serif;
     font-weight: 300;
     line-height: 1.6;
     color: #222;
 }
 
 .site-title a {
+    color: inherit;
     text-decoration: none;
-    color: #9ACD32;
 }
 
-.site-title small{
-    color: darkcyan;
-}
+    .site-title a:hover {
+        color: #888;
+    }
+
 .site-title {
     line-height: 1.2;
-    font-size: 18px;
+    font-size: 38px;
+    font-weight: 200;
     margin: 10px 0 0 0;
+}
+
+.site-title small {
+    font-size: 0.5em;
+    font-style: italic;
 }
 
 .site-description {
@@ -707,24 +712,42 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+    text-align: center;
 }
 
 .main-navigation li, #secondary li {
-    display: block;
-    width: 100%;
+    display: inline;
     margin: 0;
     padding: 0;
 }
 
+#secondary li {
+    display: block;
+    text-align: left;
+}
+
 .main-navigation a, #secondary ul li a {
-    padding: 2px 0;
+    padding: 5px 10px;
     text-decoration: none;
     display: inline;
+    color: #222;
+}
+
+        .main-navigation .home {
+            color: #888;
+        }
+
+            .main-navigation .home:hover {
+                background: none;
+                color: #444;
+            }
+
+.main-navigation a:hover {
+    background: rgba(0,0,0,.05);
 }
 
 #secondary .widget-title {
     font-size: 15px;
-    color: black;
 }
 
 .main-navigation li.current-menu-item a, .main-navigation li.current_page_item a {
@@ -758,7 +781,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     margin: 20px 0;
-    color: antiquewhite;
 }
 
 h1 {
@@ -805,16 +827,17 @@ h4, h5, h6 {
     }
 
 #page {
-    width: 95%;
+    max-width: 950px;
     margin: 0 auto;
 }
 
 #masthead {
-    float: right;
-    width: 21%;
-    margin-top: 15px;
+    width: auto;
+    margin-top: 0;
+    float: none;
     margin-bottom: 0;
-    padding: 1%;
+    padding: 15px;
+    text-align: center;
 }
 
   #masthead h2 {
@@ -823,21 +846,23 @@ h4, h5, h6 {
     margin: 10px 0;    
   }
 
-.site-content, #colophon {    
-    width: 75%;
-    float: left;
-    clear: left;
+.head-inner h1 {
+    font-weight: normal;
+}
+
+.site-content {
+    padding: 0 5px;
 }
 
 #content {
 }
 
 #secondary {
-    clear:right;
+    clear: left;
     float: right;
     overflow: hidden;
-    width: 21%;
-    padding: 1%;
+    width: 45%;
+    margin: auto;
 }
 
     #secondary form#searchform input[type="text"].field {
@@ -850,93 +875,13 @@ h4, h5, h6 {
 
 .site-footer {
     clear: both;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    padding: 40px 0;
+    text-align: center;
 }
 
     .site-footer, .site-footer a {
         font-size: 13px;
-        color: #F8F0F0;
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-border: 0;
-font-family: inherit;
-font-size: 100%;
-font-style: inherit;
-font-weight: inherit;
-margin: 0;
-outline: 0;
-padding: 0;
-vertical-align: baseline;
-}
-user agent stylesheeta:-webkit-any-link {
-color: -webkit-link;
-text-decoration: underline;
-cursor: auto;
-}
-Inherited from div.site-info
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-font-family: inherit;
-font-size: 100%;
-font-style: inherit;
-font-weight: inherit;
-}
-Inherited from footer#colophon.site-footer
-.site-footer, .site-footer a {
-font-size: 13px;
-color: #999;
-}
-Inherited from div#page.hfeed.site
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-font-family: inherit;
-font-size: 100%;
-font-style: inherit;
-font-weight: inherit;
-}
-Inherited from body.home.blog
-body {
-font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
-font-weight: 300;
-line-height: 1.6;
-color: #222;
-}
-body, button, input, select, textarea {
-color: #404040;
-font-family: sans-serif;
-font-size: 16px;
-font-size: 1.6rem;
-line-height: 1.5;
-}
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-font-family: inherit;
-font-size: 100%;
-font-style: inherit;
-font-weight: inherit;
-}
-Inherited from html
-html {
-font-size: 62.5%;
-}
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-font-family: inherit;
-font-size: 100%;
-font-style: inherit;
-font-weight: inherit;
-}
-
-margin‒
-‒border‒
-‒padding‒
-‒auto × auto‒
-‒‒
-‒‒
-‒
-
-
-
-adiv.site-infofooter#colophon.site-footerdiv#page.hfeed.sitebody.home.bloghtml
-
-α:
-#F8F0F0;
+        color: #999;
     }
 
         .site-footer a:hover {
@@ -1047,7 +992,6 @@ th {
         .main-navigation li {
             display: inline-block;
             width: auto;
-            padding: 5px 20px 5px 0;
             float: none;
         }
 
@@ -1186,37 +1130,12 @@ div#post {
     border-radius: 4px;
     background: #fff;
     box-shadow: 0 2px 6px rgba(100,100,100,.2);
-
 }
   div#post h1 {
     margin: 0;
-    color: #26ADE4;
   }
 
     div#post h1 span,
-    ul.posts > li > h1 span {
-      font-size: 11pt;
-      font-weight: normal;
-      display: block;
-      border-top: 1px #CE2222 solid;
-      padding-top: 5px;
-      color: #4BDF9E;
-    }
-      
-ul.posts {
-    list-style: none;
-    margin:0;
-    padding:0;
-}
-
-  ul.posts > li > h1 {
-    margin-top: 0;
-  }
-    ul.posts > li > h1 a {
-      margin-top: 0;
-      text-decoration: none;
-    }
-   
     ul.posts > li > h1 span {
       font-size: 8pt;
       font-weight: normal;
@@ -1225,9 +1144,103 @@ ul.posts {
       padding-top: 5px;
       color: #999;
     }
-    
-ul.archive li {
+      
+ul.posts {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+    .post {
+        padding: 0 5px;
+    }
+
+  .post > h1 {
+    text-align: center;
+    font-weight: 300;
+  }
+    .post > h1,
+    .post > h1 a {
+      text-decoration: none;
+      color: #222;
+      line-height: 1.25;
+    }
+
+    .post > h1 a:hover {
+        color: #888;
+    }
+   
+    .post > h1 span {
+      font-size: 8pt;
+      font-weight: normal;
+      display: block;
+      padding-top: 5px;
+      color: #999;
+    }
+
+    .post .meta {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .post .meta .posted {
+        width: 150px;
+        padding: 10px 0 5px;
+        margin: 0 auto;
+        border-top: 1px solid #ddd;
+        text-transform: uppercase;
+    }
+
+    .post .meta .categories {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .post .meta .categories li {
+            display: inline;
+            border-left: 1px solid #ddd;
+        }
+
+        .post .meta .categories li:first-child {
+            border-left: none;
+        }
+
+        .post .meta .categories li a {
+            color: #222;
+            text-decoration: none;
+            padding: 2px 5px;
+        }
+
+            .post .meta .categories li a:hover {
+                background: rgba(0,0,0,.05);
+            }
+
+.archives h2 {
+    font-weight: normal;
+}
+
+.category-list,
+.archive {
+    list-style: none;
+} 
+
+.category-list li,
+.archive li {
+    color: #222;
+}   
+
+.category-list a:hover,
+.archive a:hover {
+    background: rgba(0,0,0,.05);
+}
+
+.category-list li a,
+.archive li a {
   margin-left: 15px;
+  padding: 2px 5px;
+  text-decoration: none;
+  color: #222;
 }
 
 span.note {
@@ -1252,19 +1265,16 @@ div.divider {
   margin: 40px 0 15px 0;
 }
 
-.category-list li {
-  margin-left: 15px;
-}
-
 .fancy-container {
-  border: 3px #d4d4d4 solid;
+  border: 1px #d4d4d4 solid;
   margin: 15px 0;
   padding: 15px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  border-radius: 8px;
-  background: #FFF;
+  border-radius: 4px;
+  background: #fff;
   box-shadow: 0 2px 6px rgba(100,100,100,.2);
+  width: 45%;
 }
 
 .darkishblue {
@@ -1300,7 +1310,7 @@ div.logos a {
     width: 48px;
     height: 48px;
     display: block;
-    margin-right: 2px;
+    margin-right: 20px;
     margin-bottom: 2px;
 }
 div.logos a:nth-child(4n) {
@@ -1335,10 +1345,21 @@ kbd {
   margin-bottom: 5px;
 }
 
-ul.snow-series {
-  margin: 0 0 1.5em 3em
+.snow-series {
+  margin: 0 0 1.5em 3em;
+  list-style: none;
 }
 
-.head-inner{
-    color: antiquewhite;
+.snow-series li {
+    color: #222;
+}
+
+.snow-series a {
+    color: #888;
+    text-decoration: none;
+}
+
+.snow-series a:hover {
+    color: #222;
+    text-decoration: underline;
 }
