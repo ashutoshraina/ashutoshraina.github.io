@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tasks With Timeout On .net 4.5 Contd.
-category: .net, CSharp, Asynchrony
+category: .net, csharp, Asynchrony
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 series:

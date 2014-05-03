@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Console2- Command Line Awesomeness
-category: Tools, Productivity, Tips
+category: tools, productivity, tips
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---

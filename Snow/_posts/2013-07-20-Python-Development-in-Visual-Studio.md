@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python Development in Visual Studio
-category: Tools, Productivity, Tips, opensource
+category: tools, productivity, tips, opensource
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---

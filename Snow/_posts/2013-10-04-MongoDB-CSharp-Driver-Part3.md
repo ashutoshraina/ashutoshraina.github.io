@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MongoDB-CSharp-Driver-Using Linq
-category: .net, CSharp, mongodb, opensource
+category: .net, csharp, mongodb, opensource
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 series:

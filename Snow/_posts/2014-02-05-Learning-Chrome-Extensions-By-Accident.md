@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Learning Chrome Extensions by accident
-category: accident
+category: accident, chrome
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---

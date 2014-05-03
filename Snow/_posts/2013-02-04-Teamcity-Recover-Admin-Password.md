@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TeamCity- Recover Admin Password
-category: Tools, Productivity, Tips
+category: tools, productivity, tips
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---

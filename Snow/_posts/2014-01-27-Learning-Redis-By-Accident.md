@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Learning Redis by accident
-category: .net, CSharp, redis, opensource, accident
+category: .net, csharp, redis, opensource, accident
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---

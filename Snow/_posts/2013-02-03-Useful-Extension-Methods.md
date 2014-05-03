@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Useful Extension Methods
-category: .net, CSharp, Tips, Extension Methods
+category: .net, csharp, tips
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Review-CSharp in Depth.
-category: .net, CSharp, book review
+category: .net, csharp, book review
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
 ---
