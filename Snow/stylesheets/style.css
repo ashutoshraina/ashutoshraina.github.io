@@ -743,7 +743,8 @@ body {
             }
 
 .main-navigation a:hover {
-    background: rgba(0,0,0,.05);
+    
+    background: rgba(17, 173, 247, 0.5);
 }
 
 #secondary .widget-title {
@@ -1213,7 +1214,7 @@ ul.posts {
         }
 
             .post .meta .categories li a:hover {
-                background: rgba(0,0,0,.05);
+                background: rgba(17, 173, 247, 0.5);
             }
 
 .archives h2 {
@@ -1223,16 +1224,18 @@ ul.posts {
 .category-list,
 .archive {
     list-style: none;
+    overflow-x: auto;
 } 
 
 .category-list li,
 .archive li {
+    display: inline-table;
     color: #222;
 }   
 
 .category-list a:hover,
 .archive a:hover {
-    background: rgba(0,0,0,.05);
+    background: rgba(0, 0, 0, 0.07);
 }
 
 .category-list li a,
