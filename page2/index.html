@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-05-03T20:47:13.7563810+05:30" />
+    <meta http-equiv="last-modified" content="2014-05-07T19:41:39.4840730+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -43,124 +43,9 @@
 
   <ul class="posts">
     <li class="post">
-      <h1><a href="/2014/01/mvc-on-mono-monodevelop/">Up and Running with Asp.net MVC Mono and Monodevelop</a></h1> 
+      <h1><a href="/2013/11/mongodb-replication/">MongoDB-Replication</a></h1> 
       <div class="meta">
-        <p class="posted">03 Jan 2014</p>
-        <ul class="categories">
-          <li><a href="/category/monodevelop" title="monodevelop">monodevelop</a></li>
-          <li><a href="/category/mono" title="mono">mono</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-          <li><a href="/category/asp.net mvc" title="asp.net mvc">asp.net mvc</a></li>
-          <li><a href="/category/tips" title="tips">tips</a></li>
-        </ul>
-      </div>
-      
-      <p>After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.</p>
-
-
-      <p><a href="/2014/01/mvc-on-mono-monodevelop/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a></h1> 
-      <div class="meta">
-        <p class="posted">30 Dec 2013</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li>Part 3 - Tasks With Timeout on .net4.5</li></ul>
-      <p>The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!</p>
-
-<pre><code>    public static Task WithTimeout(this Task task, TimeSpan timeout)
-    {
-        var delay = task.ContinueWith(t =&gt; { }, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-    public static Task&lt;T&gt; WithTimeout&lt;T&gt;(this Task&lt;T&gt; task, TimeSpan timeout)
-    {            
-        var delay = task.ContinueWith(t =&gt; t.Result, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-</code></pre>
-
-<p>
-      <p><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a></h1> 
-      <div class="meta">
-        <p class="posted">24 Dec 2013</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li>Part 2 - Tasks With Timeouts contd.</li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
-      <p>As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!</p>
-
-<pre><code>    var tasks = new List&lt;Task&gt;();
-    try
-    {
-    //instead of checking for fault within the continutaion, 
-    //we can just use a TaskContinuationOption to tell communicate the right semantics
-
-    var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
-    .TimeoutAfter(1000)
-    .ContinueWith(t =&gt; SomethingUsefulWithTheResult(), 
-     TaskContinuationOptions.NotOnFaulted);
-
-    var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
-
-    var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"),
-    TaskCreationOptions.AttachedToParent)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
-
-    tasks.Add(t1);
-    tasks.Add(t2);
-    tasks.Add(t3);
-
-    Task.WaitAll(tasks.ToArray());
-    }
-    catch (Exception ex)
-    {
-    Console.WriteLine("There was an exception");
-    Console.WriteLine(ex.InnerException.Message);   
-    }
-</code></pre>
-
-<p>I will show in the next post how this wasn't all that better since this leaves a few gaps.</p>
-
-      <p><a href="/2013/12/tasks-with-timeout-contd/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/12/tasks-with-timeouts/">Tasks With Timeout</a></h1> 
-      <div class="meta">
-        <p class="posted">23 Dec 2013</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li>Part 1 - Tasks With Timeouts</li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
-      <p>So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
-<a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout">Tasks With Timeouts</a></p>
-
-
-      <p><a href="/2013/12/tasks-with-timeouts/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/11/mongodb-sharding/">MongoDB-Sharding</a></h1> 
-      <div class="meta">
-        <p class="posted">05 Nov 2013</p>
+        <p class="posted">04 Nov 2013</p>
         <ul class="categories">
           <li><a href="/category/.net" title=".net">.net</a></li>
           <li><a href="/category/csharp" title="csharp">csharp</a></li>
@@ -168,18 +53,250 @@
           <li><a href="/category/opensource" title="opensource">opensource</a></li>
         </ul>
       </div>
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li>Part 5 - Sharding</li></ul>
-      <p><strong>Sharding</strong></p>
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li>Part 4 - Replication</li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p><strong>REPLICATION</strong></p>
 
-<p>Mongodb sharding is based on shard key.</p>
+<p>Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
+Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
+Minimum number of nodes will be 3, since the election requires a majority of the original set.
+If there were only 2 sets then the remaining one is not a majority and you would not be able to write.</p>
 
-<p>K1 -&gt; k2 on shard1
-K2 -&gt; k3 on shard2 etc..</p>
+<p>
+      <p><a href="/2013/11/mongodb-replication/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/review-csharp-indepth/">Review-CSharp in Depth.</a></h1> 
+      <div class="meta">
+        <p class="posted">23 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/book review" title="book review">book review</a></li>
+        </ul>
+      </div>
+      
+      <p>I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy <a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet">Jon Skeet</a>) has managed to come out with a great book once again.</p>
 
-<p>Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.</p>
+
+      <p><a href="/2013/10/review-csharp-indepth/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">MongoDB-Understanding queries through explain plan</a></h1> 
+      <div class="meta">
+        <p class="posted">13 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li>Part 3 - Explain Plan</li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p>Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
+The details have been taken from the mongodb website and presented here for continuity of series.</p>
 
 
-      <p><a href="/2013/11/mongodb-sharding/">Read more...</a></p>
+      <p><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-indexing/">MongoDB-Indexing</a></h1> 
+      <div class="meta">
+        <p class="posted">06 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-ops-stuff/">Part 1 - Ops Stuff</a></li><li>Part 2 - Indexing</li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p>Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : </p>
+
+<ul>
+<li><strong>Single Field Indexes</strong> : Think about having an index on a column in RDBMS.</li>
+<li><strong>Compound Indexes</strong>: Think about an having an index on multiple columns in RDBMS.</li>
+<li><strong>Multikey Indexes</strong>: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.</li>
+<li><strong>Geospatial Indexes and Queries</strong> : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.</li>
+<li><strong>Text Indexes</strong> : For full text search inside a document. Should we use lucene ? Not sure ?</li>
+<li><strong>Hashed Index</strong>: Index on hashed contents of the fields.</li>
+</ul>
+
+
+      <p><a href="/2013/10/mongodb-indexing/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-ops-stuff/">MongoDB-Ops-Stuff</a></h1> 
+      <div class="meta">
+        <p class="posted">05 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li>Part 1 - Ops Stuff</li><li><a href="/2013/10/mongodb-indexing/">Part 2 - Indexing</a></li><li><a href="/2013/10/mongodb-understanding-your-queries-through-explainplan/">Part 3 - Explain Plan</a></li><li><a href="/2013/11/mongodb-replication/">Part 4 - Replication</a></li><li><a href="/2013/11/mongodb-sharding/">Part 5 - Sharding</a></li></ul>
+      <p>In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.</p>
+
+<p><strong>Creating Indexes</strong>
+The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.</p>
+
+<pre><code>public void CreateIndex()
+{
+var QuestionConnectionHandler = new MongoConnectionHandler&lt;Question&gt;("MongoDBDemo");
+QuestionConnectionHandler.MongoCollection.EnsureIndex( 
+                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
+}
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-ops-stuff/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part2/">MongoDB-CSharp-Driver Getting organised</a></h1> 
+      <div class="meta">
+        <p class="posted">04 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li>Part 2 - Getting organised</li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
+      <p>Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.</p>
+
+<pre><code>public class Question : MongoEntity
+{
+    public string Text { get; set; }
+    public string Answer { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int Difficulty { get; set; }
+}
+public class User : MongoEntity
+{
+    public string Name { get; set; }
+    public int Reputation { get; set; }
+}
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part2/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a></h1> 
+      <div class="meta">
+        <p class="posted">04 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li>Part 3 - Getting Started</li></ul>
+      <p>In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
+Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.</p>
+
+<pre><code>var result = UserConnectionHandler.MongoCollection.AsQueryable()
+                                  .Where(u =&gt; u.Reputation &gt; reputation);
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part3/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part1/">MongoDB-CSharp-Driver Getting started</a></h1> 
+      <div class="meta">
+        <p class="posted">03 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li>Part 1 - Using Linq</li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li><a href="/2013/10/mongodb-csharp-driver-part3/">Part 3 - Getting Started</a></li></ul>
+      <p>There are several drivers available for C#. I do not plan to go thorugh all of them here. Since, the official driver now has LINQ(although not complete yet) support, we will go with it.
+Basic Setup..get the stuff of NuGet. It should put in two dll's in there 
+1. MongoDB.Bson
+2. MongoDB.Driver</p>
+
+<p>We will get to what does what later. For now assume that we only want to get some data in and out of MongoDB.
+Let's connect to MongoDB now(the code below is just quick and dirty, we will see a better version later).</p>
+
+<pre><code>//MongoDB should be running by now, and assuming you have inserted some documents in there
+var client = new MongoClient(@"mongodb://localhost");
+var server = client.GetServer();
+var database = server.GetDatabase("YourDataBaseName");
+var mongoCollection = database.GetCollection("SomeCollectionName");
+//Getting all the documents
+var cursor = mongoCollection.AsQueryable();
+cursor.ForEach(Console.WriteLine);  
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part1/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-schemadesign/">MongoDB-Schema Design</a></h1> 
+      <div class="meta">
+        <p class="posted">02 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      
+      <p>This is a short post on Schema Design.</p>
+
+<p>Schema Design in MongoDB</p>
+
+<ul>
+<li>Application Driven Schema is the best way to store data in MongoDB</li>
+<li>MongoDB stores rich documents i.e. store embedded documents , arrays etc..</li>
+<li>Joins happen at the application level not at the database level.</li>
+<li>There are no constraints in the database.</li>
+<li>No support for transactions.</li>
+<li>Support for Atomic present operations is present.</li>
+<li>Tip : Embed as much as you can.</li>
+</ul>
+
+<p>
+      <p><a href="/2013/10/mongodb-schemadesign/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-query/">MongoDB-Query</a></h1> 
+      <div class="meta">
+        <p class="posted">01 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      
+      <p>Hopefully, the MongoDB set up in the last post is still working.
+Let's create a database and name it <em>Awesome</em>(just because we can).</p>
+
+<pre><code>&gt; use Awesome
+switched to db Awesome
+</code></pre>
+
+<p>
+      <p><a href="/2013/10/mongodb-query/">Read more...</a></p>
     </li>
     <hr/>
   </ul> 
