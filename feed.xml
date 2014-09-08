@@ -1,4 +1,50 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</guid><link>http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</link><title>Learning Chrome Extensions by accident</title><description>&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/08/ndepend-review/</guid><link>http://ashutoshraina.github.io/2014/08/ndepend-review/</link><title>NDepend Review</title><description>&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
+</description><pubDate>Sun, 24 Aug 2014 18:30:00 Z</pubDate><a10:updated>2014-08-24T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
+&lt;!--excerpt--&gt;
+&lt;a href="http://www.ndepend.com/" title="NDepend"&gt;NDepend&lt;/a&gt; is a tool which allows you to maintain code quality in a continuous way. I must state &lt;em&gt;continuous&lt;/em&gt; with some degree of importance since that is what drives quality over a sustained period of time. The set up is fairly simple. You can download it and then install the VS plugin or use it as a stand alone tool. Let's go with the VS plugin for now. To ensure that I wasn't just checking out a demo application, I decided to pull down some medium and large open source projects and then run them through the grind.
+First, &lt;a href="http://ashutoshraina.github.io/"https://github.com/Sandra/Sandra.Snow"," title="Sandra.Snow"&gt;Snow&lt;/a&gt;(since this blog runs on Snow). The menu offers a way of creating a new NDepend project and attach it to the existing solution. We will attach to just Snow for now(leave out the other for the sake of simplicity).&lt;/p&gt;
+
+&lt;p&gt;Photo Goes here
+&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/GettingStarted.png" alt="Getting Started" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once we are finished analysing the assemblies. We get a summary of the application level metrics like this. This is quite useful, especially once we establish the baseline.&lt;/p&gt;
+
+&lt;p&gt;Application Metrics
+&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/ApplicationMetrics.png" alt="Application Metrics" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, dow nto serious business. We are told that we are in violation of some rules (we haven't changed the default settings). NDepend comes with a default set of rules which are largely good and move us towards the general pit of happiness. Rules include best practices for OO design, framework usage guidelines and there are even rules on immutability. So, let's see what did we get.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;warning     Avoid public methods not publicly visible 37  methods Visibility
+warning     Fields should be declared as private 1 fields  Visibility
+warning     Fields that could have a lower visibility 1 fields  Visibility
+.....
+Many more
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hmm..these look good. Let's dig deeper.&lt;/p&gt;
+
+&lt;p&gt;The dependency graph is also a nice insight.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/DependencyGraph.png" alt="Dependency Graph" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Snow is a medium sized code base so the analysis is quite good and accurate as well.&lt;/p&gt;
+
+&lt;p&gt;Will I use NDepend ? Probably Yes
+I won't run it without configuring the rules according to my taste (naming static fields with s_ is a little bit of an overkill). It is very easy to change these rules so that's not too tough.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/ManagingRules.png" alt="Managing Rules" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I will probably not keep it running all the time, (combined with ReSharper VS becomes a little slow). The dashboard gives you a clean and clear overview of the entire process which is ofcours nice, since you don't have to load the addin into VS.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/NDependDashboard.png" alt="Dashboard" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Also, I don't think it makes much sense to run at every check-in. In your CI process you are better of making this a nightly thing, and view the results in the morning. Watchout for the .gitignore files though, they might need some updating.&lt;/p&gt;
+
+&lt;p&gt;Note : 
+The review is entirely my own and not influenced by anyone.&lt;/p&gt;
+
+&lt;p&gt;P.S. Why is everything uppercase by default in the Dashboard Menu ? (I thought the VS fiasco was enough)&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</guid><link>http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</link><title>Learning Chrome Extensions by accident</title><description>&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
 
 </description><pubDate>Tue, 04 Feb 2014 18:30:00 Z</pubDate><a10:updated>2014-02-04T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
 
@@ -863,65 +909,4 @@ Output :
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next, time I will try and write about some other things on Flirting with Tasks.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/11/mongodb-sharding/</guid><link>http://ashutoshraina.github.io/2013/11/mongodb-sharding/</link><title>MongoDB-Sharding</title><description>&lt;p&gt;&lt;strong&gt;Sharding&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Mongodb sharding is based on shard key.&lt;/p&gt;
-
-&lt;p&gt;K1 -&amp;gt; k2 on shard1
-K2 -&amp;gt; k3 on shard2 etc..&lt;/p&gt;
-
-&lt;p&gt;Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.&lt;/p&gt;
-
-</description><pubDate>Mon, 04 Nov 2013 18:30:00 Z</pubDate><a10:updated>2013-11-04T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;&lt;strong&gt;Sharding&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Mongodb sharding is based on shard key.&lt;/p&gt;
-
-&lt;p&gt;K1 -&amp;gt; k2 on shard1
-K2 -&amp;gt; k3 on shard2 etc..&lt;/p&gt;
-
-&lt;p&gt;Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.&lt;/p&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;All of the documents on a particular shard are known as chunks ~~ 100mb.&lt;/p&gt;
-
-&lt;p&gt;There are two operations that happen in the background in sharding and these are done automatically for us.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Split - splits a range if the range is producing bigger chunks, this is fairly expensive&lt;/li&gt;
-&lt;li&gt;Migrate - moves chunks to somewhere else in the cluster, this is somewhat expensive.
-&lt;ul&gt;
-&lt;li&gt;Between a pair of shards there will not be more than one migration activity.&lt;/li&gt;
-&lt;li&gt;We can still read and write from the data when we are migrating. So, it is live.&lt;/li&gt;
-&lt;li&gt;"Balancer" decides when to do the balancing. It balances on the number of chunks today.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Both of these are done to maintain a balance in the shards w.r.t. the documents.
-The metadata about these shards and our system is stored in config servers. These are light weight.
-Conceptually these shards are processes and not separate physical machines or virtual machines although they can and most likely will be.&lt;/p&gt;
-
-&lt;p&gt;Mongos gives the client the big picture of the whole setup. Client is therefore insulated from the underlying architecture that is used to implement sharding, replication etc..&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/sharding.png" alt="Sharding" /&gt;&lt;/p&gt;
-
-&lt;p&gt;End client applications should go through mongos.&lt;/p&gt;
-
-&lt;p&gt;To create a shard connect to mongos&lt;/p&gt;
-
-&lt;p&gt;Then&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sh.addShard("hostname:port")
-sh.enableSharding("dbname")
-db.ensureIndex(Key pattern for your shard key)
-sh.shardCollection("namespaceforyourCollection",shardkey);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Choosing a shard key&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Filed should be involved in most of the queries&lt;/li&gt;
-&lt;li&gt;Good cardinality/granularity&lt;/li&gt;
-&lt;li&gt;Shard key should not increase monotonically&lt;/li&gt;
-&lt;/ul&gt;
 </a10:content></item></channel></rss>

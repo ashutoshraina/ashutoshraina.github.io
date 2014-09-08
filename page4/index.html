@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-05-07T19:41:39.4840730+05:30" />
+    <meta http-equiv="last-modified" content="2014-09-08T15:01:59.8034504+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -26,9 +26,9 @@
                 <div class="menu">
                     <ul>
 						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/category">Categories</a></li>
                         <li><a href="/archive">Archive</a></li>
+                        <li><a href="/category">Categories</a></li>                        
+                        <li><a href="/about">About</a></li>
                         <li><a href="/feed.xml">RSS/Atom</a></li>
                     </ul>
                 </div>
@@ -42,6 +42,99 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2013/02/useful-extension-methods/">Useful Extension Methods</a></h1> 
+      <div class="meta">
+        <p class="posted">03 Feb 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/tips" title="tips">tips</a></li>
+        </ul>
+      </div>
+      
+      <p>Extension methods provide a very useful way of extending the functionality of a Type (value, reference or interface). The earlier way of extending or rather adding a functionality through inheritance or making an entirely new type from scratch were tedious to say the least. 
+Extension methods are basically static methods with the calling syntax same as that of static methods. Over the course of the last few weeks i have come to realise they reduce a lot of repetitiveness from the code when used appropriately.<strong>MSDN</strong> specification also clearly states they must be used sparingly.
+So,here are a few useful extension methods.
+The syntax has only one new thing, the use of <em>this </em>keyword on the type that the extension method is meant for. </p>
+
+<pre><code>public static XElement ToXElement(this XmlNode node)
+{
+   var xDoc = new XDocument();
+   using (var xmlWriter = xDoc.CreateWriter())
+          node.WriteTo(xmlWriter);
+   return xDoc.Root;
+}
+</code></pre>
+
+<p>So, calling the code would be something like ,</p>
+
+<pre><code>var xelement = node.ToXElement();
+</code></pre>
+
+<p>xelement is now an XElement. This might look very plain and simple at the outset but when you really start to have a lot of repetitive functionality over a type this could really bail you out and make the code more readable to say the least. For e.g inside a for loop if you have a lot of code that operates over a type then it could be useful to take it to an extension method and then call the extension method statically.Further, extension methods can also have overloads so that is another nifty feature.
+The following extension method returns the XmlAttributeCollection for a XmlNode</p>
+
+<pre><code>public static XmlAttributeCollection GetXmlAtrributeCollection(this XmlNode node)
+{
+    var xmlDoc = new XmlDocument();
+    var element = node.ToXElement();
+    using (var reader = element.CreateReader())
+    {
+      xmlDoc.Load(reader);
+      return xmlDoc.DocumentElement != null ? xmlDoc.DocumentElement.Attributes : null;
+    }
+} 
+</code></pre>
+
+<p>Too much of XML ?? Lets get one really useful extension method. <a href="http://msdn.microsoft.com/en-us/library/bb460184.aspx" title="Lookup">Lookup</a> is an immutable class in System.Linq. It works similar to a dictionary but does not enforce unique keys , so returns an IEnumerable.
+Unfortunately, the creation of a Lookup is internal to .net. So we can only call ToLookup() from a Dictionary etc. So ,i needed some way of adding data to the Lookup.Here is what i came up with. </p>
+
+<pre><code>public class Pairs 
+    {
+        public String Key { get; set; }
+        public Object Value { get; set; }
+    }
+public static class LookupExtensionMethods
+    {
+        public static Lookup&lt;String,Object&gt; AddToLookup(this Lookup&lt;String,Object&gt; lookup,
+                                                       List&lt;Pairs&gt; pairlist)
+        {
+            var temp = (Lookup&lt;String, Object&gt;)pairlist.ToLookup(p =&gt; p.Key, p =&gt; p.Value);
+            lookup.Concat(temp);
+            return lookup;
+        }
+
+    public static Lookup&lt;String, Object&gt; AddToLookup(this Lookup&lt;String, Object&gt; lookup, Pairs pair)
+    {
+        var pairlist = new List&lt;Pairs&gt; {pair};
+        var temp = (Lookup&lt;String, Object&gt;)pairlist.ToLookup(p =&gt; p.Key, p =&gt; p.Value);
+        lookup.Concat(temp);
+        return lookup;
+    }
+}
+</code></pre>
+
+<p>Lastly, there is no way to replace the first occurrence of a string in C# straight out of the box(I bet you did not notice that). </p>
+
+<pre><code> public static string ReplaceFirstOccurrance(this string original, string oldValue, string newValue)
+ {
+     if (String.IsNullOrEmpty(original))
+                return String.Empty;
+     if (String.IsNullOrEmpty(oldValue))
+                return original;
+     if (String.IsNullOrEmpty(newValue))
+                newValue = String.Empty;
+     var loc = original.IndexOf(oldValue);
+     return loc == -1 ? original : original.Remove(loc, oldValue.Length).Insert(loc, newValue);
+ }
+</code></pre>
+
+<p>Suddenly, the world seems a lot better.</p>
+
+      <p><a href="/2013/02/useful-extension-methods/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2013/02/entity-framework-6-whats-new/">Entity Framework 6 What's new ?</a></h1> 
       <div class="meta">
