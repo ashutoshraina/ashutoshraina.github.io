@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/06/entity-framework-table-per-type-gotcha/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,16 +42,14 @@
                   
 
 <div id="post">
-    <h1>Entity Framework - Table Per Type Gotcha</h1>
+    <h1>Implicit and Explicit Operator in C#</h1>
     
 	<div class="meta">
-        <p class="posted">02 Jun 2013</p>
+        <p class="posted">12 Sep 2014</p>
         <ul class="categories">
-          <li><a href="/category/entity-framework" title="Snow.Models.Category">entity-framework</a></li>
-          <li><a href="/category/gotcha" title="Snow.Models.Category">gotcha</a></li>
-          <li><a href="/category/tips" title="Snow.Models.Category">tips</a></li>
           <li><a href="/category/.net" title="Snow.Models.Category">.net</a></li>
           <li><a href="/category/csharp" title="Snow.Models.Category">csharp</a></li>
+          <li><a href="/category/c" title="Snow.Models.Category">C#</a></li>
         </ul>
       </div>
     
@@ -65,28 +63,48 @@
 	  
     
         
-    <p>Entity Framework Table Per Type (TPT) implementation has a little gotcha ( little is really relative ). When we create table per type we will have orphan rows if the parent gets deleted and there will be orphan rows in the parent if the child gets deleted. This causes a funny picture to emerge with very bad consequences.</p>
+    <p>One of the features that I have never used in C# is the implicit and Explicit keywords. </p>
 
-<p><img src="/stylesheets/images/posts/fix-tpt.png" alt="Gotcha" /></p>
+<p>The definitive word from MSDN on explicit is "The explicit keyword declares a user-defined type conversion operator that must be invoked with a cast." Omitting the cast will result in a compile time warning.</p>
 
-<p>Now, to get around this my simple workaround was to alter the relationships in my seed method.</p>
+<p>The definitive word from MSDN on implicit is "The implicit keyword is used to declare an implicit user-defined type conversion operator." Implicit doesn't require an explicit cast and makes the syntax a lot easier.</p>
 
-<pre><code>context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] DROP CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] ADD CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+<!--excerpt-->
 
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] DROP CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] ADD CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+<pre><code>public class Program
+{
+    public static void Main()
+    {
 
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] DROP CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] ADD CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+    Email test = "alice@test.com";
+    System.Console.WriteLine("Test: " + test);        
+    }
+}
 
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] DROP CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId]" );
-context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+class Email
+    {
+        private string user;
+        private string domain;
+        public Email(string user, string domain)
+        {
+            this.user = user;
+            this.domain = domain;
+        }
+        static public implicit operator Email(string value)
+        {
+            var parts = value.Split('@');
+            if (parts.Length != 2)
+                return null;
+            return new Email(parts[0], parts[1]);
+        }
+        static public implicit operator string(Email value)
+        {
+            return "User = " + value.user + ", Domain = " + value.domain;
+        }
+    }
 </code></pre>
 
-<p><img src="/stylesheets/images/posts/foreign-key.png" alt="ForeignKey" /></p>
-
-<p>There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.</p>
+<p>I think it would quite useful in providing conversion operations from one type to another. The simplest candidate would when you have multiple addresses and you need them in a certain formar (read Type) to send it to a shipping agency.</p>
 
 
     <div id="disqus_thread"></div>
@@ -96,14 +114,14 @@ context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CON
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/06/entity-framework-table-per-type-gotcha/';
+                this.page.url = 'http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/06/entity-framework-table-per-type-gotcha/';
+    var disqus_url = 'http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

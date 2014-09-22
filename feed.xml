@@ -1,4 +1,52 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/08/ndepend-review/</guid><link>http://ashutoshraina.github.io/2014/08/ndepend-review/</link><title>NDepend Review</title><description>&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</guid><link>http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</link><title>Implicit and Explicit Operator in C#</title><description>&lt;p&gt;One of the features that I have never used in C# is the implicit and Explicit keywords. &lt;/p&gt;
+
+&lt;p&gt;The definitive word from MSDN on explicit is "The explicit keyword declares a user-defined type conversion operator that must be invoked with a cast." Omitting the cast will result in a compile time warning.&lt;/p&gt;
+
+&lt;p&gt;The definitive word from MSDN on implicit is "The implicit keyword is used to declare an implicit user-defined type conversion operator." Implicit doesn't require an explicit cast and makes the syntax a lot easier.&lt;/p&gt;
+
+</description><pubDate>Thu, 11 Sep 2014 18:30:00 Z</pubDate><a10:updated>2014-09-11T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;One of the features that I have never used in C# is the implicit and Explicit keywords. &lt;/p&gt;
+
+&lt;p&gt;The definitive word from MSDN on explicit is "The explicit keyword declares a user-defined type conversion operator that must be invoked with a cast." Omitting the cast will result in a compile time warning.&lt;/p&gt;
+
+&lt;p&gt;The definitive word from MSDN on implicit is "The implicit keyword is used to declare an implicit user-defined type conversion operator." Implicit doesn't require an explicit cast and makes the syntax a lot easier.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Program
+{
+    public static void Main()
+    {
+
+    Email test = "alice@test.com";
+    System.Console.WriteLine("Test: " + test);        
+    }
+}
+
+class Email
+    {
+        private string user;
+        private string domain;
+        public Email(string user, string domain)
+        {
+            this.user = user;
+            this.domain = domain;
+        }
+        static public implicit operator Email(string value)
+        {
+            var parts = value.Split('@');
+            if (parts.Length != 2)
+                return null;
+            return new Email(parts[0], parts[1]);
+        }
+        static public implicit operator string(Email value)
+        {
+            return "User = " + value.user + ", Domain = " + value.domain;
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I think it would quite useful in providing conversion operations from one type to another. The simplest candidate would when you have multiple addresses and you need them in a certain formar (read Type) to send it to a shipping agency.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/08/ndepend-review/</guid><link>http://ashutoshraina.github.io/2014/08/ndepend-review/</link><title>NDepend Review</title><description>&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
 </description><pubDate>Sun, 24 Aug 2014 18:30:00 Z</pubDate><a10:updated>2014-08-24T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
 &lt;!--excerpt--&gt;
 &lt;a href="http://www.ndepend.com/" title="NDepend"&gt;NDepend&lt;/a&gt; is a tool which allows you to maintain code quality in a continuous way. I must state &lt;em&gt;continuous&lt;/em&gt; with some degree of importance since that is what drives quality over a sustained period of time. The set up is fairly simple. You can download it and then install the VS plugin or use it as a stand alone tool. Let's go with the VS plugin for now. To ensure that I wasn't just checking out a demo application, I decided to pull down some medium and large open source projects and then run them through the grind.
@@ -708,205 +756,4 @@ Output :
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I will show in the next post how this wasn't all that better since this leaves a few gaps.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeouts/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeouts/</link><title>Tasks With Timeout</title><description>&lt;p&gt;So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
-&lt;a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout"&gt;Tasks With Timeouts&lt;/a&gt;&lt;/p&gt;
-
-</description><pubDate>Sun, 22 Dec 2013 18:30:00 Z</pubDate><a10:updated>2013-12-22T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
-&lt;a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout"&gt;Tasks With Timeouts&lt;/a&gt;&lt;/p&gt;
-
-&lt;!--excerpt--&gt;
-
-&lt;p&gt;So, the extension method is &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public static class TaskWithTimeout
-{
-    internal struct VoidTypeStruct
-    { }
-    internal static void MarshalTaskResults&amp;lt;TResult&amp;gt;(Task source, TaskCompletionSource&amp;lt;TResult&amp;gt; proxy)
-    {
-        switch (source.Status)
-        {
-            case TaskStatus.Faulted:
-                proxy.TrySetException(source.Exception);
-                break;
-            case TaskStatus.Canceled:
-                proxy.TrySetCanceled();
-                break;
-            case TaskStatus.RanToCompletion:
-                Task&amp;lt;TResult&amp;gt; castedSource = source as Task&amp;lt;TResult&amp;gt;;
-                proxy.TrySetResult(
-                    castedSource == null ? default(TResult) : // source is a Task
-                        castedSource.Result); // source is a Task&amp;lt;TResult&amp;gt;
-                break;
-        }
-    }
-
-    public static Task TimeoutAfter(this Task task, int millisecondsTimeout)
-    {
-        // Short-circuit #1: infinite timeout or task already completed
-        if (task.IsCompleted || (millisecondsTimeout == Timeout.Infinite))
-        {
-            // Either the task has already completed or timeout will never occur.
-            // No proxy necessary.
-            return task;
-        }
-
-        // tcs.Task will be returned as a proxy to the caller
-        TaskCompletionSource&amp;lt;VoidTypeStruct&amp;gt; tcs = new TaskCompletionSource&amp;lt;VoidTypeStruct&amp;gt;();
-
-        // Short-circuit #2: zero timeout
-        if (millisecondsTimeout == 0)
-        {
-            // We've already timed out.
-            tcs.SetException(new TimeoutException());
-            return tcs.Task;
-        }
-
-        // Set up a timer to complete after the specified timeout period
-        Timer timer = new Timer(state =&amp;gt;
-        {
-            // Recover your state information
-            var myTcs = (TaskCompletionSource&amp;lt;VoidTypeStruct&amp;gt;)state;
-            // Fault our proxy with a TimeoutException
-            myTcs.TrySetException(new TimeoutException());
-        }, tcs, millisecondsTimeout, Timeout.Infinite);
-
-        // Wire up the logic for what happens when source task completes
-        task.ContinueWith(antecedent =&amp;gt;
-                            {
-                                timer.Dispose(); // Cancel the timer
-                                MarshalTaskResults(antecedent, tcs); // Marshal results to proxy
-                            },
-                            CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
-
-        return tcs.Task;
-    }
-
-    public static Task&amp;lt;TResult&amp;gt; TimeoutAfter&amp;lt;TResult&amp;gt;(this Task&amp;lt;TResult&amp;gt; task, int millisecondsTimeout)
-    {
-        // Short-circuit #1: infinite timeout or task already completed
-        if (task.IsCompleted || (millisecondsTimeout == Timeout.Infinite))
-        {
-            // Either the task has already completed or timeout will never occur.
-            // No proxy necessary.
-            return task;
-        }
-
-        // tcs.Task will be returned as a proxy to the caller
-        TaskCompletionSource&amp;lt;TResult&amp;gt; tcs = new TaskCompletionSource&amp;lt;TResult&amp;gt;();
-
-        // Short-circuit #2: zero timeout
-        if (millisecondsTimeout == 0)
-        {
-            // We've already timed out.
-            tcs.SetException(new TimeoutException());
-            return tcs.Task;
-        }
-
-        // Set up a timer to complete after the specified timeout period
-        Timer timer = new Timer(state =&amp;gt;
-                                {
-                                    // Recover your state information
-                                    var myTcs = (TaskCompletionSource&amp;lt;TResult&amp;gt;)state;
-                                    // Fault our proxy with a TimeoutException
-                                    myTcs.TrySetException(new TimeoutException());
-                                }, tcs, millisecondsTimeout, Timeout.Infinite);
-
-        // Wire up the logic for what happens when source task completes
-        task.ContinueWith(antecedent =&amp;gt;
-                            {
-                                timer.Dispose(); // Cancel the timer
-                                MarshalTaskResults(antecedent, tcs); // Marshal results to proxy
-                            }, 
-                            CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously,TaskScheduler.Default);
-
-        return tcs.Task;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A lot of code for doing this, and the msdn article remains the better source of explanation.&lt;/p&gt;
-
-&lt;p&gt;Now using this.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Program
-    {
-        private static List&amp;lt;int&amp;gt; Output = new List&amp;lt;int&amp;gt;();
-        private static Random _random = new Random();
-
-        public static int LongRunningTask(string message)
-        {
-            Console.WriteLine(message);
-            Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
-            //Simulate a long running task
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-            var number = _random.Next();
-            Console.WriteLine("Adding " + number + " From thread  - " + Thread.CurrentThread.ManagedThreadId);
-            return number;
-        }
-
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("In Main");
-            Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
-            var cts = new CancellationTokenSource();
-            var tasks = new List&amp;lt;Task&amp;gt;();
-            try
-            {
-//In the continuation check for the condition of fault (or something more if you so need) and perform the //continuation
-                var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"),
-                                                    TaskCreationOptions.AttachedToParent)
-                                     .TimeoutAfter(1000)
-                                     .ContinueWith(antecedent =&amp;gt; {
-                        if(!(antecedent.IsCanceled || antecedent.IsFaulted))
-                                                         Output.Add(antecedent.Result);
-                                }
-                                , cts.Token);
-                var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"),
-                                                    TaskCreationOptions.AttachedToParent)
-                                     .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
-                var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), 
-                                                    TaskCreationOptions.AttachedToParent)
-                                     .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
-
-                tasks.Add(t1);
-                tasks.Add(t2);
-                tasks.Add(t3);
-
-                Task.WaitAll(tasks.ToArray());
-            }
-            catch (Exception ex)
-            {                
-                Console.WriteLine("There was an exception");
-                Console.WriteLine(ex.InnerException.Message);               
-            }
-
-            Console.WriteLine("Output :");
-            Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
-
-            Console.ReadLine();
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The important part being that the continuation is applied after the timeout and it won't work with the other way around.
-The output therefore basically looks like this : &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;In Main
-Managed thread Id 9
-Entering task1
-Managed thread Id 10
-Entering task2
-Managed thread Id 11
-Entering task3
-Managed thread Id 14
-Adding 194443354 From thread  - 10
-Adding 792426557 From thread  - 11
-Adding 230130793 From thread  - 14
-Output :
-792426557
-230130793
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next, time I will try and write about some other things on Flirting with Tasks.&lt;/p&gt;
 </a10:content></item></channel></rss>
