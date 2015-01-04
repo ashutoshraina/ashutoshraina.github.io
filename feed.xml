@@ -1,4 +1,4 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</guid><link>http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</link><title>Becoming a bit more productive on windows</title><description>&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</guid><link>http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</link><title>Everyday utilities for a Windows developer</title><description>&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
 
 &lt;p&gt;First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.&lt;/p&gt;
 
@@ -9,7 +9,7 @@
 &lt;!--excerpt--&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Get CLS to works as well as CLEAR as well Ctrl + L&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Get CLS to works as well as CLEAR as well Ctrl + L&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Hopefully you got a decent console and it comes with these things. This does help make the switch between *nix and windows slightly less painful.&lt;/p&gt;
@@ -17,28 +17,28 @@
 &lt;p&gt;For everything below we need Sysinternal Tools. It is a powerful set of tools that provides the missing functionality that developes usually get by default in other worlds. When you do use some if these for the first time then you will be asked to accept a license (swallow the pill and move on !!).&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;View Traces or Logs &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;View Traces or Logs&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;DbgView.exe will help you do this. I have used this in the past in production when one of the servers decides to play funny and you can live stream the logs here.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Dump Event Logs &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dump Event Logs&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;PsLogList dumps event logs on a local or remote NT system.
 You can filter the dump by event, for the last n minutes or n days ..Lots of options and very handy in production.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Mutliple Desktops&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mutliple Desktops&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;How is it even possible that Microsoft forgot to ship this by default? Desktops.exe allows you have mutliple desktops on windows and have hotkeys for them. &lt;/p&gt;
 
-&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/MultipeDesktops.png" alt="Multiple Desktops" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/MultipleDesktops.png" alt="Multiple Desktops" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Finding our which dlls have been loaded by a Process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;dlls loaded by a Process&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Let's see what Sublime Text has to offer.&lt;/p&gt;
@@ -63,7 +63,7 @@ There were a gazillion more (including MS office dlls !!)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;RunAs a different User&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RunAs&lt;/strong&gt; a different User&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Sometimes it is necessary to run a software as a different user (e.g. trying to connect to a database server as a sys account).&lt;/p&gt;
@@ -77,13 +77,13 @@ There were a gazillion more (including MS office dlls !!)
 &lt;p&gt;Once done, you can light up this feature using Shift + Right Click on any program.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Zoom&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Zoom&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Another handy utility ZoomIt allows you to zoom in on fly using hotkeys. It is awesome during presentation since you don't have to permanently increase your font. Minimize this to tray and stay happy.&lt;/p&gt;
+&lt;p&gt;Another handy utility ZoomIt allows you to zoom in on fly using hotkeys (Ctrl+4 should do it). It is awesome during presentation since you don't have to permanently increase your font. Minimize this to tray and stay happy.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;CtrlToCap&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CtrlToCap&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Ofcourse we need this. Permanently disabling CAPS Lock is needed.&lt;/p&gt;
@@ -94,13 +94,13 @@ There were a gazillion more (including MS office dlls !!)
 &lt;p&gt;and in the true widows traditon a boot later you are golden.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Getting File Handles&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Getting File Handles&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Handles.exe tells you who is holdiong on to which file.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;View All the Processes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;View All the Processes&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Option 1 : Curse your existence and go to Task Manager&lt;/p&gt;
@@ -122,7 +122,7 @@ wininit      724  13   1   75    772     0:00:00.203     0:11:06.762
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Kill a Process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kill a Process&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Option 1 : Go the task manager and do it.&lt;/p&gt;
@@ -137,13 +137,14 @@ wininit      724  13   1   75    772     0:00:00.203     0:11:06.762
 &lt;p&gt;You can also kill a process running on another machine, so quite useful when you want to tame a runaway process in production.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Shutdown
-After all this works the computer needs to rest so let's shut it down.&lt;/p&gt;
-
-&lt;p&gt;psshutdown.exe&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shutdown&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Next time we will go look for a few other utilities that make life as a developer much easier.&lt;/p&gt;
+&lt;p&gt;After all this works the computer needs to rest so let's shut it down.&lt;/p&gt;
+
+&lt;p&gt;psshutdown.exe&lt;/p&gt;
+
+&lt;p&gt;Now, before you really go shutdown everything, put the sysinternal in your path. Next time we will go look for a few other utilities that make life as a developer much easier from the point of view of debugging.&lt;/p&gt;
 </a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</guid><link>http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</link><title>Implicit and Explicit Operator in C#</title><description>&lt;p&gt;One of the features that I have never used in C# is the implicit and Explicit keywords. &lt;/p&gt;
 
 &lt;p&gt;The definitive word from MSDN on explicit is "The explicit keyword declares a user-defined type conversion operator that must be invoked with a cast." Omitting the cast will result in a compile time warning.&lt;/p&gt;

@@ -7,7 +7,7 @@ email: ashutoshraina1989@gmail.com
 ---
 
 1. What is this ?
-Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toll and not just a tool. 
+Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toy and not just a tool. 
 
 2. Where do I get it ?
 You can download it from here [Console2](http://sourceforge.net/projects/console/ "Console2")

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2015-01-04T16:35:57.7115052+05:30" />
+    <meta http-equiv="last-modified" content="2015-01-04T20:44:10.1087043+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,7 +42,7 @@
                   
 
 <div id="post">
-    <h1>Becoming a bit more productive on windows</h1>
+    <h1>Everyday utilities for a Windows developer</h1>
     
 	<div class="meta">
         <p class="posted">05 Jan 2015</p>
@@ -69,7 +69,7 @@
 <!--excerpt-->
 
 <ul>
-<li>Get CLS to works as well as CLEAR as well Ctrl + L</li>
+<li><strong>Get CLS to works as well as CLEAR as well Ctrl + L</strong></li>
 </ul>
 
 <p>Hopefully you got a decent console and it comes with these things. This does help make the switch between *nix and windows slightly less painful.</p>
@@ -77,28 +77,28 @@
 <p>For everything below we need Sysinternal Tools. It is a powerful set of tools that provides the missing functionality that developes usually get by default in other worlds. When you do use some if these for the first time then you will be asked to accept a license (swallow the pill and move on !!).</p>
 
 <ul>
-<li>View Traces or Logs </li>
+<li><strong>View Traces or Logs</strong></li>
 </ul>
 
 <p>DbgView.exe will help you do this. I have used this in the past in production when one of the servers decides to play funny and you can live stream the logs here.</p>
 
 <ul>
-<li>Dump Event Logs </li>
+<li><strong>Dump Event Logs</strong></li>
 </ul>
 
 <p>PsLogList dumps event logs on a local or remote NT system.
 You can filter the dump by event, for the last n minutes or n days ..Lots of options and very handy in production.</p>
 
 <ul>
-<li>Mutliple Desktops</li>
+<li><strong>Mutliple Desktops</strong></li>
 </ul>
 
 <p>How is it even possible that Microsoft forgot to ship this by default? Desktops.exe allows you have mutliple desktops on windows and have hotkeys for them. </p>
 
-<p><img src="/stylesheets/images/posts/MultipeDesktops.png" alt="Multiple Desktops" /></p>
+<p><img src="/stylesheets/images/posts/MultipleDesktops.png" alt="Multiple Desktops" /></p>
 
 <ul>
-<li>Finding our which dlls have been loaded by a Process</li>
+<li><strong>dlls loaded by a Process</strong></li>
 </ul>
 
 <p>Let's see what Sublime Text has to offer.</p>
@@ -123,7 +123,7 @@ There were a gazillion more (including MS office dlls !!)
 </code></pre>
 
 <ul>
-<li>RunAs a different User</li>
+<li><strong>RunAs</strong> a different User</li>
 </ul>
 
 <p>Sometimes it is necessary to run a software as a different user (e.g. trying to connect to a database server as a sys account).</p>
@@ -137,13 +137,13 @@ There were a gazillion more (including MS office dlls !!)
 <p>Once done, you can light up this feature using Shift + Right Click on any program.</p>
 
 <ul>
-<li>Zoom</li>
+<li><strong>Zoom</strong></li>
 </ul>
 
-<p>Another handy utility ZoomIt allows you to zoom in on fly using hotkeys. It is awesome during presentation since you don't have to permanently increase your font. Minimize this to tray and stay happy.</p>
+<p>Another handy utility ZoomIt allows you to zoom in on fly using hotkeys (Ctrl+4 should do it). It is awesome during presentation since you don't have to permanently increase your font. Minimize this to tray and stay happy.</p>
 
 <ul>
-<li>CtrlToCap</li>
+<li><strong>CtrlToCap</strong></li>
 </ul>
 
 <p>Ofcourse we need this. Permanently disabling CAPS Lock is needed.</p>
@@ -154,13 +154,13 @@ There were a gazillion more (including MS office dlls !!)
 <p>and in the true widows traditon a boot later you are golden.</p>
 
 <ul>
-<li>Getting File Handles</li>
+<li><strong>Getting File Handles</strong></li>
 </ul>
 
 <p>Handles.exe tells you who is holdiong on to which file.</p>
 
 <ul>
-<li>View All the Processes</li>
+<li><strong>View All the Processes</strong></li>
 </ul>
 
 <p>Option 1 : Curse your existence and go to Task Manager</p>
@@ -182,7 +182,7 @@ wininit      724  13   1   75    772     0:00:00.203     0:11:06.762
 </code></pre>
 
 <ul>
-<li>Kill a Process</li>
+<li><strong>Kill a Process</strong></li>
 </ul>
 
 <p>Option 1 : Go the task manager and do it.</p>
@@ -197,13 +197,14 @@ wininit      724  13   1   75    772     0:00:00.203     0:11:06.762
 <p>You can also kill a process running on another machine, so quite useful when you want to tame a runaway process in production.</p>
 
 <ul>
-<li><p>Shutdown
-After all this works the computer needs to rest so let's shut it down.</p>
-
-<p>psshutdown.exe</p></li>
+<li><strong>Shutdown</strong></li>
 </ul>
 
-<p>Next time we will go look for a few other utilities that make life as a developer much easier.</p>
+<p>After all this works the computer needs to rest so let's shut it down.</p>
+
+<p>psshutdown.exe</p>
+
+<p>Now, before you really go shutdown everything, put the sysinternal in your path. Next time we will go look for a few other utilities that make life as a developer much easier from the point of view of debugging.</p>
 
 
     <div id="disqus_thread"></div>
