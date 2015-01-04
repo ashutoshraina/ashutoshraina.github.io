@@ -45,4 +45,4 @@ The definitive word from MSDN on implicit is "The implicit keyword is used to de
             }
         }
 
-I think it would quite useful in providing conversion operations from one type to another. The simplest candidate would when you have multiple addresses and you need them in a certain formar (read Type) to send it to a shipping agency.
+I think it would quite useful in providing conversion operations from one type to another. The simplest candidate would when you have multiple addresses and you need them in a certain format (read Type) to send it to a shipping agency.

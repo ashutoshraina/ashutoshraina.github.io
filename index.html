@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-09-22T19:15:30.3817901+05:30" />
+    <meta http-equiv="last-modified" content="2015-01-04T16:35:57.7115052+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,24 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2015/01/becoming-a-little-more-productive-on-windows/">Becoming a bit more productive on windows</a></h1> 
+      <div class="meta">
+        <p class="posted">05 Jan 2015</p>
+        <ul class="categories">
+          <li><a href="/category/windows" title="windows">windows</a></li>
+          <li><a href="/category/tips" title="tips">tips</a></li>
+        </ul>
+      </div>
+      
+      <p>As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. </p>
+
+<p>First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.</p>
+
+
+      <p><a href="/2015/01/becoming-a-little-more-productive-on-windows/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2014/09/implicit-and-explicit-in-csharp/">Implicit and Explicit Operator in C#</a></h1> 
       <div class="meta">
@@ -233,55 +251,6 @@ First, a really simple document.</p>
 
 <p>
       <p><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a></h1> 
-      <div class="meta">
-        <p class="posted">24 Dec 2013</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li>Part 2 - Tasks With Timeouts contd.</li><li><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Part 3 - Tasks With Timeout on .net4.5</a></li></ul>
-      <p>As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!</p>
-
-<pre><code>    var tasks = new List&lt;Task&gt;();
-    try
-    {
-    //instead of checking for fault within the continutaion, 
-    //we can just use a TaskContinuationOption to tell communicate the right semantics
-
-    var t1 = Task.Factory.StartNew(_ =&gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
-    .TimeoutAfter(1000)
-    .ContinueWith(t =&gt; SomethingUsefulWithTheResult(), 
-     TaskContinuationOptions.NotOnFaulted);
-
-    var t2 = Task.Factory.StartNew(_ =&gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
-
-    var t3 = Task.Factory.StartNew(_ =&gt; LongRunningTask("Entering task3"),
-    TaskCreationOptions.AttachedToParent)
-      .ContinueWith(t =&gt; SomethingUsefulWithTheResult());
-
-    tasks.Add(t1);
-    tasks.Add(t2);
-    tasks.Add(t3);
-
-    Task.WaitAll(tasks.ToArray());
-    }
-    catch (Exception ex)
-    {
-    Console.WriteLine("There was an exception");
-    Console.WriteLine(ex.InnerException.Message);   
-    }
-</code></pre>
-
-<p>I will show in the next post how this wasn't all that better since this leaves a few gaps.</p>
-
-      <p><a href="/2013/12/tasks-with-timeout-contd/">Read more...</a></p>
     </li>
     <hr/>
   </ul> 

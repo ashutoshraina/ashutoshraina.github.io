@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="last-modified" content="2015-01-04T16:35:57.7115052+05:30" />
+    <title>Ashutosh Raina</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
+    <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/" />
+</head>
+<body class="home blog">
+    <div id="page" class="hfeed site">
+        <header id="masthead" class="site-header fancy-container lightgreen" role="banner">
+            <hgroup>
+                <h1 class="site-title"><a href="/" title="ashutoshraina.github.io" rel="home">Ashutosh Raina</a></h1>
+                <h2 class="site-title"><small>For those who are still chasing</small></h2>
+                <p class="site-description">I love french fries!!</p>
+            </hgroup>
+            <nav role="navigation" class="site-navigation main-navigation">
+                <h1 class="assistive-text">Menu</h1>
+                <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
+                </div>
+                <div class="menu">
+                    <ul>
+						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
+                        <li><a href="/archive">Archive</a></li>
+                        <li><a href="/category">Categories</a></li>                        
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/feed.xml">RSS/Atom</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div id="main">
+
+            <div id="primary" class="site-content">
+                <div id="content" role="main">
+                  
+
+<div id="post">
+    <h1>Becoming a bit more productive on windows</h1>
+    
+	<div class="meta">
+        <p class="posted">05 Jan 2015</p>
+        <ul class="categories">
+          <li><a href="/category/windows" title="Snow.Models.Category">windows</a></li>
+          <li><a href="/category/tips" title="Snow.Models.Category">tips</a></li>
+        </ul>
+      </div>
+    
+	<div class="addthis_toolbox addthis_default_style" style="float:right;">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        <a class="addthis_button_linkedin_counter"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+      </div>
+	  
+    
+        
+    <p>As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. </p>
+
+<p>First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.</p>
+
+<!--excerpt-->
+
+<ul>
+<li>Get CLS to works as well as CLEAR as well Ctrl + L</li>
+</ul>
+
+<p>Hopefully you got a decent console and it comes with these things. This does help make the switch between *nix and windows slightly less painful.</p>
+
+<p>For everything below we need Sysinternal Tools. It is a powerful set of tools that provides the missing functionality that developes usually get by default in other worlds. When you do use some if these for the first time then you will be asked to accept a license (swallow the pill and move on !!).</p>
+
+<ul>
+<li>View Traces or Logs </li>
+</ul>
+
+<p>DbgView.exe will help you do this. I have used this in the past in production when one of the servers decides to play funny and you can live stream the logs here.</p>
+
+<ul>
+<li>Dump Event Logs </li>
+</ul>
+
+<p>PsLogList dumps event logs on a local or remote NT system.
+You can filter the dump by event, for the last n minutes or n days ..Lots of options and very handy in production.</p>
+
+<ul>
+<li>Mutliple Desktops</li>
+</ul>
+
+<p>How is it even possible that Microsoft forgot to ship this by default? Desktops.exe allows you have mutliple desktops on windows and have hotkeys for them. </p>
+
+<p><img src="/stylesheets/images/posts/MultipeDesktops.png" alt="Multiple Desktops" /></p>
+
+<ul>
+<li>Finding our which dlls have been loaded by a Process</li>
+</ul>
+
+<p>Let's see what Sublime Text has to offer.</p>
+
+<p><em>Listdlls.exe Sublime Text</em></p>
+
+<pre><code>sublime_text.exe pid: 9984
+Command line: "C:\Program Files\Sublime Text 3\sublime_text.exe"
+Base                Size      Path
+0x00000000a0f80000  0x556000  C:\Program Files\Sublime Text 3\sublime_text.exe
+0x000000004cd60000  0x1a6000  C:\WINDOWS\SYSTEM32\ntdll.dll
+0x000000004c860000  0x13a000  C:\WINDOWS\system32\KERNEL32.DLL
+0x000000004a1d0000  0x10f000  C:\WINDOWS\system32\KERNELBASE.dll
+0x000000004cbe0000  0x171000  C:\WINDOWS\system32\USER32.dll
+0x000000004ada0000  0x144000  C:\WINDOWS\system32\GDI32.dll
+0x000000004c7b0000  0xa5000   C:\WINDOWS\system32\ADVAPI32.dll
+0x000000004b330000  0x140f000  C:\WINDOWS\system32\SHELL32.dll
+0x000000004af10000  0x178000  C:\WINDOWS\system32\ole32.dll
+
+
+There were a gazillion more (including MS office dlls !!) 
+</code></pre>
+
+<ul>
+<li>RunAs a different User</li>
+</ul>
+
+<p>Sometimes it is necessary to run a software as a different user (e.g. trying to connect to a database server as a sys account).</p>
+
+<p>The ShellRunas utility allows us to register this feature in the context menu of programs. You can ofcourse run the program as a different program from the command line as well. You can register it using the following command.</p>
+
+<pre><code>C:\Users\Ashutosh\Tools\SysInternals
+λ ShellRunas.exe /reg 
+</code></pre>
+
+<p>Once done, you can light up this feature using Shift + Right Click on any program.</p>
+
+<ul>
+<li>Zoom</li>
+</ul>
+
+<p>Another handy utility ZoomIt allows you to zoom in on fly using hotkeys. It is awesome during presentation since you don't have to permanently increase your font. Minimize this to tray and stay happy.</p>
+
+<ul>
+<li>CtrlToCap</li>
+</ul>
+
+<p>Ofcourse we need this. Permanently disabling CAPS Lock is needed.</p>
+
+<pre><code>ctrl2cap.exe /reg 
+</code></pre>
+
+<p>and in the true widows traditon a boot later you are golden.</p>
+
+<ul>
+<li>Getting File Handles</li>
+</ul>
+
+<p>Handles.exe tells you who is holdiong on to which file.</p>
+
+<ul>
+<li>View All the Processes</li>
+</ul>
+
+<p>Option 1 : Curse your existence and go to Task Manager</p>
+
+<p>Option 2 : Use PsList.exe</p>
+
+<pre><code>C:\Users\Ashutosh\Tools\SysInternals                                        
+λ pslist.exe                                                          
+
+Process information for ARTHINKPAD:                            
+
+
+Name         Pid Pri Thd  Hnd   Priv        CPU Time    Elapsed Time 
+Idle           0   0   4    0      0     0:40:49.468     0:00:00.000 
+System         4   8 189 1562    116     0:00:27.531     0:11:19.227 
+smss         416  11   2   44    308     0:00:00.203     0:11:19.117 
+csrss        660  13  10  627   1896     0:00:00.656     0:11:07.766 
+wininit      724  13   1   75    772     0:00:00.203     0:11:06.762 
+</code></pre>
+
+<ul>
+<li>Kill a Process</li>
+</ul>
+
+<p>Option 1 : Go the task manager and do it.</p>
+
+<p>Option 2 : Use PsKill.exe </p>
+
+<pre><code>C:\Users\Ashutosh\Tools\SysInternals
+λ pskill.exe chrome
+8 processes named chrome killed.
+</code></pre>
+
+<p>You can also kill a process running on another machine, so quite useful when you want to tame a runaway process in production.</p>
+
+<ul>
+<li><p>Shutdown
+After all this works the computer needs to rest so let's shut it down.</p>
+
+<p>psshutdown.exe</p></li>
+</ul>
+
+<p>Next time we will go look for a few other utilities that make life as a developer much easier.</p>
+
+
+    <div id="disqus_thread"></div>
+<script>
+    var reset_disqus = function(){
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                //this.page.identifier = '';
+                this.page.url = 'http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/';
+                //this.page.title = '';
+            }
+        });
+    };
+
+    var disqus_shortname = 'ashutoshraina';
+    var disqus_url = 'http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    window.addEventListener('orientationchange', reset_disqus);
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
+   </script>
+
+</div>
+                </div>
+                <!-- #content -->
+            </div>
+            <!-- #primary .site-content -->      
+        <!-- #main -->
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="site-info">
+                Powered by <a href="https://github.com/Sandra/Sandra.Snow" rel="generator">Sandra.Snow</a>.	
+            </div>
+            <!-- .site-info -->
+        </footer>
+        <!-- #colophon .site-footer -->
+    </div>
+    <!-- #page .hfeed .site -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src='/javascripts/prettify.js' type='text/javascript'></script>
+    
+    <script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-46699881-1']);
+_gaq.push(['_trackPageview']);
+        
+(function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+})();
+</script>
+    
+    <script type='text/javascript'>
+      $(function () {
+        $("pre code").parent().each(function () {
+          if (!$(this).hasClass("prettyprint")) {
+            $(this).addClass("prettyprint");
+            a = true
+          }
+        });
+
+        prettyPrint();
+      });
+    </script>
+</body>
+</html>

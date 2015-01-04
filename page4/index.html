@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-09-22T19:15:30.3817901+05:30" />
+    <meta http-equiv="last-modified" content="2015-01-04T16:35:57.7115052+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,37 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2013/02/teamcity-recover-admin-password/">TeamCity- Recover Admin Password</a></h1> 
+      <div class="meta">
+        <p class="posted">04 Feb 2013</p>
+        <ul class="categories">
+          <li><a href="/category/tools" title="tools">tools</a></li>
+          <li><a href="/category/productivity" title="productivity">productivity</a></li>
+          <li><a href="/category/tips" title="tips">tips</a></li>
+        </ul>
+      </div>
+      
+      <p>The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
+I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
+Searching online will lead you to this place <a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post">Stackoverflow Post</a>.</p>
+
+<p>The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
+So,</p>
+
+<pre><code>Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+
+Step 2  Open CMD as ADMINISTRATOR
+(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
+
+Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
+</code></pre>
+
+<p>If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.</p>
+
+      <p><a href="/2013/02/teamcity-recover-admin-password/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2013/02/nunit-codesnippet/">NUnit-Code Snippet</a></h1> 
       <div class="meta">
