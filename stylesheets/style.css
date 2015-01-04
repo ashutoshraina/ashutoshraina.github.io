@@ -300,6 +300,7 @@ textarea {
 
 a {
     color: #00b6e3;
+    border-radius: 5px;
 }
 
     a:visited {
@@ -785,7 +786,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 22px;
+    font-size: 23px;
 }
 
 h2 {
@@ -793,7 +794,7 @@ h2 {
 }
 
 h3 {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 h4, h5, h6 {
