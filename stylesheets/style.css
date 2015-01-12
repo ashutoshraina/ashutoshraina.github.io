@@ -300,7 +300,7 @@ textarea {
 
 a {
     color: #00b6e3;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
     a:visited {
@@ -1165,7 +1165,7 @@ ul.posts {
     .post > h1 a {
       text-decoration: none;
       color: #222;
-      line-height: 1.25;
+      line-height: 1.5;
     }
 
     .post > h1 a:hover {

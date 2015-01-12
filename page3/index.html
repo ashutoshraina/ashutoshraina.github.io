@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2015-01-04T20:58:43.3489342+05:30" />
+    <meta http-equiv="last-modified" content="2015-01-12T22:56:26.2537096+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,29 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a></h1> 
+      <div class="meta">
+        <p class="posted">04 Oct 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
+          <li><a href="/category/opensource" title="opensource">opensource</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li>Part 3 - Getting Started</li></ul>
+      <p>In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
+Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.</p>
+
+<pre><code>var result = UserConnectionHandler.MongoCollection.AsQueryable()
+                                  .Where(u =&gt; u.Reputation &gt; reputation);
+</code></pre>
+
+
+      <p><a href="/2013/10/mongodb-csharp-driver-part3/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2013/10/mongodb-csharp-driver-part1/">MongoDB-CSharp-Driver Getting started</a></h1> 
       <div class="meta">
@@ -320,28 +343,6 @@ Console2 is a great little front-end for your existing shell, no matter what it 
 <p>All looks nice, the world is a better place.</p>
 
       <p><a href="/2013/04/console2-commandline-awesomeness/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/04/entity-framework-generic-repository-pattern-part-2/">Entity Framework - Generic repository Pattern - Part 2</a></h1> 
-      <div class="meta">
-        <p class="posted">13 Apr 2013</p>
-        <ul class="categories">
-          <li><a href="/category/entity-framework" title="entity-framework">entity-framework</a></li>
-          <li><a href="/category/pattern" title="pattern">pattern</a></li>
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li>Part 1 - Generic Repositry Pattern</li><li>Part 2 - Generic Repositry Pattern Contd.</li></ul>
-      <p>In the previous post I wrote about an implementation of the Generic Repository pattern for EF. There is so much data on the web that it is difficult to understand what might actually work for you. All of this can drive you 
-<a href="http://codereview.stackexchange.com/questions/11785/ef-code-first-with-repository-unitofwork-and-dbcontextfactory?rq=1" title="Crazy">Crazy</a></p>
-
-<p>Throw in my version of crazy as well.
-<a href="http://codereview.stackexchange.com/questions/19037/entity-framework-generic-repository-pattern" title="Crazy2">Crazy2</a></p>
-
-
-      <p><a href="/2013/04/entity-framework-generic-repository-pattern-part-2/">Read more...</a></p>
     </li>
     <hr/>
   </ul> 

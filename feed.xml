@@ -1,4 +1,70 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</guid><link>http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</link><title>Everyday utilities for a Windows developer</title><description>&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</guid><link>http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</link><title>Everyday utilities for a Windows developer - Contd.</title><description>&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    cmder.exe /REGISTER ALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time we look at some utility programs that are often required when doing deeper analysis in a windows environment.&lt;/p&gt;
+
+</description><pubDate>Sun, 11 Jan 2015 18:30:00 Z</pubDate><a10:updated>2015-01-11T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    cmder.exe /REGISTER ALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time we look at some utility programs that are often required when doing deeper analysis in a windows environment.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Process Explorer&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I consider it to be an advanced version of Task Manager. Whenever I want to see what the process is doing or kill it for whatever reason this is my go to program. Infact, it does give you the option of replacing the Task Manager with Process Explorer. I have used this in the past to identify which process has held onto my file especially when I want to delete it. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Process Monitor&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Process Monitor on the other hand, is a different tool altogether. It gives you the ability to see how the Read/Write is happening, and whether the operations succeeded or not. The ability to see these lower level operations is priceless.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;8:45:38.6874836 PM  chrome.exe  5992    TCP Receive ARThinkpad:57642 -&amp;gt; a23-211-203-17.deploy.static.akamaitechnologies.com:http    SUCCESS Length: 1442, seqnum: 0, connid: 0
+8:45:38.6876860 PM  chrome.exe  5992    TCP Disconnect  ARThinkpad:57689 -&amp;gt; ec2-54-169-42-120.ap-southeast-1.compute.amazonaws.com:http SUCCESS Length: 0, seqnum: 0, connid: 0
+8:45:38.6887398 PM  chrome.exe  5992    TCP Disconnect  ARThinkpad:57671 -&amp;gt; 119.81.205.68-static.reverse.softlayer.com:http SUCCESS Length: 0, seqnum: 0, connid: 0
+8:45:38.7076694 PM  chrome.exe  5992    TCP Receive ARThinkpad:57642 -&amp;gt; a23-211-203-17.deploy.static.akamaitechnologies.com:http    SUCCESS Length: 1442, seqnum: 0, connid: 0
+8:45:38.7081062 PM  chrome.exe  5992    TCP Disconnect  ARThinkpad:57682 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tcp View&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Another very nice utility that you can use to see what is happening under the hood. I once used it to triage high network utilisation on the database server, due to a runaway query. Being able to narrow down communication between two hosts is important and this tool is just the right fit. Also, when you are working with tunnels (as I have done in the past) then it pays to know what your tcp connections are upto.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mqsvc.exe   2872    TCPV6   arthinkpad  2107    arthinkpad  0   LISTENING                                       
+mqsvc.exe   2872    TCPV6   arthinkpad  49158   arthinkpad  0   LISTENING                                       
+QuickControlService.exe 12808   TCP ARThinkpad  5365    ARThinkpad  0   LISTENING                                       
+services.exe    780 TCP ARThinkpad  49160   ARThinkpad  0   LISTENING                                       
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Debug View&lt;/strong&gt;
+How this has saved my life !! Read debug logs like an ancient boss. Life saver when working with ancient systems which don't do centralised logging.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from these, one more utility that I have recently added is Wox. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Wox&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="http://ashutoshraina.github.io/"https://www.getwox.com/",Wox"&gt;Wox&lt;/a&gt; is Alfred/Spotlight for Windows only a so much better than launchy. It has themes, it has plugins and is free. May be we should call it Batman!!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/wox.png" alt="Wox" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Writing plugins is simple, and look they even have a documentation page.
+&lt;a href="http://ashutoshraina.github.io/"http://doc.getwox.com/en/plugin/csharp_plugin.html",Docs"&gt;Docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Hope this does help you as it as helped me improve my workflow.&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</guid><link>http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</link><title>Everyday utilities for a Windows developer</title><description>&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
 
 &lt;p&gt;First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.&lt;/p&gt;
 
@@ -712,127 +778,4 @@ Could not locate Razor Host Factory type: System.Web.Mvc.MvcWebRazorHostFactory,
 &lt;p&gt;Now, Press F5.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/mvc-mono-success.png" alt="Success" /&gt;&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</guid><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</link><title>Tasks With Timeout On .net 4.5 Contd.</title><description>&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
-    {
-        var delay = task.ContinueWith(t =&amp;gt; { }, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-    public static Task&amp;lt;T&amp;gt; WithTimeout&amp;lt;T&amp;gt;(this Task&amp;lt;T&amp;gt; task, TimeSpan timeout)
-    {            
-        var delay = task.ContinueWith(t =&amp;gt; t.Result, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;</description><pubDate>Sun, 29 Dec 2013 18:30:00 Z</pubDate><a10:updated>2013-12-29T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
-    {
-        var delay = task.ContinueWith(t =&amp;gt; { }, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-    public static Task&amp;lt;T&amp;gt; WithTimeout&amp;lt;T&amp;gt;(this Task&amp;lt;T&amp;gt; task, TimeSpan timeout)
-    {            
-        var delay = task.ContinueWith(t =&amp;gt; t.Result, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;!--excerpt--&gt;
-OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Program
-{
-    private static List&amp;lt;int&amp;gt; Output = new List&amp;lt;int&amp;gt;();
-    private static Random _random = new Random();
-
-    public static int LongRunningTask(string message)
-    {
-        Console.WriteLine(message);
-        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
-        //Simulate a long running task
-        Thread.Sleep(TimeSpan.FromSeconds(2));
-        var number = _random.Next();
-        Console.WriteLine("Adding " + number + " From thread  - " + Thread.CurrentThread.ManagedThreadId);
-        return number;
-    }
-    public static void Main(string[] args)
-    {
-        Console.WriteLine("In Main");
-        TimeoutonNet45();
-        Console.ReadLine();
-    }
-
-    public static void TimeoutonNet45()
-    {
-        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
-        var tasks = new List&amp;lt;Task&amp;gt;();
-        try
-        {
-            var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"),TaskCreationOptions.AttachedToParent)
-                                 .WithTimeout(TimeSpan.FromMilliseconds(1000))                
-                                 .ContinueWith(t =&amp;gt; Output.Add(t.Result), TaskContinuationOptions.NotOnCanceled);
-            var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
-                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
-            tasks.Add(t1);
-            tasks.Add(t2);
-            Task.WaitAll(tasks.ToArray());
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("There was an exception");
-            Console.WriteLine(ex.InnerException.Message);
-        }
-        Console.WriteLine("Output :");
-        Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
-    }
-
-    public static void TimeoutOnNet4()
-    {
-        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
-        var tasks = new List&amp;lt;Task&amp;gt;();
-        try
-        {
-            var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"), TaskCreationOptions.AttachedToParent)
-                                 .TimeoutAfter(1000)
-                                 .ContinueWith(t =&amp;gt; Output.Add(t.Result), TaskContinuationOptions.NotOnFaulted);
-            var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
-                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
-            var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
-                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
-            tasks.Add(t1);
-            tasks.Add(t2);
-            tasks.Add(t3);
-            Task.WaitAll(tasks.ToArray());
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("There was an exception");
-            Console.WriteLine(ex.InnerException.Message);
-        }
-        Console.WriteLine("Output :");
-        Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The output will look something like this :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;In Main
-Managed thread Id 10
-Entering task1
-Managed thread Id 11
-Entering task2
-Managed thread Id 12
-Adding 856463453 From thread  - 12
-Adding 1826416296 From thread  - 11
-There was an exception
-A task was canceled.
-Output :
-856463453
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.&lt;/p&gt;
 </a10:content></item></channel></rss>

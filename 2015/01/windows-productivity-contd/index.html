@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/02/entity-framework-6-whats-new/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2015/01/windows-productivity-contd/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,14 +42,13 @@
                   
 
 <div id="post">
-    <h1>Entity Framework 6 What's new ?</h1>
+    <h1>Everyday utilities for a Windows developer - Contd.</h1>
     
 	<div class="meta">
-        <p class="posted">02 Feb 2013</p>
+        <p class="posted">12 Jan 2015</p>
         <ul class="categories">
-          <li><a href="/category/entity-framework" title="Snow.Models.Category">entity-framework</a></li>
-          <li><a href="/category/.net" title="Snow.Models.Category">.net</a></li>
-          <li><a href="/category/csharp" title="Snow.Models.Category">csharp</a></li>
+          <li><a href="/category/windows" title="Snow.Models.Category">windows</a></li>
+          <li><a href="/category/tips" title="Snow.Models.Category">tips</a></li>
         </ul>
       </div>
     
@@ -61,77 +60,67 @@
         <a class="addthis_counter addthis_pill_style"></a>
       </div>
 	  
-    
+    <ul class="snow-series"><li><a href="/2015/01/becoming-a-little-more-productive-on-windows/">Part 1 - Everyday utilities for a Windows Developer</a></li><li>Part 2 - Everyday utilities for a Windows developer - Contd.</li></ul>
         
-    <p>EF6 is still in alpha stages but you can go grab it now via nuget.
-What is new ?
-A whole lot find about it here <a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6">EF6</a></p>
+    <p>From the previous post if you do end up using <a href="http://bliker.github.io/cmder/" title="Cmder Mini">cmder mini</a> like me then you should also register it and let it show up in the explorer. </p>
 
-<p>Also, do read this post about migrating to EF6 if you are migrating an existing application.</p>
+<pre><code>    cmder.exe /REGISTER ALL
+</code></pre>
 
-<p><a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6 Migration">EF6 Migration</a></p>
-
-<p>I am basically using the same model to see if life is any easier with V6. The model is fairly simple. There are users, users can questions and questions are of different types. A user creates Test which is composed of many questions.</p>
-
-<p>Earlier, there was no easy way of doing Enum in EF Code First. That limitation is no longer there.
-Now, the questions can be of varying difficulty levels so now we can do the following.</p>
+<p>This time we look at some utility programs that are often required when doing deeper analysis in a windows environment.</p>
 
 <!--excerpt-->
 
-<pre><code>public enum Difficulty
-{
-    Trivial = 1,
-    Easy = 2,
-    Medium = 3,
-    Hard = 4,
-    Difficult = 5
-}
-
-/// &lt;summary&gt;
-/// Question is the base type which describes a Question. Other types derive from Question.
-/// &lt;/summary&gt;
-public class Question
-{
-    /// &lt;summary&gt;
-    /// Gets or sets the Difficulty
-    /// &lt;/summary&gt;
-    public Difficulty Difficulty { get; set; }
-</code></pre>
-
-<p>....more properties 
-    }
-Similarly we can have UserRole as well.</p>
-
-<p>EF now has the option to specify the default schema is also available now. It can be done as shown below.</p>
-
-<pre><code>modelBuilder.HasDefaultSchema("ParikshaDev");
-</code></pre>
-
-<p>EF now has the ability to provide custom conventions as well. The following conventions are available to us.</p>
-
 <ul>
-     <li>Lightweight Conventions</li>
-     <li>Configuration Conventions</li>
-     <li>Custom Attributes</li>
-     <li>Model-based Conventions</li>
+<li><strong>Process Explorer</strong></li>
 </ul>
 
-<p>Read more about it here <a href="http://msdn.microsoft.com/en-us/data/jj680699" title="EF Conventions">EF6 Conventions</a>.
-I will cross-post an important point about the order of execution. If you have many conventions then the order will become important. I haven't written a lot of conventions but my guess is that this could get tricky if not done with care.</p>
+<p>I consider it to be an advanced version of Task Manager. Whenever I want to see what the process is doing or kill it for whatever reason this is my go to program. Infact, it does give you the option of replacing the Task Manager with Process Explorer. I have used this in the past to identify which process has held onto my file especially when I want to delete it. </p>
 
-<ol>
-    <li>IConfigurationConvention-based and lightweight conventions</li>
-    <li>IEdmConvention-based conventions</li>
-    <li>IDbConvention-based conventions</li>
-    <li>IDbMappingConvention-based conventions</li>
-</ol>
+<ul>
+<li><strong>Process Monitor</strong></li>
+</ul>
 
-<p>A conventions that I have used is Lightweight conventions. We sometimes want to append custom names to our table names as per the convention of our customers.</p>
+<p>Process Monitor on the other hand, is a different tool altogether. It gives you the ability to see how the Read/Write is happening, and whether the operations succeeded or not. The ability to see these lower level operations is priceless.</p>
 
-<pre><code>modelBuilder.Entities().Configure(_ =&gt; _.ToTable("CustomTable"+ _.ClrType.Name));
+<pre><code>8:45:38.6874836 PM  chrome.exe  5992    TCP Receive ARThinkpad:57642 -&gt; a23-211-203-17.deploy.static.akamaitechnologies.com:http    SUCCESS Length: 1442, seqnum: 0, connid: 0
+8:45:38.6876860 PM  chrome.exe  5992    TCP Disconnect  ARThinkpad:57689 -&gt; ec2-54-169-42-120.ap-southeast-1.compute.amazonaws.com:http SUCCESS Length: 0, seqnum: 0, connid: 0
+8:45:38.6887398 PM  chrome.exe  5992    TCP Disconnect  ARThinkpad:57671 -&gt; 119.81.205.68-static.reverse.softlayer.com:http SUCCESS Length: 0, seqnum: 0, connid: 0
+8:45:38.7076694 PM  chrome.exe  5992    TCP Receive ARThinkpad:57642 -&gt; a23-211-203-17.deploy.static.akamaitechnologies.com:http    SUCCESS Length: 1442, seqnum: 0, connid: 0
+8:45:38.7081062 PM  chrome.exe  5992    TCP Disconnect  ARThinkpad:57682 
 </code></pre>
 
-<p>Similarly, other conventions are also available. The most common ones that I see being used will be Lightweight and Configuration Conventions. Next, we will have a look at enabling migrations and an irritant that made me go nuts for a few months.</p>
+<ul>
+<li><strong>Tcp View</strong></li>
+</ul>
+
+<p>Another very nice utility that you can use to see what is happening under the hood. I once used it to triage high network utilisation on the database server, due to a runaway query. Being able to narrow down communication between two hosts is important and this tool is just the right fit. Also, when you are working with tunnels (as I have done in the past) then it pays to know what your tcp connections are upto.</p>
+
+<pre><code>mqsvc.exe   2872    TCPV6   arthinkpad  2107    arthinkpad  0   LISTENING                                       
+mqsvc.exe   2872    TCPV6   arthinkpad  49158   arthinkpad  0   LISTENING                                       
+QuickControlService.exe 12808   TCP ARThinkpad  5365    ARThinkpad  0   LISTENING                                       
+services.exe    780 TCP ARThinkpad  49160   ARThinkpad  0   LISTENING                                       
+</code></pre>
+
+<ul>
+<li><strong>Debug View</strong>
+How this has saved my life !! Read debug logs like an ancient boss. Life saver when working with ancient systems which don't do centralised logging.</li>
+</ul>
+
+<p>Apart from these, one more utility that I have recently added is Wox. </p>
+
+<ul>
+<li><strong>Wox</strong></li>
+</ul>
+
+<p><a href=""https://www.getwox.com/",Wox">Wox</a> is Alfred/Spotlight for Windows only a so much better than launchy. It has themes, it has plugins and is free. May be we should call it Batman!!</p>
+
+<p><img src="/stylesheets/images/posts/wox.png" alt="Wox" /></p>
+
+<p>Writing plugins is simple, and look they even have a documentation page.
+<a href=""http://doc.getwox.com/en/plugin/csharp_plugin.html",Docs">Docs</a></p>
+
+<p>Hope this does help you as it as helped me improve my workflow.</p>
 
 
     <div id="disqus_thread"></div>
@@ -141,14 +130,14 @@ I will cross-post an important point about the order of execution. If you have m
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/02/entity-framework-6-whats-new/';
+                this.page.url = 'http://ashutoshraina.github.io/2015/01/windows-productivity-contd/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/02/entity-framework-6-whats-new/';
+    var disqus_url = 'http://ashutoshraina.github.io/2015/01/windows-productivity-contd/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2015-01-04T20:58:43.3489342+05:30" />
+    <meta http-equiv="last-modified" content="2015-01-12T22:56:26.2537096+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -43,6 +43,27 @@
 
   <ul class="posts">
     <li class="post">
+      <h1><a href="/2015/01/windows-productivity-contd/">Everyday utilities for a Windows developer - Contd.</a></h1> 
+      <div class="meta">
+        <p class="posted">12 Jan 2015</p>
+        <ul class="categories">
+          <li><a href="/category/windows" title="windows">windows</a></li>
+          <li><a href="/category/tips" title="tips">tips</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2015/01/becoming-a-little-more-productive-on-windows/">Part 1 - Everyday utilities for a Windows Developer</a></li><li>Part 2 - Everyday utilities for a Windows developer - Contd.</li></ul>
+      <p>From the previous post if you do end up using <a href="http://bliker.github.io/cmder/" title="Cmder Mini">cmder mini</a> like me then you should also register it and let it show up in the explorer. </p>
+
+<pre><code>    cmder.exe /REGISTER ALL
+</code></pre>
+
+<p>This time we look at some utility programs that are often required when doing deeper analysis in a windows environment.</p>
+
+
+      <p><a href="/2015/01/windows-productivity-contd/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
       <h1><a href="/2015/01/becoming-a-little-more-productive-on-windows/">Everyday utilities for a Windows developer</a></h1> 
       <div class="meta">
         <p class="posted">05 Jan 2015</p>
@@ -51,7 +72,7 @@
           <li><a href="/category/tips" title="tips">tips</a></li>
         </ul>
       </div>
-      
+      <ul class="snow-series"><li>Part 1 - Everyday utilities for a Windows Developer</li><li><a href="/2015/01/windows-productivity-contd/">Part 2 - Everyday utilities for a Windows developer - Contd.</a></li></ul>
       <p>As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. </p>
 
 <p>First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.</p>
@@ -222,35 +243,6 @@ First, a really simple document.</p>
 
 
       <p><a href="/2014/01/mvc-on-mono-monodevelop/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a></h1> 
-      <div class="meta">
-        <p class="posted">30 Dec 2013</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li>Part 3 - Tasks With Timeout on .net4.5</li></ul>
-      <p>The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!</p>
-
-<pre><code>    public static Task WithTimeout(this Task task, TimeSpan timeout)
-    {
-        var delay = task.ContinueWith(t =&gt; { }, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-    public static Task&lt;T&gt; WithTimeout&lt;T&gt;(this Task&lt;T&gt; task, TimeSpan timeout)
-    {            
-        var delay = task.ContinueWith(t =&gt; t.Result, new CancellationTokenSource(timeout).Token);
-        return Task.WhenAny(task, delay).Unwrap();
-    }
-</code></pre>
-
-<p>
-      <p><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Read more...</a></p>
     </li>
     <hr/>
   </ul> 

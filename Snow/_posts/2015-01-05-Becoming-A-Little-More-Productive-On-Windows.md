@@ -4,6 +4,11 @@ title: Everyday utilities for a Windows developer
 category: windows, tips
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
+series:
+    name: Becoming Productive on Windows
+    current: 1
+    part: Part 1 - Everyday utilities for a Windows Developer
+    part: Part 2 - Everyday utilities for a Windows developer - Contd.
 ---
 
 As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. 

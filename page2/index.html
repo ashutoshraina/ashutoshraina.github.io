@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2015-01-04T20:58:43.3489342+05:30" />
+    <meta http-equiv="last-modified" content="2015-01-12T22:56:26.2537096+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,35 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Tasks With Timeout On .net 4.5 Contd.</a></h1> 
+      <div class="meta">
+        <p class="posted">30 Dec 2013</p>
+        <ul class="categories">
+          <li><a href="/category/.net" title=".net">.net</a></li>
+          <li><a href="/category/csharp" title="csharp">csharp</a></li>
+          <li><a href="/category/Asynchrony" title="Asynchrony">Asynchrony</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2013/12/tasks-with-timeouts/">Part 1 - Tasks With Timeouts</a></li><li><a href="/2013/12/tasks-with-timeout-contd/">Part 2 - Tasks With Timeouts contd.</a></li><li>Part 3 - Tasks With Timeout on .net4.5</li></ul>
+      <p>The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!</p>
+
+<pre><code>    public static Task WithTimeout(this Task task, TimeSpan timeout)
+    {
+        var delay = task.ContinueWith(t =&gt; { }, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+    public static Task&lt;T&gt; WithTimeout&lt;T&gt;(this Task&lt;T&gt; task, TimeSpan timeout)
+    {            
+        var delay = task.ContinueWith(t =&gt; t.Result, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+</code></pre>
+
+<p>
+      <p><a href="/2013/12/tasks-with-timeout-net4.5-contd/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2013/12/tasks-with-timeout-contd/">Tasks With Timeout Contd.</a></h1> 
       <div class="meta">
@@ -279,29 +308,6 @@ public class User : MongoEntity
 
 
       <p><a href="/2013/10/mongodb-csharp-driver-part2/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2013/10/mongodb-csharp-driver-part3/">MongoDB-CSharp-Driver-Using Linq</a></h1> 
-      <div class="meta">
-        <p class="posted">04 Oct 2013</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-        </ul>
-      </div>
-      <ul class="snow-series"><li><a href="/2013/10/mongodb-csharp-driver-part1/">Part 1 - Using Linq</a></li><li><a href="/2013/10/mongodb-csharp-driver-part2/">Part 2 - Getting organised</a></li><li>Part 3 - Getting Started</li></ul>
-      <p>In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
-Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.</p>
-
-<pre><code>var result = UserConnectionHandler.MongoCollection.AsQueryable()
-                                  .Where(u =&gt; u.Reputation &gt; reputation);
-</code></pre>
-
-
-      <p><a href="/2013/10/mongodb-csharp-driver-part3/">Read more...</a></p>
     </li>
     <hr/>
   </ul> 
