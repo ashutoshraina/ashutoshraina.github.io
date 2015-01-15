@@ -59,4 +59,15 @@ Apart from these, one more utility that I have recently added is Wox.
 Writing plugins is simple, and look they even have a documentation page.
 [Docs]("http://doc.getwox.com/en/plugin/csharp_plugin.html",Docs)
 
+* **Switcheroo**
+
+Ok, so this is something that I have added only in the last few days. Switcheroo provides IDE like experience when switching between tabs on windows. The project is also a good example of how to interact with WMI.
+As is now the tradition with almost everything on windows, it is available through chocolatey (which will be the topic of my next few posts).
+
+Note : Only install the latest version of switcheroo, the older versions crashed with .net 4.5.3.
+
+Switcheroo is available [here]("http://www.switcheroo.io/",here).
+
+Extended fun : Wox has a switcheroo [plugin]("https://github.com/orzFly/Wox.Plugin.Switcheroo",plugin).
+
 Hope this does help you as it as helped me improve my workflow.

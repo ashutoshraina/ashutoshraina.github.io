@@ -1,11 +1,4 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><link>http://ashutoshraina.github.io/feed.xml</link><description /><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</guid><link>http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</link><title>Everyday utilities for a Windows developer - Contd.</title><description>&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    cmder.exe /REGISTER ALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This time we look at some utility programs that are often required when doing deeper analysis in a windows environment.&lt;/p&gt;
-
-</description><pubDate>Sun, 11 Jan 2015 18:30:00 Z</pubDate><a10:updated>2015-01-11T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><description /><link>http://ashutoshraina.github.io/feed.xml</link><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</guid><title>Everyday utilities for a Windows developer - Contd.</title><author>ashutoshraina1989@gmail.com</author><category>tips</category><category>windows</category><description type="html">&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    cmder.exe /REGISTER ALL
 &lt;/code&gt;&lt;/pre&gt;
@@ -63,12 +56,21 @@ How this has saved my life !! Read debug logs like an ancient boss. Life saver w
 &lt;p&gt;Writing plugins is simple, and look they even have a documentation page.
 &lt;a href="http://ashutoshraina.github.io/"http://doc.getwox.com/en/plugin/csharp_plugin.html",Docs"&gt;Docs&lt;/a&gt;&lt;/p&gt;
 
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Switcheroo&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ok, so this is something that I have added only in the last few days. Switcheroo provides IDE like experience when switching between tabs on windows. The project is also a good example of how to interact with WMI.
+As is now the tradition with almost everything on windows, it is available through chocolatey (which will be the topic of my next few posts).&lt;/p&gt;
+
+&lt;p&gt;Note : Only install the latest version of switcheroo, the older versions crashed with .net 4.5.3.&lt;/p&gt;
+
+&lt;p&gt;Switcheroo is available &lt;a href="http://ashutoshraina.github.io/"http://www.switcheroo.io/",here"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Extended fun : Wox has a switcheroo &lt;a href="http://ashutoshraina.github.io/"https://github.com/orzFly/Wox.Plugin.Switcheroo",plugin"&gt;plugin&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;Hope this does help you as it as helped me improve my workflow.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</guid><link>http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</link><title>Everyday utilities for a Windows developer</title><description>&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
-
-&lt;p&gt;First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.&lt;/p&gt;
-
-</description><pubDate>Sun, 04 Jan 2015 18:30:00 Z</pubDate><a10:updated>2015-01-04T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</link><pubDate>Sun, 11 Jan 2015 18:30:00</pubDate><a10:updated>2015-01-12T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</guid><title>Everyday utilities for a Windows developer</title><author>ashutoshraina1989@gmail.com</author><category>tips</category><category>windows</category><description type="html">&lt;p&gt;As I have learned to use the command line more and more on windows I often get stuck due to lack of commands. This can be quite frustrating and if you switch between the *nix and windows then the gap can seem to quite alarming. In this post I will share some tidbits on how to overcome some of these pains. &lt;/p&gt;
 
 &lt;p&gt;First, do yourself and get a better console like Console2 or Mini Commander(or anything else that suits your style). Things are a bit better in Windows 10 (copy paste will be allowed on the command line) but that is still sometime away. If you are willing then I do suggest making the permanent shift to Powershell for all practical purposes, I don't see the windows command line (CMD) ever improving enough to make it my default console. Next, I describe some of the common things I do all the time.&lt;/p&gt;
 
@@ -211,13 +213,7 @@ wininit      724  13   1   75    772     0:00:00.203     0:11:06.762
 &lt;p&gt;psshutdown.exe&lt;/p&gt;
 
 &lt;p&gt;Now, before you really go shutdown everything, put the sysinternal in your path. Next time we will go look for a few other utilities that make life as a developer much easier from the point of view of debugging.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</guid><link>http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</link><title>Implicit and Explicit Operator in C#</title><description>&lt;p&gt;One of the features that I have never used in C# is the implicit and Explicit keywords. &lt;/p&gt;
-
-&lt;p&gt;The definitive word from MSDN on explicit is "The explicit keyword declares a user-defined type conversion operator that must be invoked with a cast." Omitting the cast will result in a compile time warning.&lt;/p&gt;
-
-&lt;p&gt;The definitive word from MSDN on implicit is "The implicit keyword is used to declare an implicit user-defined type conversion operator." Implicit doesn't require an explicit cast and makes the syntax a lot easier.&lt;/p&gt;
-
-</description><pubDate>Thu, 11 Sep 2014 18:30:00 Z</pubDate><a10:updated>2014-09-11T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;One of the features that I have never used in C# is the implicit and Explicit keywords. &lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/01/becoming-a-little-more-productive-on-windows/</link><pubDate>Sun, 04 Jan 2015 18:30:00</pubDate><a10:updated>2015-01-05T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</guid><title>Implicit and Explicit Operator in C#</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>C#</category><category>csharp</category><description type="html">&lt;p&gt;One of the features that I have never used in C# is the implicit and Explicit keywords. &lt;/p&gt;
 
 &lt;p&gt;The definitive word from MSDN on explicit is "The explicit keyword declares a user-defined type conversion operator that must be invoked with a cast." Omitting the cast will result in a compile time warning.&lt;/p&gt;
 
@@ -259,8 +255,7 @@ class Email
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I think it would quite useful in providing conversion operations from one type to another. The simplest candidate would when you have multiple addresses and you need them in a certain format (read Type) to send it to a shipping agency.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/08/ndepend-review/</guid><link>http://ashutoshraina.github.io/2014/08/ndepend-review/</link><title>NDepend Review</title><description>&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
-</description><pubDate>Sun, 24 Aug 2014 18:30:00 Z</pubDate><a10:updated>2014-08-24T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
+</description><link>http://ashutoshraina.github.io/2014/09/implicit-and-explicit-in-csharp/</link><pubDate>Thu, 11 Sep 2014 18:30:00</pubDate><a10:updated>2014-09-12T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/08/ndepend-review/</guid><title>NDepend Review</title><author>ashutoshraina1989@gmail.com</author><category>Review</category><category>Tools</category><description type="html">&lt;p&gt;Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
 &lt;!--excerpt--&gt;
 &lt;a href="http://www.ndepend.com/" title="NDepend"&gt;NDepend&lt;/a&gt; is a tool which allows you to maintain code quality in a continuous way. I must state &lt;em&gt;continuous&lt;/em&gt; with some degree of importance since that is what drives quality over a sustained period of time. The set up is fairly simple. You can download it and then install the VS plugin or use it as a stand alone tool. Let's go with the VS plugin for now. To ensure that I wasn't just checking out a demo application, I decided to pull down some medium and large open source projects and then run them through the grind.
 First, &lt;a href="http://ashutoshraina.github.io/"https://github.com/Sandra/Sandra.Snow"," title="Sandra.Snow"&gt;Snow&lt;/a&gt;(since this blog runs on Snow). The menu offers a way of creating a new NDepend project and attach it to the existing solution. We will attach to just Snow for now(leave out the other for the sake of simplicity).&lt;/p&gt;
@@ -305,9 +300,7 @@ I won't run it without configuring the rules according to my taste (naming stati
 The review is entirely my own and not influenced by anyone.&lt;/p&gt;
 
 &lt;p&gt;P.S. Why is everything uppercase by default in the Dashboard Menu ? (I thought the VS fiasco was enough)&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</guid><link>http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</link><title>Learning Chrome Extensions by accident</title><description>&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
-
-</description><pubDate>Tue, 04 Feb 2014 18:30:00 Z</pubDate><a10:updated>2014-02-04T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2014/08/ndepend-review/</link><pubDate>Sun, 24 Aug 2014 18:30:00</pubDate><a10:updated>2014-08-25T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</guid><title>Learning Chrome Extensions by accident</title><author>ashutoshraina1989@gmail.com</author><category>accident</category><category>chrome</category><description type="html">&lt;p&gt;So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!&lt;/p&gt;
 
 &lt;!--excerpt--&gt;
 
@@ -385,10 +378,7 @@ margin:inherit;
 I thought about putting it up on chrome extension gallery then saw the $5 charge and dropped the idea.&lt;/p&gt;
 
 &lt;p&gt;P.S. Don't judge me by my CSS skills.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</guid><link>http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</link><title>Learning Redis by accident</title><description>&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
-Microsoft provides the executable for 2.6 and we can download it from there.&lt;/p&gt;
-
-</description><pubDate>Sun, 26 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-26T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
+</description><link>http://ashutoshraina.github.io/2014/02/learning-chrome-extensions-by-accident/</link><pubDate>Tue, 04 Feb 2014 18:30:00</pubDate><a10:updated>2014-02-05T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</guid><title>Learning Redis by accident</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>accident</category><category>csharp</category><category>opensource</category><category>redis</category><description type="html">&lt;p&gt;While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
 Microsoft provides the executable for 2.6 and we can download it from there.&lt;/p&gt;
 
 &lt;!--excerpt--&gt;
@@ -450,8 +440,7 @@ Console.WriteLine(Encoding.UTF8.GetString((message)));
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This wasn't so hard and can be quite useful in situation where you simply need to hold data and not pay the penalty of going back to a full database again and again. I enjoyed writing about redis, hope you like reading it.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</guid><link>http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</link><title>Pub Sub with MongoDB</title><description>&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
-</description><pubDate>Wed, 22 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-22T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
+</description><link>http://ashutoshraina.github.io/2014/01/learning-redis-by-accident/</link><pubDate>Sun, 26 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-27T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</guid><title>Pub Sub with MongoDB</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
 &lt;!--excerpt--&gt;
 First, Capped Collection. Again from the MongodB webstie &lt;/p&gt;
 
@@ -542,12 +531,7 @@ Task.Factory.StartNew(t =&amp;gt; Subscribe(topic), TaskCreationOptions.None);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It wasn't so hard after all!!&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</link><title>MongoDb: Optimistic Concurrency</title><description>&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
-First, a really simple document.&lt;/p&gt;
-
-&lt;p&gt;Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.&lt;/p&gt;
-
-</description><pubDate>Fri, 17 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-17T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
+</description><link>http://ashutoshraina.github.io/2014/01/mongodb-pubsub/</link><pubDate>Wed, 22 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-23T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</guid><title>MongoDb: Optimistic Concurrency</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
 First, a really simple document.&lt;/p&gt;
 
 &lt;p&gt;Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.&lt;/p&gt;
@@ -584,26 +568,7 @@ First, a really simple document.&lt;/p&gt;
             }
         }
 &lt;/code&gt;&lt;/pre&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</guid><link>http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</link><title>MongoDb: Querying the OpLog</title><description>&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What is the OpLog?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;The mongodb website gives a rather long definition. I will quote that &lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, allowing them to maintain the current state of the database.&lt;/p&gt;
-  
-  &lt;p&gt;To facilitate replication, all replica set members send heartbeats (pings) to all other members. Any member can import oplog entries from any other member.
-  Whether applied once or multiple times to the target dataset, each operation in the oplog produces the same results, i.e. each operation in the oplog is idempotent. For proper replication operations, entries in the oplog must be idempotent:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;initial sync&lt;/li&gt;
-&lt;li&gt;post-rollback catch-up&lt;/li&gt;
-&lt;li&gt;sharding chunk migrations&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;</description><pubDate>Thu, 09 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-09T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2014/01/optimistic-concurrency-mongodb/</link><pubDate>Fri, 17 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-18T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</guid><title>MongoDb: Querying the OpLog</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;What is the OpLog?&lt;/strong&gt;&lt;/p&gt;
 
@@ -713,9 +678,7 @@ resut.ForEach(r =&amp;gt; Console.WriteLine(r));
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now, go on and make some operations through the shell and watch the oplog show up in a console window.&lt;/p&gt;
-</a10:content></item><item><guid isPermaLink="true">http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</guid><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><title>Up and Running with Asp.net MVC Mono and Monodevelop</title><description>&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
-
-</description><pubDate>Thu, 02 Jan 2014 18:30:00 Z</pubDate><a10:updated>2014-01-02T18:30:00Z</a10:updated><a10:content type="html">&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2014/01/querying-oplog-mongodb/</link><pubDate>Thu, 09 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-10T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</guid><title>Up and Running with Asp.net MVC Mono and Monodevelop</title><author>ashutoshraina1989@gmail.com</author><category>asp.net mvc</category><category>mono</category><category>monodevelop</category><category>opensource</category><category>tips</category><description type="html">&lt;p&gt;After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.&lt;/p&gt;
 
 &lt;!--excerpt--&gt;
 
@@ -778,4 +741,1720 @@ Could not locate Razor Host Factory type: System.Web.Mvc.MvcWebRazorHostFactory,
 &lt;p&gt;Now, Press F5.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/mvc-mono-success.png" alt="Success" /&gt;&lt;/p&gt;
-</a10:content></item></channel></rss>
+</description><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><pubDate>Thu, 02 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</guid><title>Tasks With Timeout On .net 4.5 Contd.</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
+    {
+        var delay = task.ContinueWith(t =&amp;gt; { }, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+    public static Task&amp;lt;T&amp;gt; WithTimeout&amp;lt;T&amp;gt;(this Task&amp;lt;T&amp;gt; task, TimeSpan timeout)
+    {            
+        var delay = task.ContinueWith(t =&amp;gt; t.Result, new CancellationTokenSource(timeout).Token);
+        return Task.WhenAny(task, delay).Unwrap();
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Program
+{
+    private static List&amp;lt;int&amp;gt; Output = new List&amp;lt;int&amp;gt;();
+    private static Random _random = new Random();
+
+    public static int LongRunningTask(string message)
+    {
+        Console.WriteLine(message);
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        //Simulate a long running task
+        Thread.Sleep(TimeSpan.FromSeconds(2));
+        var number = _random.Next();
+        Console.WriteLine("Adding " + number + " From thread  - " + Thread.CurrentThread.ManagedThreadId);
+        return number;
+    }
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("In Main");
+        TimeoutonNet45();
+        Console.ReadLine();
+    }
+
+    public static void TimeoutonNet45()
+    {
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        var tasks = new List&amp;lt;Task&amp;gt;();
+        try
+        {
+            var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"),TaskCreationOptions.AttachedToParent)
+                                 .WithTimeout(TimeSpan.FromMilliseconds(1000))                
+                                 .ContinueWith(t =&amp;gt; Output.Add(t.Result), TaskContinuationOptions.NotOnCanceled);
+            var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+            tasks.Add(t1);
+            tasks.Add(t2);
+            Task.WaitAll(tasks.ToArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("There was an exception");
+            Console.WriteLine(ex.InnerException.Message);
+        }
+        Console.WriteLine("Output :");
+        Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
+    }
+
+    public static void TimeoutOnNet4()
+    {
+        Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+        var tasks = new List&amp;lt;Task&amp;gt;();
+        try
+        {
+            var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"), TaskCreationOptions.AttachedToParent)
+                                 .TimeoutAfter(1000)
+                                 .ContinueWith(t =&amp;gt; Output.Add(t.Result), TaskContinuationOptions.NotOnFaulted);
+            var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+            var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), TaskCreationOptions.AttachedToParent)
+                                 .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+            tasks.Add(t1);
+            tasks.Add(t2);
+            tasks.Add(t3);
+            Task.WaitAll(tasks.ToArray());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("There was an exception");
+            Console.WriteLine(ex.InnerException.Message);
+        }
+        Console.WriteLine("Output :");
+        Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output will look something like this :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In Main
+Managed thread Id 10
+Entering task1
+Managed thread Id 11
+Entering task2
+Managed thread Id 12
+Adding 856463453 From thread  - 12
+Adding 1826416296 From thread  - 11
+There was an exception
+A task was canceled.
+Output :
+856463453
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</link><pubDate>Sun, 29 Dec 2013 18:30:00</pubDate><a10:updated>2013-12-30T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</guid><title>Tasks With Timeout Contd.</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    var tasks = new List&amp;lt;Task&amp;gt;();
+    try
+    {
+    //instead of checking for fault within the continutaion, 
+    //we can just use a TaskContinuationOption to tell communicate the right semantics
+
+    var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(),TaskCreationOptions.AttachedToParent)
+    .TimeoutAfter(1000)
+    .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult(), 
+     TaskContinuationOptions.NotOnFaulted);
+
+    var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask(), TaskCreationOptions.AttachedToParent)
+      .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult());
+
+    var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"),
+    TaskCreationOptions.AttachedToParent)
+      .ContinueWith(t =&amp;gt; SomethingUsefulWithTheResult());
+
+    tasks.Add(t1);
+    tasks.Add(t2);
+    tasks.Add(t3);
+
+    Task.WaitAll(tasks.ToArray());
+    }
+    catch (Exception ex)
+    {
+    Console.WriteLine("There was an exception");
+    Console.WriteLine(ex.InnerException.Message);   
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I will show in the next post how this wasn't all that better since this leaves a few gaps.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</link><pubDate>Mon, 23 Dec 2013 18:30:00</pubDate><a10:updated>2013-12-24T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeouts/</guid><title>Tasks With Timeout</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;So the task is to timeout a task. now, I never thought it would take me as long as it did. Turns out it is a really tricky problem problem. I was expecting something within the framework to make life easier, there isn't anything by default but msdn to the rescue 
+&lt;a href="http://blogs.msdn.com/b/pfxteam/archive/2011/11/10/10235834.aspx" title="Tasks With Timeout"&gt;Tasks With Timeouts&lt;/a&gt;&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;So, the extension method is &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static class TaskWithTimeout
+{
+    internal struct VoidTypeStruct
+    { }
+    internal static void MarshalTaskResults&amp;lt;TResult&amp;gt;(Task source, TaskCompletionSource&amp;lt;TResult&amp;gt; proxy)
+    {
+        switch (source.Status)
+        {
+            case TaskStatus.Faulted:
+                proxy.TrySetException(source.Exception);
+                break;
+            case TaskStatus.Canceled:
+                proxy.TrySetCanceled();
+                break;
+            case TaskStatus.RanToCompletion:
+                Task&amp;lt;TResult&amp;gt; castedSource = source as Task&amp;lt;TResult&amp;gt;;
+                proxy.TrySetResult(
+                    castedSource == null ? default(TResult) : // source is a Task
+                        castedSource.Result); // source is a Task&amp;lt;TResult&amp;gt;
+                break;
+        }
+    }
+
+    public static Task TimeoutAfter(this Task task, int millisecondsTimeout)
+    {
+        // Short-circuit #1: infinite timeout or task already completed
+        if (task.IsCompleted || (millisecondsTimeout == Timeout.Infinite))
+        {
+            // Either the task has already completed or timeout will never occur.
+            // No proxy necessary.
+            return task;
+        }
+
+        // tcs.Task will be returned as a proxy to the caller
+        TaskCompletionSource&amp;lt;VoidTypeStruct&amp;gt; tcs = new TaskCompletionSource&amp;lt;VoidTypeStruct&amp;gt;();
+
+        // Short-circuit #2: zero timeout
+        if (millisecondsTimeout == 0)
+        {
+            // We've already timed out.
+            tcs.SetException(new TimeoutException());
+            return tcs.Task;
+        }
+
+        // Set up a timer to complete after the specified timeout period
+        Timer timer = new Timer(state =&amp;gt;
+        {
+            // Recover your state information
+            var myTcs = (TaskCompletionSource&amp;lt;VoidTypeStruct&amp;gt;)state;
+            // Fault our proxy with a TimeoutException
+            myTcs.TrySetException(new TimeoutException());
+        }, tcs, millisecondsTimeout, Timeout.Infinite);
+
+        // Wire up the logic for what happens when source task completes
+        task.ContinueWith(antecedent =&amp;gt;
+                            {
+                                timer.Dispose(); // Cancel the timer
+                                MarshalTaskResults(antecedent, tcs); // Marshal results to proxy
+                            },
+                            CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+
+        return tcs.Task;
+    }
+
+    public static Task&amp;lt;TResult&amp;gt; TimeoutAfter&amp;lt;TResult&amp;gt;(this Task&amp;lt;TResult&amp;gt; task, int millisecondsTimeout)
+    {
+        // Short-circuit #1: infinite timeout or task already completed
+        if (task.IsCompleted || (millisecondsTimeout == Timeout.Infinite))
+        {
+            // Either the task has already completed or timeout will never occur.
+            // No proxy necessary.
+            return task;
+        }
+
+        // tcs.Task will be returned as a proxy to the caller
+        TaskCompletionSource&amp;lt;TResult&amp;gt; tcs = new TaskCompletionSource&amp;lt;TResult&amp;gt;();
+
+        // Short-circuit #2: zero timeout
+        if (millisecondsTimeout == 0)
+        {
+            // We've already timed out.
+            tcs.SetException(new TimeoutException());
+            return tcs.Task;
+        }
+
+        // Set up a timer to complete after the specified timeout period
+        Timer timer = new Timer(state =&amp;gt;
+                                {
+                                    // Recover your state information
+                                    var myTcs = (TaskCompletionSource&amp;lt;TResult&amp;gt;)state;
+                                    // Fault our proxy with a TimeoutException
+                                    myTcs.TrySetException(new TimeoutException());
+                                }, tcs, millisecondsTimeout, Timeout.Infinite);
+
+        // Wire up the logic for what happens when source task completes
+        task.ContinueWith(antecedent =&amp;gt;
+                            {
+                                timer.Dispose(); // Cancel the timer
+                                MarshalTaskResults(antecedent, tcs); // Marshal results to proxy
+                            }, 
+                            CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously,TaskScheduler.Default);
+
+        return tcs.Task;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A lot of code for doing this, and the msdn article remains the better source of explanation.&lt;/p&gt;
+
+&lt;p&gt;Now using this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Program
+    {
+        private static List&amp;lt;int&amp;gt; Output = new List&amp;lt;int&amp;gt;();
+        private static Random _random = new Random();
+
+        public static int LongRunningTask(string message)
+        {
+            Console.WriteLine(message);
+            Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+            //Simulate a long running task
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            var number = _random.Next();
+            Console.WriteLine("Adding " + number + " From thread  - " + Thread.CurrentThread.ManagedThreadId);
+            return number;
+        }
+
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("In Main");
+            Console.WriteLine("Managed thread Id " + Thread.CurrentThread.ManagedThreadId);
+            var cts = new CancellationTokenSource();
+            var tasks = new List&amp;lt;Task&amp;gt;();
+            try
+            {
+//In the continuation check for the condition of fault (or something more if you so need) and perform the //continuation
+                var t1 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task1"),
+                                                    TaskCreationOptions.AttachedToParent)
+                                     .TimeoutAfter(1000)
+                                     .ContinueWith(antecedent =&amp;gt; {
+                        if(!(antecedent.IsCanceled || antecedent.IsFaulted))
+                                                         Output.Add(antecedent.Result);
+                                }
+                                , cts.Token);
+                var t2 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task2"),
+                                                    TaskCreationOptions.AttachedToParent)
+                                     .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+                var t3 = Task.Factory.StartNew(_ =&amp;gt; LongRunningTask("Entering task3"), 
+                                                    TaskCreationOptions.AttachedToParent)
+                                     .ContinueWith(_ =&amp;gt; Output.Add(_.Result));
+
+                tasks.Add(t1);
+                tasks.Add(t2);
+                tasks.Add(t3);
+
+                Task.WaitAll(tasks.ToArray());
+            }
+            catch (Exception ex)
+            {                
+                Console.WriteLine("There was an exception");
+                Console.WriteLine(ex.InnerException.Message);               
+            }
+
+            Console.WriteLine("Output :");
+            Output.ForEach(_ =&amp;gt; Console.WriteLine(_));
+
+            Console.ReadLine();
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The important part being that the continuation is applied after the timeout and it won't work with the other way around.
+The output therefore basically looks like this : &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In Main
+Managed thread Id 9
+Entering task1
+Managed thread Id 10
+Entering task2
+Managed thread Id 11
+Entering task3
+Managed thread Id 14
+Adding 194443354 From thread  - 10
+Adding 792426557 From thread  - 11
+Adding 230130793 From thread  - 14
+Output :
+792426557
+230130793
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, time I will try and write about some other things on Flirting with Tasks.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeouts/</link><pubDate>Sun, 22 Dec 2013 18:30:00</pubDate><a10:updated>2013-12-23T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/11/mongodb-sharding/</guid><title>MongoDB-Sharding</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;&lt;strong&gt;Sharding&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Mongodb sharding is based on shard key.&lt;/p&gt;
+
+&lt;p&gt;K1 -&amp;gt; k2 on shard1
+K2 -&amp;gt; k3 on shard2 etc..&lt;/p&gt;
+
+&lt;p&gt;Each shard is then replicated for higher availability and DR etc..Sharding is therefore range based. Sharding is done per collections basis.Range based sharding helps it do range based queries.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;All of the documents on a particular shard are known as chunks ~~ 100mb.&lt;/p&gt;
+
+&lt;p&gt;There are two operations that happen in the background in sharding and these are done automatically for us.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Split - splits a range if the range is producing bigger chunks, this is fairly expensive&lt;/li&gt;
+&lt;li&gt;Migrate - moves chunks to somewhere else in the cluster, this is somewhat expensive.
+&lt;ul&gt;
+&lt;li&gt;Between a pair of shards there will not be more than one migration activity.&lt;/li&gt;
+&lt;li&gt;We can still read and write from the data when we are migrating. So, it is live.&lt;/li&gt;
+&lt;li&gt;"Balancer" decides when to do the balancing. It balances on the number of chunks today.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Both of these are done to maintain a balance in the shards w.r.t. the documents.
+The metadata about these shards and our system is stored in config servers. These are light weight.
+Conceptually these shards are processes and not separate physical machines or virtual machines although they can and most likely will be.&lt;/p&gt;
+
+&lt;p&gt;Mongos gives the client the big picture of the whole setup. Client is therefore insulated from the underlying architecture that is used to implement sharding, replication etc..&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/sharding.png" alt="Sharding" /&gt;&lt;/p&gt;
+
+&lt;p&gt;End client applications should go through mongos.&lt;/p&gt;
+
+&lt;p&gt;To create a shard connect to mongos&lt;/p&gt;
+
+&lt;p&gt;Then&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sh.addShard("hostname:port")
+sh.enableSharding("dbname")
+db.ensureIndex(Key pattern for your shard key)
+sh.shardCollection("namespaceforyourCollection",shardkey);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Choosing a shard key&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Filed should be involved in most of the queries&lt;/li&gt;
+&lt;li&gt;Good cardinality/granularity&lt;/li&gt;
+&lt;li&gt;Shard key should not increase monotonically&lt;/li&gt;
+&lt;/ul&gt;
+</description><link>http://ashutoshraina.github.io/2013/11/mongodb-sharding/</link><pubDate>Mon, 04 Nov 2013 18:30:00</pubDate><a10:updated>2013-11-05T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/11/mongodb-replication/</guid><title>MongoDB-Replication</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;&lt;strong&gt;REPLICATION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Replication helps us achieve availability and fault-tolerance. A replica set is a set of mongo nodes that replicate data amongst each other asynchronously. One of the replica sets is primary while the rest of them will be secondary.
+Writes only happen to the primary. If the primary goes down then an election happens and the new primary comes up.
+Minimum number of nodes will be 3, since the election requires a majority of the original set.
+If there were only 2 sets then the remaining one is not a majority and you would not be able to write.&lt;/p&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+Replica Set Elections&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Regular Node : It has the data and can become primary or secondary.
+Arbiter : It is just there for voting purposes. We need it if we want an even number of nodes. It has no data on it.
+Delayed/Regular : It can be set to a few hours after the nodes. It cannot become primary. It's priority is set to 0.
+Hidden Node : It cannot become a primary node. It's priority is set to 0.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default the reads and writes go to the primary. You can go to secondary for reading. This means that you might read stale data. The lag between nodes is not guaranteed since the process is async. If you read from secondary then what we have is &lt;em&gt;"eventual consistency"&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rs.slaveOk() -- ok to read from the secondary
+rs.isMaster() -- checks whether the node is master
+rs.status() -- gives the current status of the replica set.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the database locals , the collection oplogs.rs has all the operational logs. Replication happens when secondary nodes query the primary for the changes from a given timestamp. OpLog is the statement based replication log.
+Replication happens in a statement driven manner?
+e.g If a statement deletes 100 documents on the primary then there will 100 statements that are sent to the secondary to execute. There is no binary replication. This allows us to run different version of mongodb on different machines.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Try to keep the OpLog small on 64 bit machine since it defaults to a large value on 64 bit systems.&lt;/li&gt;
+&lt;li&gt;For replica sets don't use localhost or the ip address of the machine.&lt;/li&gt;
+&lt;li&gt;Use a logical name, that is the best practice.&lt;/li&gt;
+&lt;li&gt;Use DNS.&lt;/li&gt;&lt;/li&gt;
+&lt;li&gt;Pick appropriate TTL as well.&lt;/li&gt;
+&lt;/ul&gt;
+</description><link>http://ashutoshraina.github.io/2013/11/mongodb-replication/</link><pubDate>Sun, 03 Nov 2013 18:30:00</pubDate><a10:updated>2013-11-04T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/review-csharp-indepth/</guid><title>Review-CSharp in Depth.</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>book review</category><category>csharp</category><description type="html">&lt;p&gt;I have read the second edition as well. The third edition carries on from there and provides a deeper look in C# 5 and it's key feature async/await. If you want to understand what goes on behind the scenes, this one is for you. Jon Skeet ( yes the famous guy &lt;a href="http://stackoverflow.com/users/22656/jon-skeet" title="Jon Skeet"&gt;Jon Skeet&lt;/a&gt;) has managed to come out with a great book once again.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Jon starts easy on this, but doesn't hold back. The prose is lucid yet well paced. It is one of the few books that make the effort to take the reader on journey. The journey begins with C#1 and then continues to C#5. Hardly any chapters drag on anymore than they should. Linq is covered in great depth and is a nicely written with enough diagrams to visualize what is happening under the hood. Generics is one my personal favourites. The text is nice, so are the code samples. I have never really understood generics completely, but the books does make things a lot clearer. The treatment of dynamic is really nice. It goes into the heart of the DLR and shows everything that you need to know to really understand dynamic. &lt;/p&gt;
+
+&lt;p&gt;The book really shines when you move to &lt;em&gt;async/await&lt;/em&gt;. Jon makes a rather tough concept easier. I had to read it several times but each time the concept became easier. I only wish we moved away from the download the web page example for async. The book does spend time on compiler transformations that are behind &lt;em&gt;async/await&lt;/em&gt;. Be patient when you read it, it will take time to sink in.&lt;/p&gt;
+
+&lt;p&gt;The only part that has been left out from the third edition is the chapter on Code Contracts. Jon clearly mentions that the topic hasn't gained as much traction as he hoped. It may come back in the future though. As many have mentioned this before this is not a book for beginners. Use this to become a better C# programmer, after you have written C# for some time. This is a must have in your collection, especially if you work with C# day in and day out. It will give you a greater understanding of how the language designers wanted you think, and what makes C# a real joy.
+A 4.5/5 for this one, keeping the 0.5 for the next edition :).&lt;/p&gt;
+
+&lt;p&gt;P.S. Even the appendix is handy.&lt;/p&gt;
+
+&lt;p&gt;Disclosure : I got a free copy of the book to review.  The review is my own opinion and not influenced by anyone else.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/review-csharp-indepth/</link><pubDate>Tue, 22 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-23T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/</guid><title>MongoDB-Understanding queries through explain plan</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;Understanding the queries we write is very critical and MongoDB does a good job here. Developers will find it easy to understand what the queries are doing and where to look for bottlenecks. Well defined parameters and also well documented ones make life a lot easier.
+The details have been taken from the mongodb website and presented here for continuity of series.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;&lt;strong&gt;Explain Output Fields&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.cursor&lt;/em&gt;
+cursor is a string that reports the type of cursor used by the query operation:&lt;/p&gt;
+
+&lt;p&gt;BasicCursor indicates a full collection scan.
+BtreeCursor indicates that the query used an index. The cursor includes name of the index. When a query uses an index, the output of explain() includes indexBounds details.
+GeoSearchCursor indicates that the query used a geospatial index.
+explain.isMultiKey
+isMultiKey is a boolean. When true, the query uses a multikey index, where one of the fields in the index holds an array.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.n&lt;/em&gt;
+n is a number that reflects the number of documents that match the query selection criteria.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.nscannedObjects&lt;/em&gt;
+Specifies the total number of documents scanned during the query. The nscannedObjects may be lower than nscanned, such as if the index covers a query. See indexOnly. Additionally, the nscannedObjects may be lower than nscanned in the case of multikey index on an array field with duplicate documents.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.nscanned&lt;/em&gt;
+Specifies the total number of documents or index entries scanned during the database operation. You want n and nscanned to be close in value as possible. The nscanned value may be higher than the nscannedObjects value, such as if the index covers a query. See indexOnly.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.nscannedObjectsAllPlans&lt;/em&gt;
+nscannedObjectsAllPlans is a number that reflects the total number of documents scanned for all query plans during the database operation.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.nscannedAllPlans&lt;/em&gt;
+nscannedAllPlans is a number that reflects the total number of documents or index entries scanned for all query plans during the database operation.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.scanAndOrder&lt;/em&gt;
+scanAndOrder is a boolean that is true when the query cannot use the index for returning sorted results.&lt;/p&gt;
+
+&lt;p&gt;When true, MongoDB must sort the documents after it retrieves them from either an index cursor or a cursor that scans the entire collection.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.indexOnly&lt;/em&gt;
+indexOnly is a boolean value that returns true when the query is covered by the index indicated in the cursor field. When an index covers a query, MongoDB can both match the query conditions and return the results using only the index because:&lt;/p&gt;
+
+&lt;p&gt;all the fields in the query are part of that index, and
+all the fields returned in the results set are in the same index.
+explain.nYields
+nYields is a number that reflects the number of times this query yielded the read lock to allow waiting writes execute.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.nChunkSkips&lt;/em&gt;
+nChunkSkips is a number that reflects the number of documents skipped because of active chunk migrations in a sharded system. Typically this will be zero. A number greater than zero is ok, but indicates a little bit of inefficiency.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.millis&lt;/em&gt;
+millis is a number that reflects the time in milliseconds to complete the query.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.indexBounds&lt;/em&gt;
+indexBounds is a document that contains the lower and upper index key bounds. This field resembles one of the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;"indexBounds" : {
+"start" : {  : , ...  },
+"end" : {  : , ... }
+},
+"indexBounds" : { "" : [ [ ,  ] ],
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;explain.allPlans&lt;/em&gt;
+allPlans is an array that holds the list of plans the query optimizer runs in order to select the index for the query. Displays only when the  parameter to explain() is true or 1.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.oldPlan&lt;/em&gt;
+oldPlan is a document value that contains the previous plan selected by the query optimizer for the query. Displays only when the  parameter to explain() is true or 1.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.server&lt;/em&gt;
+server is a string that reports the MongoDB server.&lt;/p&gt;
+
+&lt;p&gt;$or Query Output Fields
+explain.clauses
+clauses is an array that holds the Core Explain Output Fields information for each clause of the $or expression. clauses is only included when the clauses in the $or expression use indexes.&lt;/p&gt;
+
+&lt;p&gt;Sharded Collections Output Fields
+&lt;em&gt;explain.clusteredType&lt;/em&gt;
+clusteredType is a string that reports the access pattern for shards. The value is:&lt;/p&gt;
+
+&lt;p&gt;ParallelSort, if the mongos queries shards in parallel.
+SerialServer, if the mongos queries shards sequentially.
+&lt;em&gt;explain.shards&lt;/em&gt;
+shards contains fields for each shard in the cluster accessed during the query. Each field holds the Core Explain Output Fields for that shard.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.millisShardTotal&lt;/em&gt;
+millisShardTotal is a number that reports the total time in milliseconds for the query to run on the shards.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.millisShardAvg&lt;/em&gt;
+millisShardAvg is a number that reports the average time in millisecond for the query to run on each shard.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.numQueries&lt;/em&gt;
+numQueries is a number that reports the total number of queries executed.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;explain.numShards&lt;/em&gt;
+numShards is a number that reports the total number of shards queried.&lt;/p&gt;
+
+&lt;p&gt;Lastly, some more profiling tips that can be pretty useful.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Logging Slow Queries&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are 3 levels for the profiler 0 OFF , 1Slow, 2 ALL&lt;/li&gt;
+&lt;li&gt;Enable this using mongod -profile 1 --slowms 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Db.getProfilingLevel()&lt;/code&gt; to get the current profiling level.&lt;/li&gt;
+&lt;li&gt;If you want to get all queries that took longer than 3 second, ordered by timestamp descending&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;db.system.profile.find({millis:{$gt:3000}}).sort({ts:-1})&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Mongotop can be run set to a specific time interval to determine where is the majority of the time spent. This utility tracks the time that mongod spends on reads and writes. The information is on a per collection basis.
+I prefer to increase the time for reporting from the default 1 sec to somewhere close to 5 sec or more (this is just a random number that I feel comfortable with..otherwise the data is to verbose to make any sense).&lt;/p&gt;
+
+&lt;p&gt;This should be a good start. We will go into some more concepts about monitoring mongodb before going into sharding etc..&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-understanding-your-queries-through-explainplan/</link><pubDate>Sat, 12 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-13T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-indexing/</guid><title>MongoDB-Indexing</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;Indexing is one of the most important concepts for any database. Without indexes the mongod process would scan the entire collection and the all the documents it contains to obtain the result of the query. Indexes are defined for the collections and properties as well as sub-fields are supported. Briefly, MongoDB supports the following types of indexes : &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Field Indexes&lt;/strong&gt; : Think about having an index on a column in RDBMS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compound Indexes&lt;/strong&gt;: Think about an having an index on multiple columns in RDBMS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multikey Indexes&lt;/strong&gt;: This is unique to MongodB, it references an array and succeeds if there is a match for any value in the array.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geospatial Indexes and Queries&lt;/strong&gt; : Allows you to index GeoData. I really don't know much about this to comment. MongoDB website is the best source.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Text Indexes&lt;/strong&gt; : For full text search inside a document. Should we use lucene ? Not sure ?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hashed Index&lt;/strong&gt;: Index on hashed contents of the fields.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Indexes have properties associated with them :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;TTL: This is a rather surprising feature. I never expected such a feature to be available on indexes, but after giving it some thought, it makes sense to expire the indexes.&lt;/li&gt;
+&lt;li&gt;Unique: Only documents with unique values on the field are permitted.&lt;/li&gt;
+&lt;li&gt;Sparse: Really useful if you are going to have sparse fields. It leaves out the documents that do not have the field.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Some more tid-bits&lt;/strong&gt;
+- The order of indexes matters.
+e.g. if an index is created on (a,b,c) then index will be used only if the query is on
+- A or a,b or a,b,c . 
+- Index will not be called if we query on b,c or c.
+- It needs to be a left subset of the index.&lt;/p&gt;
+
+&lt;p&gt;The command is below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Db.collection.ensureIndex('property');
+e.g. `db.students.ensureIndex({'class':1,'student_name':1});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;- Note: 1 or -1 is for ascending v/s descending which becomes useful when we have a lot of sort queries.
+- By default all the indexes are built in the foreground i.e. all the writers will be blocked while the index is being created. It is fast but the database is blocked.
+- Background ones are slow, fit for production use.
+- Creating the database index in the background also blocks the current shell while it is being created.
+- All indexes are Btree indexes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Index Creation option , Unique , Removing Duplicates&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unique indexes ensure that the key is unique in the collection.&lt;/li&gt;
+&lt;li&gt;e.g. db.students.ensureIndex({'student&lt;em&gt;id':1,'class&lt;/em&gt;id':1},{'unique':true})&lt;/li&gt;
+&lt;li&gt;To remove the duplicates while creating the index we can do the following :&lt;/li&gt;
+&lt;li&gt;Provide the dropDups :true along with the unique attribute. This is dangerous, so handle with care. There is no way to control which documents it will remove. It will let live a single document and we can't predict or configure as to which one it will be.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;MultiKey Index&lt;/em&gt;
+- It will create an index for all the items in the array if the key.
+- You can't have two multi keys in a single index. This cause a polynomial explosion of the indexes.
+- We will only when we first insert something in the collection.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Index Efficiency&lt;/em&gt;
+- $gt, $lt will use the index but the efficiency may not be there since the selectivity could be very low.
+Similar for $ne etc.. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Index Size&lt;/em&gt;
+- Indexes must be kept in memory.
+- Db.collection.stats() to get the stats on the collection.
+Db.collection.getIndexSize() to get the total size of the index of the database.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Final thoughts&lt;/strong&gt;
+- Create any and all indexes that are required for your queries.
+- Ensure that the indexes fit in memory, reading from the disk is bad.
+- Sorting should also use Indexes.
+- High selectivity should be the prime consideration when deciding about indexes.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-indexing/</link><pubDate>Sat, 05 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-06T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-ops-stuff/</guid><title>MongoDB-Ops-Stuff</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;In the previous two posts we have seen some basic querying and how to leverage the querying mechanism to get up and running. Now, we are off in the wild world and we also need to some more complicated stuff.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Creating Indexes&lt;/strong&gt;
+The api surface is really smooth with this, allowing us to specify the sort order of the indexes and the manner of building them foreground or background.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public void CreateIndex()
+{
+var QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
+QuestionConnectionHandler.MongoCollection.EnsureIndex( 
+                      IndexKeys.Ascending("Difficulty"), IndexOptions.SetBackground(true));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Dropping indexes is also easy with &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;QuestionConnectionHandler.MongoCollection.DropAllIndexes();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What happens when you want to see what is going on under the hood ? You let the database &lt;strong&gt;Explain&lt;/strong&gt; it's&lt;strong&gt; Plan&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;QuestionConnectionHandler.MongoCollection.AsQueryable()
+                  .Where(q =&amp;gt; q.Difficulty &amp;gt;= 3).Explain();
+//or if you went the other way 
+var query = Query&amp;lt;Question&amp;gt;.GTE(q =&amp;gt; q.Difficulty, 3);
+var explainPlan = QuestionConnectionHandler.MongoCollection
+                          .FindAs&amp;lt;Question&amp;gt;(query).Explain();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, if only we could have some stats about our database and the indexes. All wrapped in a nice syntax.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var stats = QuestionConnectionHandler.MongoCollection.GetStats();
+Console.WriteLine("Namespace : {0}", stats.Namespace);
+Console.WriteLine("DataSize : {0}", stats.DataSize);
+Console.WriteLine("Index Count : {0}", stats.IndexCount);
+stats.IndexSizes.Keys.ForEach(Console.WriteLine);
+var size = QuestionConnectionHandler.MongoCollection.GetTotalDataSize();
+Console.WriteLine("The total datasize for this collection is {0}", size);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A routine task is to get all the collections in a database and all the databases on the server itself. Easy peasy!!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var collections = QuestionConnectionHandler.MongoCollection.Database.GetCollectionNames();
+Console.WriteLine("\nThe following collections are present in the database");
+collections.ForEach(Console.WriteLine);
+var client = new MongoClient(@"mongodb://localhost");
+var server = client.GetServer();
+var databases = server.GetDatabaseNames().ToList();
+Console.WriteLine("\nAll the databases in the server");
+databases.ForEach(Console.WriteLine);
+&lt;/code&gt;&lt;/pre&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-ops-stuff/</link><pubDate>Fri, 04 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-05T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part2/</guid><title>MongoDB-CSharp-Driver Getting organised</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;Having done the inital work for talking to MongoDB we can now create some POCO classes and then do some querying on top of it. As usual, my model is Questions and Users.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Question : MongoEntity
+{
+    public string Text { get; set; }
+    public string Answer { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int Difficulty { get; set; }
+}
+public class User : MongoEntity
+{
+    public string Name { get; set; }
+    public int Reputation { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Finally, we get down to some real stuff. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class SimpleQueries
+{
+    protected readonly MongoConnectionHandler&amp;lt;User&amp;gt; UserConnectionHandler;
+    protected readonly MongoConnectionHandler&amp;lt;Question&amp;gt; QuestionConnectionHandler;
+
+    public SimpleQueries()
+    {
+        UserConnectionHandler = new MongoConnectionHandler&amp;lt;User&amp;gt;("MongoDBDemo");
+        QuestionConnectionHandler = new MongoConnectionHandler&amp;lt;Question&amp;gt;("MongoDBDemo");
+    }
+
+    public void CreateQuestion(Question question)
+    {
+        //// Save the entity with safe mode (WriteConcern.Acknowledged)
+        var result = QuestionConnectionHandler.MongoCollection.Save&amp;lt;Question&amp;gt;(question, 
+                             new MongoInsertOptions { WriteConcern = WriteConcern.Acknowledged});
+
+        if (!result.Ok)
+        {
+            Console.WriteLine(result.LastErrorMessage);
+        }
+        else if (result.Response["err"] != null)
+        {
+            Console.WriteLine("Insertion was successfull");
+        }
+    }
+
+    public void CreateUser(User user)
+    {
+        //// Save the entity with safe mode (WriteConcern.Acknowledged)
+        var result = UserConnectionHandler.MongoCollection.Save&amp;lt;User&amp;gt;(user, 
+                          new MongoInsertOptions { WriteConcern = WriteConcern.Acknowledged });
+
+        if (!result.Ok)
+        {
+            Console.WriteLine(result.LastErrorMessage);
+        }
+        else if (result.Response["err"] != null)
+        {
+            Console.WriteLine("Insertion was successfull");
+        }
+    }
+
+    public void GetAllQuestions()
+    {
+        var cursor = QuestionConnectionHandler.MongoCollection.AsQueryable();
+        var resultSet = cursor.ToList();
+
+        Console.WriteLine("Writing out all the questions");
+        foreach (var result in resultSet)
+        {
+            Console.WriteLine("Text : {0},  Answer : {1}", result.Text, result.Answer);
+        }
+    }
+
+    public ObjectId GetOneQuestion()
+    {
+        var cursor = QuestionConnectionHandler.MongoCollection.AsQueryable().FirstOrDefault();
+
+        Console.WriteLine(cursor.Id);
+        return cursor.Id;
+    }
+
+    public void DeleteQuestion(ObjectId id)
+    {
+        var result = QuestionConnectionHandler.MongoCollection.Remove(
+            Query&amp;lt;Question&amp;gt;.EQ(e =&amp;gt; e.Id, id), RemoveFlags.None, WriteConcern.Acknowledged);
+
+        if (!result.Ok)
+        {
+            Console.WriteLine(result.ErrorMessage);
+        }
+        else
+        {
+            Console.WriteLine("Delete Operation OK : {0}", result.Ok);
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, that we have some capabilities in our application, we can query away.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//Seed Data
+var question = new Question { Text = "Who are you ?", Answer = "I am MongoDB.",
+                          CreatedOn = DateTime.Now, Difficulty = 3 };
+var user = new User {Name = "Ashutosh", Reputation = 100};
+var queries = new SimpleQueries();
+queries.CreateQuestion(question);
+queries.CreateUser(user);
+
+
+
+var queries = new SimpleQueries();
+queries.GetAllQuestions();
+var id = queries.GetOneQuestion();
+queries.DeleteQuestion(id);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If all is well then you will see some output and the world will be a better place.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part2/</link><pubDate>Thu, 03 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-04T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part3/</guid><title>MongoDB-CSharp-Driver-Using Linq</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;In the previous post we have seen some simple queries. It is time we move onto something more concrete and realistic. There are basically two ways of querying MongoDB with the driver. First, as I showed last time is using LINQ. To use LINQ we need to first move into the Queryable world and then proceed with actual querying.
+Be careful about pulling all the documents locally and then performing operations on them. What we really want to do is offload all our querying to MongoDB and then only use the results. The driver implements the IQueryable interface and hence we should use it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var result = UserConnectionHandler.MongoCollection.AsQueryable()
+                                  .Where(u =&amp;gt; u.Reputation &amp;gt; reputation);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;The alternative to this form of querying is using a BsonDocument and a MongoQuery. The way to build up such a query is below. Note, that the first lambda is the property and the second parameter is the key for the filtering. The query builder is in the MongoDB.Drivers.Builders namespace.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var query = Query&amp;lt;User&amp;gt;.GT(u =&amp;gt; u.Reputation, reputation);
+var result = UserConnectionHandler.MongoCollection.FindAs&amp;lt;User&amp;gt;(query);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is a bit more work to specify queries by hand so I would prefer LINQ, but both options are available.
+Another, interesting querying mechanism is Regex. It was kind of hard to locate in the API ( or may be I just didn't know where to look). It is present in Bson namesapce.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public void UserNameStartsWith(string searchKey)
+{
+var query = Query.Matches("Name", new BsonRegularExpression(string.Format("^{0}", searchKey)));
+var result = UserConnectionHandler.MongoCollection.Find(query);
+Console.WriteLine("We found {0} Users whose name starts with {1}", result.Count(), searchKey);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Select does not result in fewer fields being returned from the server. The entire document is pulled back and passed to the native Select method. Therefore, the projection is performed client side. We should use the IQueryable implementation from the MongoDB.Driver.Linq namespace. Alternatively, there is SetFields() that is available to selectively bring fields back from the database. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var query = Query.Matches("Name", new BsonRegularExpression(string.Format("^{0}", searchKey)));
+var result = UserConnectionHandler.MongoCollection.Find(query)
+                .SetFields(Fields&amp;lt;User&amp;gt;.Include(u =&amp;gt; u.Name, u =&amp;gt; u.Reputation));
+&lt;/code&gt;&lt;/pre&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part3/</link><pubDate>Thu, 03 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-04T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part1/</guid><title>MongoDB-CSharp-Driver Getting started</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;There are several drivers available for C#. I do not plan to go thorugh all of them here. Since, the official driver now has LINQ(although not complete yet) support, we will go with it.
+Basic Setup..get the stuff of NuGet. It should put in two dll's in there 
+1. MongoDB.Bson
+2. MongoDB.Driver&lt;/p&gt;
+
+&lt;p&gt;We will get to what does what later. For now assume that we only want to get some data in and out of MongoDB.
+Let's connect to MongoDB now(the code below is just quick and dirty, we will see a better version later).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//MongoDB should be running by now, and assuming you have inserted some documents in there
+var client = new MongoClient(@"mongodb://localhost");
+var server = client.GetServer();
+var database = server.GetDatabase("YourDataBaseName");
+var mongoCollection = database.GetCollection("SomeCollectionName");
+//Getting all the documents
+var cursor = mongoCollection.AsQueryable();
+cursor.ForEach(Console.WriteLine);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;It is time for some explanataion.&lt;/p&gt;
+
+&lt;p&gt;What is MongoClient ?
+MongoClient is the standard way of accessing the driver. I have dabbled with the python driver(pymongo) and it is the same there. I believe it was changed to keep the drivers for different languages in sync.
+Reading up on this told me that SafeMode settings were dropped in favour of WriteConcern and instead of SlaveOK , ReadPreference should be used. The settings were present previously in MongoServerSettings, the new ones are on MongoClientSettings. IpV6 setting is also in MongoClientSettings. &lt;/p&gt;
+
+&lt;p&gt;What is MongoServer ?
+The server manages the life cycle of ServerProxies. Gives access to databases and some sort of connection management. More needs to be said about the server, I will stop short for now.&lt;/p&gt;
+
+&lt;p&gt;Notice that I did not use a genric GetCollection here (yet, will do so soon). The generic method is also available, which we will put to use soon.&lt;/p&gt;
+
+&lt;p&gt;All documents in MongoDB have an Id which has the type ObjectId (ObjectId resides in MongoDB.Bson).
+So, we can have an interface which takes care of this and subsequently all our types can implement this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface IMongoEntity
+{
+    ObjectId Id { get; set; }
+}
+public class MongoEntity : IMongoEntity
+{
+   public ObjectId Id { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Refinement and obtaining a better MongoDBHandler(you can do much better than what I will show you here, but   that depends to large extent on your taste).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MongoConnectionHandler&amp;lt;T&amp;gt; where T : IMongoEntity
+{
+    public MongoCollection&amp;lt;T&amp;gt; MongoCollection { get; private set; }
+    private const string ConnectionString = @"mongodb://localhost";
+
+    public MongoConnectionHandler(string databaseName)
+    {
+        var client = new MongoClient(ConnectionString);
+        var server = client.GetServer();
+        var database = server.GetDatabase(databaseName);
+        MongoCollection = database.GetCollection&amp;lt;T&amp;gt;(typeof (T).Name.ToLower() + "s");
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Having a the &lt;em&gt;databaseName&lt;/em&gt; as a parameter is very subjective, if you only have a single database then you might want to just stick it directly in the method call, otherwise it just increases the burden of the caller and spreads the database name all over the code base. Another option that comes to my mind striaghtaway is having an Enum of DatabaseName or in some sort of configuration files. The same goes for ConnectionString, put it in some place configurable. The collection names are plural so you need to just stick an extra "s" in there(this took me quite a while to figure out).
+So, we are setup nicely to go forward and do some more interesting work with MongoDB.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-csharp-driver-part1/</link><pubDate>Wed, 02 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-schemadesign/</guid><title>MongoDB-Schema Design</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;This is a short post on Schema Design.&lt;/p&gt;
+
+&lt;p&gt;Schema Design in MongoDB&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Application Driven Schema is the best way to store data in MongoDB&lt;/li&gt;
+&lt;li&gt;MongoDB stores rich documents i.e. store embedded documents , arrays etc..&lt;/li&gt;
+&lt;li&gt;Joins happen at the application level not at the database level.&lt;/li&gt;
+&lt;li&gt;There are no constraints in the database.&lt;/li&gt;
+&lt;li&gt;No support for transactions.&lt;/li&gt;
+&lt;li&gt;Support for Atomic present operations is present.&lt;/li&gt;
+&lt;li&gt;Tip : Embed as much as you can.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+Relational Normalisation&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Frees the database of modification anomalies&lt;/li&gt;
+&lt;li&gt;Achieve extensibility.&lt;/li&gt;
+&lt;li&gt;Removes bias towards a particular access pattern.&lt;/li&gt;
+&lt;li&gt;Constraints are supposed to be handled at the application level&lt;/li&gt;
+&lt;li&gt;Transactions are also not present in the database.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Mapping Strategies&lt;/p&gt;
+
+&lt;p&gt;Considerations 
+    Query access pattern.
+    Which collections will grow.
+&lt;strong&gt;1:1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Two documents related to each other can be kept in separate collections :
+    To reduce the working set size of your application.
+    Because the combined size of the documents would be larger than 16MB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1: M&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We should have true linking in this case.
+i.e. have collection for each type.&lt;/p&gt;
+
+&lt;p&gt;If it is 1 to few then we can embed it in the 1 collection.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;M: M&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;e.g. Student and Teacher&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Generally make both of them separate collections. 
+Link in one direction.
+At the risk of duplication we can link both ways but that should be done only when 
+    we have performance considerations.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When to De-Normalise ?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1: 1 Embed
+1 : M Embed from the many to one
+M : M Link
+&lt;/code&gt;&lt;/pre&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-schemadesign/</link><pubDate>Tue, 01 Oct 2013 18:30:00</pubDate><a10:updated>2013-10-02T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-query/</guid><title>MongoDB-Query</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;Hopefully, the MongoDB set up in the last post is still working.
+Let's create a database and name it &lt;em&gt;Awesome&lt;/em&gt;(just because we can).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; use Awesome
+switched to db Awesome
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+Now, the database can have collection and those collections will have documents.
+So, let's create a couple of collections and then use show collections to view them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db.createCollection("superAwesome")db.createCollection("superAwesome")
+{ "ok" : 1 }
+&amp;gt; show collections
+superAwesome
+system.indexes
+users
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;MongoDB is schemaless, which means the schema will be defined by the document structure you throw in there.
+ So, if you insert nothing (i.e. no fields) it would still be a document with an ObjectID.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db.superAwesome.insert({}) 
+
+db.superAwesome.find()
+{ "_id" : ObjectId("524dc34c1ad09caf6c994f8b") }
+
+db.superAwesome.insert({"name":"awesome","age":1})
+
+db.superAwesome.find()
+{ "_id" : ObjectId("524dc34c1ad09caf6c994f8b") }
+{ "_id" : ObjectId("524dc4141ad09caf6c994f8c"), "name" : "awesome", "age" : 1 }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I have mentioned ObjecId and find just now. I will elaborate a bit more in upcoming posts. What you have seen is the JS shell, so insertion, retrieval etc.. is all in Javascript. When we insert we send in JSON and we get back JSON when we are querying for documents.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-query/</link><pubDate>Mon, 30 Sep 2013 18:30:00</pubDate><a10:updated>2013-10-01T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/10/mongodb-shell/</guid><title>MongoDB-Shell</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;MongoDB stores the documents in BSON format. It is a binary serialisation format and a super set of JSON.
+It has more types than JSON which enables better integration with various languages that support these types. 
+Languages like perl and JS have a smaller type system which can cause problems.
+ObjectId which uniquely identifies a document in mongodb is also part of the bson specification.
+&lt;em&gt;id field is the primary key which is of type ObjectId. 
+It is immutable.
+    _Object Id = 4-byte timestamp + machine id + process id + counter&lt;/em&gt;&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;&lt;strong&gt;Shell&lt;/strong&gt;
+Note : This is not comprehensive list of what mongodb can do. These are just bits that I find interesting.&lt;/p&gt;
+
+&lt;p&gt;MongoDb does not have a querying language like SQL. It has it's own wire protocol with codes for doing things. The shell is basically a JS interpreter.
+Here is a run down of some operators and tid-bits about them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$regex is the operator for passing in perl lie regular expression.
+$exists is for existential check.
+$or is a prefix operator unlike most of the other operators.
+//For querying arrays we can directly write property: value in the search criteria.
+$all operator can help us match a property which should contain all of the supplied values 
+Property : {$all : [value1 , value2]}
+$in is the enumeration of the values for the given field.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Multiple filters on the same property must be in the same sub document or
+The javascript parser will ensure that your last filter will win, since the last literal will override everything else.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db.users.find({$or: [
+                {
+                },
+                {
+                }
+            ]
+        })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Upsert : This is kind of unique and took me by surprise the first time ( a pleasant one mind you ).
+    db.collection.update( , , ,  )&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;*Quips and Quirks *&lt;/em&gt;
+Empty document selector {} matches every document in the collections. This has the effect of selecting all the documents in the collection. 
+From  the docs &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;"Optional. If set to true, creates a new document when no document matches the query criteria. The default value is false, which does not insert a new document when no match is found. The syntax for this parameter depends on the MongoDB version. See Upsert Parameter."&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is a rather useful operator once which I would dearly love SQL Server to have.&lt;/p&gt;
+
+&lt;p&gt;When an empty document selector is passed as an argument to the update method then mongodb will only update the first document that it finds and not all of the collection. To affect all the documents specify multi : true in your Find based operations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db.superAwesome.update(
+                     { name: "awesome" },
+                     { $inc : { age: -1 } },
+                     { multi: true }
+                   )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want to remove all the documents in a collection then use drop() instead of remove(). It is just a little faster since remove() goes through all of the documents one at a time. Further, the metadata will remain if you use remove() ( like indexes etc..) , with drop all of that will go away.
+Remove() is not thread safe. Each document is however atomically removed.&lt;/p&gt;
+
+&lt;p&gt;If you want to find out about the last error in the database, then the runCommand is available. It can also be used to find out information about the last write performed in the database. It has a property n which gives us the number of records affected. &lt;/p&gt;
+
+&lt;p&gt;GetLastError
+    Db.runCommand( { getLastError : 1 }  )&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/10/mongodb-shell/</link><pubDate>Mon, 30 Sep 2013 18:30:00</pubDate><a10:updated>2013-10-01T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/09/mongodb-getting-started/</guid><title>MongoDB-Getting Started</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>mongodb</category><category>opensource</category><description type="html">&lt;p&gt;MongoDB is a document database and I won't bore you with details about what it can do. MongoDB makes many claims, they are &lt;a href="http://www.mongodb.org/" title="Here"&gt;here&lt;/a&gt;. In short, MongoDB is a document database that stores data in a JSON format and then promises to make out lives easier. 
+Installation instruction are varied depending on your OS etc..and the both varieties of bitness are also available. &lt;a href="http://www.mongodb.org/downloads,"Download""&gt;Download&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The shell for MongoDB is a Javascript based one, so if you know a bit of JS then you will fly in there. Start mongod from the command line, this can be done by navigating to the bin directory of installation. Provide the dbpath(the place where it stores the data) as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/mongod.png" alt="Mongod" /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you look at the output when we start the daemon (mongod = mongo-daemon) then the last line talks about a rest interface. This can be enable by passing the --rest flag when starting the instance. The port for viewing the webpage is also there.&lt;/p&gt;
+
+&lt;p&gt;Let's get into the mix of things by connecting to this mongod using the shell(mongo.exe). Navigate to the mongo directory and go mongo.exe.
+By default this connects  to the test database. The prompt will say something like &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Users\Ashutosh\mongodb\bin&amp;gt;mongo.exe
+MongoDB shell version: 2.4.1
+connecting to: test
+&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At any moment you can go back to mongod and check how many connections are open. Run a couple of commands like 
+&lt;em&gt;show dbs
+show collections&lt;/em&gt; 
+to see if everything is in order. &lt;/p&gt;
+
+&lt;p&gt;Create a new database by use yourdatabasename. The shell will switch it's context to that database(after creating it if it does not exist already.) 
+Next, time we will do some stuff by creating some collections and then querying. This will be a longish series, hold on and let me smear you twitter timelines.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/09/mongodb-getting-started/</link><pubDate>Sun, 29 Sep 2013 18:30:00</pubDate><a10:updated>2013-09-30T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/07/python-development-in-visual-studio/</guid><title>Python Development in Visual Studio</title><author>ashutoshraina1989@gmail.com</author><category>opensource</category><category>productivity</category><category>tips</category><category>tools</category><description type="html">&lt;p&gt;&lt;strong&gt;What ..you must be mad !!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;IronPython has been around for some time now. Python tools for Visual Studio have recently been given a facelift. It has been lifted to become a more complete tool which we can use for Python development with Visual Studio.
+I have recently been flirting with Python since it is easier and quicker to just get some stuff done in Python. It can easily be a second language for a C# developer and I do intend to keep it in my toolbox. There are alternatives available including but not limited to PyDev plugin for eclipse and Aptana Studio which comes with all the bells bundled together.&lt;/p&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+&lt;strong&gt;OK..So how do we get started ?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you don't have python then I suggest you grab python 3 and above. To save yourself hours and days I suggest follow this post here &lt;a href="https://zignar.net/2012/06/17/install-python-on-windows/" title="Install Python on Windows"&gt;Install Python on Windows&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Go get all the needed mojo from here [Python Tools For Visual Studio](http://pytools.codeplex.com/ Python Tools For Visual Studio). Do remember to pick the correct msi as per your VS installation. Do watch some videos if you feel like, they will give you a sense of what to expect. It is excruciatingly painful to get the python set up done if you are a newbie ( python guys are you listening ?? the defaults should be easy ).&lt;/p&gt;
+
+&lt;p&gt;A simple HellWorld would be nice. Once you finish the installation Go File -&amp;gt; New Project and wait awesomeness to pop up.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/hellopython.png" alt="HelloPython" /&gt;
+Now, here comes the part where the defaults are stupid. Go to Tools -&amp;gt; Options -&amp;gt; Python Tools -&amp;gt; Check the Wait for input when process exits normally.&lt;/p&gt;
+
+&lt;p&gt;Now create a new Project HelloPython and wait for it to spin up. Right Click on the file and say Debug As Script.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Hello World
+Press any key to continue . . .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Show me something more complicated&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In the solution you should see Virtual Environments where you can add the virtual environments. In VS 2013, I see that managing the python interpreter has also moved there and the whole thing is now called PythonEnvironments. That is a nice touch and I think going forward it makes life easy. In VS 2012 you can go to your project properties and pick the python interpreter of your choice. 
+Creating virtual environments is easy. In VS 2012, First create a virtual environment and then add it to your project.
+In VS 2013 this experience has come together nicely and the it looks more and more a native part of VS.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/pytools-vs2013.png" alt="Python Tools For Visual Studio" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In VS 2013, as you can see I have pymongo installed ( using pip ). Right click on Python 64 bit ... and install package to choose from pip of easy-install. In VS 2012 you can right click on your environment to achieve the same goal.&lt;/p&gt;
+
+&lt;p&gt;Back to some code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from pymongo import MongoClient
+import pprint
+    def hello():
+        client = MongoClient("localhost",27017)
+        database = client['blog']
+        result = database.posts.find_one()
+        pprint.pprint(result)
+
+hello();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Are there any obvious benefits to run Python in VS ?  I think the familiarity of the environment and the easy of use are compelling reasons. Refactoring and all the big IDE goodies are just nice add-ons.&lt;/p&gt;
+
+&lt;p&gt;This feels nice !!&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/07/python-development-in-visual-studio/</link><pubDate>Fri, 19 Jul 2013 18:30:00</pubDate><a10:updated>2013-07-20T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/06/entity-framework-table-per-type-gotcha/</guid><title>Entity Framework - Table Per Type Gotcha</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><category>gotcha</category><category>tips</category><description type="html">&lt;p&gt;Entity Framework Table Per Type (TPT) implementation has a little gotcha ( little is really relative ). When we create table per type we will have orphan rows if the parent gets deleted and there will be orphan rows in the parent if the child gets deleted. This causes a funny picture to emerge with very bad consequences.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/fix-tpt.png" alt="Gotcha" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, to get around this my simple workaround was to alter the relationships in my seed method.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] DROP CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Match] ADD CONSTRAINT [FK_ParikshaDev.Match_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] DROP CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Brief] ADD CONSTRAINT [FK_ParikshaDev.Brief_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] DROP CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Choice] ADD CONSTRAINT [FK_ParikshaDev.Choice_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] DROP CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId]" );
+context.Database.ExecuteSqlCommand( @"ALTER TABLE [ParikshaDev].[Custom] ADD CONSTRAINT [FK_ParikshaDev.Custom_ParikshaDev.Questions_QuestionId] FOREIGN KEY (QuestionId) REFERENCES [ParikshaDev].[Questions] (QuestionId) ON DELETE CASCADE" );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/foreign-key.png" alt="ForeignKey" /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are things that can be better in this code. We can have the Schema name and the Table name statically typed with the help of the context. The relationship name was arrived at by making an educated guess about the relationships and then confirming them by having a look at the db that was generated previously. I would consider this as a bug in EF. I didn't see any way to configure this behaviour with the fluent api. I expected this to be clearly stated in the documentation or a flag or a switch be made available in the api for configuration.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/06/entity-framework-table-per-type-gotcha/</link><pubDate>Sat, 01 Jun 2013 18:30:00</pubDate><a10:updated>2013-06-02T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/05/entity-framework-migrations/</guid><title>Entity Framework - Migrations</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><category>gotcha</category><category>tips</category><description type="html">&lt;p&gt;Migrations are needed in our day to day work and EF migrations story has become a lot better over the last year. When your database changes rapidly then migrations are needed to keep pace. Ofcourse this is nothing new, but it wasn't available in EF before.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enable Migrations*&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To enable the migrations go to Tools -&amp;gt; Library Package Manager -&amp;gt; Package Manager Console.
+Type Enable-Migrations in the console.
+-Force parameter is optionally available if you want to overwrite an existing migrations.
+&lt;!--excerpt--&gt;
+&lt;strong&gt;Creating a migration*&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the migrations are enabled, use the Add-Migrations command to add a migration. Give a logical name to the migration, attach a issue number if needed to the migration name like myawesomemigration-issue#1234. It really helps when you want to go up and down the migrations. When you choose to enable migrations, do it in the correct project if you have multiple projects in the solution.
+Once the migration has been added, then you will see two new files within a new folder Migrations pop in. One of these is the migrations file which will have your nice name and the other one is Configuration.cs which will have your configuration. Your awesome migrations file will have all your create table syntax, this seems to be a DSL. You can do your funny bits here, add an Index tweak mania can begin here. Do read the file carefully though for the first few times. It should not be too dense and it should all make sense. If something looks off highly likely that your configuration in the model is fishy. It has two methods which allow you to move up and down between the migrations.&lt;/p&gt;
+
+&lt;p&gt;Configuration.cs is a useful class. It has the seed method with which you can seed you database. You can seed your db with test data which you will need for running the system tests (which you should with EF).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Updating your database*&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;All said and done, time to update our database to the latest version. In the package manager console, write 
+Update-Database -Verbose. The verbose flag gives you back the sql as well for you to see. Options are available to script it out to a file as well if you want to hand it over to someone else.&lt;/p&gt;
+
+&lt;p&gt;As of this writing EF 6 beta has broken this bit 
+&lt;a href="https://entityframework.codeplex.com/workitem/1128" title="Bug"&gt;Bug&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You should be safe on previous bits ( till alpha or EF 5 and below ).
+Have a look at your database when the command finishes, your database should be updated.&lt;/p&gt;
+
+&lt;p&gt;Irritant
+Next, I will write about a gotcha that made me think long and hard if I was very dumb.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/05/entity-framework-migrations/</link><pubDate>Sun, 12 May 2013 18:30:00</pubDate><a10:updated>2013-05-13T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/04/console2-commandline-awesomeness/</guid><title>Console2- Command Line Awesomeness</title><author>ashutoshraina1989@gmail.com</author><category>productivity</category><category>tips</category><category>tools</category><description type="html">&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;What is this ?
+Ever felt that the command prompt fall a little short of your expectations ? You want it to feel like the power toy and not just a tool. &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Where do I get it ?
+You can download it from here &lt;a href="http://sourceforge.net/projects/console/" title="Console2"&gt;Console2&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Help me set it up .&lt;a href="http://www.hanselman.com/blog/Console2ABetterWindowsCommandPrompt.aspx" title="Scott's Blog Post"&gt;Scott's Originial Blog Post&lt;/a&gt;
+Refer to Scott Hansleman's blog post &lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now, if you have successfully managed to get Console2 working note carefully what the last part in Scott's post said 
+Console2 is a great little front-end for your existing shell, no matter what it is. Note that Console2 isn't a shell itself, it's just a face on whatever you are already using.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Let's make the world a better place by adding Git Bash to the the tabs.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Title : GitBash&lt;/p&gt;
+  
+  &lt;p&gt;Icon : C:\Program Files (x86)\Git\etc\git.ico&lt;/p&gt;
+  
+  &lt;p&gt;Shell : C:\Program Files (x86)\Git\bin\sh.exe --login -i&lt;/p&gt;
+  
+  &lt;p&gt;Startup dir : c:\Users\Ashutosh ( or whatever your path is )&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/console2.png" alt="Console2" /&gt;&lt;/p&gt;
+
+&lt;p&gt;All looks nice, the world is a better place.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/04/console2-commandline-awesomeness/</link><pubDate>Sat, 13 Apr 2013 18:30:00</pubDate><a10:updated>2013-04-14T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/04/entity-framework-generic-repository-pattern-part-2/</guid><title>Entity Framework - Generic repository Pattern - Part 2</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><category>pattern</category><description type="html">&lt;p&gt;In the previous post I wrote about an implementation of the Generic Repository pattern for EF. There is so much data on the web that it is difficult to understand what might actually work for you. All of this can drive you 
+&lt;a href="http://codereview.stackexchange.com/questions/11785/ef-code-first-with-repository-unitofwork-and-dbcontextfactory?rq=1" title="Crazy"&gt;Crazy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Throw in my version of crazy as well.
+&lt;a href="http://codereview.stackexchange.com/questions/19037/entity-framework-generic-repository-pattern" title="Crazy2"&gt;Crazy2&lt;/a&gt;&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Now that you have checked out the links and gone crazy reading how we all wanted a code review for this, it tells you the developer about the levels of confusion this pattern can create. One of my first thoughts was something like this 
+&lt;a href="https://gist.github.com/ashutoshraina/4175430" title="Repository Pattern"&gt;repository pattern&lt;/a&gt;
+Honestly, I don't even remember what my exact thoughts were when I was prototyping the code.&lt;/p&gt;
+
+&lt;p&gt;In  Part1 I did say that I will highlight some of the issues that I faced (remember YMMV). I didn't do TDD for this ( sue me  :) ).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+Testing is not as pain-free as it seems. What layers to test and how to test them ?
+After all of this code is for separating components and making life easier in the long run by increasing our confidence in the code. 
+If EF is already a UoW and Repository then what are doing building a layer on top of this ?
+&lt;/li&gt;
+&lt;li&gt;
+We end up having a service layer anyway since our application logic is often non trivial and needs to be kept separate. Then the real fun begins with tests.
+&lt;/li&gt;
+
+&lt;li&gt;
+Mocking EF is a pain since you don't have an &lt;em&gt;IDbContext &lt;/em&gt; available. Get your fake data in there , then mock the repository and then mock the repository methods, then if you want to mock something like &lt;em&gt;Includes()&lt;/em&gt; you will have some real fun. The idea is not mock EF, but even checking anything that sits on top of it can become an exercise in itself.
+After writing the tests, I can confidently say that my confidence in my code had not increased the manner I had expected (you bet this confidence thing is funny business) . I often had the feeling of buyer's remorse.
+&lt;/li&gt;
+
+&lt;li&gt;
+It felt like I was on the wrong path. What do we really care about ? We need to get our data in and out of our database. That is it. How does making an abstraction help? It does not help that much. We are working exactly with the IQueryable that EF gives us back. Some implementations also have methods like FindById(..) , SortBy(..) etc...
+We need to concentrate on queries in our application. Make queries first class in your application.
+&lt;/li&gt;
+
+&lt;li&gt;
+Was all of this useless ? No, not quite. Implementing the Repository Pattern this way is, the pattern is not useless.
+We leak our data access technology Entity Framework into the Application Layer. A UnitOfWork driven implementation is actually very useful.  
+I have not given that a go in code but here is something to start with &lt;a href="http://www.planetgeek.ch/2012/05/05/what-is-that-all-about-the-repository-anti-pattern/" title="Repository Pattern" target="_blank"&gt;Repository Pattern&lt;/a&gt;
+&lt;/li&gt;
+
+&lt;/ul&gt;
+
+&lt;p&gt;In conclusion, it was both fun and enriching to hit roadblocks and see why the developers are moving to and from the Repository Pattern. I was working with EF6 and that came with its fair share of headaches. I will blog about that soon. Stay hungry, stay awesome.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/04/entity-framework-generic-repository-pattern-part-2/</link><pubDate>Fri, 12 Apr 2013 18:30:00</pubDate><a10:updated>2013-04-13T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/</guid><title>TeamCity- Recover Admin Password</title><author>ashutoshraina1989@gmail.com</author><category>productivity</category><category>tips</category><category>tools</category><description type="html">&lt;p&gt;The trials and tribulations of this world are beyond me. Sometimes, a simple gesture can save your life.
+I lost(forgot, forgive my small brain it has to keep up with a day job) my TeamCity login details.
+Searching online will lead you to this place &lt;a href="http://stackoverflow.com/questions/506115/teamcity-forgotten-admin-password-where-to-look" title="StackOverflow Post"&gt;Stackoverflow Post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The solution there is mighty correct barring two things. One, your TeamCity data directory path is likely to C:\ProgramData\JetBrains\TeamCity\ on a windows box and not C:\users\foo\TeamCity. Second, you need to run CMD as admin.
+So,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Step 1 Stop TeamCity service ( either through services.msc or the bat files ).
+
+Step 2  Open CMD as ADMINISTRATOR
+(don't forget the admin part you will go bonkers trying to figure out what is happening) and go to C:\TeamCity\webapps\ROOT\WEB-INF\lib
+
+Step 3 type -cp server.jar; hsqldb.jar ChangePassword USERNAME PASSWORD C:\ProgramData\JetBrain\TeamCity
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If all is successful then you password has been reset and you can login. Here's hoping to a few hours saved for anyone who comes around to reading this.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/02/teamcity-recover-admin-password/</link><pubDate>Sun, 03 Feb 2013 18:30:00</pubDate><a10:updated>2013-02-04T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/02/nunit-codesnippet/</guid><title>NUnit-Code Snippet</title><author>ashutoshraina1989@gmail.com</author><category>productivity</category><category>tips</category><category>tools</category><description type="html">&lt;p&gt;What are we doing ?
+We are trying to create a snippet for creating an NUnit test.&lt;/p&gt;
+
+&lt;p&gt;How do we do this ?
+We go write a snippet.&lt;/p&gt;
+
+&lt;p&gt;The snippet is here &lt;a href="https://gist.github.com/4696972" title="NUnit Snippet"&gt;Snippet&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Save it under &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;..\Documents\Visual Studio 2012\Code Snippets\Visual C#\My Code Snippets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now go add the snippet.
+Go to Tools in VS -&amp;gt; Code Snippets Manager -&amp;gt; and Import after clicking on the Snippet.
+That's it, we are done.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/02/nunit-codesnippet/</link><pubDate>Sat, 02 Feb 2013 18:30:00</pubDate><a10:updated>2013-02-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/02/useful-extension-methods/</guid><title>Useful Extension Methods</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>tips</category><description type="html">&lt;p&gt;Extension methods provide a very useful way of extending the functionality of a Type (value, reference or interface). The earlier way of extending or rather adding a functionality through inheritance or making an entirely new type from scratch were tedious to say the least. 
+Extension methods are basically static methods with the calling syntax same as that of static methods. Over the course of the last few weeks i have come to realise they reduce a lot of repetitiveness from the code when used appropriately.&lt;strong&gt;MSDN&lt;/strong&gt; specification also clearly states they must be used sparingly.
+So,here are a few useful extension methods.
+The syntax has only one new thing, the use of &lt;em&gt;this &lt;/em&gt;keyword on the type that the extension method is meant for. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static XElement ToXElement(this XmlNode node)
+{
+   var xDoc = new XDocument();
+   using (var xmlWriter = xDoc.CreateWriter())
+          node.WriteTo(xmlWriter);
+   return xDoc.Root;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, calling the code would be something like ,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var xelement = node.ToXElement();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;xelement is now an XElement. This might look very plain and simple at the outset but when you really start to have a lot of repetitive functionality over a type this could really bail you out and make the code more readable to say the least. For e.g inside a for loop if you have a lot of code that operates over a type then it could be useful to take it to an extension method and then call the extension method statically.Further, extension methods can also have overloads so that is another nifty feature.
+The following extension method returns the XmlAttributeCollection for a XmlNode&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static XmlAttributeCollection GetXmlAtrributeCollection(this XmlNode node)
+{
+    var xmlDoc = new XmlDocument();
+    var element = node.ToXElement();
+    using (var reader = element.CreateReader())
+    {
+      xmlDoc.Load(reader);
+      return xmlDoc.DocumentElement != null ? xmlDoc.DocumentElement.Attributes : null;
+    }
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Too much of XML ?? Lets get one really useful extension method. &lt;a href="http://msdn.microsoft.com/en-us/library/bb460184.aspx" title="Lookup"&gt;Lookup&lt;/a&gt; is an immutable class in System.Linq. It works similar to a dictionary but does not enforce unique keys , so returns an IEnumerable.
+Unfortunately, the creation of a Lookup is internal to .net. So we can only call ToLookup() from a Dictionary etc. So ,i needed some way of adding data to the Lookup.Here is what i came up with. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Pairs 
+    {
+        public String Key { get; set; }
+        public Object Value { get; set; }
+    }
+public static class LookupExtensionMethods
+    {
+        public static Lookup&amp;lt;String,Object&amp;gt; AddToLookup(this Lookup&amp;lt;String,Object&amp;gt; lookup,
+                                                       List&amp;lt;Pairs&amp;gt; pairlist)
+        {
+            var temp = (Lookup&amp;lt;String, Object&amp;gt;)pairlist.ToLookup(p =&amp;gt; p.Key, p =&amp;gt; p.Value);
+            lookup.Concat(temp);
+            return lookup;
+        }
+
+    public static Lookup&amp;lt;String, Object&amp;gt; AddToLookup(this Lookup&amp;lt;String, Object&amp;gt; lookup, Pairs pair)
+    {
+        var pairlist = new List&amp;lt;Pairs&amp;gt; {pair};
+        var temp = (Lookup&amp;lt;String, Object&amp;gt;)pairlist.ToLookup(p =&amp;gt; p.Key, p =&amp;gt; p.Value);
+        lookup.Concat(temp);
+        return lookup;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lastly, there is no way to replace the first occurrence of a string in C# straight out of the box(I bet you did not notice that). &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; public static string ReplaceFirstOccurrance(this string original, string oldValue, string newValue)
+ {
+     if (String.IsNullOrEmpty(original))
+                return String.Empty;
+     if (String.IsNullOrEmpty(oldValue))
+                return original;
+     if (String.IsNullOrEmpty(newValue))
+                newValue = String.Empty;
+     var loc = original.IndexOf(oldValue);
+     return loc == -1 ? original : original.Remove(loc, oldValue.Length).Insert(loc, newValue);
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Suddenly, the world seems a lot better.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/02/useful-extension-methods/</link><pubDate>Sat, 02 Feb 2013 18:30:00</pubDate><a10:updated>2013-02-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/02/entity-framework-6-whats-new/</guid><title>Entity Framework 6 What's new ?</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><description type="html">&lt;p&gt;EF6 is still in alpha stages but you can go grab it now via nuget.
+What is new ?
+A whole lot find about it here &lt;a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6"&gt;EF6&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also, do read this post about migrating to EF6 if you are migrating an existing application.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://entityframework.codeplex.com/wikipage?title=Updating%20Applications%20to%20use%20EF6" title="EF6 Migration"&gt;EF6 Migration&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I am basically using the same model to see if life is any easier with V6. The model is fairly simple. There are users, users can questions and questions are of different types. A user creates Test which is composed of many questions.&lt;/p&gt;
+
+&lt;p&gt;Earlier, there was no easy way of doing Enum in EF Code First. That limitation is no longer there.
+Now, the questions can be of varying difficulty levels so now we can do the following.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;pre&gt;&lt;code&gt;public enum Difficulty
+{
+    Trivial = 1,
+    Easy = 2,
+    Medium = 3,
+    Hard = 4,
+    Difficult = 5
+}
+
+/// &amp;lt;summary&amp;gt;
+/// Question is the base type which describes a Question. Other types derive from Question.
+/// &amp;lt;/summary&amp;gt;
+public class Question
+{
+    /// &amp;lt;summary&amp;gt;
+    /// Gets or sets the Difficulty
+    /// &amp;lt;/summary&amp;gt;
+    public Difficulty Difficulty { get; set; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;....more properties 
+    }
+Similarly we can have UserRole as well.&lt;/p&gt;
+
+&lt;p&gt;EF now has the option to specify the default schema is also available now. It can be done as shown below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.HasDefaultSchema("ParikshaDev");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;EF now has the ability to provide custom conventions as well. The following conventions are available to us.&lt;/p&gt;
+
+&lt;ul&gt;
+     &lt;li&gt;Lightweight Conventions&lt;/li&gt;
+     &lt;li&gt;Configuration Conventions&lt;/li&gt;
+     &lt;li&gt;Custom Attributes&lt;/li&gt;
+     &lt;li&gt;Model-based Conventions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Read more about it here &lt;a href="http://msdn.microsoft.com/en-us/data/jj680699" title="EF Conventions"&gt;EF6 Conventions&lt;/a&gt;.
+I will cross-post an important point about the order of execution. If you have many conventions then the order will become important. I haven't written a lot of conventions but my guess is that this could get tricky if not done with care.&lt;/p&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;IConfigurationConvention-based and lightweight conventions&lt;/li&gt;
+    &lt;li&gt;IEdmConvention-based conventions&lt;/li&gt;
+    &lt;li&gt;IDbConvention-based conventions&lt;/li&gt;
+    &lt;li&gt;IDbMappingConvention-based conventions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A conventions that I have used is Lightweight conventions. We sometimes want to append custom names to our table names as per the convention of our customers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.Entities().Configure(_ =&amp;gt; _.ToTable("CustomTable"+ _.ClrType.Name));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similarly, other conventions are also available. The most common ones that I see being used will be Lightweight and Configuration Conventions. Next, we will have a look at enabling migrations and an irritant that made me go nuts for a few months.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/02/entity-framework-6-whats-new/</link><pubDate>Fri, 01 Feb 2013 18:30:00</pubDate><a10:updated>2013-02-02T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/02/entity-framework-generic-repository-pattern-part-1/</guid><title>Entity Framework - Generic repository Pattern - Part 1</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><category>pattern</category><description type="html">&lt;p&gt;The generic repository pattern has been a matter of discussion on the forums and SO. Developers are not convinced that it solves a problem, yet everyday SO has more questions about the pattern. Clearly, something is not right. I tried to implement the pattern in a way I thought fit. I changed my mind a million times during the process, that tells you that the process was not smooth. You can find several implementations of the pattern scattered all over the internet. I will not pass a opinion on the pattern. I would rather tell you what issues I faced and I how solved (or not) them.
+&lt;!--excerpt--&gt;
+First I created an IRepository and IUnitOfwork&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface IRepository
+{
+    T Add(T entity);
+    T Remove(T entity);
+    T Update(T entity);
+    IQueryable Query();        
+}
+public interface IUnitOfWork : IDisposable
+{
+    void Commit();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, let's get the EF specific implementation up and running.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
+/// A EFRepository represents the repository for performing operations on the
+/// Entity using the EntityFramework.
+/// &amp;lt;/summary&amp;gt;
+/// &amp;lt;typeparam name="T"&amp;gt;T is the Entity&amp;lt;/typeparam&amp;gt;
+public class EFRepository&amp;lt;T&amp;gt; : IRepository&amp;lt;T&amp;gt; where T : class
+{
+    /// &amp;lt;summary&amp;gt;
+    /// This is set in the constructor and provides access to the underlying EntityFramework methods
+    /// &amp;lt;/summary&amp;gt;
+    private DbSet&amp;lt;T&amp;gt; _dbSet;
+    /// &amp;lt;summary&amp;gt;
+    /// The context for working with the EntityFramework. This is set in the constructor.
+    /// &amp;lt;/summary&amp;gt;
+    private DbContext _dataContext;
+    /// &amp;lt;summary&amp;gt;
+    /// Initialises a new instance of Repository for &amp;lt;see cref="T"/&amp;gt;
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="unitOfWork"&amp;gt;IUnitOfWork&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name="dataContext"&amp;gt;DbContext&amp;lt;/param&amp;gt;
+    /// &amp;lt;exception cref="ArgumentNullException"&amp;gt;Throws ArgumentNullException if any of the arguments is null&amp;lt;/exception&amp;gt;
+    public EFRepository(IUnitOfWork unitOfWork, DbContext dataContext)
+    {
+        if (unitOfWork == null)
+        {
+            throw new ArgumentNullException("unitOfWork", "unitOfWork cannot be null");
+        }
+        if (dataContext == null)
+        {
+            throw new ArgumentNullException("dataContext", "dataContext cannot be null");
+        }
+        var EfUnitOfWork = unitOfWork as EFUnitOfWork;            
+        _dataContext = dataContext;
+        _dbSet = _dataContext.Set&amp;lt;T&amp;gt;();
+    }
+    /// &amp;lt;summary&amp;gt;
+    /// Adds the specified Entity to the DbSet of the context.
+    /// The Entity is inserted only when UnitOfWork is commited.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="item"&amp;gt;The Entity to be added&amp;lt;/param&amp;gt;
+    /// &amp;lt;returns&amp;gt;The added Entity&amp;lt;/returns&amp;gt;
+    public T Add(T item)
+    {
+        return _dbSet.Add(item);
+    }
+    /// &amp;lt;summary&amp;gt;
+    /// Removes the specified Entity from the DbSet of the context.
+    /// The Entity is removed only when UnitOfWork is commited.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="item"&amp;gt;The Entity to be removed&amp;lt;/param&amp;gt;
+    /// &amp;lt;returns&amp;gt;The Entity removed from the underlying DbSet&amp;lt;/returns&amp;gt;
+    public T Remove(T item)
+    {
+        return _dbSet.Remove(item);
+    }
+    /// &amp;lt;summary&amp;gt;
+    /// Removes the specified Entity from the DbSet of the context.
+    /// The Entity is removed only when UnitOfWork is commited.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name="item"&amp;gt;The Entity to be updated&amp;lt;/param&amp;gt;
+    /// &amp;lt;returns&amp;gt;the Entity removed from the underlying DbSet&amp;lt;/returns&amp;gt;
+    public T Update(T item)
+    {
+        var updated = _dbSet.Attach(item);
+        _dataContext.Entry(item).State = EntityState.Modified;
+        return updated;
+    }
+    /// &amp;lt;summary&amp;gt;
+    /// Provides the caller with the underlying DbSet.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;returns&amp;gt;An IQueryable to run queries against the underlying DbSet&amp;lt;/returns&amp;gt;
+    public IQueryable&amp;lt;T&amp;gt; Query()
+    {
+        return _dbSet;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Follow this up with an implementation of EFUnitOfWork&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
+/// Represents an IUnitOfWork for Entity Framework
+/// &amp;lt;/summary&amp;gt;
+public class EFUnitOfWork : IUnitOfWork
+{
+    private DbContext _context;        
+    private bool _disposed;
+    public EFUnitOfWork(DbContext context)
+    {
+        if (context == null)
+        {
+            throw new UnitOfWorkException();
+        }
+        _context = context;
+    }
+    /// &amp;lt;summary&amp;gt;
+    /// Method to be called when a UnitOfWork is to be committed.
+    /// &amp;lt;/summary&amp;gt;
+    public void Commit()
+    {
+        _context.SaveChanges();
+    }
+    // Implement IDisposable.       
+    public void Dispose()
+    {
+        Dispose(true);
+        // Take yourself off the Finalization queue to prevent finalization code for object from executing a second time.
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        // Check to see if Dispose has already been called.
+        if (!_disposed)
+        {
+            // If disposing equals true, dispose all managed and unmanaged resources.
+            if (disposing)
+            {
+                // Dispose managed resources.
+                if (_context != null)
+                {
+                    _context.Dispose();
+                }
+            }             
+        }
+        _disposed = true;
+    }
+}
+[Serializable]
+public class UnitOfWorkException : Exception
+{
+    public override string Message
+    {
+        get
+        {
+            return "The parameter must be EFUnitOfWork";
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above code is at 
+&lt;a href="https://github.com/ashutoshraina/Pariksha/tree/master/Repository/Infrastructure" title="Github"&gt;Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are there alternatives ?
+Oh yes plenty. Some just differ in implementation details , but others differ in philosophy altogether. Next time I will blog about a different one that I thought of initially. Then later I will write about the problems we face. Pick and choose what fits.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/02/entity-framework-generic-repository-pattern-part-1/</link><pubDate>Fri, 01 Feb 2013 18:30:00</pubDate><a10:updated>2013-02-02T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2011/10/entity-framework-complex-types/</guid><title>Entity Framework Complex Types</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><description type="html">&lt;p&gt;In complicated models we need complex types to satisfy complex business logic .The most simple example would be having address as a complex type. Complex types are objects with no identity of their own. They are dependent on the parent for their existence. Consider the case where address has no real significance if it is not associated with a customer. This also implies that lazy loading of the complex type is not possible.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Address
+    {
+        public String Street { get; set; }
+        public String City { get; set; }
+        public String State { get; set; }
+        public int Zip { get; set; }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add the new property to the UserDetail class and associate the instance with a new address.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class UserDetail
+  {
+      public int UserDetailId { get; set; }
+      public String Name { get; set; }
+      public String Password { get; set; }
+      public String UserRole { get; set; }
+      public DateTime DateOfCreation { get; set; }
+      public Address UserAddress { get; set; }
+  }
+context.UserDetails.Add(new UserDetail{
+                                     Name = "TestName",
+                                     Password = "TestPassword",
+                                     UserRole = "Administrator",
+                                     DateOfCreation = DateTime.Now,
+                                     UserAddress = new Address{
+                                                 City = "Vashi",
+                                                 State = "Maharashtra",
+                                                 Street = "High Street",
+                                                 Zip = 400705
+                                                 }
+                                               });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;•   A good practice is to always explicitly register a complex type.
+•   Always initialize them; otherwise we will get a null reference exception.&lt;/p&gt;
+
+&lt;p&gt;So, in the mapping configuration we call explicitly register our complex type. There are two ways:-
+1) Use the DataAnnotations to mark the Address class as a ComplexType.
+2) Use the FluentApi to register the complex type.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.ComplexType&amp;lt;Address&amp;gt;();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can further override the default naming conventions of the EntityFramework to have more readable column names in the database. This again can be done using both DataAnnotations and FluentApi.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.Entity&amp;lt;UserDetail&amp;gt;().
+                Property(p =&amp;gt; p.UserAddress.State)
+                .HasColumnName("State");
+
+modelBuilder.Entity&amp;lt;UserDetail&amp;gt;()
+                .Property(p =&amp;gt; p.UserAddress.City)
+                .HasColumnName("City");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/complex-types.jpg" alt="Complex Type" title="Complex Type" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Figure 1 Users Table with a Complex Type before and after configuration&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2011/10/entity-framework-complex-types/</link><pubDate>Sun, 23 Oct 2011 18:30:00</pubDate><a10:updated>2011-10-24T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2011/10/entity-framework-inhertiance/</guid><title>Entity Framework Inhertiance</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>csharp</category><category>entity-framework</category><description type="html">&lt;p&gt;Inheritance is the basic requirement when we go about making a model for our business. Inheritance in SQL based systems is restricted to “has a “relationships. In real world applications which are modeled in object oriented mechanisms this is the real paint point for the developers. The essence of ORM systems is to bridge the gap between these two worlds and allow a seamless layer of abstraction to exist for the database access.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Inheritance in general can be classified into 3 chief categories: - 
+Table Per Type (TPT)
+Table Per Hierarchy (TPH)
+Table Per Concrete Type (TPC)&lt;/p&gt;
+
+&lt;p&gt;Consider that following structure of inheritance.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class QuestionDescriptor
+    {
+        public int QuestionDescriptorId { get; set; }
+        public int Rating { get; set; }
+        public int Difficulty { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public String QuestionText { get; set; }
+        public String Answer { get; set; }        
+    }
+public class QuestionBrief : QuestionDescriptor
+    {
+        public bool Short { get; set; }
+    }
+public class QuestionImage : QuestionDescriptor
+    {
+       public String ImagePath { get; set; }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Table Per Type represents the “IS A” relationship through Foreign Keys. This means that we need to map QuestionBrief and QuestionImage to separate tables in the database and have Foreign Key relations with the QuestionDescriptor table.
+The mapping required is as follows: -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.Entity&amp;lt;QuestionBrief&amp;gt;().ToTable("Brief");
+modelBuilder.Entity&amp;lt;QuestionImage&amp;gt;().ToTable("Image");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;TPT strategy gives rise to a normalised database and the schema lends itself nicely to evolution. The primary drawback is that the queries formed are using Joins between table.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/r1.jpg" alt="Table Per Type" title="Table Per Type" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Figure 1 Table Per Type&lt;/p&gt;
+
+&lt;p&gt;This strategy involves creating a single table and having a discriminator column. Since discriminator is not the key and yet determines the values of the columns that belong to the subclasses, this strategy violates the third normal form. It also requires the properties of the subclasses to be nullable. However, it is the best performing strategy for both polymorphic (queries instance of a class and all instances of the sub-class) and non-polymorphic queries (queries returning only instances of a particular subclass).
+This can be achieved with the following mapping: -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.Entity&amp;lt;QuestionDescriptor&amp;gt;()
+                .Map&amp;lt;QuestionBrief&amp;gt;(m =&amp;gt; m.Requires("QuestionType").HasValue("Brief"))
+                .Map&amp;lt;QuestionImage&amp;gt;(m =&amp;gt; m.Requires("QuestionType").HasValue("Image"));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The HasValue() method takes as a parameter an Object type so we can pass Boolean, integers etc. The type of parameter we pass to the HasValue() method will determine the datatype of the column in the database.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modelBuilder.Entity&amp;lt;QuestionDescriptor&amp;gt;()
+            .Map&amp;lt;QuestionBrief&amp;gt;(m =&amp;gt; m.Requires("QuestionType").HasValue(1))
+            .Map&amp;lt;QuestionImage&amp;gt;(m =&amp;gt; m.Requires("QuestionType").HasValue(2));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/r21.jpg" alt="R2" title="R2" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Figure 2 Table Per Hierarchy&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Table Per Concrete Type*&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Table per concrete type strategy pushes down the attributes of the base class to the sub-class. So, if we do not have many attributes in the base class and don’t care much for the polymorphism in our model we can also go for this strategy. 
+•   TPC becomes tough when we have changes in the schema and the base class evolves to have more attributes and relationships. 
+•   This approach also suffers with major ideological challenge in the sense that it discards polymorphism altogether and hence doesn’t support a dynamic environment with changing business requirements. 
+•   This approach is recommended only when we are confident that the base class won’t change and we are not referring to the base class for multiple queries.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2011/10/entity-framework-inhertiance/</link><pubDate>Sun, 23 Oct 2011 18:30:00</pubDate><a10:updated>2011-10-24T00:00:00+05:30</a10:updated></item></channel></rss>
