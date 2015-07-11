@@ -1,4 +1,481 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><description /><link>http://ashutoshraina.github.io/feed.xml</link><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</guid><title>Everyday utilities for a Windows developer - Contd.</title><author>ashutoshraina1989@gmail.com</author><category>tips</category><category>windows</category><description type="html">&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title /><description /><link>http://ashutoshraina.github.io/feed.xml</link><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/05/scriptcs-tools/</guid><title>Scriptcs : The Tooling</title><author>ashutoshraina1989@gmail.com</author><category>open source</category><category>scriptcs</category><description type="html">&lt;p&gt;Tools really make the ecosystem more productive. I list down some of the tools that I have found to be useful.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Version Management&lt;/p&gt;
+
+&lt;p&gt;We can have multiple version of ScriptCS installed on the system. Then to pick which one to use we can use the ScriptCS version Manager &lt;a href="https://github.com/scriptcs-contrib/svm"&gt;SVM&lt;/a&gt;
+This is essentially similar to npm and helps keep track of different scriptcs versions.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Running the code&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sublime Plugin :
+&lt;a href="https://github.com/scriptcs/scriptcs-sublime"&gt;Sublime Plugin&lt;/a&gt; &lt;/p&gt;
+
+&lt;p&gt;It is a little dodgy on mac, windows will work just fine.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Atom Runner : 
+The wiki has a good guide on how to start with Atom and Scriptcs 
+&lt;a href="https://github.com/scriptcs/scriptcs/wiki/Running-scripts-in-Atom"&gt;Atom&lt;/a&gt;
+I did struggle quite a bit with getting this to work neatly on mac initially things seem to be better now.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Omnisharp :
+One of the most active and loved .net projects. Omnisharp also has support for ScriptCS.
+&lt;a href="https://github.com/OmniSharp/omnisharp-atom"&gt;Omnisharp&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This was a short tour of the tools and hopefully this gets you on your way.&lt;/p&gt;
+
+&lt;p&gt;With this we round up our tour of ScriptCS, it is a great project that continues to make little improvements to my every day workflow.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/05/scriptcs-tools/</link><pubDate>Tue, 05 May 2015 18:30:00</pubDate><a10:updated>2015-05-06T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/05/scriptcs-doing-something-useful/</guid><title>Scriptcs : Doing something Useful</title><author>ashutoshraina1989@gmail.com</author><category>open source</category><category>scriptcs</category><description type="html">&lt;p&gt;We now have a fair grasp of how to swing with ScriptCS. Let's try and do something more useful with it.&lt;/p&gt;
+
+&lt;p&gt;Let's start by talking to a redis instance. Talking to a running instance interactively is a great a capability to have.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;scriptcs -install StackExchange.Redis
+
+using StackExchange.Redis;
+
+var redis = ConnectionMultiplexer.Connect("localhost");
+var db = redis.GetDatabase();
+db.StringSet("foo","bar");
+var result = db.StringGet("foo");
+Console.WriteLine(result);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Github is another important part of out daily workflow. I usually want to look at my notifications on Github when I come in the morning.
+With the Ocktokit script-pack we can accomplish a lot of automation. We will make use of a few concepts we have seen in the previous posts.&lt;/p&gt;
+
+&lt;p&gt;First, a simple utility method to print messages in color to the console.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//ConsoleUtil.csx
+void WriteToConsoleWithColor(string message, ConsoleColor color)
+{
+   var previousColor = Console.ForegroundColor;
+   Console.ForegroundColor = color;
+   Console.WriteLine(message);
+   Console.ForegroundColor = previousColor;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To make the scripts interactive we need to take in parameters from the user. Here, we will use the concept of ScriptArgs. 
+The arguments passed are available in Env.ScriptArgs and are indexed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//GithubAutomation.csx
+#load ConsoleUtil.csx
+var octokit = Require&amp;lt;OctokitPack&amp;gt;();
+
+string userName = Env.ScriptArgs[0];
+var client = octokit.CreateWithOAuth("GitHubClient", "ashutoshraina", "yourlovelytokengoeshere");
+
+void PrintNotifications(string userName)
+{
+  var notifications = client.Notification.GetAllForCurrent().Result;
+  if(!notifications.Any())
+  {
+    WriteToConsoleWithColor("Hurray No notifications !!!", ConsoleColor.Green);
+  }
+  var groupedByRepository = notifications.GroupBy(n =&amp;gt; n.Repository.Name);
+  foreach (var groupedNotification in groupedByRepository) {
+    WriteToConsoleWithColor(groupedNotification.Key, ConsoleColor.Blue);
+    int i = 0;
+    foreach (var notification in groupedNotification) {
+        WriteToConsoleWithColor(i++ + "--&amp;gt; " + notification.Subject.Title, ConsoleColor.Green);         
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To run this script we will need to pass in the username parameter. This can be done as shown below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;scriptcs .\CLIAutomation.csx -- ashutoshraina
+Hurray No notifications !!!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hopefully, the idea that ScriptCS can form part of your daily developer workflow is starting to set in. We can easily extend this print our release notes and then hook that script up to the CI.&lt;/p&gt;
+
+&lt;p&gt;Interactively doing automation using selnium is difficult since we have to go figure out which selectors etc..to click.
+With ScriptCS and FluentAutomation scriptpack we can do this from the REPL.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;using FluentAutomation;
+var test = new FluentTest();
+SeleniumWebDriver.Bootstrap(SeleniumWebDriver.Browser.Chrome);
+
+var I = test.I;
+
+I.Open("http://somewebsite.com.com");
+I.Click(".header__menu&amp;gt;.menu-item&amp;gt;.menu-item__link");
+I.Click(".section-links .grid__cell a");
+
+//Running this is going to open your browser and start the automation.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can attach yourself to a process and diagnose what is going on. This is powered by ClrMd ScriptPack.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var clrmd = Require&amp;lt;ClrMdPack&amp;gt;();
+var clrRuntime = clrmd.Attach(2772);
+clrmd.DumpHeapStatsByType();
+clrmd.Detach();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ScriptCS being extensible has good abstraction written on top of it. One such is the ConfigR project. 
+It allows us to get rid of XML based config files and use pure C# instead to write configuration.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a New Console Project and the ConfigR Nuget package. Let's call it &lt;strong&gt;* ConfigRDemo *&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Create a File called ConfigRDemo.exe.csx    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now, let't load the exe in the script file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#r "ConfigRDemo.exe"    
+using ConfigRDemo;
+
+//We can simply start adding the config values like this.
+Add("Name", "ChristosMatskas");  
+Add("Age", 25);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How, do we consume these values ?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var name = Config.Global.Get&amp;lt;string&amp;gt;("Name");
+var age = Config.Global.Get&amp;lt;int&amp;gt;("Age");
+
+Notice, how the casting went away and we started to have real types.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now simply have custom configuration as well. In your code create a class&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  public class MyCustomConfigurationStyle
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the csx file then it is simply a matter of putting it in the config.&lt;br /&gt;
+    var config = new MyCustomConfigurationStyle{Id = 1, Name = "Awesome"};&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Add("config",config);
+var config = Config.Global.Get&amp;lt;MyCustomConfigurationStyle&amp;gt;("config");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Loading it is just the same.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var config = Config.Global.Get&amp;lt;MyCustomConfigurationStyle&amp;gt;("config");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can continue to leverage the full capabilities of the language like call methods, load another configuration from the network..make async await calls and do strange things after that.    &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var x = 5;
+var y = x * 5;
+
+void AwesomeMethod()
+{
+    x = 50 * x ;
+}
+AwesomeMethod();
+
+Add("x",x)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That really does bring a lot of C# into our config files.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/05/scriptcs-doing-something-useful/</link><pubDate>Mon, 04 May 2015 18:30:00</pubDate><a10:updated>2015-05-05T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/05/scriptcs-better-abstractions/</guid><title>Scriptcs : Better Abstraction</title><author>ashutoshraina1989@gmail.com</author><category>open source</category><category>scriptcs</category><description type="html">&lt;p&gt;Abstractions are what drive most of software development. 
+ScriptCS also has a few abstractions which bridge the gap between the existing frameworks and the notion of scripting and REPL.&lt;/p&gt;
+
+&lt;p&gt;From the github wiki&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Script Packs allow you to bootstrap the environment for new scripts, 
+  further reducing the amount of code necessary to take advantage of your favorite C# frameworks.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;Script Packs get rid of the boiler plate code which is required to get up and running with a framework. For e.g. Web Api requires a lot assembly references and using statements just to get going.
+That may be fine in VS but in the REPL that becomes a serious overhead.&lt;/p&gt;
+
+&lt;p&gt;To see what kind of effect do script packs have we need to see them in action. We will look at the NancyScript Pack.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;scriptcs install ScriptCs.Nancy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ScriptCS provides the Require construct to load the script pack. We can have more than one as well. The basic code then just boild down to &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var r = Require&amp;lt;NancyPack&amp;gt;();
+
+public class IndexModule : NancyModule
+{
+    public IndexModule()
+    {
+        Get["/"] = _ =&amp;gt; "Hello World";
+        Get["/view"] = _ =&amp;gt; View["index"];//put a index.html in the same directory and it will be served
+    }
+}
+
+r.Host();
+
+Running it is scriptcs ./Server.csx
+
+Searching assembly: Anonymously Hosted DynamicMethods Assembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null 
+Searching assembly: R*109eaf48-8359-4ded-b57a-d3c89575f24a-#1UD, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+
+Searching assembly: WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+Found Nancy module: Submission#0+IndexModule
+Hosting Nancy at: http://localhost:8888/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What did we gain ? We got rid of the usings, the code required to spin up the process and host. We could purely focus and our code.&lt;/p&gt;
+
+&lt;p&gt;Most of the frameworks do not have the notion of in-memory compilation that Roslyn supports and hence these script packs are needed.&lt;/p&gt;
+
+&lt;p&gt;Similarly, for Web API as well we can do the following (from the Github Wiki).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;using System.Dynamic;
+
+public class TestController : ApiController
+{
+    public dynamic Get() 
+    {
+        dynamic obj = new ExpandoObject();
+        obj.message = "Hello from Web Api";
+        return obj;
+    }
+}
+
+var webapi = Require&amp;lt;WebApi&amp;gt;();
+
+var server = webapi.
+    Configure(typeof(TestController)).
+    UseJsonOnly().
+    Start("http://localhost:8080");
+
+Console.WriteLine("Listening...");
+Console.ReadLine();
+server.Dispose();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, we will look at using Scripts to start doing something useful.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/05/scriptcs-better-abstractions/</link><pubDate>Sun, 03 May 2015 18:30:00</pubDate><a10:updated>2015-05-04T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/05/scriptcs-becoming-productive/</guid><title>Scriptcs : Becoming Productive</title><author>ashutoshraina1989@gmail.com</author><category>open source</category><category>scriptcs</category><description type="html">&lt;p&gt;Last time we got up and running with Scriptcs. We have done everything in the REPL so far.
+When it comes to scripts we need a few more things to make everything easy.&lt;/p&gt;
+
+&lt;p&gt;Roslyn allows us to load assemblies using the #r directive.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#r System.Data
+#r System.Net.Http
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Roslyn does not give us the power to load multiple script files. Scriptcs helps us out here by giving the #load directive.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;HelloWorld.csx
+
+Console.WriteLine("Hello World");
+
+MyWorld.csx
+
+#load HelloWorld.csx
+Console.WriteLine("MyWorld");
+
+//output 
+Hello World
+MyWorld
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The loading of scriptcs is recursive and the script that gets loaded first gets executed first. 
+Scriptcs also ensures that only one version of the script is loaded at a time (e.g. File1 loads File2 &amp;amp; File3 and File2 also loads File3).&lt;/p&gt;
+
+&lt;p&gt;&lt;!--excerpt--&gt;
+In .net things would be incomplete without Nuget support. Scriptcs allows us to include any package available on Nuget as we want.
+Scriptcs relies on the nuget Api and not the nuget.exe to do it's job. It covers quite a few scenarios easily.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;How do I add a Nuget package ?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;scriptcs install YourPackage&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Scriptcs will create a scriptcs_packages.config in the directory. It will also make the dll available instantly in the app domain.
+Adding the required usings to start using the package is upto us. What this also means is that scripts become reusable by default.
+Put the script and the packages.config on Github and everyone can use it.&lt;/p&gt;
+
+&lt;p&gt;Show me the code &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;scriptcs install CsvHelper
+/*
+create a Data.csv like below
+Subject,Predicate,Object
+ScriptCS,is,useful
+I,am,awesome
+
+Inside Demo.csx
+*/
+using CsvHelper;
+using System.IO;
+
+var reader = new StreamReader("Data.csv");
+var csvReader = new CsvReader(reader);
+var records = csvReader.GetRecords&amp;lt;Sentence&amp;gt;();
+
+foreach (var record in records) {
+    Console.WriteLine(record);
+}
+
+class Sentence
+{
+    public string Subject { get; set; }
+    public string Predicate { get; set; }
+    public string Object { get; set; }
+
+    public override string ToString()
+    {
+        return Subject + " ..." + Predicate + "..." + Object;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How do i use a pcakges.config that I have from an existing project ?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Just copy and drop it with the scripts and ScriptCS will honour that. 
+If the pckages aren't present in the directory it will go ahead and restore them.&lt;/p&gt;
+
+&lt;p&gt;Next, we look at ScriptPacks and how they make life easier.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/05/scriptcs-becoming-productive/</link><pubDate>Sat, 02 May 2015 18:30:00</pubDate><a10:updated>2015-05-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/05/scriptcs-up-and-running/</guid><title>Scriptcs : Up &amp; Running</title><author>ashutoshraina1989@gmail.com</author><category>open source</category><category>scriptcs</category><description type="html">&lt;p&gt;Last time we saw how we could get Scriptcs up and running. Before we go further, it would be nice to know what is going on.&lt;/p&gt;
+
+&lt;p&gt;Roslyn enabled in-memory compilation which means we can finally take loose C# code and start running with it. 
+In code terms it means we can get rid of 
+    class Program 
+        public static void ....  &lt;/p&gt;
+
+&lt;p&gt;We can valid C# statements and then move on to doing the real thing. &lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;The code will get wrapped in a class and then get called.
+Since inner classes can't have namespaces we also don't get to use namespaces in scriptcs (not yet, but this restriction is likely to go away.)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; scriptcs
+scriptcs (ctrl-c to exit or :help for help)
+&amp;gt; :help
+The following commands are available in the REPL:
+:alias          Allows you to alias a command with a custom name
+:cd             Changes the working directory to the path provided.
+:clear          Clears the console window.
+:cwd            Displays the current working directory.
+:exit           Exits the REPL
+:help           Shows this help.
+:install        Installs a Nuget package. I.e. :install &amp;lt;package&amp;gt; &amp;lt;version&amp;gt;
+:references     Displays a list of assemblies referenced from the REPL context.
+:reset          Resets the REPL state. All local variables and member definitions are cleared.
+:usings         Displays a list of namespaces imported into REPL context.
+:vars           Displays a list of variables defined within the REPL, along with their types and values.
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Scriptcs will by default load certain assemblies by default, we can check that out using :references. 
+:usings will give us the currently loaded namespaces.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; :references
+[
+  "System",
+  "System.Core",
+  "System.Data",
+  "System.Data.DataSetExtensions",
+  "System.Xml",
+  "System.Xml.Linq",
+  "System.Net.Http",
+  "/usr/local/Cellar/scriptcs/0.14.1/libexec/ScriptCs.Core.dll",
+  "/usr/local/Cellar/scriptcs/0.14.1/libexec/ScriptCs.Contracts.dll"
+]
+&amp;gt;
+
+&amp;gt; :usings
+[
+  "System",
+  "System.Collections.Generic",
+  "System.Linq",
+  "System.Text",
+  "System.Threading.Tasks",
+  "System.IO",
+  "System.Net.Http"
+]
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now get on with the job of playing with the REPL. Let's declare a few variables.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; :clear
+&amp;gt; var x = 42;
+&amp;gt; var y =x ;
+&amp;gt; Console.WriteLine(x); 
+42
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now look at the :vars and see what got stored.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; :vars
+[
+  "int x = 42",
+  "int y = 42"
+]
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, we become a bit more productive by using the full power of the .net ecosystem.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/05/scriptcs-up-and-running/</link><pubDate>Fri, 01 May 2015 18:30:00</pubDate><a10:updated>2015-05-02T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/05/scriptcs-getting-started/</guid><title>Scriptcs : Getting Started</title><author>ashutoshraina1989@gmail.com</author><category>open source</category><category>scriptcs</category><description type="html">&lt;p&gt;C# even though a really nice language has always been tied to Visual Studio. 
+With mono we had the ability to write it on non-windows platforms as well. 
+One other thing that mono had was the repl and the ability to script. &lt;/p&gt;
+
+&lt;p&gt;What is Scriptcs ?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use C# as a scripting language powered by Roslyn&lt;/li&gt;
+&lt;li&gt;Uses the Rosyln nuget package&lt;/li&gt;
+&lt;li&gt;No IDE, No dlls&lt;/li&gt;
+&lt;li&gt;Xplat, CLI&lt;/li&gt;
+&lt;li&gt;Lighter experience with faster feedback&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;How many times have we done this ?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/VSFlow.gif" alt="HelloWorld" /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Everything is still typed and you get to try things out iteratively without using VS.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Roslyn is available as nuget package which means that we can get in there and do useful things with it.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Open Source, XPlat ...things that make us believe that it is going to solve a lot of problems.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Really nice CLI experience and what more there is a REPL there as well.&lt;/li&gt;
+&lt;li&gt;Significantly lighter experience which is a welcome change.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;ScriptCS on Windows is easy to get started using Chocolatey.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cinst scriptcs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For Mac, Homebrew is the simplest way to go.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install scriptcs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I will interchangeably use mac and windows, but the things should be the same (leaving out the differences in runtime between mono and .net).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ scriptcs
+scriptcs (ctrl-c to exit or :help for help)
+
+&amp;gt; Console.WriteLine("Hello World");
+Hello World
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That's a good start, we are able to write Hello World without doing the File -&gt; New Project dance.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2015/05/scriptcs-getting-started/</link><pubDate>Thu, 30 Apr 2015 18:30:00</pubDate><a10:updated>2015-05-01T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2015/01/windows-productivity-contd/</guid><title>Everyday utilities for a Windows developer - Contd.</title><author>ashutoshraina1989@gmail.com</author><category>tips</category><category>windows</category><description type="html">&lt;p&gt;From the previous post if you do end up using &lt;a href="http://bliker.github.io/cmder/" title="Cmder Mini"&gt;cmder mini&lt;/a&gt; like me then you should also register it and let it show up in the explorer. &lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    cmder.exe /REGISTER ALL
 &lt;/code&gt;&lt;/pre&gt;

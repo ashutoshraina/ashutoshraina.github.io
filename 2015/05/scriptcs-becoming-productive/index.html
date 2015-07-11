@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="last-modified" content="2015-07-11T19:55:45.9688470+05:30" />
+    <title>Ashutosh Raina</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
+    <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2015/05/scriptcs-becoming-productive/" />
+</head>
+<body class="home blog">
+    <div id="page" class="hfeed site">
+        <header id="masthead" class="site-header fancy-container lightgreen" role="banner">
+            <hgroup>
+                <h1 class="site-title"><a href="/" title="ashutoshraina.github.io" rel="home">Ashutosh Raina</a></h1>
+                <h2 class="site-title"><small>For those who are still chasing</small></h2>
+                <p class="site-description">I love french fries!!</p>
+            </hgroup>
+            <nav role="navigation" class="site-navigation main-navigation">
+                <h1 class="assistive-text">Menu</h1>
+                <div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to    content</a>
+                </div>
+                <div class="menu">
+                    <ul>
+						<li><a href="/" class="home"><i class="fa fa-home"></i></a></li>
+                        <li><a href="/archive">Archive</a></li>
+                        <li><a href="/category">Categories</a></li>                        
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/feed.xml">RSS/Atom</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div id="main">
+
+            <div id="primary" class="site-content">
+                <div id="content" role="main">
+                  
+
+<div id="post">
+    <h1>Scriptcs : Becoming Productive</h1>
+    
+	<div class="meta">
+        <p class="posted">03 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open-source" title="Snow.Models.Category">open source</a></li>
+          <li><a href="/category/scriptcs" title="Snow.Models.Category">scriptcs</a></li>
+        </ul>
+      </div>
+    
+	<div class="addthis_toolbox addthis_default_style" style="float:right;">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        <a class="addthis_button_linkedin_counter"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+      </div>
+	  
+    <ul class="snow-series"><li><a href="/2015/05/scriptcs-getting-started/">Part 1 - Getting Started</a></li><li><a href="/2015/05/scriptcs-up-and-running/">Part 2 - Up & Running</a></li><li>Part 3 - Becoming more productive with Scriptcs</li><li><a href="/2015/05/scriptcs-better-abstractions/">Part 4 - Raising the bar with better abstractions</a></li><li><a href="/2015/05/scriptcs-tools/">Part 5 - Doing something Useful</a></li><li>Part 6 - Tools to make you productive</li></ul>
+        
+    <p>Last time we got up and running with Scriptcs. We have done everything in the REPL so far.
+When it comes to scripts we need a few more things to make everything easy.</p>
+
+<p>Roslyn allows us to load assemblies using the #r directive.</p>
+
+<pre><code>#r System.Data
+#r System.Net.Http
+</code></pre>
+
+<p>Roslyn does not give us the power to load multiple script files. Scriptcs helps us out here by giving the #load directive.</p>
+
+<pre><code>HelloWorld.csx
+
+Console.WriteLine("Hello World");
+
+MyWorld.csx
+
+#load HelloWorld.csx
+Console.WriteLine("MyWorld");
+
+//output 
+Hello World
+MyWorld
+</code></pre>
+
+<p>The loading of scriptcs is recursive and the script that gets loaded first gets executed first. 
+Scriptcs also ensures that only one version of the script is loaded at a time (e.g. File1 loads File2 &amp; File3 and File2 also loads File3).</p>
+
+<p><!--excerpt-->
+In .net things would be incomplete without Nuget support. Scriptcs allows us to include any package available on Nuget as we want.
+Scriptcs relies on the nuget Api and not the nuget.exe to do it's job. It covers quite a few scenarios easily.</p>
+
+<ul>
+<li><p>How do I add a Nuget package ?</p>
+
+<blockquote>
+  <p>scriptcs install YourPackage</p>
+</blockquote></li>
+</ul>
+
+<p>Scriptcs will create a scriptcs_packages.config in the directory. It will also make the dll available instantly in the app domain.
+Adding the required usings to start using the package is upto us. What this also means is that scripts become reusable by default.
+Put the script and the packages.config on Github and everyone can use it.</p>
+
+<p>Show me the code </p>
+
+<pre><code>scriptcs install CsvHelper
+/*
+create a Data.csv like below
+Subject,Predicate,Object
+ScriptCS,is,useful
+I,am,awesome
+
+Inside Demo.csx
+*/
+using CsvHelper;
+using System.IO;
+
+var reader = new StreamReader("Data.csv");
+var csvReader = new CsvReader(reader);
+var records = csvReader.GetRecords&lt;Sentence&gt;();
+
+foreach (var record in records) {
+    Console.WriteLine(record);
+}
+
+class Sentence
+{
+    public string Subject { get; set; }
+    public string Predicate { get; set; }
+    public string Object { get; set; }
+
+    public override string ToString()
+    {
+        return Subject + " ..." + Predicate + "..." + Object;
+    }
+}
+</code></pre>
+
+<ul>
+<li>How do i use a pcakges.config that I have from an existing project ?</li>
+</ul>
+
+<p>Just copy and drop it with the scripts and ScriptCS will honour that. 
+If the pckages aren't present in the directory it will go ahead and restore them.</p>
+
+<p>Next, we look at ScriptPacks and how they make life easier.</p>
+
+
+    <div id="disqus_thread"></div>
+<script>
+    var reset_disqus = function(){
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                //this.page.identifier = '';
+                this.page.url = 'http://ashutoshraina.github.io/2015/05/scriptcs-becoming-productive/';
+                //this.page.title = '';
+            }
+        });
+    };
+
+    var disqus_shortname = 'ashutoshraina';
+    var disqus_url = 'http://ashutoshraina.github.io/2015/05/scriptcs-becoming-productive/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    window.addEventListener('orientationchange', reset_disqus);
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52ba834d16119580">
+   </script>
+
+</div>
+                </div>
+                <!-- #content -->
+            </div>
+            <!-- #primary .site-content -->      
+        <!-- #main -->
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="site-info">
+                Powered by <a href="https://github.com/Sandra/Sandra.Snow" rel="generator">Sandra.Snow</a>.	
+            </div>
+            <!-- .site-info -->
+        </footer>
+        <!-- #colophon .site-footer -->
+    </div>
+    <!-- #page .hfeed .site -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src='/javascripts/prettify.js' type='text/javascript'></script>
+    
+    <script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-46699881-1']);
+_gaq.push(['_trackPageview']);
+        
+(function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+})();
+</script>
+    
+    <script type='text/javascript'>
+      $(function () {
+        $("pre code").parent().each(function () {
+          if (!$(this).hasClass("prettyprint")) {
+            $(this).addClass("prettyprint");
+            a = true
+          }
+        });
+
+        prettyPrint();
+      });
+    </script>
+</body>
+</html>

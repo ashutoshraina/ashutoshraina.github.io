@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2015-01-15T12:11:41.6880220+05:30" />
+    <meta http-equiv="last-modified" content="2015-07-11T19:55:45.9688470+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
@@ -42,6 +42,193 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2015/05/scriptcs-tools/">Scriptcs : The Tooling</a></h1> 
+      <div class="meta">
+        <p class="posted">06 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open source" title="open source">open source</a></li>
+          <li><a href="/category/scriptcs" title="scriptcs">scriptcs</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2015/05/scriptcs-getting-started/">Part 1 - Getting Started</a></li><li><a href="/2015/05/scriptcs-up-and-running/">Part 2 - Up & Running</a></li><li><a href="/2015/05/scriptcs-becoming-productive/">Part 3 - Becoming more productive with Scriptcs</a></li><li><a href="/2015/05/scriptcs-better-abstractions/">Part 4 - Raising the bar with better abstractions</a></li><li>Part 5 - Doing something Useful</li><li>Part 6 - Tools to make you productive</li></ul>
+      <p>Tools really make the ecosystem more productive. I list down some of the tools that I have found to be useful.</p>
+
+<ul>
+<li><p>Version Management</p>
+
+<p>We can have multiple version of ScriptCS installed on the system. Then to pick which one to use we can use the ScriptCS version Manager <a href="https://github.com/scriptcs-contrib/svm">SVM</a>
+This is essentially similar to npm and helps keep track of different scriptcs versions.</p></li>
+<li><p>Running the code</p>
+
+<ul>
+<li><p>Sublime Plugin :
+<a href="https://github.com/scriptcs/scriptcs-sublime">Sublime Plugin</a> </p>
+
+<p>It is a little dodgy on mac, windows will work just fine.</p></li>
+<li><p>Atom Runner : 
+The wiki has a good guide on how to start with Atom and Scriptcs 
+<a href="https://github.com/scriptcs/scriptcs/wiki/Running-scripts-in-Atom">Atom</a>
+I did struggle quite a bit with getting this to work neatly on mac initially things seem to be better now.</p></li>
+<li><p>Omnisharp :
+One of the most active and loved .net projects. Omnisharp also has support for ScriptCS.
+<a href="https://github.com/OmniSharp/omnisharp-atom">Omnisharp</a></p></li>
+</ul></li>
+</ul>
+
+<p>This was a short tour of the tools and hopefully this gets you on your way.</p>
+
+<p>With this we round up our tour of ScriptCS, it is a great project that continues to make little improvements to my every day workflow.</p>
+
+      <p><a href="/2015/05/scriptcs-tools/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2015/05/scriptcs-doing-something-useful/">Scriptcs : Doing something Useful</a></h1> 
+      <div class="meta">
+        <p class="posted">05 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open source" title="open source">open source</a></li>
+          <li><a href="/category/scriptcs" title="scriptcs">scriptcs</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2015/05/scriptcs-getting-started/">Part 1 - Getting Started</a></li><li><a href="/2015/05/scriptcs-up-and-running/">Part 2 - Up & Running</a></li><li><a href="/2015/05/scriptcs-becoming-productive/">Part 3 - Becoming more productive with Scriptcs</a></li><li><a href="/2015/05/scriptcs-better-abstractions/">Part 4 - Raising the bar with better abstractions</a></li><li>Part 5 - Doing something Useful</li><li>Part 6 - Tools to make you productive</li></ul>
+      <p>We now have a fair grasp of how to swing with ScriptCS. Let's try and do something more useful with it.</p>
+
+<p>Let's start by talking to a redis instance. Talking to a running instance interactively is a great a capability to have.</p>
+
+<pre><code>scriptcs -install StackExchange.Redis
+
+using StackExchange.Redis;
+
+var redis = ConnectionMultiplexer.Connect("localhost");
+var db = redis.GetDatabase();
+db.StringSet("foo","bar");
+var result = db.StringGet("foo");
+Console.WriteLine(result);
+</code></pre>
+
+
+      <p><a href="/2015/05/scriptcs-doing-something-useful/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2015/05/scriptcs-better-abstractions/">Scriptcs : Better Abstraction</a></h1> 
+      <div class="meta">
+        <p class="posted">04 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open source" title="open source">open source</a></li>
+          <li><a href="/category/scriptcs" title="scriptcs">scriptcs</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2015/05/scriptcs-getting-started/">Part 1 - Getting Started</a></li><li><a href="/2015/05/scriptcs-up-and-running/">Part 2 - Up & Running</a></li><li><a href="/2015/05/scriptcs-becoming-productive/">Part 3 - Becoming more productive with Scriptcs</a></li><li>Part 4 - Raising the bar with better abstractions</li><li><a href="/2015/05/scriptcs-tools/">Part 5 - Doing something Useful</a></li><li>Part 6 - Tools to make you productive</li></ul>
+      <p>Abstractions are what drive most of software development. 
+ScriptCS also has a few abstractions which bridge the gap between the existing frameworks and the notion of scripting and REPL.</p>
+
+<p>From the github wiki</p>
+
+<blockquote>
+  <p>Script Packs allow you to bootstrap the environment for new scripts, 
+  further reducing the amount of code necessary to take advantage of your favorite C# frameworks.</p>
+</blockquote>
+
+
+      <p><a href="/2015/05/scriptcs-better-abstractions/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2015/05/scriptcs-becoming-productive/">Scriptcs : Becoming Productive</a></h1> 
+      <div class="meta">
+        <p class="posted">03 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open source" title="open source">open source</a></li>
+          <li><a href="/category/scriptcs" title="scriptcs">scriptcs</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2015/05/scriptcs-getting-started/">Part 1 - Getting Started</a></li><li><a href="/2015/05/scriptcs-up-and-running/">Part 2 - Up & Running</a></li><li>Part 3 - Becoming more productive with Scriptcs</li><li><a href="/2015/05/scriptcs-better-abstractions/">Part 4 - Raising the bar with better abstractions</a></li><li><a href="/2015/05/scriptcs-tools/">Part 5 - Doing something Useful</a></li><li>Part 6 - Tools to make you productive</li></ul>
+      <p>Last time we got up and running with Scriptcs. We have done everything in the REPL so far.
+When it comes to scripts we need a few more things to make everything easy.</p>
+
+<p>Roslyn allows us to load assemblies using the #r directive.</p>
+
+<pre><code>#r System.Data
+#r System.Net.Http
+</code></pre>
+
+<p>Roslyn does not give us the power to load multiple script files. Scriptcs helps us out here by giving the #load directive.</p>
+
+<pre><code>HelloWorld.csx
+
+Console.WriteLine("Hello World");
+
+MyWorld.csx
+
+#load HelloWorld.csx
+Console.WriteLine("MyWorld");
+
+//output 
+Hello World
+MyWorld
+</code></pre>
+
+<p>The loading of scriptcs is recursive and the script that gets loaded first gets executed first. 
+Scriptcs also ensures that only one version of the script is loaded at a time (e.g. File1 loads File2 &amp; File3 and File2 also loads File3).</p>
+
+<p>
+      <p><a href="/2015/05/scriptcs-becoming-productive/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2015/05/scriptcs-up-and-running/">Scriptcs : Up &amp; Running</a></h1> 
+      <div class="meta">
+        <p class="posted">02 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open source" title="open source">open source</a></li>
+          <li><a href="/category/scriptcs" title="scriptcs">scriptcs</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li><a href="/2015/05/scriptcs-getting-started/">Part 1 - Getting Started</a></li><li>Part 2 - Up & Running</li><li><a href="/2015/05/scriptcs-becoming-productive/">Part 3 - Becoming more productive with Scriptcs</a></li><li><a href="/2015/05/scriptcs-better-abstractions/">Part 4 - Raising the bar with better abstractions</a></li><li><a href="/2015/05/scriptcs-tools/">Part 5 - Doing something Useful</a></li><li>Part 6 - Tools to make you productive</li></ul>
+      <p>Last time we saw how we could get Scriptcs up and running. Before we go further, it would be nice to know what is going on.</p>
+
+<p>Roslyn enabled in-memory compilation which means we can finally take loose C# code and start running with it. 
+In code terms it means we can get rid of 
+    class Program 
+        public static void ....  </p>
+
+<p>We can valid C# statements and then move on to doing the real thing. </p>
+
+
+      <p><a href="/2015/05/scriptcs-up-and-running/">Read more...</a></p>
+    </li>
+    <hr/>
+    <li class="post">
+      <h1><a href="/2015/05/scriptcs-getting-started/">Scriptcs : Getting Started</a></h1> 
+      <div class="meta">
+        <p class="posted">01 May 2015</p>
+        <ul class="categories">
+          <li><a href="/category/open source" title="open source">open source</a></li>
+          <li><a href="/category/scriptcs" title="scriptcs">scriptcs</a></li>
+        </ul>
+      </div>
+      <ul class="snow-series"><li>Part 1 - Getting Started</li><li><a href="/2015/05/scriptcs-up-and-running/">Part 2 - Up & Running</a></li><li><a href="/2015/05/scriptcs-becoming-productive/">Part 3 - Becoming more productive with Scriptcs</a></li><li><a href="/2015/05/scriptcs-better-abstractions/">Part 4 - Raising the bar with better abstractions</a></li><li><a href="/2015/05/scriptcs-tools/">Part 5 - Doing something Useful</a></li><li>Part 6 - Tools to make you productive</li></ul>
+      <p>C# even though a really nice language has always been tied to Visual Studio. 
+With mono we had the ability to write it on non-windows platforms as well. 
+One other thing that mono had was the repl and the ability to script. </p>
+
+<p>What is Scriptcs ?</p>
+
+<ul>
+<li>Use C# as a scripting language powered by Roslyn</li>
+<li>Uses the Rosyln nuget package</li>
+<li>No IDE, No dlls</li>
+<li>Xplat, CLI</li>
+<li>Lighter experience with faster feedback</li>
+</ul>
+
+
+      <p><a href="/2015/05/scriptcs-getting-started/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2015/01/windows-productivity-contd/">Everyday utilities for a Windows developer - Contd.</a></h1> 
       <div class="meta">
@@ -115,134 +302,6 @@
       <p>Patrick from NDepend wasgracious enough to give me a license for NDepend. I have been wanting to get my hands on such a tool for some time now, and as it turns NDepend is actually quite good. Let's have a look at what the hell am I a talking about.
 
       <p><a href="/2014/08/ndepend-review/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2014/02/learning-chrome-extensions-by-accident/">Learning Chrome Extensions by accident</a></h1> 
-      <div class="meta">
-        <p class="posted">05 Feb 2014</p>
-        <ul class="categories">
-          <li><a href="/category/accident" title="accident">accident</a></li>
-          <li><a href="/category/chrome" title="chrome">chrome</a></li>
-        </ul>
-      </div>
-      
-      <p>So, twitter has revamped their look to be flatter and what not...It looks like apple now. This really means I was annoyed and wanted to get rid of things in the interface I did not like. Ok so how do we do that ? Write a chrome extension and that will be the permanent end of that!!</p>
-
-
-      <p><a href="/2014/02/learning-chrome-extensions-by-accident/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2014/01/learning-redis-by-accident/">Learning Redis by accident</a></h1> 
-      <div class="meta">
-        <p class="posted">27 Jan 2014</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/accident" title="accident">accident</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-          <li><a href="/category/redis" title="redis">redis</a></li>
-        </ul>
-      </div>
-      
-      <p>While exploring the pub-sub mechanism in MongoDB, I came across Redis. Redis has this built in. This gave me the incentive to scratch a long time itch and try redis. Redis is eseentially an in-memory database. It is supposed to be fast (like really fast). So, I thought I would take it for a spin. Considering, I am on windows and it seems like there is no direct support for windows. Windows remains the poor second, but we will let it be for now.
-Microsoft provides the executable for 2.6 and we can download it from there.</p>
-
-
-      <p><a href="/2014/01/learning-redis-by-accident/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2014/01/mongodb-pubsub/">Pub Sub with MongoDB</a></h1> 
-      <div class="meta">
-        <p class="posted">23 Jan 2014</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-        </ul>
-      </div>
-      
-      <p>In the spirit of trying out new thigns I wanted to create a pub0sub system with mongodb. Usually we would create a pub sub system with a message queue, but since we are a little crazy we will try and do it this way. Turns out it is quite simple. Before we begin we must understand somethings that are available uniquely in MongoDB.
-
-      <p><a href="/2014/01/mongodb-pubsub/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2014/01/optimistic-concurrency-mongodb/">MongoDb: Optimistic Concurrency</a></h1> 
-      <div class="meta">
-        <p class="posted">18 Jan 2014</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-        </ul>
-      </div>
-      
-      <p>Optimistic concurrency is one something that most of us need in our applications. What follows is a simple example on how to achieve it in MongoDB.
-First, a really simple document.</p>
-
-<p>Note : This post uses a lot of code that I have shown in previous posts, please look at them if there is any confusion. The principles remain simple and can be used without using the code shown below.</p>
-
-
-      <p><a href="/2014/01/optimistic-concurrency-mongodb/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2014/01/querying-oplog-mongodb/">MongoDb: Querying the OpLog</a></h1> 
-      <div class="meta">
-        <p class="posted">10 Jan 2014</p>
-        <ul class="categories">
-          <li><a href="/category/.net" title=".net">.net</a></li>
-          <li><a href="/category/csharp" title="csharp">csharp</a></li>
-          <li><a href="/category/mongodb" title="mongodb">mongodb</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-        </ul>
-      </div>
-      
-      <p>Back to MongoDB after some time. OpLog has always been a curious case for me. To know more about it let's start to our detective work.</p>
-
-<p><strong>What is the OpLog?</strong></p>
-
-<p>The mongodb website gives a rather long definition. I will quote that </p>
-
-<blockquote>
-  <p>The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, allowing them to maintain the current state of the database.</p>
-  
-  <p>To facilitate replication, all replica set members send heartbeats (pings) to all other members. Any member can import oplog entries from any other member.
-  Whether applied once or multiple times to the target dataset, each operation in the oplog produces the same results, i.e. each operation in the oplog is idempotent. For proper replication operations, entries in the oplog must be idempotent:</p>
-</blockquote>
-
-<ul>
-<li>initial sync</li>
-<li>post-rollback catch-up</li>
-<li>sharding chunk migrations</li>
-</ul>
-
-<p>
-      <p><a href="/2014/01/querying-oplog-mongodb/">Read more...</a></p>
-    </li>
-    <hr/>
-    <li class="post">
-      <h1><a href="/2014/01/mvc-on-mono-monodevelop/">Up and Running with Asp.net MVC Mono and Monodevelop</a></h1> 
-      <div class="meta">
-        <p class="posted">03 Jan 2014</p>
-        <ul class="categories">
-          <li><a href="/category/asp.net mvc" title="asp.net mvc">asp.net mvc</a></li>
-          <li><a href="/category/mono" title="mono">mono</a></li>
-          <li><a href="/category/monodevelop" title="monodevelop">monodevelop</a></li>
-          <li><a href="/category/opensource" title="opensource">opensource</a></li>
-          <li><a href="/category/tips" title="tips">tips</a></li>
-        </ul>
-      </div>
-      
-      <p>After 3 hours worth of work, I was finally able to run Asp.net MVC4 using monodevelop on mono. I will talk about installaing monodevelop later (that was a painful exercise). So, assuming you have monodevelop installed on windows and latest version of mono installed (mono-3.2.3)as well. Now, go file new solution Asp.net MVC project with razor. Run it and wait for the world to fall apart.</p>
-
-
-      <p><a href="/2014/01/mvc-on-mono-monodevelop/">Read more...</a></p>
     </li>
     <hr/>
   </ul> 
