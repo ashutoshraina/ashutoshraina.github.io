@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2015-07-11T19:55:45.9688470+05:30" />
+    <meta http-equiv="last-modified" content="2015-07-30T23:55:41.2622080+05:30" />
     <title>Ashutosh Raina</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link rel="shortcut icon" href="/stylesheets/images/me.png" type="image/png">
     <link rel="shortcut icon" type="image/png" href="/stylesheets/images/me.png" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
-    <link rel="canonical" href="http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/" />
+    <link rel="canonical" href="http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4-5/" />
 </head>
 <body class="home blog">
     <div id="page" class="hfeed site">
@@ -42,7 +42,7 @@
                   
 
 <div id="post">
-    <h1>Tasks With Timeout On .net 4.5 Contd.</h1>
+    <h1>Tasks With Timeout On .net 4.5</h1>
     
 	<div class="meta">
         <p class="posted">30 Dec 2013</p>
@@ -77,8 +77,9 @@
     }
 </code></pre>
 
-<p><!--excerpt-->
-OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.</p>
+<!--excerpt-->
+
+<p>OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.</p>
 
 <pre><code>public class Program
 {
@@ -171,7 +172,7 @@ Output :
 856463453
 </code></pre>
 
-<p>A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.</p>
+<p>A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timeouts a lot easier.</p>
 
 
     <div id="disqus_thread"></div>
@@ -181,14 +182,14 @@ Output :
             reload: true,
             config: function () {
                 //this.page.identifier = '';
-                this.page.url = 'http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/';
+                this.page.url = 'http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4-5/';
                 //this.page.title = '';
             }
         });
     };
 
     var disqus_shortname = 'ashutoshraina';
-    var disqus_url = 'http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/';
+    var disqus_url = 'http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4-5/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

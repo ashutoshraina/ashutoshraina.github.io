@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tasks With Timeout On .net 4.5 Contd.
+title: Tasks With Timeout On .net 4.5
 category: .net, csharp, Asynchrony
 author: ashutosh raina
 email: ashutoshraina1989@gmail.com
@@ -26,6 +26,7 @@ The previous two posts looked at creating tasks with timeouts on .net4. The code
         }
 
 <!--excerpt-->
+
 OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.
 
     public class Program
@@ -117,4 +118,4 @@ The output will look something like this :
     Output :
     856463453
 
-A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.
+A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timeouts a lot easier.

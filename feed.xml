@@ -1218,7 +1218,7 @@ Could not locate Razor Host Factory type: System.Web.Mvc.MvcWebRazorHostFactory,
 &lt;p&gt;Now, Press F5.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="http://ashutoshraina.github.io/stylesheets/images/posts/mvc-mono-success.png" alt="Success" /&gt;&lt;/p&gt;
-</description><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><pubDate>Thu, 02 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</guid><title>Tasks With Timeout On .net 4.5 Contd.</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2014/01/mvc-on-mono-monodevelop/</link><pubDate>Thu, 02 Jan 2014 18:30:00</pubDate><a10:updated>2014-01-03T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4-5/</guid><title>Tasks With Timeout On .net 4.5</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;The previous two posts looked at creating tasks with timeouts on .net4. The code as expected took some heavy lifting to get going. Understanding the extension methods themselves took some time. Today, using .net 4.5 this can be made a lot easier. Can we do better ? Yes we can !!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    public static Task WithTimeout(this Task task, TimeSpan timeout)
     {
@@ -1232,8 +1232,9 @@ Could not locate Razor Host Factory type: System.Web.Mvc.MvcWebRazorHostFactory,
     }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;!--excerpt--&gt;
-OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.&lt;/p&gt;
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;OK, so that really trimmed the code. Usage still remains the same with one difference. The task will now be really cancelled and not faulted which will force us to change the TaskContinuationOptions to NotOnCanceled.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;public class Program
 {
@@ -1326,8 +1327,8 @@ Output :
 856463453
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timouts a lot easier.&lt;/p&gt;
-</description><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4.5-contd/</link><pubDate>Sun, 29 Dec 2013 18:30:00</pubDate><a10:updated>2013-12-30T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</guid><title>Tasks With Timeout Contd.</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!&lt;/p&gt;
+&lt;p&gt;A more robust means will always be to check for both faults and cancellation within the continuation. So, this makes creating tasks with timeouts a lot easier.&lt;/p&gt;
+</description><link>http://ashutoshraina.github.io/2013/12/tasks-with-timeout-net4-5/</link><pubDate>Sun, 29 Dec 2013 18:30:00</pubDate><a10:updated>2013-12-30T00:00:00+05:30</a10:updated></item><item><guid isPermaLink="false">http://ashutoshraina.github.io/2013/12/tasks-with-timeout-contd/</guid><title>Tasks With Timeout Contd.</title><author>ashutoshraina1989@gmail.com</author><category>.net</category><category>Asynchrony</category><category>csharp</category><description type="html">&lt;p&gt;As mentioned in the last post we can now have tasks with individual timeouts. The code looked a little heavy. Can we do better ? Yes we can !!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    var tasks = new List&amp;lt;Task&amp;gt;();
     try
